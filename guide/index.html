@@ -46,20 +46,15 @@
             <li>
               <a href="http://kuzzle.io/" class="nav-item">Home</a>
             </li>
-
             <li>
-              <a href="http://kuzzle.io/documentation" class="nav-item developers">Documentation</a>
+              <a href="http://docs.kuzzle.io/" class="nav-item developers active">Documentation</a>
             </li>
-<!--
             <li>
               <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
             </li>
-
             <li>
               <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
             </li>
--->
-
             <li>
               <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
                 <i class="icon icon-github icon-small"></i>
@@ -70,13 +65,13 @@
       </div>
       <div class="developer-nav open">
         <ul>
-            <li class="active"><a href="/documentation/guide/"><span>Guide</span></a></li>
-            <li><a href="/documentation/sdk-reference/"><span>SDK</span></a></li>
-            <li><a href="/documentation/real-time-filters/"><span>Real-time filters</span></a></li>
-            <li><a href="/documentation/validation-reference/"><span>Data Validation</span></a></li>
-            <li><a href="/documentation/api-reference/"><span>API</span></a></li>
-            <li><a href="/documentation/plugin-reference/"><span>Plugins</span></a></li>
-            <li><a href="/documentation/elasticsearch-cookbook/"><span>Elasticsearch Cookbook</span></a></li>
+            <li class="active"><a href="/guide/"><span>Guide</span></a></li>
+            <li><a href="/sdk-reference/"><span>SDK</span></a></li>
+            <li><a href="/real-time-filters/"><span>Real-time filters</span></a></li>
+            <li><a href="/validation-reference/"><span>Data Validation</span></a></li>
+            <li><a href="/api-reference/"><span>API</span></a></li>
+            <li><a href="/plugin-reference/"><span>Plugins</span></a></li>
+            <li><a href="/elasticsearch-cookbook/"><span>Elasticsearch Cookbook</span></a></li>
         </ul>
         <div class="search">
           <input type="text" class="search" id="input-search" tabindex="1" placeholder="Search in the guide">
@@ -147,9 +142,9 @@
 <b>Docker and Docker-compose are not mandatory</b>. Kuzzle can run outside a Docker container. This tutorial uses Docker as it simplifies a lot the startup process. If you wish to run Kuzzle without Docker, jump to the <a href="#manual-install">manual installation guide</a>.
 </aside>
 
-<p>Thanks to Docker-compose, running Kuzzle is easy. Just grab the standard <a href="http://kuzzle.io/kuzzle-docker-compose.yml">docker-compose.yml</a> file, copy it into a directory and start Kuzzle:</p>
+<p>Thanks to Docker-compose, running Kuzzle is easy. Just grab the standard <a href="http://kuzzle.io/docker-compose.yml">docker-compose.yml</a> file, copy it into a directory and start Kuzzle:</p>
 <pre class="highlight shell"><code><span class="gp">$ </span>sudo sysctl -w vm.max_map_count<span class="o">=</span>262144
-<span class="gp">$ </span>wget http://kuzzle.io/kuzzle-docker-compose.yml
+<span class="gp">$ </span>wget http://kuzzle.io/docker-compose.yml
 <span class="gp">$ </span>docker-compose up
 </code></pre>
 
@@ -380,11 +375,11 @@ For the time being, Kuzzle supports the following protocols:</p>
 <li><strong>Docker-compose v1.8+</strong>, see <a href="https://docs.docker.com/compose/install/">instructions here</a></li>
 </ul>
 
-<p>Get the standard <a href="http://kuzzle.io/kuzzle-docker-compose.yml">docker-compose.yml</a> file, copy it into a directory and start Kuzzle:</p>
+<p>Get the standard <a href="http://kuzzle.io/docker-compose.yml">docker-compose.yml</a> file, copy it into a directory and start Kuzzle:</p>
 
 <p>In this case, you need to increase the maximum virtual memory allowed by typing</p>
 <pre class="highlight shell"><code><span class="gp">$ </span>sudo sysctl -w vm.max_map_count<span class="o">=</span>262144
-<span class="gp">$ </span>wget http://kuzzle.io/kuzzle-docker-compose.yml
+<span class="gp">$ </span>wget http://kuzzle.io/docker-compose.yml
 <span class="gp">$ </span>docker-compose up
 </code></pre>
 
