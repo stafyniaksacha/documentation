@@ -891,9 +891,171 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
             <h2 id="real-time-notifications">Real-time notifications</h2>
 
-<p>Please, be patient, we are working on this chapter of the Docs.</p>
+<p>Besides persisting data and retrieving it via advanced searches, Kuzzle enables you to set up <strong>live subscriptions</strong> to any set of data.</p>
 
-<p>We apologize for the inconvenience.</p>
+<p>Live subscriptions are great to <strong>keep track of the evolution</strong> of a portion of your data you are interested in.</p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Imagine you are developing <a href="http://kuzzle.io/demos-tutorials/real-time-collaborative-todo-list/">a collaborative TO-DO list</a> application. All the TO-DO items are persisted in Kuzzle (in a collection called <code class="prettyprint">todos</code>) so, once the clients start, they fetch all the items via a simple document search.</p>
+
+<p>But imagine that one of the users (let&rsquo;s call her Ann), adds a new TO-DO item. In order for other users (let&rsquo;s call them Tom and Matt) to display the new item, they need to perform a new document search on the <code class="prettyprint">todos</code> collection. They will not see the new item until they refresh (or restart) their application.</p>
+
+<p>This cannot be called a &ldquo;modern&rdquo; application: it rather looks like an old-school, refresh-ish, one. Like the early &lsquo;90s. Today, such a user-experience wouldn&rsquo;t be satisfying at all.</p>
+
+<p>A more interesting user-experience would be that clients display the new TO-DO item <em>as soon as it is created</em>. How could we achieve that?</p>
+
+<ul>
+<li>By implementing a long-polling mechanism in the clients. Every, say, one second, the clients perform a document search and update their list of TO-DO items. Doesn&rsquo;t look like a great idea (performances would be rather bad, for example).</li>
+<li>By introducing a <strong>pub/sub</strong> mechanism that enables the backend to <em>push</em> the new item to the clients as soon as it is created (looks awesome, doesn&rsquo;t it?)</li>
+</ul>
+
+<p>The second solution is exactly what we are looking for and Kuzzle ships it natively. We can call it <strong>pub/sub</strong>, <strong>real-time notifications</strong> or <strong>live subscriptions</strong> and it is often used to solve use-cases like this one, where things need to be kept <em>in sync</em> between the client and the server.</p>
+
+<p>Our collaborative TO-DO list clients would subscribe to the <code class="prettyprint">todos</code> collection (right after the first document search) in order to be notified <em>in real-time</em> about new TO-DO items. This way, once Ann creates her new item, Tom and Matt see it immediately on their screen.</p>
+
+<h3 id="concepts">Concepts</h3>
+
+<p>Real-time notifications are triggered by the <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">pub/sub mechanism</a> embedded in Kuzzle and follow the <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer/Observable pattern</a>, in which Kuzzle is the Observable and the client is the Observer.</p>
+
+<p>They are is possible only when the communication happens in a <strong>persistent-connection</strong>-oriented protocol (like Websockets or MQTT) and therefore not in HTTP.</p>
+
+<p>Clients can subscribe to many types of notifications. Below are some examples:</p>
+
+<ol>
+<li><strong>new documents</strong> being created in a given collection (e.g. Ann creates a new TO-DO item);</li>
+<li><strong>documents being deleted</strong> from a given collection (e.g. Tom deletes a TO-DO item);</li>
+<li><strong>changes happening</strong> on any document within a collection (e.g. Matt checks an item as &ldquo;done&rdquo;);</li>
+<li><strong>changes happening on a given set of documents</strong> (e.g. clients must play a sound every time an item containing the word &ldquo;URGENT&rdquo; is created).</li>
+</ol>
+
+<p>The scope of possibilities is huge. Take a look at the <a href="http://docs.kuzzle.io/api-reference/?others#notifications">Notifications section</a> in the API Reference for more details.</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>But, how does this work in Kuzzle? <strong>How do we select the data that we want to subscribe to?</strong></p>
+
+<p>Let&rsquo;s dive into the implementation of the Collaborative TO-DO list application.</p>
+
+<aside class="notice">
+All the following examples are written in Javascript, therefore using the Javascript Kuzzle SDK. If this is not your usual development language, take a look at the different flavors of the `subscribe` method in the [SDK Reference](http://docs.kuzzle.io/sdk-reference/#subscribe).
+</aside>
+
+<h4 id="the-basic-subscription">The basic subscription</h4>
+
+<p>Once our client has started and initialized with the set of TO-DO items it fetched from the persistence layer, we want it to subscribe to the changes happening on them.</p>
+<pre class="highlight javascript"><code><span class="nx">kuzzle</span>
+    <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'todos'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">({},</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">notification</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Something happened and we should do something.'</span><span class="p">,</span> <span class="nx">notification</span><span class="p">)</span>
+    <span class="p">})</span>
+</code></pre>
+
+<p>This code isn&rsquo;t very useful but it shows the capability to react to a notification coming from the server. </p>
+
+<p>Here, we call the <code class="prettyprint">subscribe</code> method on the <code class="prettyprint">todos</code> collection with two arguments:</p>
+
+<ul>
+<li>The first argument represents the <em>filters</em>, and in this case there&rsquo;s none, which means that we are subscribing to <em>all the documents</em> in the collection. Filters enable more fine-grained selection on the data we want to subscribe to and are described in the next example.</li>
+<li>The second argument is the <em>callback</em>, i.e. a function that is called <em>every time a notification is received</em>.</li>
+</ul>
+
+<p>Now, imagine this code is executed on Tom&rsquo;s client: when Ann creates the new TO-DO item, Tom receives a notification looking like the following:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;data index&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;data collection&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;unique request identifier&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fswdfsrt43e6t2q3rfw"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The new item Ann just created!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"checked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The Notification bears some useful information about what just happened:</p>
+
+<ul>
+<li>the <code class="prettyprint">controller</code> and <code class="prettyprint">action</code> attributes show <em>what</em> has happened;</li>
+<li>the <code class="prettyprint">index</code> and <code class="prettyprint">collection</code> attributes show <em>where</em> it happened;</li>
+<li>the <code class="prettyprint">result</code> shows <em>the consequence</em> of what just happened (in this case, the newly created document).</li>
+</ul>
+
+<p>We won&rsquo;t analyze the other attributes for the moment. Take a look at the <a href="http://kuzzleio.github.io/kuzzle-api-documentation/#notifications">Notifications section of the API Reference</a> for a comprehensive list of the available notification events.</p>
+
+<p>This subscription is very handy and will notify Tom about the events 1, 2 and 3 of the list above (the <code class="prettyprint">controller</code>, <code class="prettyprint">action</code> and <code class="prettyprint">result</code> will vary depending on the case). But what about the event number 4? How does Tom subscribe to items that only contain the word <code class="prettyprint">URGENT</code> in their <code class="prettyprint">label</code> field? Looks like a job for the <a href="http://docs.kuzzle.io/real-time-filters/">Real-time Filtering DSL</a> coming up in the following section.</p>
+
+<h4 id="subscription-with-filters">Subscription with filters</h4>
+
+<p>Kuzzle ships with a powerful <a href="http://docs.kuzzle.io/real-time-filters/">Filtering DSL for Live Subscriptions</a>. It is heavily inspired in the Elasticsearch DSL and enables you to perform fine-grained selections on the documents you want to subscribe to.</p>
+
+<p>In our case, we want to select all the documents that contain the <code class="prettyprint">URGENT</code> word in the <code class="prettyprint">label</code> field. The best pick for this case is the <a href="http://docs.kuzzle.io/real-time-filters/#regexp">regexp</a> filter.</p>
+<pre class="highlight javascript"><code><span class="nx">kuzzle</span>
+    <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'todos'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">({</span>
+        <span class="na">regexp</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">label</span><span class="p">:</span> <span class="s1">'.*URGENT.*'</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">notification</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Something happened and we should do something URGENTLY.'</span><span class="p">,</span> <span class="nx">notification</span><span class="p">)</span>
+    <span class="p">})</span>
+</code></pre>
+
+<p>This way, Tom will be notified about urgent TO-DO items. Take a look at the <a href="http://docs.kuzzle.io/real-time-filters/">Filtering DSL Refernce</a> for a comprehensive list of the available filters.</p>
+
+<p>There are a few things that deserve to be noticed here:</p>
+
+<ul>
+<li>Tom will be notified either if somebody creates, updates or deletes a document containing the word <code class="prettyprint">URGENT</code>;</li>
+<li>Tom will be notified even if he performs the actions himself (e.g. he is notified right after having created a new TO-DO item).</li>
+</ul>
+
+<p>The last point may seem a little bit inconvenient. What if Tom does not want to receive notifications when the event come from his own actions? Keep reading, the solution is right below.</p>
+
+<h4 id="subscription-with-options">Subscription with options</h4>
+
+<p>The <code class="prettyprint">subscribe</code> method can be called with an extra argument, which is an object containing a set of options to be passed to the subscription Room.</p>
+
+<p>We just introduced a new concept here, the Room. A <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">Room</a> is a class representing a single subscription and its constructor is called internally by the <code class="prettyprint">subscribe</code> method. The &ldquo;options&rdquo; are passed directly to the <a href="http://kuzzleio.github.io/sdk-documentation/#constructors72">Room Constructor</a>.</p>
+
+<p>The option we are looking for is <code class="prettyprint">subscribeToSelf</code>, which is set to <code class="prettyprint">true</code> by default.</p>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">kuzzle</span>
+    <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'todos'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
+      <span class="p">{</span> <span class="c1">// The Filters object</span>
+        <span class="na">regexp</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">label</span><span class="p">:</span> <span class="s1">'.*URGENT.*'</span>
+        <span class="p">}</span>
+      <span class="p">},</span> 
+      <span class="p">{</span> <span class="c1">// The Options object</span>
+        <span class="na">subscribeToSelf</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">notification</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="c1">// The callback</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Something happened and we should do something URGENTLY.'</span><span class="p">,</span> <span class="nx">notification</span><span class="p">)</span>
+    <span class="p">})</span>
+</code></pre>
+
+<p>In the code right above, we added the extra &ldquo;options&rdquo; object as the second argument to avoid subscribing Tom to his own events.</p>
+
+<p>You may have noticed that, on the very first line, we stored the return value of the <code class="prettyprint">subscribe</code> method in a variable. Guess what type is its value? <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">Room</a>.</p>
 
             <h2 id="security">Security</h2>
 
