@@ -1502,6 +1502,344 @@ If you are running Kuzzle in a Docker container, you will have to [enter the Kuz
 
 <p>This can be particularly handy to feed a crash report to the support team if you own a Kuzzle License.</p>
 
+            <h2 id="the-plugin-system">The Plugin System</h2>
+
+<p>Being able to grab a full-feature backend and run it quickly is very convenient, but Kuzzle is about more than that. As soon as you start developing real-life applications that live out in the wild, you need to <strong>extend your backend with your own business-logic</strong>.
+That&rsquo;s quite legitimate: some logic is sensible and cannot live on the client.</p>
+
+<p>For example, imagine your application needs to leverage a <strong>third-party payment system</strong>, such as Braintree. You don&rsquo;t want to put the client in charge of bearing API keys and tokens. Also, you will probably want to <strong>keep track of orders</strong> and payments, once the transactions successfully end. This should be also a concern of your backend. Also, you are not likely to allow your customers to purchase more items than available, right? At some point, <strong>your backend has to validate the transaction</strong> by comparing the ordered quantity with the available stocks.</p>
+
+<p>To solve this problem, Kuzzle ships with a powerful <strong><a href="/plugin-reference">Plugin System</a></strong> that enables you to add features to your server in a modular fashion. With Kuzzle Plugins you can</p>
+
+<ul>
+<li>use an existing plugin from the Kuzzle Plugins ecosystem (such as the <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth">OAuth2 Authentication strategy</a> or the <a href="https://github.com/kuzzleio/kuzzle-plugin-mqtt">MQTT Protocol</a>);</li>
+<li><a href="/plugin-reference/#writing-plugin-code">create your own plugin</a> from scratch.</li>
+</ul>
+
+<h3 id="plugin-types">Plugin Types</h3>
+
+<p>There are several types of Plugins:</p>
+
+<h4 id="listener-plugins">Listener Plugins</h4>
+
+<p><a href="/plugin-reference#listener-plugins">Listener Plugins</a> listen to data-related events. They react asynchronously (which means that Kuzzle does not wait for them) and cannot change the provided data.</p>
+
+<p><em>Example - &ldquo;Write a log to a third-party log system every time a document is deleted&rdquo;</em>.</p>
+
+<p>Kuzzle ships with a Listener Plugin already bundled in its Community Edition, the <a href="https://github.com/kuzzleio/kuzzle-plugin-logger">Logger Plugin</a>.</p>
+
+<h4 id="worker-plugins">Worker Plugins</h4>
+
+<p><a href="/plugin-reference#worker-plugins">Workers Plugins</a> are just like Listener Plugins, but they are run on separate processes. They are useful when performing costly operations as they have no impact on Kuzzle performances.</p>
+
+<p><em>Example - &ldquo;Compute a complex data-mining operation and commit the result to a third-party Business-Intelligence platform every time a document is changed&rdquo;.</em></p>
+
+<h4 id="pipe-plugins">Pipe Plugins</h4>
+
+<p><a href="/plugin-reference#pipe-plugins">Pipe Plugins</a> are just like Listener Plugins, but react synchronously to events. They can change the data (that is returned to Kuzzle after processing) and even stop the request life-cycle.</p>
+
+<p><em>Example - &ldquo;Compare the ordered quantity with the available stocks and return an error if ordered is greater than stocks&rdquo;</em>.</p>
+
+<h4 id="controller-plugins">Controller Plugins</h4>
+
+<p><a href="/plugin-reference#controllers">Controller Plugins</a> extend Kuzzle API with new controllers and actions.</p>
+
+<p><em>Example - &ldquo;Expose a <code class="prettyprint">checkout</code> API endpoint that handles the Braintree payment process&rdquo;</em>.</p>
+
+<h4 id="protocol-plugins">Protocol Plugins</h4>
+
+<p><a href="/plugin-reference#protocol-plugins">Protocol Plugins</a> extend Kuzzle networking capabilities by adding new network protocols.</p>
+
+<p><em>Example - &ldquo;Enable Kuzzle to interact with XMPP-oriented services&rdquo;</em></p>
+
+<p>Kuzzle ships with a Protocol Plugin already bundled in its Community Edition, the <a href="https://github.com/kuzzleio/kuzzle-plugin-websocket">Websocket Plugin</a>.</p>
+
+<h4 id="authentication-plugins">Authentication Plugins</h4>
+
+<p><a href="/plugin-reference#authentication-plugin">Authentication Plugins</a> add new Kuzzle authentication strategies.</p>
+
+<p><em>Example - &ldquo;Enable Kuzzle to authenticate users via the OAuth strategy&rdquo;</em></p>
+
+<p>Kuzzle ships with an Authentication Plugin already bundled in its Community Edition, the <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-local">Local Strategy Plugin</a>.</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>This example is a very dummy one. We are going to install the <strong>Hello World Controller Plugin</strong>, which opens a new API endpoint that simply&hellip; Greets the client! Not very useful, except for the sake of this example.</p>
+
+<p>In Kuzzle, you can use the CLI to manage your Plugins. The <code class="prettyprint">plugins --install</code> command enables you to install a Plugin from a Git repository, an NPM package or a local path on your machine.</p>
+
+<aside class="notice">
+If you are running Kuzzle in a Docker container, you will need to enter the container to use the CLI.
+</aside>
+
+<p>Go to the Kuzzle installation directory and type:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>bin/kuzzle plugins --install --url https://github.com/kuzzleio/kuzzle-plugin-helloworld.git
+<span class="gp">$ </span>pm2 restart KuzzleServer
+</code></pre>
+
+<p>Once Kuzzle has restarted (that&rsquo;s what the second command is for) you can check the server information at <code class="prettyprint">http://localhost:7511/?pretty=true</code> for the new <code class="prettyprint">hello</code> endpoint:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"serverInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"kuzzle"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+                </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"routes"</span><span class="p">:</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                    </span><span class="s2">"kuzzle-plugin-helloworld/hello"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                      </span><span class="nt">"sayHello"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sayHello"</span><span class="w">
+                      </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>Which means you can call the <code class="prettyprint">http://localhost:7511/kuzzle-plugin-helloworld/hello/</code> route and get the following response:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"66265614-e908-4a91-a492-135e40e64aa3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kuzzle-plugin-helloworld/hello"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sayHello"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To get a deeper insight on how Plugins work in Kuzzle, please refer to the <a href="/plugin-reference">Plugin Reference</a>.</p>
+
+<h3 id="managing-plugins-using-the-cli">Managing plugins using the CLI</h3>
+
+<p>Plugins can be managed using the Kuzzle command-line interface:</p>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --help
+
+  Usage: plugins [options] [name]
+
+  manage plugins
+
+  Options:
+
+    -h, --help                      output usage information
+        --list                      list currently installed plugins
+        --install                   if plugin [name] is provided, install it from --version, --url or --path, otherwise, (re-)install all listed plugins
+        --remove                    remove plugin [name] from Kuzzle
+        --activate                  mark the plugin as "activated"
+        --deactivate                mark the plugin as "deactivated"
+        --importConfig &lt;file&gt;       import plugin [name] configuration from &lt;file&gt;
+        --get                       get plugin [name] configuration stored in Kuzzle
+        --set &lt;JSONObject&gt;          merge plugin [name] configuration with JSONObject
+        --unset &lt;property&gt;          unset property from the plugin configuration
+        --replace &lt;JSONObject&gt;      erase the plugin configuration and apply JSONObject instead
+    -v, --packageVersion &lt;version&gt;  plugin &lt;version&gt; to install (npm repository or git only)
+    -u, --url &lt;url&gt;                 install plugin from a git repository or a remote tarball
+    -p, --path &lt;path&gt;               install plugin from the file system
+
+</code></pre>
+
+<aside class="warning">Restarting Kuzzle is required to apply any change made to plugins using the command-line interface</aside>
+
+<h4 id="list-installed-plugins">List installed plugins</h4>
+
+<aside class="note">Installed plugins are copied into the node_modules directory of a Kuzzle server instance, even if installed from a directory path</aside>
+
+<p>You can get an overview of installed plugins and their activation status using the <code class="prettyprint">--list</code> option:</p>
+<pre class="highlight plaintext"><code>./bin/kuzzle plugins --list
+{ 'kuzzle-plugin-logger':
+   { version: '2.0.4',
+     activated: true,
+     config:
+      { services:
+         { file:
+            { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
+              addDate: true },
+           stdout: { level: 'info' } } } },
+  'kuzzle-plugin-auth-passport-local':
+   { version: '2.0.4',
+     activated: true,
+     config: { secret: 'changeme', algorithm: 'sha1', digest: 'hex' } } }
+</code></pre>
+
+<h4 id="install-a-plugin">Install a plugin</h4>
+
+<p>Kuzzle CLI supports most <a href="https://docs.npmjs.com/cli/install">npm installation methodes</a>.</p>
+
+<h5 id="from-npm-repositories">from npm repositories</h5>
+<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion x.y.z] name
+</code></pre>
+
+<p>If <code class="prettyprint">--packageVersion</code> is not provided, the <code class="prettyprint">latest</code> version will be installed.</p>
+
+<h5 id="from-a-git-repository">from a git repository</h5>
+<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion commit-ish] --url https://git.repository.url/project.git
+</code></pre>
+
+<p>The version can be anything related to commits: branch, tag, commit sha1.</p>
+
+<p>If no version is provided, the <code class="prettyprint">master</code> branch is used.</p>
+
+<h5 id="from-a-remote-tarball">from a remote tarball</h5>
+<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --url http://remote.com/plugin.tar.gz
+</code></pre>
+
+<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
+
+<h5 id="from-a-local-tarball">from a local tarball</h5>
+<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --path /path/to/plugin.tar.gz
+</code></pre>
+
+<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
+
+<h5 id="from-a-local-directory">from a local directory</h5>
+<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plgins --install --path /path/to/plugin
+</code></pre>
+
+<aside class="note">The directory content will be copied in the node_modules directory</aside>
+
+<h4 id="view-plugins-configuration">View plugins configuration</h4>
+
+<p>To view a plugin configuration, use the <code class="prettyprint">--get</code> option.</p>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
+{ npmVersion: '2.0.2',
+  activated: true,
+  config:
+   { services:
+      { file:
+         { outputs:
+            { error: { level: 'error', filename: 'kuzzle-error.log' },
+              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
+           addDate: true },
+        stdout: { level: 'info', addDate: true } } } }
+</code></pre>
+
+<h4 id="modify-a-plugin-configuration">Modify a plugin configuration</h4>
+
+<p>Plugin configurations are stored in the <code class="prettyprint">config</code> part of plugins properties.</p>
+
+<p>There are multiple ways of changing a plugin configuration:</p>
+
+<ul>
+<li>perform a partial update, using the <code class="prettyprint">--set</code> action. This allows adding or updating parts of the configuration</li>
+<li>replace the entire plugin configuration on the command-line, with the <code class="prettyprint">--replace</code> action</li>
+<li>replace the entire plugin configuration by loading a JSON file, with the <code class="prettyprint">--importConfig &lt;file&gt;</code> action</li>
+</ul>
+
+<p>Updating a plugin configuration:</p>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
+{ version: '2.0.4',
+  activated: true,
+  config:
+   { services:
+      { file:
+         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
+           addDate: true },
+        stdout: { level: 'info' } } } }
+$ ./bin/kuzzle plugins --set '{ "stdout": { "level": "debug"} }' kuzzle-plugin-logger
+{ version: '2.0.4',
+  activated: true,
+  config:
+   { services:
+      { file:
+         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
+           addDate: true },
+        stdout: { level: 'info' } },
+     stdout: { level: 'debug' } } }
+</code></pre>
+
+<p>Replacing a plugin configuration on the command-line:</p>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
+
+{ version: '2.0.4',
+  activated: true,
+  config:
+   { services:
+      { file:
+         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
+           addDate: true },
+        stdout: { level: 'info' } } } }
+$ ./bin/kuzzle plugins --replace '{"stdout": {"level": "debug", "addDate": true}}' kuzzle-plugin-logger
+
+{ version: '2.0.4',
+  activated: true,
+  config: { stdout: { level: 'debug', addDate: true } } }
+</code></pre>
+
+<p>Replacing a plugin configuration using a JSON file:</p>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --importConfig foo.json kuzzle-plugin-logger
+[✔] Successfully imported configuration
+$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
+{ npmVersion: '2.0.4', activated: true, config: { foo: 'bar' } }
+</code></pre>
+
+<h4 id="removing-a-plugin-configuration-property">Removing a plugin configuration property</h4>
+
+<p>You can remove a plugin configuration property by using the <code class="prettyprint">--unset</code> action:</p>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
+{ version: '2.0.4',
+  activated: true,
+  config:
+   { services:
+      { file:
+         { outputs:
+            { error: { level: 'error', filename: 'kuzzle-error.log' },
+              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
+           addDate: true },
+        stdout: { level: 'info', addDate: true } } } }
+$ ./bin/kuzzle plugins --unset 'services' kuzzle-plugin-logger
+  { npmVersion: '2.0.4',
+    activated: true }
+</code></pre>
+
+<aside class="notice">NB: Only root properties can be unset</aside>
+
+<h4 id="uninstalling-a-plugin">Uninstalling a plugin</h4>
+
+<p>Plugins can be uninstalled using the <code class="prettyprint">--remove</code> option.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --remove kuzzle-plugin-socketio
+<span class="o">{</span> acknowledged: <span class="nb">true</span> <span class="o">}</span>
+</code></pre>
+
+<h4 id="activating-deactivating-a-plugin">Activating/Deactivating a plugin</h4>
+
+<p>By default, a plugin is activated when installed, meaning it will be loaded and used by Kuzzle on the next restart.</p>
+
+<p>You may want to activate or deactivate a plugin, without uninstalling it.</p>
+
+<p>To deactivate a plugin:</p>
+<pre class="highlight plaintext"><code>./bin/kuzzle plugins --deactivate kuzzle-plugin-logger
+{ version: '2.0.4',
+  activated: false,
+  config:
+   { services:
+      { file:
+         { outputs:
+            { error: { level: 'error', filename: 'kuzzle-error.log' },
+              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
+           addDate: true },
+        stdout: { level: 'info', addDate: true } } } }
+</code></pre>
+
+<p>To activate a plugin:</p>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --activate kuzzle-plugin-logger
+  { version: '2.0.4',
+    activated: true,
+    config:
+     { services:
+        { file:__
+           { outputs:
+              { error: { level: 'error', filename: 'kuzzle-error.log' },
+                warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
+             addDate: true },
+          stdout: { level: 'info', addDate: true } } } }
+</code></pre>
+
             <h1 id="advanced">Advanced</h1>
 
             <h2 id="kuzzle-in-depth">Kuzzle in depth</h2>
@@ -2434,245 +2772,6 @@ Each <em>args</em> item will look like:</p>
 <p>The <em>action.search</em> value is sent to Kuzzle&rsquo;s database layer directly, being Elasticsearch 2.2.</p>
 
 <p>Please refer to <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.2/search-request-body.html">Elasticsearch search API documentation</a> for additional information on how to build your query.</p>
-
-            <h2 id="extending-kuzzle-with-plugins">Extending Kuzzle with plugins</h2>
-
-<p>Plugins are external components extending Kuzzle with custom features.</p>
-
-<p>There are several types of plugins:</p>
-
-<ul>
-<li><a href="http://kuzzle.io/documentation/plugin-reference#listener-plugins">Listener plugins</a> listen to events and are supplied with these events data. Cannot change the provided data, and Kuzzle does not wait for them either</li>
-<li><a href="http://kuzzle.io/documentation/plugin-reference#worker-plugins">Workers plugins</a> are just like listener plugins, but they are run on a separate processes. Useful when performing costly operations as they do not imped Kuzzle performances.</li>
-<li><a href="http://kuzzle.io/documentation/plugin-reference#pipe-plugins">Pipe plugins</a> listen to events, and can validate or modify the provided data. Kuzzle waits for pipe plugins before continuing processing data.</li>
-<li><a href="http://kuzzle.io/documentation/plugin-reference#controllers">Controller plugins</a> extend Kuzzle API with new controllers and actions.</li>
-<li><a href="http://kuzzle.io/documentation/plugin-reference#protocol-plugins">Protocol plugins</a> extend Kuzzle networking capabilities by adding new network protocols to it</li>
-<li><a href="http://kuzzle.io/documentation/plugin-reference#authentication-plugin">Authentication plugins</a> add new Kuzzle authentication strategies</li>
-</ul>
-
-<h3 id="managing-plugins-using-the-cli">Managing plugins using the CLI</h3>
-
-<p>Plugins can be managed using the Kuzzle command-line interface:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --help
-
-  Usage: plugins [options] [name]
-
-  manage plugins
-
-  Options:
-
-    -h, --help                      output usage information
-        --list                      list currently installed plugins
-        --install                   if plugin [name] is provided, install it from --version, --url or --path, otherwise, (re-)install all listed plugins
-        --remove                    remove plugin [name] from Kuzzle
-        --activate                  mark the plugin as "activated"
-        --deactivate                mark the plugin as "deactivated"
-        --importConfig &lt;file&gt;       import plugin [name] configuration from &lt;file&gt;
-        --get                       get plugin [name] configuration stored in Kuzzle
-        --set &lt;JSONObject&gt;          merge plugin [name] configuration with JSONObject
-        --unset &lt;property&gt;          unset property from the plugin configuration
-        --replace &lt;JSONObject&gt;      erase the plugin configuration and apply JSONObject instead
-    -v, --packageVersion &lt;version&gt;  plugin &lt;version&gt; to install (npm repository or git only)
-    -u, --url &lt;url&gt;                 install plugin from a git repository or a remote tarball
-    -p, --path &lt;path&gt;               install plugin from the file system
-
-</code></pre>
-
-<aside class="warning">Restarting Kuzzle is required to apply any change made to plugins using the command-line interface</aside>
-
-<h4 id="list-installed-plugins">List installed plugins</h4>
-
-<aside class="note">Installed plugins are copied into the node_modules directory of a Kuzzle server instance, even if installed from a directory path</aside>
-
-<p>You can get an overview of installed plugins and their activation status using the <code class="prettyprint">--list</code> option:</p>
-<pre class="highlight plaintext"><code>./bin/kuzzle plugins --list
-{ 'kuzzle-plugin-logger':
-   { version: '2.0.4',
-     activated: true,
-     config:
-      { services:
-         { file:
-            { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-              addDate: true },
-           stdout: { level: 'info' } } } },
-  'kuzzle-plugin-auth-passport-local':
-   { version: '2.0.4',
-     activated: true,
-     config: { secret: 'changeme', algorithm: 'sha1', digest: 'hex' } } }
-</code></pre>
-
-<h4 id="install-a-plugin">Install a plugin</h4>
-
-<p>Kuzzle CLI supports most <a href="https://docs.npmjs.com/cli/install">npm installation methodes</a>.</p>
-
-<h5 id="from-npm-repositories">from npm repositories</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion x.y.z] name
-</code></pre>
-
-<p>If <code class="prettyprint">--packageVersion</code> is not provided, the <code class="prettyprint">latest</code> version will be installed.</p>
-
-<h5 id="from-a-git-repository">from a git repository</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion commit-ish] --url https://git.repository.url/project.git
-</code></pre>
-
-<p>The version can be anything related to commits: branch, tag, commit sha1.</p>
-
-<p>If no version is provided, the <code class="prettyprint">master</code> branch is used.</p>
-
-<h5 id="from-a-remote-tarball">from a remote tarball</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --url http://remote.com/plugin.tar.gz
-</code></pre>
-
-<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
-
-<h5 id="from-a-local-tarball">from a local tarball</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --path /path/to/plugin.tar.gz
-</code></pre>
-
-<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
-
-<h5 id="from-a-local-directory">from a local directory</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plgins --install --path /path/to/plugin
-</code></pre>
-
-<aside class="note">The directory content will be copied in the node_modules directory</aside>
-
-<h4 id="view-plugins-configuration">View plugins configuration</h4>
-
-<p>To view a plugin configuration, use the <code class="prettyprint">--get</code> option.</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ npmVersion: '2.0.2',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-</code></pre>
-
-<h4 id="modify-a-plugin-configuration">Modify a plugin configuration</h4>
-
-<p>Plugin configurations are stored in the <code class="prettyprint">config</code> part of plugins properties.</p>
-
-<p>There are multiple ways of changing a plugin configuration:</p>
-
-<ul>
-<li>perform a partial update, using the <code class="prettyprint">--set</code> action. This allows adding or updating parts of the configuration</li>
-<li>replace the entire plugin configuration on the command-line, with the <code class="prettyprint">--replace</code> action</li>
-<li>replace the entire plugin configuration by loading a JSON file, with the <code class="prettyprint">--importConfig &lt;file&gt;</code> action</li>
-</ul>
-
-<p>Updating a plugin configuration:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } } } }
-$ ./bin/kuzzle plugins --set '{ "stdout": { "level": "debug"} }' kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } },
-     stdout: { level: 'debug' } } }
-</code></pre>
-
-<p>Replacing a plugin configuration on the command-line:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } } } }
-$ ./bin/kuzzle plugins --replace '{"stdout": {"level": "debug", "addDate": true}}' kuzzle-plugin-logger
-
-{ version: '2.0.4',
-  activated: true,
-  config: { stdout: { level: 'debug', addDate: true } } }
-</code></pre>
-
-<p>Replacing a plugin configuration using a JSON file:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --importConfig foo.json kuzzle-plugin-logger
-[✔] Successfully imported configuration
-$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ npmVersion: '2.0.4', activated: true, config: { foo: 'bar' } }
-</code></pre>
-
-<h4 id="removing-a-plugin-configuration-property">Removing a plugin configuration property</h4>
-
-<p>You can remove a plugin configuration property by using the <code class="prettyprint">--unset</code> action:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-$ ./bin/kuzzle plugins --unset 'services' kuzzle-plugin-logger
-  { npmVersion: '2.0.4',
-    activated: true }
-</code></pre>
-
-<aside class="notice">NB: Only root properties can be unset</aside>
-
-<h4 id="uninstalling-a-plugin">Uninstalling a plugin</h4>
-
-<p>Plugins can be uninstalled using the <code class="prettyprint">--remove</code> option.</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --remove kuzzle-plugin-socketio
-<span class="o">{</span> acknowledged: <span class="nb">true</span> <span class="o">}</span>
-</code></pre>
-
-<h4 id="activating-deactivating-a-plugin">Activating/Deactivating a plugin</h4>
-
-<p>By default, a plugin is activated when installed, meaning it will be loaded and used by Kuzzle on the next restart.</p>
-
-<p>You may want to activate or deactivate a plugin, without uninstalling it.</p>
-
-<p>To deactivate a plugin:</p>
-<pre class="highlight plaintext"><code>./bin/kuzzle plugins --deactivate kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: false,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-</code></pre>
-
-<p>To activate a plugin:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --activate kuzzle-plugin-logger
-  { version: '2.0.4',
-    activated: true,
-    config:
-     { services:
-        { file:__
-           { outputs:
-              { error: { level: 'error', filename: 'kuzzle-error.log' },
-                warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-             addDate: true },
-          stdout: { level: 'info', addDate: true } } } }
-</code></pre>
 
         </div>
         <div class="dark-box">
