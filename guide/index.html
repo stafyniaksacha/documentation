@@ -383,6 +383,11 @@ For the time being, Kuzzle supports the following protocols:</p>
 <span class="gp">$ </span>docker-compose up
 </code></pre>
 
+<p>To persist this changes add this line to your /etc/sysctl.conf
+<code class="prettyprint">
+m.max_map_count=262144
+</code></p>
+
 <aside class="notice">
 The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/vm-max-map-count.html">here</a>.
 </aside>
