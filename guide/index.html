@@ -2256,208 +2256,188 @@ Kuzzle will get back to him with a corresponding Room ID and a Room Channel usin
 <li>Finally, the plugins send the message to the clients who subscribed to it.</li>
 </ul>
 
-            <h2 id="security">Security</h2>
+            <h2 id="authentication">Authentication</h2>
 
-<h3 id="authentication-process">Authentication Process</h3>
-
-<h4 id="overview">Overview</h4>
-
-<p>Kuzzle uses <a href="http://passportjs.org/">passportjs</a> to enable authentication with a potentially large amount of providers, for example:</p>
+<p>Kuzzle uses <a href="http://PassportJS.org/">PassportJS</a> to enable authentication through a large amount of providers, for example:</p>
 
 <ul>
 <li>local username/password authentication (enabled by default)</li>
-<li>oauth2 providers like github or google (using (Oauth plugin)[https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth])</li>
+<li>OAuth2 providers like GitHub or google (using (Oauth plugin)[https://GitHub.com/kuzzleio/kuzzle-plugin-auth-passport-oauth])</li>
 <li>SAML providers</li>
-<li>etc.</li>
 </ul>
-
-<h4 id="how-it-works">How it works</h4>
 
 <p>Remember the <a href="#core-architecture">Architecture overview</a> and focus on the components involved by reading actions:
 <img alt="read_scenario_http_overview" src="images/request-scenarios/auth/overview.png" /></p>
 
-<p>Kuzzle uses these internal components during the authentication process:
-* The Auth Controller
-* The &ldquo;Passport Wrapper&rdquo;, which makes an interface between Kuzzle controllers and the Passport library
-* The User and Token <a href="https://github.com/kuzzleio/kuzzle/tree/master/lib/api/core/models/repositories">Repositories</a>, to retrieve users&rsquo; data.
-* The Authentication strategy, implemented within a dedicated plugin.</p>
+<p>Kuzzle uses the following internal components during the authentication process:</p>
 
-<h5 id="sample-scenario-with-the-local-plugin">Sample scenario with the Local Plugin</h5>
+<ul>
+<li>The Auth Controller.</li>
+<li>The Passport Wrapper, which acts as an interface between Kuzzle controllers and the Passport library,</li>
+<li>The User and Token <a href="https://GitHub.com/kuzzleio/kuzzle/tree/master/lib/api/core/models/repositories">Repositories</a>, to retrieve users&rsquo; data.</li>
+<li>The Authentication strategy, implemented within a dedicated plugin.</li>
+</ul>
 
-<p>The &ldquo;Local&rdquo; strategy authenticates a user locally with his username/password, implemented by the <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-local">Passport Local Plugin</a>.</p>
+<h3 id="example-local-strategy">Example - Local Strategy</h3>
 
-<p>Detailed workflow:</p>
+<p>The &ldquo;Local&rdquo; strategy (implemented by the <a href="https://GitHub.com/kuzzleio/kuzzle-plugin-auth-passport-local">Passport Local Plugin</a>) authenticates a user via a username/password pair (locally stored).</p>
 
 <p><img alt="auth_scenario_details_local" src="images/request-scenarios/auth/details-local.png" /></p>
 
-<p>#1. The user calls the <em>login</em> action of the <code class="prettyprint">Auth Controller</code>:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;my_username&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;my_password&gt;"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<ul>
+<li>The user calls the <code class="prettyprint">login</code> action of the Auth Controller:</li>
+</ul>
+<pre class="highlight plaintext"><code>{
+  "controller": "auth",
+  "action": "login",
+  "body": {
+    "strategy": "local",
+    "username": "&lt;my_username&gt;",
+    "password": "&lt;my_password&gt;"
+  }
+}
+</code></pre>
 
-<p>#2. The <code class="prettyprint">Auth Controller</code> calls the <em>authenticate()</em> method of the <code class="prettyprint">Passport Wrapper</code> which format and sends the related request to the <code class="prettyprint">Passport local strategy</code>.</p>
-
-<p>#3. The <code class="prettyprint">Passport local strategy</code> calls the <em>verify()</em> callback method declared by the <code class="prettyprint">Local Authentication Plugin</code> to check credentials.</p>
-
-<p>#4. The plugin calls the <code class="prettyprint">User Repository</code> and check if credentials are good and resolve to an existing user.</p>
-
-<p>#5. If a user is found, he is resolved and sent back to the <code class="prettyprint">Auth Controller</code> through the internal components.</p>
-
-<p>#6. The <code class="prettyprint">Auth Controller</code> calls the <em>generateToken()</em> method to get a <a href="https://jwt.io/">JWT Token</a> related to the user.</p>
-
-<p>#7. The JWT Token is sent back to the client, who will use it in next requests to be authenticated:</p>
+<ul>
+<li>The Auth Controller calls the <code class="prettyprint">authenticate()</code> method of the Passport Wrapper which formats and sends the related request to the Passport local strategy.</li>
+<li>The Passport local strategy calls the <code class="prettyprint">verify()</code> callback method declared by the Local Authentication Plugin to check credentials.</li>
+<li>The plugin calls the User Repository and check if credentials are good and resolve to an existing user.</li>
+<li>If a user is found, he is resolved and sent back to the Auth Controller through the internal components.</li>
+<li>The Auth Controller calls the <code class="prettyprint">generateToken()</code> method to get a <a href="https://jwt.io/">JWT Token</a> corresponding to the user.</li>
+<li>The JWT Token is sent back to the client, who will use it in next requests to be authenticated:</li>
+</ul>
 
 <p>Sample response:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed4faaff-253a-464f-a6b3-387af9d8483d"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_username"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"jwt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJteV91c2VybmFtZSIsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ.BefoyfAKzwXuGhbYe0iPeG0v9F4HmikvahqwqzQr3pE"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight plaintext"><code>{
+  "status": 200,
+  "error": null,
+  "controller": "auth",
+  "action": "login",
+  "state": "done",
+  "requestId": "ed4faaff-253a-464f-a6b3-387af9d8483d",
+  "metadata": {},
+  "result": {
+    "_id": "my_username",
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJteV91c2VybmFtZSIsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ.BefoyfAKzwXuGhbYe0iPeG0v9F4HmikvahqwqzQr3pE"
+  }
+}
+</code></pre>
 
-<h5 id="oauth2-scenario-with-the-oauth-plugin">OAuth2 scenario with the Oauth Plugin</h5>
+<h3 id="example-oauth2-strategy">Example - OAuth2 Strategy</h3>
 
-<p>The &ldquo;Oauth&rdquo; strategy, implemented by the <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth">Passport Oauth Plugin</a>, authenticates a user locally with his account on Github, Google+, Facebook, Twitter, or any identity provider using OAUth2 protocol with &ldquo;Authorization Code&rdquo; grant type.</p>
+<p>The &ldquo;Oauth&rdquo; strategy, implemented by the <a href="https://GitHub.com/kuzzleio/kuzzle-plugin-auth-passport-oauth">Passport Oauth Plugin</a>, authenticates a user  via Github, Google+, Facebook, Twitter, or any identity provider using OAUth2 protocol with &ldquo;Authorization Code&rdquo; grant type.</p>
 
 <p>For more details about OAuth2 protocol, see <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2#grant-type-authorization-code">here</a>.</p>
 
-<p>Detailed workflow:</p>
-
-<p><img alt="auth_scenario_details_oauth2" src="images/request-scenarios/auth/details-oauth2.png" /></p>
+<p><img alt="auth_scenario_details_oauth2" src="images/images/request-scenarios/auth/details-OAuth2.png" /></p>
 
 <p>The authentication flow is a 2-step flow:</p>
 
-<h6 id="1st-step-get-the-oauth2-provider-39-s-url">1st step: get the OAuth2 Provider&rsquo;s URL</h6>
+<h4 id="1st-step-get-the-oauth2-provider-39-s-url">1st step: get the OAuth2 Provider&rsquo;s URL</h4>
 
-<p>#1. The user calls the <em>login</em> action of the <code class="prettyprint">Auth Controller</code>:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<ul>
+<li>The user calls the <code class="prettyprint">login</code> action of the Auth Controller:</li>
+</ul>
+<pre class="highlight plaintext"><code>{
+  "controller": "auth",
+  "action": "login",
+  "body": {
+    "strategy": "GitHub"
+  }
+}
+</code></pre>
 
-<p>#2. The <code class="prettyprint">Auth Controller</code> calls the <em>authenticate()</em> method of the <code class="prettyprint">Passport Wrapper</code> which format and sends the related request to the <code class="prettyprint">Passport oauth2 strategy</code>.</p>
+<ul>
+<li>The Auth Controller calls the <code class="prettyprint">authenticate()</code> method of the Passport Wrapper which formats and sends the related request to the Passport OAuth2 strategy.</li>
+<li>The strategy calls a redirection to the OAuth2 Provider.</li>
+<li>The Passport Wrapper intercepts the redirection request and formats a Kuzzle Response for the client:</li>
+</ul>
+<pre class="highlight plaintext"><code>{
+  "headers":
+  {
+    "Content-Length": "0",
+    "Location": "https://GitHub.com/login/oauth/authorize?response_type=code&amp;redirect_uri=http%3A%2F%2Fkuzzle%2Fapi%2F1.0%2F_login%2Fgithub&amp;client_id=MY_CLIENT_ID"
+  },
+  "statusCode": 302
+}
+</code></pre>
 
-<p>#3. While no Authorization code is provided, the strategy calls a redirection to the <code class="prettyprint">OAuth2 Provider</code></p>
+<ul>
+<li>The Auth Controller sends the response to the client, with the redirection URL to the OAUth2 Provider:</li>
+</ul>
+<pre class="highlight plaintext"><code>{
+  "action": "login",
+  "controller": "auth",
+  "error": null,
+  "metadata": {},
+  "requestId": "fd4246f9-717c-4503-b50b-3a5bf0f142b5",
+  "result": {
+    "headers": {
+      "Content-Length": "0",
+      "Location": "https://GitHub.com/login/oauth/authorize?response_type=code&amp;redirect_uri=http%3A%2F%2Fkuzzle%2Fapi%2F1.0%2F_login%2Fgithub&amp;client_id=MY_CLIENT_ID"
+    },
+    "statusCode": 302
+  },
+  "scope": null,
+  "state": "done",
+  "status": 200
+}
+</code></pre>
 
-<p>#4. The <code class="prettyprint">Passport Wrapper</code> intercepts the redirection request and format a Kuzzle Response for the client:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"headers"</span><span class="p">:</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"Content-Length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/login/oauth/authorize?response_type=code&amp;redirect_uri=http%3A%2F%2Fkuzzle%2Fapi%2F1.0%2F_login%2Fgithub&amp;client_id=MY_CLIENT_ID"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">302</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<h4 id="2nd-step-authenticate-the-user-with-the-oauth2-code">2nd step: authenticate the user with the OAuth2 code.</h4>
 
-<p>#5. The <code class="prettyprint">Auth Controller</code> sends the response to the client, with the redirection URL to the <code class="prettyprint">OAUth2 Provider</code>:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fd4246f9-717c-4503-b50b-3a5bf0f142b5"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"Content-Length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/login/oauth/authorize?response_type=code&amp;redirect_uri=http%3A%2F%2Fkuzzle%2Fapi%2F1.0%2F_login%2Fgithub&amp;client_id=MY_CLIENT_ID"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">302</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h6 id="2nd-step-authenticate-the-user-with-the-oauth2-code">2nd step: authenticate the user with the OAuth2 code.</h6>
-
-<p>#6. The Client sends an HTTP request to the <code class="prettyprint">OAuth2 Provider</code> (<strong>it has to be implemented within the client&rsquo;s application code</strong>).</p>
-
-<p>#7. The user authenticates himself to the <code class="prettyprint">Oauth2 Provider</code> and allow Kuzzle Application to use his credentials (that is the standard OAuth2 flow, managed at the provider&rsquo;s side).</p>
-
-<p>#8. The <code class="prettyprint">OAuth2 Provider</code> sends a HTTP redirect response to the client, containing the oauth2 authorization code:</p>
+<ul>
+<li>The Client sends an HTTP request to the OAuth2 Provider (unless you are using a Kuzzle SDK, this has to be implemented within the client&rsquo;s application code).</li>
+<li>The user authenticates to the OAuth2 Provider and allow Kuzzle Application to use his credentials (that is the standard OAuth2 flow, managed at the provider&rsquo;s side).</li>
+<li>The OAuth2 Provider sends a HTTP redirect response to the client, containing the OAuth2 authorization code:</li>
+</ul>
 <pre class="highlight plaintext"><code>HTTP/1.1 302 Found
-Location: http://&lt;kuzzle&gt;/_login/github?code=OAUTH2_CODE
-</code></pre>
-
-<p>#9. The client calls again the <em>login</em> action of the <code class="prettyprint">Auth Controller</code>, now with the oauth2 authorization code:</p>
-
-<ul>
-<li>either in HTTP, simply following the redirection:</li>
-</ul>
-<pre class="highlight plaintext"><code>curl http://&lt;kuzzle&gt;/_login/github?code=OAUTH2_CODE
+Location: http://&lt;kuzzle&gt;/_login/GitHub?code=OAUTH2_CODE
 </code></pre>
 
 <ul>
+<li>The client calls again the <code class="prettyprint">login</code> action of the Auth Controller, now with the OAuth2 authorization code:
+
+<ul>
+<li>either in HTTP, simply following the redirection <code class="prettyprint">curl http://&lt;kuzzle&gt;/_login/GitHub?code=OAUTH2_CODE</code></li>
 <li>or, with another protocol (for example WebSocket), after having parsed the URL to get the authorization code:</li>
+</ul></li>
 </ul>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OAUTH2_CODE"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight plaintext"><code>{
+  "controller": "auth",
+  "action": "login",
+  "body": {
+    "strategy": "GitHub",
+    "code": "OAUTH2_CODE"
+  }
+}
+</code></pre>
 
-<p>#10. The <code class="prettyprint">Auth Controller</code> calls the <em>authenticate()</em> method of the <code class="prettyprint">Passport Wrapper</code> which format and sends the related request to the <code class="prettyprint">Passport oauth2 strategy</code>.</p>
-
-<p>#11. The <code class="prettyprint">Passport oauth2 strategy</code> transmits the oauth2 authorization code to the <code class="prettyprint">OAuth2 Provider</code> in order to retrieve the OAuth2 Token.</p>
-
-<p>#12. The <code class="prettyprint">Passport oauth2 strategy</code> calls the <em>verify()</em> callback method declared by the <code class="prettyprint">Oauth2 Authentication Plugin</code></p>
-
-<p>#13. The plugin calls the <code class="prettyprint">User Repository</code> to check for an existing user with the given github ID.</p>
-
-<p><em>(Note: If no related user is found in kuzzle, the plugin can either deny the authentication, or create automatically the user, depending on its settings).</em></p>
-
-<p>#14. The user is resolved and sent back to the <code class="prettyprint">Auth Controller</code> through the internal components.</p>
-
-<p>#15. The <code class="prettyprint">Auth Controller</code> calls the <em>generateToken()</em> method to get a <a href="https://jwt.io/">JWT Token</a> related to the user.</p>
-
-<p>#16. The JWT Token is sent back to the client, who will use it in next requests to be authenticated:</p>
+<ul>
+<li>The Auth Controller calls the <code class="prettyprint">authenticate()</code> method of the Passport Wrapper which formats and sends the related request to the Passport OAuth2 strategy.</li>
+<li>The Passport OAuth2 strategy forwards the OAuth2 authorization code to the OAuth2 Provider in order to retrieve the OAuth2 Token.</li>
+<li>The Passport OAuth2 strategy calls the <code class="prettyprint">verify()</code> callback method declared by the OAuth2 Authentication Plugin</li>
+<li>The plugin calls the User Repository to check for an existing user with the given GitHub ID. <em>(Note: If no related user is found in Kuzzle, the plugin can either deny the authentication or create automatically the user, depending on the settings).</em></li>
+<li>The user is resolved and sent back to the Auth Controller through the internal components.</li>
+<li>The Auth Controller calls the <code class="prettyprint">generateToken()</code> method to get a <a href="https://jwt.io/">JWT Token</a> related to the user.</li>
+<li>The JWT Token is sent back to the client, who will use it in next requests to be authenticated.</li>
+</ul>
 
 <h4 id="how-to-provide-your-own-strategy">How to provide your own strategy</h4>
 
-<p>Any strategy supported by passportjs can be implemented for Kuzzle with a dedicated plugin (see <a href="#gt-authentication-plugin">plugins documentation</a>).</p>
+<p>Any strategy supported by PassportJS can be implemented in Kuzzle with a dedicated plugin. Please refer to the <a href="/plugin-reference/#authentication-plugin">Plugins Reference</a>).</p>
 
-<h3 id="roles-definition-reference">Roles definition reference</h3>
+<h3 id="advanced-roles-definitions">Advanced Roles Definitions</h3>
 
-<h4 id="role-and-profile-definition">Role and profile definition</h4>
+<p>In the <a href="#permissions">User Guide</a>, we have seen how to assign basic roles to profiles and profiles to users. Here, we are going to learn how to set complex and dynamic permissions.</p>
 
-<p>see <a href="#permissions">User Guide</a>.</p>
+<p>The privileges for a certain action (restricted to a given set of indexes and collections) must be expressed as a boolean value. So far, we hard-coded this value within the permissions configuration. In some cases, this will not fit your needs. In a collaborative TO-DO list application, for example, a user should not be allowed to update other user&rsquo;s items. This need is addressed by what we call Permission Closures.</p>
 
-<h4 id="permission-closures">Permission closures</h4>
+<h4 id="permission-closures">Permission Closures</h4>
 
-<p>The <code class="prettyprint">action permission</code> value can be set either to:</p>
+<p>Instead of hard-coding the permission boolean value, we assign a function (a closure) that computes this value and returns it based on the execution context.</p>
 
-<ul>
-<li>a boolean. When set to <code class="prettyprint">true</code>, the user is allowed to perform the action.</li>
-<li>an object that describes a function (we call it &ldquo;closure&rdquo;).</li>
-</ul>
-
-<p>A closure enable to set a role&rsquo;s policy according to some execution context.
-For example, if we need to allow users to update only their own documents, it can be done with this sample role:</p>
+<p>For example, if we need to allow users to update only their own documents, it can be done with this sample role:</p>
 <pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">role</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">controllers</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">write</span><span class="p">:</span> <span class="p">{</span>
@@ -2484,11 +2464,9 @@ For example, if we need to allow users to update only their own documents, it ca
 - <code class="prettyprint">test</code> is the body of <a href="#the-permission-function">the permission function</a>
 - <code class="prettyprint">args</code> is the parameter given to <a href="#the-fetch-definition">the fetch definition function</a></p>
 
-<p>(see below)</p>
+<h4 id="the-permission-function">The permission function</h4>
 
-<h5 id="the-permission-function">The permission function</h5>
-
-<p>The permission function is executed in a sandbox with a limited scope. Its body is the evaluation of the <em>test</em> parameter given in the role&rsquo;s definition and must return a boolean value.</p>
+<p>The permission function is executed in a sandbox with a limited context. Its body is the evaluation of the <code class="prettyprint">test</code> parameter given in the role&rsquo;s definition and <strong>must return a boolean value</strong>.</p>
 
 <p>The permission function has the following signature:</p>
 <pre class="highlight javascript"><code><span class="cm">/**
@@ -2505,191 +2483,174 @@ For example, if we need to allow users to update only their own documents, it ca
 <span class="p">};</span>
 </code></pre>
 
-<h6 id="parameters">Parameters</h6>
+<h5 id="request">$request</h5>
 
-<h6 id="gt-request">&gt; $request</h6>
+<p>The <a href="https://github.com/kuzzleio/kuzzle-common-objects#request">Request</a> object is the request that is currently being evaluated.  </p>
 
-<p>The <a href="https://www.npmjs.com/package/kuzzle-common-objects#request">Request</a> object is the request that is currently being evaluated.<br>
-A typical request object will look like this:</p>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="s1">'66978665-1ac5-4770-890c-59cc88f89098'</span><span class="p">,</span>
-  <span class="nx">timestamp</span><span class="err">:</span> <span class="mi">14582100322345</span><span class="p">,</span>
-  <span class="nx">input</span><span class="err">:</span> <span class="p">{</span>
-    <span class="nl">controller</span><span class="p">:</span> <span class="s1">'write'</span><span class="p">,</span>
-    <span class="nx">action</span><span class="err">:</span> <span class="s1">'update'</span><span class="p">,</span>
-    <span class="nx">resource</span><span class="err">:</span> <span class="p">{</span>
-      <span class="nl">index</span><span class="p">:</span> <span class="s1">'myIndex'</span><span class="p">,</span>
-      <span class="nx">collection</span><span class="err">:</span> <span class="s1">'myCollection'</span><span class="p">,</span>
-      <span class="nx">_id</span><span class="err">:</span> <span class="s1">'id_1'</span>
-    <span class="p">},</span>
-    <span class="nx">body</span><span class="err">:</span> <span class="p">{</span>
-      <span class="nl">foo</span><span class="p">:</span> <span class="s1">'bar'</span>
-    <span class="p">},</span>
-    <span class="nx">metadata</span><span class="err">:</span> <span class="p">{</span>
-      <span class="nl">someMetadata</span><span class="p">:</span> <span class="s2">"some metadata value"</span>
-    <span class="p">},</span>
-    <span class="nx">jwt</span><span class="err">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">args</span><span class="err">:</span> <span class="p">{}</span>
-  <span class="p">},</span>
-  <span class="nx">error</span><span class="err">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="nx">result</span><span class="err">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="nx">status</span><span class="err">:</span> <span class="mi">102</span><span class="p">,</span>
-  <span class="nx">context</span><span class="err">:</span> <span class="p">{</span>
-    <span class="nl">connectionId</span><span class="p">:</span> <span class="s1">'123456789'</span><span class="p">,</span>
-    <span class="nx">protocol</span><span class="err">:</span> <span class="s1">'network protocol'</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
+<h5 id="currentuserid">$currentUserId</h5>
 
-<h6 id="gt-currentuserid">&gt; $currentUserId</h6>
+<p>The <code class="prettyprint">$currentUserId</code> variable contains the current user ID. It is an alias for <code class="prettyprint">request.context.token.userId</code>.</p>
 
-<p>The <em>$currentUserId</em> variable contains the current user ID. It is an alias for <code class="prettyprint">request.context.token.userId</code>.</p>
+<h5 id="args">args</h5>
 
-<h6 id="gt-args">&gt; args</h6>
+<p>The main purpose of the &ldquo;closures&rdquo; behavior is to define a role policy based on the current state of the persistence layer. This means that we need to fetch documents from the storage engine in order to use them within the permission function.</p>
 
-<p>The main purpose of the &ldquo;closures&rdquo; behavior is to define a role policy based on conditions about stored documents.
-That means that we need to fetch documents from the storage engine in order to use them within the permission function.</p>
-
-<p>The <em>args</em> object contains these documents, as a result of the evaluation of the <a href="#the-fetch-definition">fetch definition</a>.
-Each <em>args</em> item will look like:</p>
+<p>The <code class="prettyprint">args</code> object contains these documents, as a result of the evaluation of the <a href="#the-fetch-definition">fetch definition</a>.
+Each <code class="prettyprint">args</code> item will look like:</p>
 <pre class="highlight javascript"><code><span class="p">{</span>
   <span class="nl">content</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">the</span> <span class="nb">document</span> <span class="nx">itself</span><span class="o">&gt;</span><span class="p">,</span>
   <span class="nx">id</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">the</span> <span class="nb">document</span> <span class="nx">id</span><span class="o">&gt;</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>With the sample role above (<code class="prettyprint">return args.document.content.user.id === $currentUserId</code>), the <code class="prettyprint">update</code> action is allowed only if the fetched document contains an attribute <code class="prettyprint">user.id</code> which value is the current user ID.</p>
+<p>In the sample role above (<code class="prettyprint">return args.document.content.user.id === $currentUserId</code>), the <code class="prettyprint">update</code> action is allowed only if the fetched document contains an attribute <code class="prettyprint">user.id</code> which value is the current user ID.</p>
 
-<h4 id="the-fetch-definition">The fetch definition</h4>
+<h4 id="the-fetch-definition">The Fetch Definition</h4>
 
-<p>The optional <em>args</em> parameter given to the permission function is the result of the evaluation of some fetch definition given in the args section of the role definition.</p>
+<p>The Fetch Definition allows you to pass some documents fetched from the persistence layer to your permission function.</p>
 
-<p>Using this ability, you can pass some documents fetched from Kuzzle&rsquo;s database layer to your permission function.</p>
-
-<p>In our sample role above, we fetch a <em>document</em> variable which contains the document that was requested for update, and we use it in the permission function to test if it is owned by the current user.</p>
+<p>In our sample role above, we fetch a <code class="prettyprint">document</code> variable which contains the document that was requested for update, and we use it in the permission function to test if it is owned by the current user.</p>
 
 <h5 id="args-element-structure">args element structure</h5>
 
-<p>The <em>args</em> element has the following structure:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="o">&lt;</span><span class="nx">some</span> <span class="nx">variable</span><span class="o">&gt;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">index</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">index</span> <span class="nx">from</span> <span class="nx">which</span> <span class="nx">to</span> <span class="nx">fetch</span> <span class="nx">the</span> <span class="nb">document</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="na">collection</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">collection</span> <span class="nx">from</span> <span class="nx">which</span> <span class="nx">to</span> <span class="nx">fetch</span> <span class="nx">the</span> <span class="nb">document</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="na">action</span><span class="p">:</span> <span class="p">{</span>
-      <span class="o">&lt;</span><span class="nx">action</span> <span class="nx">type</span> <span class="p">(</span><span class="nx">get</span><span class="o">|</span><span class="nx">mget</span><span class="o">|</span><span class="nx">search</span><span class="p">)</span><span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">action</span> <span class="nx">type</span> <span class="nx">specific</span> <span class="nx">parameters</span><span class="o">&gt;</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="o">&lt;</span><span class="nx">another</span> <span class="nx">variable</span><span class="o">&gt;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="p">...</span>
-  <span class="p">},</span>
-  <span class="p">...</span>
-<span class="p">};</span>
-</code></pre>
+<p>The <code class="prettyprint">args</code> element is the place where we define our Fetch Definitions and has the following structure:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"&lt;some variable&gt;"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;index</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">fetch</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">document(s)&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;collection</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">fetch</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">document(s)&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"&lt;action type (get|mget|search)&gt;"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;action</span><span class="w"> </span><span class="err">type</span><span class="w"> </span><span class="err">specific</span><span class="w"> </span><span class="err">parameters&gt;</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"&lt;another variable&gt;"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>You can define one or more <em>variables</em> inside the args element and, for each of them, the action to use to populate them.</p>
+<p>You can define one or more variables inside the args element and, for each of them, the action to use to populate them. Each variable will then be available in <a href="#the-permission-function">your permission function</a> as <code class="prettyprint">args.&lt;variable&gt;</code>.</p>
 
-<p>Each <em>variable</em> will then be availalbe in <a href="#the-permission-function">your permission function</a> under <code class="prettyprint">args.&lt;variable&gt;</code>.</p>
+<h5 id="embedded-variables">Embedded variables</h5>
 
-<h6 id="embedded-variables">embedded variables</h6>
-
-<p>Some variables are exposed by Kuzzle and can be used within your fetch function definition:</p>
+<p>Some variables are exposed by Kuzzle and can be used within your Fetch  Definition:</p>
 
 <ul>
 <li><code class="prettyprint">$request</code>: The complete request object being evaluated.</li>
-<li><code class="prettyprint">$currentId</code>: The current request&rsquo;s document ID. It is an alias for <code class="prettyprint">$request.input.resource._id</code>.</li>
+<li><code class="prettyprint">$currentId</code>: The current request document ID. It is an alias for <code class="prettyprint">$request.input.resource._id</code>.</li>
 </ul>
 
-<h6 id="action-types">action types</h6>
+<h5 id="action-types">action types</h5>
 
-<h6 id="gt-get-action-type">&gt; <em>get</em> action type</h6>
+<h6 id="get"><code class="prettyprint">get</code></h6>
 
-<p>The <code class="prettyprint">get</code> action type performs a read/get call. It takes a document id for entry and returns the matching document.</p>
+<p>The <code class="prettyprint">get</code> action type performs a read/get call. It fetches a document by its ID.</p>
 
 <p>Example:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">currentDocument</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">index</span><span class="p">:</span> <span class="s2">"$request.input.resource.index"</span><span class="p">,</span>
-    <span class="na">collection</span><span class="p">:</span> <span class="s2">"$request.input.resource.collection"</span><span class="p">,</span>
-    <span class="na">action</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">get</span><span class="p">:</span> <span class="s2">"$currentId"</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">anotherDocument</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">index</span><span class="p">:</span> <span class="s2">"myIndex"</span><span class="p">,</span>
-    <span class="na">collection</span><span class="p">:</span> <span class="s2">"myCollection"</span><span class="p">,</span>
-    <span class="na">action</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">get</span><span class="p">:</span> <span class="s2">"document_id"</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"currentDocument"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$request.input.resource.index"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$request.input.resource.collection"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"get"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$currentId"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"anotherDocument"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myIndex"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myCollection"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"get"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document_id"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>The <em>args</em> variable passed to the permission function contains:
-- <code class="prettyprint">args.currentDocument</code>: the document that is being updated. Indeed, we fetch:
-  - the document which ID is the current document&rsquo;s ID (<code class="prettyprint">{action: {get: &quot;currentId&quot;}}</code>)
-  - in the current collection (<code class="prettyprint">collection: &quot;$request.input.resource.collection&quot;</code>)
-  - of the current index (<code class="prettyprint">index: &quot;$request.input.resource.index&quot;</code>).
-- <code class="prettyprint">args.anotherDocument</code>: the document with ID <code class="prettyprint">document_id</code>, from index <code class="prettyprint">myIndex</code> and collection <code class="prettyprint">myCollection</code>.</p>
+<p>In the <code class="prettyprint">args</code> field, we declare the following Fetch Definitions:</p>
 
-<h6 id="gt-mget-action-type">&gt; <em>mget</em> action type</h6>
+<ul>
+<li><code class="prettyprint">currentDocument</code>, which represents the document that the user wants to update and whose Fetch Definition is composed of:
+
+<ul>
+<li><code class="prettyprint">index</code>: the index pointed by the current Request;</li>
+<li><code class="prettyprint">collection</code>: the collection pointed by the current Request;</li>
+<li><code class="prettyprint">$currentId</code>: the document ID pointed by the current Request, passed as an argument to the <code class="prettyprint">get</code> action.</li>
+</ul></li>
+<li><code class="prettyprint">anotherDocument</code>, which represents another document, just as an example, fetched the same way as the previous one but with different parameters.</li>
+</ul>
+
+<h6 id="mget"><code class="prettyprint">mget</code></h6>
 
 <p>The <code class="prettyprint">mget</code> action type takes a list of document ids for entry and returns the list of matching documents.</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">myDocuments</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">index</span><span class="p">:</span> <span class="s2">"myIndex"</span><span class="p">,</span>
-    <span class="na">collection</span><span class="p">:</span> <span class="s2">"myCollection"</span><span class="p">,</span>
-    <span class="na">action</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">mget</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">"id_1"</span><span class="p">,</span>
-        <span class="s2">"id_2"</span><span class="p">,</span>
-        <span class="p">...</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"myDocuments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myIndex"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myCollection"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mget"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"id_1"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"id_2"</span><span class="p">,</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>The <em>args</em> variable passed to the permission function contains an array of documents fetched from <code class="prettyprint">myIndex</code>/<code class="prettyprint">myCollection</code>, like:</p>
+<p>In the <code class="prettyprint">args</code> field, we declare a multi-valued Fetch Definition. Notice how the <code class="prettyprint">mget</code> action takes an array of IDs rather than a single value.</p>
+
+<p>These documents are accessed in the Permission Function as follows:</p>
 <pre class="highlight javascript"><code><span class="nx">args</span><span class="p">.</span><span class="nx">myDocuments</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"id_1"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"Document 1"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="s2">"Cum sociis natoque penatibus et magnis dis parturient montes"</span><span class="p">},</span>
-  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"id_2"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"Document 2"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="s2">"nascetur ridiculus mus. Nulla nunc velit"</span><span class="p">},</span>
+  <span class="p">}</span>
+  <span class="p">{</span> <span class="nl">id</span><span class="p">:</span> <span class="s2">"id_2"</span><span class="p">,</span> <span class="nx">content</span><span class="err">:</span> <span class="p">{</span><span class="nl">name</span><span class="p">:</span> <span class="s2">"Document 2"</span><span class="p">,</span> <span class="nx">description</span><span class="err">:</span> <span class="s2">"nascetur ridiculus mus. Nulla nunc velit"</span><span class="p">},</span>
+  <span class="p">}</span>
   <span class="p">...</span>
 <span class="p">]</span>
 </code></pre>
 
-<h6 id="gt-search-action-type">&gt; <em>search</em> action type</h6>
+<h6 id="search"><code class="prettyprint">search</code></h6>
 
-<p>The <code class="prettyprint">search</code> action type makes a search in Kuzzle&rsquo;s database layer and returns the related documents.</p>
+<p>The <code class="prettyprint">search</code> action type performs a search on the persistence layer and returns the resulting documents. It behave exactly like a normal <a href="#document-search">document search</a>.</p>
 
 <p>Example:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">myDocuments</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">index</span><span class="p">:</span> <span class="s2">"myIndex"</span><span class="p">,</span>
-    <span class="na">collection</span><span class="p">:</span> <span class="s2">"myCollection"</span><span class="p">,</span>
-    <span class="na">action</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">search</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">filter</span><span class="p">:</span> <span class="p">{</span>
-          <span class="na">match</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">name</span><span class="p">:</span> <span class="s2">"$request.input.body.name"</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"myDocuments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myIndex"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myCollection"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$request.input.body.name"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">  
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>The <em>args</em> variable passed to the permission function contains an array of documents fetched from <code class="prettyprint">myIndex</code>/<code class="prettyprint">myCollection</code>, for which the <code class="prettyprint">name</code> attribute matches the <code class="prettyprint">name</code> attribute of the request:</p>
+<p>The search results are available in the Permission Function as an array of documents fetched from <code class="prettyprint">myIndex</code>/<code class="prettyprint">myCollection</code>, for which the <code class="prettyprint">name</code> attribute matches the <code class="prettyprint">name</code> attribute of the request:</p>
 <pre class="highlight javascript"><code><span class="nx">args</span><span class="p">.</span><span class="nx">myDocuments</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"id_1"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="s2">"Cum sociis natoque penatibus et magnis dis parturient montes"</span><span class="p">},</span>
-  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"id_2"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"foo bar"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="s2">"nascetur ridiculus mus. Nulla nunc velit"</span><span class="p">},</span>
+  <span class="p">}</span>
+  <span class="p">{</span> <span class="nl">id</span><span class="p">:</span> <span class="s2">"id_2"</span><span class="p">,</span> <span class="nx">content</span><span class="err">:</span> <span class="p">{</span><span class="nl">name</span><span class="p">:</span> <span class="s2">"foo bar"</span><span class="p">,</span> <span class="nx">description</span><span class="err">:</span> <span class="s2">"nascetur ridiculus mus. Nulla nunc velit"</span><span class="p">},</span>
+  <span class="p">}</span>
   <span class="p">...</span>
 <span class="p">]</span>
 </code></pre>
 
-<p>The <em>action.search</em> value is sent to Kuzzle&rsquo;s database layer directly, being Elasticsearch 2.2.</p>
+<p>The content of <code class="prettyprint">action.search</code> is directly passed to Elasticsearch.</p>
 
-<p>Please refer to <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.2/search-request-body.html">Elasticsearch search API documentation</a> for additional information on how to build your query.</p>
+<p>Please refer to <a href="/elasticsearch-cookbook/">our Elasticsearch Cookbook</a> for additional information on how to build your query.</p>
 
         </div>
         <div class="dark-box">
