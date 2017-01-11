@@ -465,15 +465,15 @@ By default, Kuzzle expects all the components to be running on localhost. You ca
 </code></pre>
 
 <ol>
-<li>Create a pm2 configuration file:</li>
+<li>Create a <a href="http://pm2.keymetrics.io/docs/usage/application-declaration/#process-file">pm2 configuration file</a>:</li>
 </ol>
 <pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">"apps:
    - name: kuzzle-proxy
-     cwd: </span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span><span class="s2">/kuzzle/kuzzle-proxy
-     script: index.js
+     cwd: </span><span class="k">${</span><span class="nv">KUZZLE_PROXY_INSTALL_DIR</span><span class="k">}</span><span class="s2">
+     script: </span><span class="k">${</span><span class="nv">KUZZLE_PROXY_INSTALL_DIR</span><span class="k">}</span><span class="s2">/index.js
    - name: kuzzle
-     cwd: </span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span><span class="s2">/kuzzle/kuzzle
-     script: bin/kuzzle
+     cwd: </span><span class="k">${</span><span class="nv">KUZZLE_CORE_INSTALL_DIR</span><span class="k">}</span><span class="s2">
+     script: </span><span class="k">${</span><span class="nv">KUZZLE_CORE_INSTALL_DIR</span><span class="k">}</span><span class="s2">/bin/kuzzle
      args: start
      env:
        kuzzle_server__http__port: 7510
