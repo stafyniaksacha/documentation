@@ -108,9 +108,69 @@
         <div class="content">
           <h2 id="data-validation">Data Validation</h2>
 
-<p>Kuzzle natively provides a way to validate the documents you want to create, replace, update or publish against a validation schema. You can specify the validation rules in the kuzzle configuration file in <code class="prettyprint">validation</code>.</p>
+<p>One common need when you are dealing with data is validation. Every time you create new documents, update them or publish real-time messages, you may want to <strong>check that their content meets a given set of criteria</strong>.</p>
 
-<p>See <a href="http://kuzzle.io/documentation/data-validation">Kuzzle Data Validation Reference</a> for more information.</p>
+<p>The most common example is the &ldquo;e-mail field validation&rdquo;. Imagine you provide a registration form to your users to collect their name and e-mail. It&rsquo;s quite vital to you that the user provides a valid e-mail address.</p>
+
+<p>Instead of leaving you with the burden of coding this logic, Kuzzle natively provides a way to validate your data input against a validation schema. It enables you to define the set document fields to validate and provides you with <a href="/validation-reference/">an extended set of validation rules</a>.</p>
+
+<p>This way, every time Kuzzle receives a data input, it checks it against the validation schema and returns a <strong>standard error</strong> when the validation fails.</p>
+
+<p>You can specify the validation rules in the kuzzle <a href="http://localhost/guide/#configuring-kuzzle">configuration file</a> in the <code class="prettyprint">validation</code> field.</p>
+
+<p>You can take a look at the <a href="/validation-reference/">Kuzzle Data Validation Reference</a> for a straight dive, or keep reading for a smoother introduction.</p>
+
+<h3 id="basic-validation">Basic validation</h3>
+
+<p>The place to specify your validation schema is the <code class="prettyprint">validation</code> field in your kuzzlerc file. A validation schema has a <a href="/validation-reference/#schema-structure">hierarchical structure</a>, where you specify a set of rules per collection.</p>
+<pre class="highlight json"><code><span class="err">validation:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"onlineshop"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"mandatory"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"productDescription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"defaultValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sorry, no description available for this product."</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Let&rsquo;s take a look at what we just did here.</p>
+
+<ul>
+<li>We defined a set of rules for the documents contained in the <code class="prettyprint">products</code> collection, within the <code class="prettyprint">onlineshop</code> index.</li>
+<li>We specified the field <code class="prettyprint">id</code> as mandatory (which means that it must have a value) and of type <code class="prettyprint">Number</code>.</li>
+<li>We specified the field <code class="prettyprint">productDescription</code> as of type <code class="prettyprint">String</code>, with a sorry-ish default value.</li>
+</ul>
+
+<p>Take a look at the <a href="/validation-reference/#fields">Validation Fields Reference</a> for a complete insight of all the available specifications.</p>
+
+<h3 id="complex-validation-via-the-dsl">Complex validation via the DSL</h3>
+
+<p>When the validation fields are not enough for your need, you can switch gears and create a complex validation specification via the <a href="/real-time-filters/">filtering DSL</a> (the same DSL used to create real-time subscriptions). The idea is pretty simple: you specify a filter that documents must match in order to be valid.</p>
+<pre class="highlight json"><code><span class="err">validation:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"onlineshop"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="err">//</span><span class="w"> </span><span class="err">Here</span><span class="w"> </span><span class="err">goes</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">filter</span><span class="w">
+                </span><span class="s2">"range"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"gte"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>In the example above, we specified that the value of the attribute <code class="prettyprint">price</code> (of documents contained in the <code class="prettyprint">products</code> collection) must be greater than 0 (because we do not want to make an online shop that gives products away). We leveraged the <code class="prettyprint">range</code> term, that you can look-up in the <a href="/real-time-filters/#range">Real-time filters Reference</a>.</p>
+
+<p>You can take a look at the <a href="/validation-reference/">Kuzzle Data Validation Reference</a> for deeper insight.</p>
 
         </div>
         <div class="dark-box">
