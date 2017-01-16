@@ -1755,93 +1755,6 @@ It responds 200 even there where no validation specification manually set before
 <p>Allows to get the validation specifications associated to the given
 index and collection if some specifications has been defined first.</p>
 
-<h2 id="getusermapping">getUserMapping</h2>
-
-<section class="http"></section>
-
-<blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_mapping</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code></p>
-</blockquote>
-
-<section class="others"></section>
-
-<blockquote>
-<p>Query</p>
-</blockquote>
-
-<section class="others"></section>
-<pre class="highlight literate_coffeescript"><code>{
-  "controller": "collection",
-  "action": "getUserMapping"
-}
-</code></pre>
-
-<blockquote>
-<p>Response</p>
-</blockquote>
-<pre class="highlight literate_coffeescript"><code>{
-  "status": 200,                      // Assuming everything went well
-  "error": null,                      // Assuming everything went well
-  "controller": "collection",
-  "action": "getUserMapping",
-  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
-  "result": {
-    <span class="s">"mapping"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"hobby"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-      <span class="p">},</span>
-      <span class="s">"name"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"first"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-          <span class="p">},</span>
-          <span class="s">"last"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-          <span class="p">},</span>
-          <span class="s">"real"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s">"password"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"index"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-      <span class="p">},</span>
-      <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  }
-}
-</code></pre>
-
-<p>Gets the mapping of the internal <code class="prettyprint">users</code> collection.</p>
-
 <h2 id="list">list</h2>
 
 <section class="http"></section>
@@ -2252,91 +2165,6 @@ stored in a collection and the complexity of your database.</p>
 Whenever a document is stored or updated, or a message is published, Kuzzle applies these specifications to check if the new data complies to the defined rules. If not, the document or message will be rejected along with an appropriate error message.
 This method allows you to specify or update the validation specifications. You can both use it to create or update validation specifications for one index/collection couple or more.
 When the validation specification is not well formatted, a detailed error message is answered by Kuzzle to help you to debug.</p>
-
-<h2 id="updateusermapping">updateUserMapping</h2>
-
-<section class="http"></section>
-
-<blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_mapping</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
-<strong>Body:</strong></p>
-</blockquote>
-
-<section class="http"></section>
-<pre class="highlight literate_coffeescript"><code>{
-  // Data mapping using ElasticSearch mapping syntax
-  "properties": {
-    <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
-      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
-    <span class="p">},</span>
-    <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
-      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
-    <span class="p">},</span>
-    <span class="p">...</span>
-    <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
-      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
-    <span class="p">}</span>
-  }
-}
-</code></pre>
-
-<section class="others"></section>
-
-<blockquote>
-<p>Query</p>
-</blockquote>
-
-<section class="others"></section>
-<pre class="highlight literate_coffeescript"><code>{
-  "controller": "collection",
-  "action": "updateUserMapping",
-
-  // Data mapping using ElasticSearch mapping syntax
-  "body": {
-    <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
-        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
-      <span class="p">},</span>
-      <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
-        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
-      <span class="p">},</span>
-      <span class="p">...</span>
-      <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
-        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  }
-}
-</code></pre>
-
-<blockquote>
-<p>Response</p>
-</blockquote>
-<pre class="highlight literate_coffeescript"><code>{
-  "status": 200,                      // Assuming everything went well
-  "error": null,                      // Assuming everything went well
-  "action": "updateMapping",
-  "controller": "collection",
-  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
-  "result": {
-    <span class="s">"acknowledged"</span><span class="o">:</span> <span class="no">true</span>
-  },
-}
-</code></pre>
-
-<p>At the first initialization, Kuzzle defines a default mapping for the <code class="prettyprint">users</code> internal collection in the persistent data storage layer.</p>
-
-<p>This mapping is intended to store the basic information of a user; typically, its crendentials and rights.</p>
-
-<p>But if you want to store more information about your users, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">users</code> data mapping using the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
 
 <h2 id="validatespecifications">validateSpecifications</h2>
 
@@ -5211,6 +5039,87 @@ that the related roles will NOT be deleted.</p>
 
 <p>Given a <code class="prettyprint">profile id</code>, retrieves the corresponding profile from the database.</p>
 
+<h2 id="getprofilemapping">getProfileMapping</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mapping</code><br>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "getProfileMapping"
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "controller": "security",
+  "action": "getProfileMapping",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"mapping"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"policies"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_id"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
+          <span class="p">},</span>
+          <span class="s">"allowInternalIndex"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"type"</span><span class="o">:</span> <span class="s">"boolean"</span>
+          <span class="p">},</span>
+          <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s">"collections"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span><span class="p">,</span>
+                <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span><span class="p">,</span>
+                    <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span>
+                  <span class="p">}</span>
+                <span class="p">}</span>
+              <span class="p">},</span>
+              <span class="s">"index"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span><span class="p">,</span>
+                <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span><span class="p">,</span>
+                    <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span>
+                  <span class="p">}</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">},</span>
+          <span class="s">"roleId"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span><span class="p">,</span>
+            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span><span class="p">,</span>
+                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<p>Gets the mapping of the internal <code class="prettyprint">profiles</code> collection.</p>
+
 <h2 id="getprofilerights">getProfileRights</h2>
 
 <section class="http"></section>
@@ -5313,6 +5222,50 @@ that the related roles will NOT be deleted.</p>
 
 <p>Given a <code class="prettyprint">role id</code>, retrieves the corresponding role from the database.</p>
 
+<h2 id="getrolemapping">getRoleMapping</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mapping</code><br>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "getRoleMapping"
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "controller": "security",
+  "action": "getRoleMapping",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"mapping"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"object"</span><span class="p">,</span>
+        <span class="s">"enabled"</span><span class="o">:</span> <span class="no">false</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<p>Gets the mapping of the internal <code class="prettyprint">roles</code> collection.</p>
+
 <h2 id="getuser">getUser</h2>
 
 <section class="http"></section>
@@ -5358,6 +5311,93 @@ that the related roles will NOT be deleted.</p>
 </code></pre>
 
 <p>Given a <code class="prettyprint">user id</code>, gets the matching user from Kuzzle&rsquo;s dabatase layer.</p>
+
+<h2 id="getusermapping">getUserMapping</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_mapping</code><br>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "getUserMapping"
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "controller": "security",
+  "action": "getUserMapping",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"mapping"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"hobby"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
+            <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
+      <span class="p">},</span>
+      <span class="s">"name"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"first"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
+                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
+          <span class="p">},</span>
+          <span class="s">"last"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
+                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
+          <span class="p">},</span>
+          <span class="s">"real"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
+                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s">"password"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"index"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
+      <span class="p">},</span>
+      <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<p>Gets the mapping of the internal <code class="prettyprint">users</code> collection.</p>
 
 <h2 id="getuserrights">getUserRights</h2>
 
@@ -6103,6 +6143,91 @@ that the related roles will NOT be deleted.</p>
 
 <p>Given a <code class="prettyprint">profile id</code>, updates the matching Profile object in Kuzzle&rsquo;s database layer.</p>
 
+<h2 id="updateprofilemapping">updateProfileMapping</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mapping</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  // Data mapping using ElasticSearch mapping syntax
+  "properties": {
+    <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">},</span>
+    <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+    <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "updateProfileMapping",
+
+  // Data mapping using ElasticSearch mapping syntax
+  "body": {
+    <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">},</span>
+      <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+      <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "action": "updateProfileMapping",
+  "controller": "security",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"acknowledged"</span><span class="o">:</span> <span class="no">true</span>
+  },
+}
+</code></pre>
+
+<p>At the first initialization, Kuzzle defines a default mapping for the <code class="prettyprint">profiles</code> internal collection in the persistent data storage layer.</p>
+
+<p>This mapping is intended to store the basic information of a profile; typically, its policies (roles and restrictions).</p>
+
+<p>But if you want to store more information about your users, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">profiles</code> data mapping using the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
+
 <h2 id="updaterole">updateRole</h2>
 
 <section class="http"></section>
@@ -6183,6 +6308,91 @@ In other words, you always need to provide the complete role definition in the b
 <p>To get some more detailed information about Kuzzle&rsquo;s user management model,
 please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/security/">Kuzzle&rsquo;s security documentation</a>.</p>
 
+<h2 id="updaterolemapping">updateRoleMapping</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mapping</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  // Data mapping using ElasticSearch mapping syntax
+  "properties": {
+    <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">},</span>
+    <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+    <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "updateRoleMapping",
+
+  // Data mapping using ElasticSearch mapping syntax
+  "body": {
+    <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">},</span>
+      <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+      <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "action": "updateRoleMapping",
+  "controller": "security",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"acknowledged"</span><span class="o">:</span> <span class="no">true</span>
+  },
+}
+</code></pre>
+
+<p>At the first initialization, Kuzzle defines a default mapping for the <code class="prettyprint">roles</code> internal collection in the persistent data storage layer.</p>
+
+<p>This mapping is intended to store the basic information of a role; typically, its allowed controllers and actions.</p>
+
+<p>But if you want to store more information about your users, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">roles</code> data mapping using the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
+
 <h2 id="updateuser">updateUser</h2>
 
 <section class="http"></section>
@@ -6241,6 +6451,91 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 </code></pre>
 
 <p>Given a <code class="prettyprint">user id</code>, updates the matching User object in Kuzzle&rsquo;s database layer.</p>
+
+<h2 id="updateusermapping">updateUserMapping</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_mapping</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  // Data mapping using ElasticSearch mapping syntax
+  "properties": {
+    <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">},</span>
+    <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+    <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+      <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "updateUserMapping",
+
+  // Data mapping using ElasticSearch mapping syntax
+  "body": {
+    <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"field1"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">},</span>
+      <span class="s">"field2"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+      <span class="s">"fieldn"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"type"</span><span class="o">:</span> <span class="s">"field type"</span><span class="p">,</span>
+        <span class="s">"other"</span><span class="o">:</span> <span class="s">"...options..."</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "action": "updateUserMapping",
+  "controller": "security",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"acknowledged"</span><span class="o">:</span> <span class="no">true</span>
+  },
+}
+</code></pre>
+
+<p>At the first initialization, Kuzzle defines a default mapping for the <code class="prettyprint">users</code> internal collection in the persistent data storage layer.</p>
+
+<p>This mapping is intended to store the basic information of a user; typically, its credentials and profiles.</p>
+
+<p>But if you want to store more information about your users, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">users</code> data mapping using the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
 
             <h1 id="server-controller">~ server controller</h1>
 
