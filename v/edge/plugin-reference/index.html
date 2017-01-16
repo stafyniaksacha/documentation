@@ -329,7 +329,7 @@ The timeout value can be configured in Kuzzle configuration file.</p>
 
 <h2 id="controller-plugins">Controller plugins</h2>
 
-<p>Kuzzle API is divided into &ldquo;controllers&rdquo;, each one of them exposing &ldquo;actions&rdquo; to execute (see <a href="http://kuzzle.io/documentation/api-reference#common-attributes">API reference</a>).</p>
+<p>Kuzzle API is divided into &ldquo;controllers&rdquo;, each one of them exposing &ldquo;actions&rdquo; to execute (see <a href="/api-reference/#common-attributes">API reference</a>).</p>
 
 <p><code class="prettyprint">controller</code> plugins extend Kuzzle API by adding new controllers to it, each with their own list of available actions.</p>
 
@@ -570,7 +570,7 @@ To access these methods, simply call <code class="prettyprint">context.accessors
 
 <p>The connection <code class="prettyprint">id</code> Kuzzle sends to plugins is the one declared by <code class="prettyprint">protocol</code> plugins using <code class="prettyprint">context.accessors.router.newConnection</code>.</p>
 
-<p><em>For more information about channels, see our <a href="http://kuzzle.io/documentation/api-reference#on">API Documentation</a></em></p>
+<p><em>For more information about channels, see our <a href="/api-reference/#subscribe">API Documentation</a></em></p>
 
 <h3 id="protocol-plugin-implementation-example"><code class="prettyprint">protocol</code> plugin implementation example</h3>
 <pre class="highlight javascript"><code><span class="kd">function</span> <span class="nx">MyPlugin</span> <span class="p">()</span> <span class="p">{</span>
@@ -808,7 +808,7 @@ Each plugin receives its own plugin context instance.</p>
 
 <h3 id="execute"><code class="prettyprint">execute</code></h3>
 
-<p>Sends a request to <a href="http://kuzzle.io/documentation/api-reference">Kuzzle API</a>.</p>
+<p>Sends a request to <a href="/api-reference">Kuzzle API</a>.</p>
 
 <h4 id="arguments">Arguments</h4>
 
@@ -947,7 +947,7 @@ Each plugin receives its own plugin context instance.</p>
 <h4 id="callback">Callback</h4>
 
 <p>The callback is invoked once the request has been processed by Kuzzle.<br>
-The provided callback is resolved with a <code class="prettyprint">response</code> argument, which is a plain-object, representing a standardized <a href="http://kuzzle.io/documentation/api-reference/#kuzzle-response">Kuzzle response</a>.</p>
+The provided callback is resolved with a <code class="prettyprint">response</code> argument, which is a plain-object, representing a standardized <a href="/api-reference/#kuzzle-response">Kuzzle response</a>.</p>
 
 <h3 id="router-removeconnection"><code class="prettyprint">router.removeConnection</code></h3>
 
@@ -1320,7 +1320,7 @@ Not calling this method after a connection is dropped will result in a memory-le
 
 <h3 id="request"><code class="prettyprint">Request</code></h3>
 
-<p>This constructor is used to transform an <a href="http://kuzzle.io/documentation/api-reference/?websocket#common-attributes">API call</a> into a standardized Kuzzle request. This object is updated along the request process to reflect the current state of the request, and is ultimately used to serialize a standard <a href="http://kuzzle.io/documentation/api-reference/#kuzzle-response">Kuzzle response</a> to be forwarded to the requesting client.</p>
+<p>This constructor is used to transform an <a href="/api-reference/?others#common-attributes">API call</a> into a standardized Kuzzle request. This object is updated along the request process to reflect the current state of the request, and is ultimately used to serialize a standard <a href="/api-reference/?others#kuzzle-response">Kuzzle response</a> to be forwarded to the requesting client.</p>
 
 <p>Network protocol specific headers can be added to the response. If the protocol can handle them, these headers will be used to configure the response sent to the client.<br>
 As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers special cases. Other network protocols headers are stored in raw format, and protocol plugins need to handle their own specific headers manually.</p>
@@ -1490,7 +1490,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <p>Any undefined attribute from the list above will be set to null.</p>
 
-<p>Please refer to our <a href="http://kuzzle.io/documentation/api-reference/?websocket">API Reference</a> for a complete list of controllers-actions and their purposes.</p>
+<p>Please refer to our <a href="/api-reference/?others">API Reference</a> for a complete list of controllers-actions and their purposes.</p>
 
 <p>Getters</p>
 
@@ -1504,7 +1504,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 <tr>
 <td><code class="prettyprint">response</code></td>
 <td><code class="prettyprint">RequestResponse</code></td>
-<td>Response view of the request, standardized as the expected <a href="http://kuzzle.io/documentation/api-reference/?websocket#kuzzle-response">Kuzzle API response</a></td>
+<td>Response view of the request, standardized as the expected <a href="/api-reference/?others#kuzzle-response">Kuzzle API response</a></td>
 </tr>
 </tbody></table>
 
@@ -1763,7 +1763,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="auth">auth</h2>
 
-<p>Events triggered when a request is treated in the <a href="http://kuzzle.io/documentation/api-reference/#auth-controller"><code class="prettyprint">auth</code> controller</a>.</p>
+<p>Events triggered when a request is treated in the <a href="/api-reference/#auth-controller"><code class="prettyprint">auth</code> controller</a></p>
 
 <table><thead>
 <tr>
@@ -1786,7 +1786,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="bulk">bulk</h2>
 
-<p>Events triggered when a request is treated in the <a href="http://kuzzle.io/documentation/api-reference/#bulk-controller"><code class="prettyprint">bulk</code> controller</a>.</p>
+<p>Events triggered when a request is treated in the <a href="/api-reference/#bulk-controller"><code class="prettyprint">bulk</code> controller</a></p>
 
 <table><thead>
 <tr>
@@ -1837,7 +1837,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="collection">collection</h2>
 
-<p>Events triggered when a request is treated in the <a href="http://kuzzle.io/documentation/api-reference/#collection-controller"><code class="prettyprint">collection</code> controller</a>.</p>
+<p>Events triggered when a request is treated in the <a href="/api-reference/#collection-controller"><code class="prettyprint">collection</code> controller</a>.</p>
 
 <table><thead>
 <tr>
@@ -1913,7 +1913,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="index">index</h2>
 
-<p>Events triggered when a request is treated in the <a href="http://kuzzle.io/documentation/api-reference/#index-controller"><code class="prettyprint">index</code> controller</a>.</p>
+<p>Events triggered when a request is treated in the <a href="/api-reference/#index-controller"><code class="prettyprint">index</code> controller</a>.</p>
 
 <table><thead>
 <tr>
@@ -1936,7 +1936,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="document">document</h2>
 
-<p>Events triggered when a request is treated in the <a href="http://kuzzle.io/documentation/api-reference/#document-controller"><code class="prettyprint">document</code> controller</a>.</p>
+<p>Events triggered when a request is treated in the <a href="/api-reference/#document-controller"><code class="prettyprint">document</code> controller</a>.</p>
 
 <table><thead>
 <tr>
@@ -2015,7 +2015,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="ms-memorystorage">ms (memoryStorage)</h2>
 
-<p>Events triggered when a request is sent to the <a href="http://kuzzle.io/documentation/api-reference/#memorystorage-controller"><code class="prettyprint">memoryStorage</code> controller</a>.</p>
+<p>Events triggered when a request is sent to the <a href="/#memorystorage-controller"><code class="prettyprint">memoryStorage</code> controller</a>.</p>
 
 <table><thead>
 <tr>
@@ -2124,7 +2124,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="realtime">realtime</h2>
 
-<p>Events triggered when a request is sent to the <a href="http://kuzzle.io/documentation/api-reference/#realtime-controller"><code class="prettyprint">realtime</code> controller</a>.</p>
+<p>Events triggered when a request is sent to the <a href="/api-reference/#realtime-controller"><code class="prettyprint">realtime</code> controller</a>.</p>
 
 <table><thead>
 <tr>
@@ -2170,7 +2170,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="security">security</h2>
 
-<p>Events triggered when a request is sent to the <a href="http://kuzzle.io/documentation/api-reference/#security-controller"><code class="prettyprint">security</code> controller</a>.</p>
+<p>Events triggered when a request is sent to the <a href="/api-reference/#security-controller"><code class="prettyprint">security</code> controller</a>.</p>
 
 <table><thead>
 <tr>
@@ -2198,7 +2198,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 
 <h2 id="server">server</h2>
 
-<p>Events triggered on server special events or when a request is sent to the <a href="http://kuzzle.io/documentation/api-reference/#server-controller"><code class="prettyprint">server</code> controller</a>.</p>
+<p>Events triggered on server special events or when a request is sent to the <a href="/api-reference/#server-controller"><code class="prettyprint">server</code> controller</a>.</p>
 
 <table><thead>
 <tr>

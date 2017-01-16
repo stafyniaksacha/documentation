@@ -181,7 +181,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle">Get in touch with us
 
 <ul>
 <li><a href="#running-kuzzle-backoffice">installing the Backoffice</a>, a handy way to manage data and security in Kuzzle;</li>
-<li>installing one of the available <a href="http://kuzzle.io/documentation/sdk-reference/">Kuzzle SDK</a> to power-up one of your projects:
+<li>installing one of the available <a href="/sdk-reference/">Kuzzle SDK</a> to power-up one of your projects:
 
 <ul>
 <li><a href="https://github.com/kuzzleio/sdk-javascript">Javascript</a> (check the <a href="#sdk-play-time">SDK play time</a> section below),</li>
@@ -189,7 +189,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle">Get in touch with us
 <li><a href="https://github.com/kuzzleio/sdk-ios">iOS</a>,</li>
 <li><a href="https://github.com/kuzzleio/sdk-android">Android</a>;</li>
 </ul></li>
-<li>exploring the <a href="http://kuzzle.io/documentation/api-reference/">Kuzzle API reference</a>;</li>
+<li>exploring the <a href="/api-reference/">Kuzzle API reference</a>;</li>
 <li><a href="#manual-install">setting-up a Kuzzle Server without Docker</a>.</li>
 </ul>
 
@@ -199,7 +199,7 @@ You can also <a href="#installing-kuzzle-manually-on-linux">install Kuzzle manua
 
 <h2 id="sdk-play-time">SDK play time</h2>
 
-<p>It&rsquo;s time to play with the <a href="http://kuzzle.io/documentation/sdk-reference">Kuzzle SDK</a>. In this section, we will persist a document and subscribe to notifications in Kuzzle using the JS SDK.</p>
+<p>It&rsquo;s time to play with the <a href="/sdk-reference">Kuzzle SDK</a>. In this section, we will persist a document and subscribe to notifications in Kuzzle using the JS SDK.</p>
 
 <p>Before proceeding, ensure that your system matches the following requisites:</p>
 
@@ -210,7 +210,7 @@ You can also <a href="#installing-kuzzle-manually-on-linux">install Kuzzle manua
 
 <h3 id="create-your-first-quot-hello-world-quot-document">Create your first &ldquo;Hello World&rdquo; document</h3>
 
-<p>Create your playground directory and install the <a href="http://kuzzle.io/documentation/sdk-reference">Javascript SDK</a> from the command line using npm:</p>
+<p>Create your playground directory and install the <a href="/sdk-reference">Javascript SDK</a> from the command line using npm:</p>
 <pre class="highlight shell"><code><span class="gp">$ </span>mkdir kuzzle-playground
 <span class="gp">$ </span><span class="nb">cd </span>kuzzle-playground
 <span class="gp">$ </span>npm install kuzzle-sdk
@@ -225,7 +225,7 @@ You can also <a href="#installing-kuzzle-manually-on-linux">install Kuzzle manua
   <span class="p">})</span>
 
 <span class="c1">// get a reference to the a collection</span>
-<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">dataCollectionFactory</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
 
 <span class="c1">// define the document itself</span>
 <span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="p">{</span>
@@ -248,11 +248,11 @@ You have persisted your first document in Kuzzle. If you are running the Backoff
 Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with us on Gitter!</a> We&rsquo;ll be happy to help.
 </aside>
 
-<p><em>You can find more resources about Kuzzle SDK in the <a href="http://kuzzle.io/documentation/sdk-reference">SDK Documentation</a>.</em></p>
+<p><em>You can find more resources about Kuzzle SDK in the <a href="/sdk-reference">SDK Documentation</a>.</em></p>
 
 <h3 id="subscribe-to-data-changes-pub-sub">Subscribe to data changes (pub/sub)</h3>
 
-<p>Kuzzle provides pub/sub features that allow you to be notified in real-time on the state of your data (check the <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">KuzzleRoom Class Documentation</a> for a deep-dive on notifications).</p>
+<p>Kuzzle provides pub/sub features that allow you to be notified in real-time on the state of your data (check the <a href="/sdk-reference/#room">Room Class Documentation</a> for a deep-dive on notifications).</p>
 
 <p>Let&rsquo;s get started. Open a new termnial in the playground directory you created before and create the <code class="prettyprint">subscribe.js</code> file containing the following code:</p>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Kuzzle</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kuzzle-sdk'</span><span class="p">)</span>
@@ -263,7 +263,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
   <span class="p">})</span>
 
 <span class="c1">// create a reference to the data collection</span>
-<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">dataCollectionFactory</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
 
 <span class="c1">// define a filter</span>
 <span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="p">{</span>
@@ -300,9 +300,9 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 <p>Now that you are started and operational with Kuzzle, you can fully leverage its power by:</p>
 
 <ul>
-<li><a href="http://kuzzle.io/documentation/sdk-reference">taking a look at the SDK reference</a>;</li>
-<li><a href="http://kuzzle.io/documentation/real-time-filters">mastering the Kuzzle real-time filtering syntax</a> to create incredibly fine-grained and blazing-fast subscriptions;</li>
-<li><a href="http://kuzzle.io/documentation/guide/#security">learning how to manage users and set-up fine-grained permission rights</a>.</li>
+<li><a href="/sdk-reference">taking a look at the SDK reference</a>;</li>
+<li><a href="/real-time-filters">mastering the Kuzzle real-time filtering syntax</a> to create incredibly fine-grained and blazing-fast subscriptions;</li>
+<li><a href="/guide/#security">learning how to manage users and set-up fine-grained permission rights</a>.</li>
 </ul>
 
             <h1 id="essentials">Essentials</h1>
@@ -320,12 +320,11 @@ You can create a subscription by selecting a set of data. Selections (also calle
 
 <h4 id="sdk">SDK</h4>
 
-<p>Kuzzle ships with a set of open-source <a href="http://kuzzle.io/documentation/sdk-reference">SDK</a> for a variety of languages:</p>
+<p>Kuzzle ships with a set of open-source <a href="/sdk-reference">SDK</a> for a variety of languages:</p>
 
 <ul>
 <li><a href="https://github.com/kuzzleio/sdk-javascript">Javascript</a> (NodeJS &amp; Browsers)</li>
 <li><a href="https://github.com/kuzzleio/sdk-android">Android</a></li>
-<li><a href="https://github.com/kuzzleio/sdk-ios">iOS</a></li>
 <li><a href="https://github.com/kuzzleio/sdk-php">PHP</a></li>
 <li>C (planned)</li>
 </ul>
@@ -634,7 +633,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Kuzzle ships with a full data <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> API that enables you to operate in many ways on your documents.</p>
 
-<p>Let&rsquo;s <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#create"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol. This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7511/myindex/mycollection/_create</code> with the body set to</p>
+<p>Let&rsquo;s <a href="/api-reference/#create48"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol. This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7511/myindex/mycollection/_create</code> with the body set to</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -680,7 +679,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Take some time to examine the content of a <a href="#kuzzle-response-objects">Kuzzle Response</a>. You may notice that it contains useful information like the name of the <a href="/#core-architecture">controller and action</a> that correspond to the HTTP route we hit with our request, or the complete KuzzleDocument object we just created.</p>
 
-<p>One more thing you may notice is that <code class="prettyprint">myindex</code> and <code class="prettyprint">mycollection</code> are created on-the-fly along with the document. Let&rsquo;s verify it by <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#listcollections"><strong>getting the list of collections</strong></a> stored in <code class="prettyprint">myindex</code> by sending a <code class="prettyprint">GET</code> request to <code class="prettyprint">http://localhost:7511/myindex/_list</code>.</p>
+<p>One more thing you may notice is that <code class="prettyprint">myindex</code> and <code class="prettyprint">mycollection</code> are created on-the-fly along with the document. Let&rsquo;s verify it by <a href="/api-reference/?http#list"><strong>getting the list of collections</strong></a> stored in <code class="prettyprint">myindex</code> by sending a <code class="prettyprint">GET</code> request to <code class="prettyprint">http://localhost:7511/myindex/_list</code>.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -705,7 +704,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Take a look at the <code class="prettyprint">result</code> field in the Response from Kuzzle. It contains an array of <code class="prettyprint">collections</code>, each one defined by a <code class="prettyprint">name</code> and a <code class="prettyprint">type</code>. <code class="prettyprint">mycollection</code> is of type <code class="prettyprint">stored</code> (which stands for persistent). This is made to distinguish persisted collection from the <code class="prettyprint">realtime</code> (or volatile) collections, used to identify <a href="#realtime-notifications">real-time documents</a>.</p>
 
-<p>Let&rsquo;s <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#update"><strong>modify to our brand new document</strong></a> by sending a <code class="prettyprint">PUT</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0/_update</code> with the body set to:</p>
+<p>Let&rsquo;s <a href="/api-reference/?http#update"><strong>modify to our brand new document</strong></a> by sending a <code class="prettyprint">PUT</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0/_update</code> with the body set to:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in a bottle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"an_englishman"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in New York"</span><span class="w">
@@ -740,13 +739,13 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>&hellip;telling us that the document has been successfully updated.</p>
 
-<p>Now, we&rsquo;ll let you figure out what happens when we send a <code class="prettyprint">DELETE</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0</code> with an empty body (take a look at the <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#delete">API Reference</a> if you don&rsquo;t want to try).</p>
+<p>Now, we&rsquo;ll let you figure out what happens when we send a <code class="prettyprint">DELETE</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0</code> with an empty body (take a look at the <a href="/api-reference/?http#delete">API Reference</a> if you don&rsquo;t want to try).</p>
 
 <h3 id="document-search">Document Search</h3>
 
 <p>One thing that Elasticsearch is <em>really</em> good at doing is&hellip; Searching! It enables to create extremely precise search queries, thanks to its powerful query DSL. We wrote a <a href="#elasticsearch-cookbook">comprehensive cookbook</a> to help you understand how it works in detail, but let&rsquo;s take a look at a couple of simple examples, just to get started.</p>
 
-<p>Say we want to <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#search"><strong>find</strong></a> all the documents within <code class="prettyprint">mycollection</code>, via the HTTP protocol. To do it, we send a <code class="prettyprint">POST</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/_search</code> (we leave the body empty since we have no filters to apply to our query). Depending on the documents you have created in your database, the response will look like:</p>
+<p>Say we want to <a href="/api-reference/?http#search"><strong>find</strong></a> all the documents within <code class="prettyprint">mycollection</code>, via the HTTP protocol. To do it, we send a <code class="prettyprint">POST</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/_search</code> (we leave the body empty since we have no filters to apply to our query). Depending on the documents you have created in your database, the response will look like:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -895,7 +894,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>This way, every time Kuzzle receives a data input, it checks it against the validation schema and returns a <strong>standard error</strong> when the validation fails.</p>
 
-<p>You can specify the validation rules in the kuzzle <a href="http://localhost/guide/#configuring-kuzzle">configuration file</a> in the <code class="prettyprint">validation</code> field.</p>
+<p>You can specify the validation rules in the kuzzle <a href="/guide/#configuring-kuzzle">configuration file</a> in the <code class="prettyprint">validation</code> field.</p>
 
 <p>You can take a look at the <a href="/validation-reference/">Kuzzle Data Validation Reference</a> for a straight dive, or keep reading for a smoother introduction.</p>
 
@@ -991,7 +990,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 <li><strong>changes happening on a given set of documents</strong> (e.g. clients must play a sound every time an item containing the word &ldquo;URGENT&rdquo; is created).</li>
 </ol>
 
-<p>The scope of possibilities is huge. Take a look at the <a href="http://docs.kuzzle.io/api-reference/?others#notifications">Notifications section</a> in the API Reference for more details.</p>
+<p>The scope of possibilities is huge. Take a look at the <a href="/api-reference/?others#notifications">Notifications section</a> in the API Reference for more details.</p>
 
 <h3 id="examples">Examples</h3>
 
@@ -1000,7 +999,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 <p>Let&rsquo;s dive into the implementation of the Collaborative TO-DO list application.</p>
 
 <aside class="notice">
-All the following examples are written in Javascript, therefore using the Javascript Kuzzle SDK. If this is not your usual development language, take a look at the different flavors of the `subscribe` method in the [SDK Reference](http://docs.kuzzle.io/sdk-reference/#subscribe).
+All the following examples are written in Javascript, therefore using the Javascript Kuzzle SDK. If this is not your usual development language, take a look at the different flavors of the `subscribe` method in the [SDK Reference](/sdk-reference/#subscribe).
 </aside>
 
 <h4 id="the-basic-subscription">The basic subscription</h4>
@@ -1016,7 +1015,7 @@ All the following examples are written in Javascript, therefore using the Javasc
     <span class="p">})</span>
 </code></pre>
 
-<p>This code isn&rsquo;t very useful but it shows the capability to react to a notification coming from the server. </p>
+<p>This code isn&rsquo;t very useful but it shows the capability to react to a notification coming from the server.</p>
 
 <p>Here, we call the <code class="prettyprint">subscribe</code> method on the <code class="prettyprint">todos</code> collection with two arguments:</p>
 
@@ -1055,15 +1054,15 @@ All the following examples are written in Javascript, therefore using the Javasc
 <li>the <code class="prettyprint">result</code> shows <em>the consequence</em> of what just happened (in this case, the newly created document).</li>
 </ul>
 
-<p>We won&rsquo;t analyze the other attributes for the moment. Take a look at the <a href="http://kuzzleio.github.io/kuzzle-api-documentation/#notifications">Notifications section of the API Reference</a> for a comprehensive list of the available notification events.</p>
+<p>We won&rsquo;t analyze the other attributes for the moment. Take a look at the <a href="/api-reference/#notifications">Notifications section of the API Reference</a> for a comprehensive list of the available notification events.</p>
 
-<p>This subscription is very handy and will notify Tom about the events 1, 2 and 3 of the list above (the <code class="prettyprint">controller</code>, <code class="prettyprint">action</code> and <code class="prettyprint">result</code> will vary depending on the case). But what about the event number 4? How does Tom subscribe to items that only contain the word <code class="prettyprint">URGENT</code> in their <code class="prettyprint">label</code> field? Looks like a job for the <a href="http://docs.kuzzle.io/real-time-filters/">Real-time Filtering DSL</a> coming up in the following section.</p>
+<p>This subscription is very handy and will notify Tom about the events 1, 2 and 3 of the list above (the <code class="prettyprint">controller</code>, <code class="prettyprint">action</code> and <code class="prettyprint">result</code> will vary depending on the case). But what about the event number 4? How does Tom subscribe to items that only contain the word <code class="prettyprint">URGENT</code> in their <code class="prettyprint">label</code> field? Looks like a job for the <a href="/real-time-filters/">Real-time Filtering DSL</a> coming up in the following section.</p>
 
 <h4 id="subscription-with-filters">Subscription with filters</h4>
 
-<p>Kuzzle ships with a powerful <a href="http://docs.kuzzle.io/real-time-filters/">Filtering DSL for Live Subscriptions</a>. It is heavily inspired in the Elasticsearch DSL and enables you to perform fine-grained selections on the documents you want to subscribe to.</p>
+<p>Kuzzle ships with a powerful <a href="/real-time-filters/">Filtering DSL for Live Subscriptions</a>. It is heavily inspired in the Elasticsearch DSL and enables you to perform fine-grained selections on the documents you want to subscribe to.</p>
 
-<p>In our case, we want to select all the documents that contain the <code class="prettyprint">URGENT</code> word in the <code class="prettyprint">label</code> field. The best pick for this case is the <a href="http://docs.kuzzle.io/real-time-filters/#regexp">regexp</a> filter.</p>
+<p>In our case, we want to select all the documents that contain the <code class="prettyprint">URGENT</code> word in the <code class="prettyprint">label</code> field. The best pick for this case is the <a href="/real-time-filters/#regexp">regexp</a> filter.</p>
 <pre class="highlight javascript"><code><span class="nx">kuzzle</span>
     <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'todos'</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">subscribe</span><span class="p">({</span>
@@ -1078,7 +1077,7 @@ All the following examples are written in Javascript, therefore using the Javasc
     <span class="p">})</span>
 </code></pre>
 
-<p>This way, Tom will be notified about urgent TO-DO items. Take a look at the <a href="http://docs.kuzzle.io/real-time-filters/">Filtering DSL Refernce</a> for a comprehensive list of the available filters.</p>
+<p>This way, Tom will be notified about urgent TO-DO items. Take a look at the <a href="/real-time-filters/">Filtering DSL Refernce</a> for a comprehensive list of the available filters.</p>
 
 <p>There are a few things that deserve to be noticed here:</p>
 
@@ -1093,7 +1092,7 @@ All the following examples are written in Javascript, therefore using the Javasc
 
 <p>The <code class="prettyprint">subscribe</code> method can be called with an extra argument, which is an object containing a set of options to be passed to the subscription Room.</p>
 
-<p>We just introduced a new concept here, the Room. A <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">Room</a> is a class representing a single subscription and its constructor is called internally by the <code class="prettyprint">subscribe</code> method. The &ldquo;options&rdquo; are passed directly to the <a href="http://kuzzleio.github.io/sdk-documentation/#constructors72">Room Constructor</a>.</p>
+<p>We just introduced a new concept here, the Room. A <a href="/sdk-reference/#room">Room</a> is a class representing a single subscription and its constructor is called internally by the <code class="prettyprint">subscribe</code> method. The &ldquo;options&rdquo; are passed directly to the <a href="/sdk-reference/#constructors82">Room Constructor</a>.</p>
 
 <p>The option we are looking for is <code class="prettyprint">subscribeToSelf</code>, which is set to <code class="prettyprint">true</code> by default.</p>
 <pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">kuzzle</span>
@@ -1103,7 +1102,7 @@ All the following examples are written in Javascript, therefore using the Javasc
         <span class="na">regexp</span><span class="p">:</span> <span class="p">{</span>
           <span class="na">label</span><span class="p">:</span> <span class="s1">'.*URGENT.*'</span>
         <span class="p">}</span>
-      <span class="p">},</span> 
+      <span class="p">},</span>
       <span class="p">{</span> <span class="c1">// The Options object</span>
         <span class="na">subscribeToSelf</span><span class="p">:</span> <span class="kc">false</span>
       <span class="p">},</span>
@@ -1117,7 +1116,7 @@ All the following examples are written in Javascript, therefore using the Javasc
 
 <p>In the code right above, we added the extra &ldquo;options&rdquo; object as the second argument to avoid subscribing Tom to his own events.</p>
 
-<p>You may have noticed that, on the very first line, we stored the return value of the <code class="prettyprint">subscribe</code> method in a variable. Guess what type is its value? <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">Room</a>.</p>
+<p>You may have noticed that, on the very first line, we stored the return value of the <code class="prettyprint">subscribe</code> method in a variable. Guess what type is its value? <a href="/sdk-reference/#room">Room</a>.</p>
 
             <h2 id="security">Security</h2>
 
@@ -2087,7 +2086,7 @@ $ ./bin/kuzzle plugins --unset 'services' kuzzle-plugin-logger
 
 <h4 id="writing-persistent-data">Writing persistent data</h4>
 
-<p>This subsection describes the process for <strong>persistent</strong> data, with an example using the &ldquo;<em>create</em>&rdquo; action (see also <a href="http://kuzzle.io/documentation/api-reference/#create">API Documentation</a>).</p>
+<p>This subsection describes the process for <strong>persistent</strong> data, with an example using the &ldquo;<em>create</em>&rdquo; action (see also <a href="/api-reference/#create48">API Documentation</a>).</p>
 
 <p><img alt="persistence_overview" src="images/request-scenarios/persistence/overview.png" /></p>
 
@@ -2231,7 +2230,7 @@ Kuzzle will get back to him with a corresponding Room ID and a Room Channel usin
 <li>A new content is published to the Notifier component. The <code class="prettyprint">_publish_</code> method can be triggered:
 
 <ul>
-<li>either directly by the Document Controller for non persistent data (using the <a href="http://kuzzle.io/documentation/api-reference/#publish">publish</a> action).</li>
+<li>either directly by the Document Controller for non persistent data (using the <a href="/api-reference/#publish">publish</a> action).</li>
 <li>or by the Plugins Manager when a &#39;document:create&rsquo; event is triggered, to notify users in real-time before the data are sent to the storage Engine.</li>
 </ul></li>
 <li>The Notifier calls the DSL component to test registered filters that match the content, and get related rooms.</li>
