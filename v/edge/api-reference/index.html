@@ -2370,7 +2370,7 @@ When the validation specification is not well formatted, a detailed error messag
 <p>Returns an error if the document already exists.</p>
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
-with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (availability using <code class="prettyprint">search</code>).</p>
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
 
 <h2 id="createorreplace">createOrReplace</h2>
 
@@ -2434,7 +2434,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <p>Creates a new document in the persistent data storage, or replaces it if it already exists.</p>
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
-with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (availability using <code class="prettyprint">search</code>).</p>
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
 
 <h2 id="delete">delete</h2>
 
@@ -2676,7 +2676,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 Only documents in the persistent data storage layer can be replaced.</p>
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
-with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (availability using <code class="prettyprint">search</code>).</p>
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
 
 <h2 id="scroll">scroll</h2>
 
@@ -2860,6 +2860,712 @@ which tells Elasticsearch how long it should keep the “search context” alive
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html">Elasticsearch Documentation</a>
 for more details.</p>
 
+<h2 id="mcreate">mCreate</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mCreate[?refresh=wait_for]</code><br>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "documents": <span class="err">[</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>              <span class="o">//</span> <span class="nx">Optional</span><span class="p">.</span> <span class="na">If</span> <span class="o">not</span> <span class="nx">provided</span><span class="p">,</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">generated</span> <span class="nx">automatically</span><span class="p">.</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span>        <span class="o">//</span> <span class="nx">Optional</span><span class="p">.</span> <span class="na">If</span> <span class="o">not</span> <span class="nx">provided</span><span class="p">,</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">generated</span> <span class="nx">automatically</span><span class="p">.</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+  ]
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "controller": "document",
+  "action": "mCreate",
+  <span class="p">[</span><span class="nv">"refresh": "wait_for",</span><span class="p">]</span>
+  "body": {
+    <span class="s">"documents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+    <span class="p">]</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "action": "mCreate",
+  "controller": "document",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484225532686</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">"created"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"created"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484225532686</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">"created"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"created"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">created</span> <span class="nx">documents</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">created</span> <span class="nx">documents</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>Creates new documents in the persistent data storage.</p>
+
+<p>Returns a partial error (with status 206) if one or more documents already exist.</p>
+
+<p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
+
+<h2 id="mcreateorreplace">mCreateOrReplace</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mCreateOrReplace[?refresh=wait_for]</code><br>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "documents": <span class="err">[</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>              <span class="o">//</span> <span class="nx">Mandatory</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span>        <span class="o">//</span> <span class="nx">Mandatory</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+  ]
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "controller": "document",
+  "action": "mCreateOrReplace",
+  <span class="p">[</span><span class="nv">"refresh": "wait_for",</span><span class="p">]</span>
+  "body": {
+    <span class="s">"documents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+    <span class="p">]</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "action": "mCreateOrReplace",
+  "controller": "document",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484226104822</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">"created"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484226104822</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">"created"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">created</span> <span class="o">or</span> <span class="nx">replaced</span> <span class="nx">documents</span> 
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">created</span> <span class="o">or</span> <span class="nx">replaced</span> <span class="nx">documents</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>Creates or replaces documents in the persistent data storage.</p>
+
+<p>Returns a partial error (with status 206) if one or more documents can not be created or replaced.</p>
+
+<h2 id="mdelete">mDelete</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mDelete[?refresh=wait_for]</code><br>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "ids": <span class="p">[</span><span class="nv">"&lt;documentId&gt;", "&lt;anotherDocumentId&gt;", ...</span><span class="p">]</span>
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "controller": "document",
+  "action": "mDelete",
+  "body": {
+    <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"&lt;documentId&gt;"</span><span class="p">,</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span> <span class="p">...]</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "action": "mDelete",
+  <span class="p">[</span><span class="nv">"refresh": "wait_for",</span><span class="p">]</span>
+  "controller": "document",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": <span class="err">[</span>
+    <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+    <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+    <span class="p">...</span>
+  ]
+}
+</code></pre>
+
+<p>Deletes documents in the persistent data storage.</p>
+
+<p>Returns a partial error (with status 206) if one or more document can not be deleted.</p>
+
+<p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
+
+<h2 id="mget">mGet</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mGet</code><br>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "ids": <span class="p">[</span><span class="nv">"&lt;documentId&gt;", "&lt;anotherDocumentId&gt;", ...</span><span class="p">]</span>
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "controller": "document",
+  "action": "mGet",
+  "body": {
+    <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"&lt;documentId&gt;"</span><span class="p">,</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span> <span class="p">...]</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "action": "mGet",
+  "controller": "document",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484226562795</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"some"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s">"found"</span><span class="o">:</span> <span class="no">true</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484226562795</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"some"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s">"found"</span><span class="o">:</span> <span class="no">true</span>
+      <span class="p">}</span>
+      <span class="p">{</span>
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">documents</span> 
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">retrieved</span> <span class="nx">documents</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>Given <code class="prettyprint">document ids</code>, retrieves the corresponding documents from the database.</p>
+
+<p>Only documents in the persistent data storage layer can be retrieved.</p>
+
+<h2 id="mreplace">mReplace</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mReplace[?refresh=wait_for]</code><br>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "documents": <span class="err">[</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>              <span class="o">//</span> <span class="nx">Mandatory</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span>        <span class="o">//</span> <span class="nx">Mandatory</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+  ]
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "controller": "document",
+  "action": "mReplace",
+  <span class="p">[</span><span class="nv">"refresh": "wait_for",</span><span class="p">]</span>
+  "body": {
+    <span class="s">"documents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+    <span class="p">]</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "action": "mReplace",
+  "controller": "document",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484226104822</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">"created"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"_kuzzle_info"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"active"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+            <span class="s">"author"</span><span class="o">:</span> <span class="s">"-1"</span><span class="p">,</span>
+            <span class="s">"createdAt"</span><span class="o">:</span> <span class="mi">1484226104822</span><span class="p">,</span>
+            <span class="s">"deletedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updatedAt"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+            <span class="s">"updater"</span><span class="o">:</span> <span class="no">null</span>
+          <span class="p">},</span>
+          <span class="s">"document"</span><span class="o">:</span> <span class="s">"body"</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">"created"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">replaced</span> <span class="nx">documents</span> 
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">replaced</span> <span class="nx">documents</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>Replaces documents in the persistent data storage.</p>
+
+<p>Returns a partial error (with status 206) if one or more documents can not be replaced.</p>
+
+<p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
+
+<h2 id="mupdate">mUpdate</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mUpdate[?refresh=wait_for]</code><br>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<strong>Body:</strong></p>
+</blockquote>
+
+<section class="http"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "documents": <span class="err">[</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>              <span class="o">//</span> <span class="nx">Mandatory</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"partial"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span>        <span class="o">//</span> <span class="nx">Mandatory</span>
+      <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">"partial"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+  ]
+}
+</code></pre>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "controller": "document",
+  "action": "mUpdate",
+  "body": {
+    <span class="s">"documents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"partial"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"body"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"partial"</span><span class="o">:</span> <span class="s">"body"</span><span class="p">,</span>
+          <span class="p">...</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+    <span class="p">]</span>
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "index": "<span class="nt">&lt;index&gt;</span>",
+  "collection": "<span class="nt">&lt;collection&gt;</span>",
+  "action": "mUpdate",
+  <span class="p">[</span><span class="nv">"refresh": "wait_for",</span><span class="p">]</span>
+  "controller": "document",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherDocumentId&gt;"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span><span class="p">,</span>
+        <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s">"successful"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"&lt;collection&gt;"</span><span class="p">,</span>
+        <span class="s">"_version"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">updated</span> <span class="nx">documents</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">updated</span> <span class="nx">documents</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>Updates documents in the persistent data storage.</p>
+
+<p>Returns a partial error (with status 206) if one or more documents can not be updated.</p>
+
+<p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
+
 <h2 id="update">update</h2>
 
 <section class="http"></section>
@@ -2917,9 +3623,6 @@ for more details.</p>
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": {
     <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;documentId&gt;"</span><span class="p">,</span>
-    <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>                      <span class="o">//</span> <span class="nx">The</span> <span class="nx">resulting</span> <span class="nb">document</span>
-      <span class="p">...</span>
-    <span class="p">},</span>
     <span class="s">"_version"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">,</span>             <span class="o">//</span> <span class="nx">The</span> <span class="k">new</span> <span class="nx">version</span> <span class="nx">number</span> <span class="k">of</span> <span class="k">this</span> <span class="nb">document</span>
     <span class="s">"created"</span><span class="o">:</span> <span class="no">false</span>
   }
@@ -2929,7 +3632,7 @@ for more details.</p>
 <p>Only documents in the persistent data storage layer can be updated.</p>
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
-with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (availability using <code class="prettyprint">search</code>).</p>
+with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
 
 <h2 id="validate">validate</h2>
 
@@ -5609,7 +6312,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mget</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mGet</code><br>
 <strong>Method:</strong> <code class="prettyprint">POST</code><br>
 <strong>Body:</strong></p>
 </blockquote>
@@ -5664,7 +6367,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mget</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mGet</code><br>
 <strong>Method:</strong> <code class="prettyprint">POST</code><br>
 <strong>Body:</strong></p>
 </blockquote>
