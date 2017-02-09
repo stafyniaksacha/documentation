@@ -141,20 +141,11 @@
 <h2 id="constructors">Constructors</h2>
 
 <p>Connects to a Kuzzle instance.</p>
-<pre class="highlight javascript"><code><span class="cm">/*
- As this SDK embarks two protocols instead of just one (WebSocket and SocketIO),
- the "port" option has been replaced by a "wsPort" and "ioPort" ones, used
- to set, respectively, the WebSocket port and the SocketIO one.
-
- These ports are defaulted to Kuzzle default values, so you only have to change
- them if you modify the protocols default values server-side.
- */</span>
-<span class="kd">var</span> <span class="nx">kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="p">{</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">defaultIndex</span><span class="p">:</span> <span class="s1">'some index'</span><span class="p">,</span>
   <span class="na">autoReconnect</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="na">someheader</span><span class="p">:</span> <span class="s2">"value"</span><span class="p">},</span>
-  <span class="na">ioPort</span><span class="p">:</span> <span class="mi">7512</span><span class="p">,</span>
-  <span class="na">wsPort</span><span class="p">:</span> <span class="mi">7513</span>
+  <span class="na">port</span><span class="p">:</span> <span class="mi">7512</span>
 <span class="p">});</span>
 
 <span class="c1">// A callback is also available and will be invoked once connected to the Kuzzle instance:</span>
@@ -269,12 +260,6 @@
 <td></td>
 </tr>
 <tr>
-<td><code class="prettyprint">ioPort</code></td>
-<td>integer</td>
-<td>(Javascript SDK only) Kuzzle network port for socket.io</td>
-<td>7512</td>
-</tr>
-<tr>
 <td><code class="prettyprint">metadata</code></td>
 <td>JSON object</td>
 <td>Common metadata, will be sent to all future requests</td>
@@ -289,7 +274,7 @@
 <tr>
 <td><code class="prettyprint">port</code></td>
 <td>integer</td>
-<td>(All SDKs except Javascript) Kuzzle network port</td>
+<td>Kuzzle network port</td>
 <td>7512</td>
 </tr>
 <tr>
@@ -322,19 +307,12 @@
 <td>Switch Kuzzle connection to SSL mode</td>
 <td><code class="prettyprint">false</code></td>
 </tr>
-<tr>
-<td><code class="prettyprint">wsPort</code></td>
-<td>integer</td>
-<td>(Javascript SDK only) Kuzzle network port for websocket</td>
-<td>7513</td>
-</tr>
 </tbody></table>
 
 <p><strong>Notes:</strong></p>
 
 <ul>
 <li>the <code class="prettyprint">offlineMode</code> option only accepts the <code class="prettyprint">manual</code> and <code class="prettyprint">auto</code> values</li>
-<li>the Javascript SDK accepts <code class="prettyprint">ioPort</code> and <code class="prettyprint">wsPort</code> options instead of the <code class="prettyprint">port</code> one. This is because this SDK supports 2 network protocols to ensure maximum performances AND compatibility depending on browsers capabilities</li>
 </ul>
 
 <h3 id="callback-response">Callback response</h3>
@@ -395,12 +373,6 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <td>get/set</td>
 </tr>
 <tr>
-<td><code class="prettyprint">ioPort</code></td>
-<td>integer</td>
-<td>(Javascript SDK only) Kuzzle network port for socket.io</td>
-<td>7512</td>
-</tr>
-<tr>
 <td><code class="prettyprint">jwtToken</code></td>
 <td>string</td>
 <td>Token used in requests for authentication.</td>
@@ -427,7 +399,7 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <tr>
 <td><code class="prettyprint">port</code></td>
 <td>integer</td>
-<td>(All SDKs except Javascript) Kuzzle network port</td>
+<td>Kuzzle network port</td>
 <td>7512</td>
 </tr>
 <tr>
@@ -460,12 +432,6 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <td>number of milliseconds between reconnection attempts</td>
 <td>get</td>
 </tr>
-<tr>
-<td><code class="prettyprint">wsPort</code></td>
-<td>integer</td>
-<td>(Javascript SDK only) Kuzzle network port for websocket</td>
-<td>7513</td>
-</tr>
 </tbody></table>
 
 <p><strong>Notes:</strong></p>
@@ -480,7 +446,6 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <li>if <code class="prettyprint">queueMaxSize</code> is set to <code class="prettyprint">0</code>, an unlimited number of requests is kept until the buffer is flushed</li>
 <li>the <code class="prettyprint">offlineQueueLoader</code> must be set with a function, taking no argument, and returning an array of objects containing a <code class="prettyprint">query</code> member with a Kuzzle query to be replayed, and an optional <code class="prettyprint">cb</code> member with the corresponding callback to invoke with the query result</li>
 <li>the <code class="prettyprint">host</code> and <code class="prettyprint">port</code> properties can be changed, but it will only be in effect at the next <code class="prettyprint">connect</code> call</li>
-<li>the Javascript SDK accepts <code class="prettyprint">ioPort</code> and <code class="prettyprint">wsPort</code> options instead of the <code class="prettyprint">port</code> one. This is because this SDK supports 2 network protocols to ensure maximum performances AND compatibility depending on browsers capabilities</li>
 </ul>
 
 <h2 id="offline-mode">Offline mode</h2>
@@ -1942,8 +1907,8 @@ This method is non-queuable, meaning that during offline mode, it will be discar
 
 <p>Log a user according to a strategy and credentials.</p>
 
-<p>If the Kuzzle response contains a JWT Token, the SDK token is set and the <code class="prettyprint">loginAttempt</code> event is fired immediately with the following object:<br>
-<code class="prettyprint">{ success: true }</code><br>
+<p>If the Kuzzle response contains a JWT Token, the SDK token is set and the <code class="prettyprint">loginAttempt</code> event is fired immediately with the following object:
+<code class="prettyprint">{ success: true }</code>
 This is the case, for instance, with the <code class="prettyprint">local</code> authentication strategy.</p>
 
 <p>If the request succeeds but there is no token, then it means that the chosen strategy is a two-steps authentication method, like OAUTH. In that case, the <code class="prettyprint">loginAttempt</code> event is <strong>not</strong> fired. To complete the login attempt, the <code class="prettyprint">setJwtToken</code> method must be called either with a token or with an appropriate Kuzzle response.</p>

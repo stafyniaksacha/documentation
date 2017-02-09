@@ -156,18 +156,18 @@ The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <
 <pre class="highlight plaintext"><code>kuzzle_1         | [✔] Kuzzle server ready
 </code></pre>
 
-<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7511?pretty=true">http://localhost:7511?pretty=true</a> or via cURL on the command line:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7511/?pretty=true"</span>
+<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7512?pretty=true">http://localhost:7512?pretty=true</a> or via cURL on the command line:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7512/?pretty=true"</span>
 </code></pre>
 
 <p>Kuzzle will respond you with a list of the existing routes.</p>
 
 <aside class="success">
-Kuzzle is up and running. It will accept requests at the following addresses:
+Kuzzle is up and running. It will accept requests at <code>localhost:7512</code>:
 <ul>
-  <li><code>localhost:7511</code> via <strong>standard HTTP requests,</strong></li>
-  <li><code>localhost:7513</code> via a <strong>Websocket</strong> client (like the <a href="https://github.com/kuzzleio/sdk-javascript">Javascript SDK</a>),</li>
-  <li><code>localhost:7512</code> via <strong>Socket.IO</strong> (used as a fallback by the SDK on browsers that do not provide Websocket support).</li>
+  <li>via <strong>standard HTTP requests,</strong></li>
+  <li>via a <strong>Websocket</strong> client (like the <a href="https://github.com/kuzzleio/sdk-javascript">Javascript SDK</a>),</li>
+  <li>via <strong>Socket.IO</strong> (used as a fallback by the SDK on browsers that do not provide Websocket support).</li>
 </ul>
 </aside>
 
@@ -395,8 +395,8 @@ The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <
 <pre class="highlight plaintext"><code>kuzzle_1         | [✔] Kuzzle server ready
 </code></pre>
 
-<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7511">http://localhost:7511</a> or via cURL on the command line:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7511/?pretty"</span>
+<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7512">http://localhost:7512</a> or via cURL on the command line:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7512/?pretty"</span>
 </code></pre>
 
 <p>Kuzzle will respond you with a list of the existing routes.</p>
@@ -492,8 +492,8 @@ By default, Kuzzle expects all the components to be running on localhost. You ca
 </code></pre>
 
 <p>The Kuzzle Back-office can be reached on http://localhost:3000.<br>
-Kuzzle HTTP API can be reached on http://localhost:7511/<br>
-Socket IO and Websocket channels can respectively be reached on ports 7512 and 7513.</p>
+Kuzzle HTTP API can be reached on http://localhost:7512/<br>
+Socket IO and Websocket channels can be reached over the HTTP server, on port 7512.</p>
 
 <h5 id="change-external-services-hosts-or-ports">Change external services hosts or ports</h5>
 
@@ -516,7 +516,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <h3 id="select-the-kuzzle-server-to-connect-to">Select the Kuzzle server to connect to</h3>
 
-<p>The Kuzzle Backoffice automatically looks for a Kuzzle server on <code class="prettyprint">localhost:7513</code>. If none is present, you will be prompted to choose a Kuzzle instance to connect to.</p>
+<p>The Kuzzle Backoffice automatically looks for a Kuzzle server on <code class="prettyprint">localhost:7512</code>. If none is present, you will be prompted to choose a Kuzzle instance to connect to.</p>
 
 <p>You can tell the Backoffice to connect to any Kuzzle server by clicking on the <strong>&ldquo;Choose Environment&rdquo;</strong> dropdown menu, then by selecting <strong>&ldquo;Create new&rdquo;</strong>.</p>
 
@@ -591,7 +591,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
   <span class="s">proxy</span><span class="pi">:</span>
     <span class="s">image</span><span class="pi">:</span> <span class="s">kuzzleio/proxy</span>
     <span class="s">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s2">"</span><span class="s">7511-7513:7511-7513"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">7512:7512"</span>
 
   <span class="s">kuzzle</span><span class="pi">:</span>
     <span class="s">image</span><span class="pi">:</span> <span class="s">kuzzleio/kuzzle</span>
@@ -633,7 +633,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Kuzzle ships with a full data <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> API that enables you to operate in many ways on your documents.</p>
 
-<p>Let&rsquo;s <a href="/api-reference/#create48"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol. This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7511/myindex/mycollection/_create</code> with the body set to</p>
+<p>Let&rsquo;s <a href="/api-reference/#create48"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol. This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7512/myindex/mycollection/_create</code> with the body set to</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -679,7 +679,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Take some time to examine the content of a <a href="#kuzzle-response-objects">Kuzzle Response</a>. You may notice that it contains useful information like the name of the <a href="/#core-architecture">controller and action</a> that correspond to the HTTP route we hit with our request, or the complete KuzzleDocument object we just created.</p>
 
-<p>One more thing you may notice is that <code class="prettyprint">myindex</code> and <code class="prettyprint">mycollection</code> are created on-the-fly along with the document. Let&rsquo;s verify it by <a href="/api-reference/?http#list"><strong>getting the list of collections</strong></a> stored in <code class="prettyprint">myindex</code> by sending a <code class="prettyprint">GET</code> request to <code class="prettyprint">http://localhost:7511/myindex/_list</code>.</p>
+<p>One more thing you may notice is that <code class="prettyprint">myindex</code> and <code class="prettyprint">mycollection</code> are created on-the-fly along with the document. Let&rsquo;s verify it by <a href="/api-reference/?http#list"><strong>getting the list of collections</strong></a> stored in <code class="prettyprint">myindex</code> by sending a <code class="prettyprint">GET</code> request to <code class="prettyprint">http://localhost:7512/myindex/_list</code>.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -704,7 +704,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Take a look at the <code class="prettyprint">result</code> field in the Response from Kuzzle. It contains an array of <code class="prettyprint">collections</code>, each one defined by a <code class="prettyprint">name</code> and a <code class="prettyprint">type</code>. <code class="prettyprint">mycollection</code> is of type <code class="prettyprint">stored</code> (which stands for persistent). This is made to distinguish persisted collection from the <code class="prettyprint">realtime</code> (or volatile) collections, used to identify <a href="#realtime-notifications">real-time documents</a>.</p>
 
-<p>Let&rsquo;s <a href="/api-reference/?http#update"><strong>modify to our brand new document</strong></a> by sending a <code class="prettyprint">PUT</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0/_update</code> with the body set to:</p>
+<p>Let&rsquo;s <a href="/api-reference/?http#update"><strong>modify to our brand new document</strong></a> by sending a <code class="prettyprint">PUT</code> request to <code class="prettyprint">http://localhost:7512/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0/_update</code> with the body set to:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in a bottle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"an_englishman"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in New York"</span><span class="w">
@@ -739,13 +739,13 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>&hellip;telling us that the document has been successfully updated.</p>
 
-<p>Now, we&rsquo;ll let you figure out what happens when we send a <code class="prettyprint">DELETE</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0</code> with an empty body (take a look at the <a href="/api-reference/?http#delete">API Reference</a> if you don&rsquo;t want to try).</p>
+<p>Now, we&rsquo;ll let you figure out what happens when we send a <code class="prettyprint">DELETE</code> request to <code class="prettyprint">http://localhost:7512/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0</code> with an empty body (take a look at the <a href="/api-reference/?http#delete">API Reference</a> if you don&rsquo;t want to try).</p>
 
 <h3 id="document-search">Document Search</h3>
 
 <p>One thing that Elasticsearch is <em>really</em> good at doing is&hellip; Searching! It enables to create extremely precise search queries, thanks to its powerful query DSL. We wrote a <a href="#elasticsearch-cookbook">comprehensive cookbook</a> to help you understand how it works in detail, but let&rsquo;s take a look at a couple of simple examples, just to get started.</p>
 
-<p>Say we want to <a href="/api-reference/?http#search"><strong>find</strong></a> all the documents within <code class="prettyprint">mycollection</code>, via the HTTP protocol. To do it, we send a <code class="prettyprint">POST</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/_search</code> (we leave the body empty since we have no filters to apply to our query). Depending on the documents you have created in your database, the response will look like:</p>
+<p>Say we want to <a href="/api-reference/?http#search"><strong>find</strong></a> all the documents within <code class="prettyprint">mycollection</code>, via the HTTP protocol. To do it, we send a <code class="prettyprint">POST</code> request to <code class="prettyprint">http://localhost:7512/myindex/mycollection/_search</code> (we leave the body empty since we have no filters to apply to our query). Depending on the documents you have created in your database, the response will look like:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -1190,7 +1190,7 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 </ul>
 
 <p>You can find a <strong>comprehensive summary of all the available controllers</strong> and actions by sending a <code class="prettyprint">GET</code> request to the root endpoint of the Kuzzle API via the HTTP protocol:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -XGET http://localhost:7511/<span class="se">\?</span>pretty<span class="se">\=</span><span class="nb">true</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -XGET http://localhost:7512/<span class="se">\?</span>pretty<span class="se">\=</span><span class="nb">true</span>
 </code></pre>
 
 <p>Take a look at the example below:</p>
@@ -1629,7 +1629,7 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 <span class="gp">$ </span>pm2 restart KuzzleServer
 </code></pre>
 
-<p>Once Kuzzle has restarted (that&rsquo;s what the last command is for) you can check the server information at <code class="prettyprint">http://localhost:7511/?pretty=true</code> for the new <code class="prettyprint">hello</code> endpoint:</p>
+<p>Once Kuzzle has restarted (that&rsquo;s what the last command is for) you can check the server information at <code class="prettyprint">http://localhost:7512/?pretty=true</code> for the new <code class="prettyprint">hello</code> endpoint:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="err">...</span><span class="w">
     </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1652,7 +1652,7 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 
 </span></code></pre>
 
-<p>Which means you can call the <code class="prettyprint">http://localhost:7511/kuzzle-plugin-helloworld/hello/</code> route and get the following response:</p>
+<p>Which means you can call the <code class="prettyprint">http://localhost:7512/kuzzle-plugin-helloworld/hello/</code> route and get the following response:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"66265614-e908-4a91-a492-135e40e64aa3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -1747,7 +1747,7 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 <p><img alt="read_scenario_http_details" src="images/request-scenarios/read-http/details.png" /></p>
 
 <ul>
-<li>The HTTP client asks for a document via a HTTP GET Request. For instance, to retrieve the document &lsquo;739c26bc-7a09-469a-803d-623c4045b0cb&rsquo; in the collection <code class="prettyprint">users</code>: <code class="prettyprint">GET http://kuzzle:7511/mainindex/users/739c26bc-7a09-469a-803d-623c4045b0cb</code>.</li>
+<li>The HTTP client asks for a document via a HTTP GET Request. For instance, to retrieve the document &lsquo;739c26bc-7a09-469a-803d-623c4045b0cb&rsquo; in the collection <code class="prettyprint">users</code>: <code class="prettyprint">GET http://kuzzle:7512/mainindex/users/739c26bc-7a09-469a-803d-623c4045b0cb</code>.</li>
 <li>The proxy forwards the Request through the HTTP Entry point to the Router, which handles it and forwards the formatted Request to the Funnel.</li>
 </ul>
 

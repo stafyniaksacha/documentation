@@ -134,15 +134,17 @@ If you are a Javascript or Android developer, you may first like to start by hav
 
 <p>The connection to Kuzzle depends on the protocol to be used.</p>
 
+<p>HTTP, WebSocket and SocketIO protocols are shipped in Kuzzle&rsquo;s core.
+Other protocols can be added with <a href="/plugin-reference/#protocol-plugins">Protocol Plugins</a>.</p>
+
 <h2 id="http">HTTP</h2>
 
 <section class="http"></section>
-<pre class="highlight shell"><code> <span class="nv">$ </span>curl <span class="s2">"http://localhost:7511/"</span>
+<pre class="highlight shell"><code> <span class="nv">$ </span>curl <span class="s2">"http://localhost:7512/"</span>
 </code></pre>
 
-<p>By default, Kuzzle exposes itself on the 7511 port. Assuming the Kuzzle server runs locally,
-it can be reached on <code class="prettyprint">http://localhost:7511/</code>.
-Note that HTTP is the only protocol shipped in Kuzzle&rsquo;s core.</p>
+<p>By default, Kuzzle exposes itself on the 7512 port. Assuming the Kuzzle server runs locally,
+it can be reached on <code class="prettyprint">http://localhost:7512/</code>.</p>
 
 <p>The default response is the <a href="?http#serverinfo">ServerInfo</a> controller.
 With this you will get detailed information about available HTTP API routes.</p>
@@ -157,12 +159,12 @@ With this you will get detailed information about available HTTP API routes.</p>
 
 <section class="others"></section>
 <pre class="highlight html"><code><span class="nt">&lt;script&gt;</span>
-    <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://localhost:7513"</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://localhost:7512"</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 </code></pre>
 
-<p>By default, Kuzzle embarks our official <a href="https://www.npmjs.com/package/kuzzle-plugin-websocket">WebSocket</a> plugin,
-accepting websocket requests on the 7513 port.</p>
+<p>By default, Kuzzle enables the core websockets protocol,
+accepting websocket requests via the http server (on port 7512 by default).</p>
 
 <h2 id="socket-io-websocket-like">Socket.io (WebSocket-like)</h2>
 
@@ -180,9 +182,7 @@ accepting websocket requests on the 7513 port.</p>
 </code></pre>
 
 <p>To ensure compatibility with older web browsers, our official docker images embeds the
-<a href="https://www.npmjs.com/package/kuzzle-plugin-socketio">Socket.io</a> protocol plugin.</p>
-
-<p>By default, this plugin listens to the port 7512.</p>
+Kuzzle embeds a socketio protocol, accepting socket requests via the http server (on port 7512 by default).</p>
 
 <h2 id="mqtt-protocols">MQTT protocols</h2>
 
@@ -256,8 +256,8 @@ Kuzzle <span class="o">{</span>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;action route&gt;[route options]</code><br>
-<strong>Method:</strong> <code class="prettyprint">get|post|put|delete</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;action route&gt;[route options]</code>
+<strong>Method:</strong> <code class="prettyprint">get|post|put|delete</code>
 <strong>Body:</strong> Can be empty (usually with get and delete methods) or a JSON object
 of the resource body (usually with post and put methods).</p>
 </blockquote>
@@ -348,7 +348,7 @@ identify which query generated the response you got, the best way is to provide 
 <h2 id="authorization-token">Authorization token</h2>
 
 <section class="http"></section>
-<pre class="highlight shell"><code> <span class="nv">$ </span>curl -H <span class="s2">"Authorization: Bearer &lt;encrypted_jwt_token&gt;"</span> <span class="s2">"http://localhost:7511/..."</span>
+<pre class="highlight shell"><code> <span class="nv">$ </span>curl -H <span class="s2">"Authorization: Bearer &lt;encrypted_jwt_token&gt;"</span> <span class="s2">"http://localhost:7512/..."</span>
 </code></pre>
 
 <section class="others"></section>
@@ -542,7 +542,7 @@ the forwarded metadata are those provided in the <strong>subscription</strong> r
 <pre class="highlight html"><code>// For browsers not supporting websocket, use socket.io instead
 <span class="nt">&lt;script&gt;</span>
   <span class="kd">var</span>
-    <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://localhost:7513"</span><span class="p">),</span>
+    <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://localhost:7512"</span><span class="p">),</span>
     <span class="nx">channel</span><span class="p">;</span>
 
   <span class="nx">socket</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">payload</span><span class="p">)</span> <span class="p">{</span>
@@ -947,8 +947,8 @@ it cannot be filtered.
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_checkToken</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_checkToken</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1006,8 +1006,8 @@ This API route does not require to be logged in.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_me</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_me</code>
+<strong>Method:</strong> <code class="prettyprint">GET</code>
 <strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code></p>
 </blockquote>
 
@@ -1062,8 +1062,8 @@ This API route does not require to be logged in.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_me/_rights</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_me/_rights</code>
+<strong>Method:</strong> <code class="prettyprint">GET</code>
 <strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code></p>
 </blockquote>
 
@@ -1111,8 +1111,8 @@ This API route does not require to be logged in.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_login</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_login</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1189,8 +1189,8 @@ and let you authenticate with a login and password.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_logout</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_logout</code>
+<strong>Method:</strong> <code class="prettyprint">GET</code>
 <strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code></p>
 </blockquote>
 
@@ -1233,9 +1233,9 @@ and let you authenticate with a login and password.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_updateSelf</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
-<strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_updateSelf</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -1317,8 +1317,8 @@ even if some of the documents in the import match your subscription filters.
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_bulk</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_bulk</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1410,8 +1410,8 @@ In such case, the <code class="prettyprint">collection</code> in which the docum
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_bulk</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_bulk</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1505,7 +1505,7 @@ The <code class="prettyprint">collections</code> to modify then need to be speci
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;data&gt;/&lt;collection&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;data&gt;/&lt;collection&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">PUT</code></p>
 </blockquote>
 
@@ -1550,7 +1550,7 @@ This method does nothing if the collection already exists.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_specifications</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_specifications</code>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -1593,7 +1593,7 @@ It responds 200 even there where no validation specification manually set before
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_exists</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_exists</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -1634,7 +1634,7 @@ It responds 200 even there where no validation specification manually set before
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mapping</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mapping</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -1690,8 +1690,8 @@ It responds 200 even there where no validation specification manually set before
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_specifications</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_specifications</code>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -1760,7 +1760,7 @@ index and collection if some specifications has been defined first.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/_list(/&lt;all|stored|realtime&gt;)[?from=0][&amp;size=42]</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_list(/&lt;all|stored|realtime&gt;)[?from=0][&amp;size=42]</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -1833,8 +1833,8 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_searchSpecifications</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_searchSpecifications</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -1887,34 +1887,34 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
     },
     "hits": [
       {
-        "_id": "myIndex#myCollection", 
-        "_index": "%kuzzle", 
-        "_score": 1, 
+        "_id": "myIndex#myCollection",
+        "_index": "%kuzzle",
+        "_score": 1,
         "_source": {
-          "collection": "myCollection", 
-          "index": "myIndex", 
+          "collection": "myCollection",
+          "index": "myIndex",
           "validation": {
             "fields": {
               "fieldName": {
-                "defaultValue": "a default value", 
-                "mandatory": true, 
+                "defaultValue": "a default value",
+                "mandatory": true,
                 "multivalued": {
-                  "maxCount": 5, 
-                  "minCount": 1, 
+                  "maxCount": 5,
+                  "minCount": 1,
                   "value": true
-                }, 
-                "type": "string", 
+                },
+                "type": "string",
                 "typeOptions": {
                   "length": {
-                    "max": 12, 
+                    "max": 12,
                     "min": 2
                   }
                 }
               }
-            }, 
+            },
             "strict": true
           }
-        }, 
+        },
         "_type": "validations"
       }
     ],
@@ -1933,7 +1933,7 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_truncate</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_truncate</code>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -1977,8 +1977,8 @@ It is also faster than deleting all documents from a collection using a query.</
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mapping</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mapping</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2067,8 +2067,8 @@ stored in a collection and the complexity of your database.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_specifications</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_specifications</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2171,8 +2171,8 @@ When the validation specification is not well formatted, a detailed error messag
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_validateSpecifications</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_validateSpecifications</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2249,8 +2249,8 @@ When the validation specification is not well formatted, a detailed error messag
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_count</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_count</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2313,8 +2313,8 @@ When the validation specification is not well formatted, a detailed error messag
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_create[?refresh=wait_for]</code> or <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_create[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_create[?refresh=wait_for]</code> or <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_create[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2377,8 +2377,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2441,7 +2441,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -2494,8 +2494,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_query</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_query</code>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2559,7 +2559,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -2619,8 +2619,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_replace[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_replace[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2683,8 +2683,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_scroll/&lt;scrollId&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_scroll/&lt;scrollId&gt;</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2767,8 +2767,8 @@ which tells Elasticsearch how long it should keep the “search context” alive
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_search[?from=0][&amp;size=42]</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_search[?from=0][&amp;size=42]</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2865,8 +2865,8 @@ for more details.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mCreate[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mCreate[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3009,8 +3009,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mCreateOrReplace[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mCreateOrReplace[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3133,7 +3133,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
         <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">created</span> <span class="o">or</span> <span class="nx">replaced</span> <span class="nx">documents</span> 
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">created</span> <span class="o">or</span> <span class="nx">replaced</span> <span class="nx">documents</span>
       <span class="p">}</span>
     <span class="p">],</span>
     <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">created</span> <span class="o">or</span> <span class="nx">replaced</span> <span class="nx">documents</span><span class="o">&gt;</span>
@@ -3150,8 +3150,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mDelete[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mDelete[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3211,8 +3211,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mGet</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mGet</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3290,7 +3290,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
         <span class="s">"found"</span><span class="o">:</span> <span class="no">true</span>
       <span class="p">}</span>
       <span class="p">{</span>
-        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">documents</span> 
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">documents</span>
       <span class="p">}</span>
     <span class="p">],</span>
     <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">retrieved</span> <span class="nx">documents</span><span class="o">&gt;</span>
@@ -3307,8 +3307,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mReplace[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mReplace[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3431,7 +3431,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
         <span class="s">"result"</span><span class="o">:</span> <span class="s">"updated"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">replaced</span> <span class="nx">documents</span> 
+        <span class="o">//</span> <span class="nx">Other</span> <span class="nx">replaced</span> <span class="nx">documents</span>
       <span class="p">}</span>
     <span class="p">],</span>
     <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">replaced</span> <span class="nx">documents</span><span class="o">&gt;</span>
@@ -3451,8 +3451,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_mUpdate[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mUpdate[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3571,8 +3571,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_update[?refresh=wait_for]</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_update[?refresh=wait_for]</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3639,8 +3639,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_validate</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_validate</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3700,7 +3700,7 @@ In any ways, the document is <strong>not</strong> stored nor published.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -3744,7 +3744,7 @@ But in some cases, you may want to create an empty index directly, prior to stor
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -3785,7 +3785,7 @@ But in some cases, you may want to create an empty index directly, prior to stor
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/_exists</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_exists</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -3824,7 +3824,7 @@ But in some cases, you may want to create an empty index directly, prior to stor
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/_autoRefresh</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_autoRefresh</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -3877,7 +3877,7 @@ immediately after each write request, forcing the documents to be immediately vi
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_list</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_list</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -3922,8 +3922,8 @@ immediately after each write request, forcing the documents to be immediately vi
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_mDelete</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_mDelete</code>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3988,7 +3988,7 @@ and &ldquo;index3&rdquo; is kept in the persistent storage layer.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/_refresh</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_refresh</code>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -4055,7 +4055,7 @@ on it, making the documents visible to search immediately.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_refreshInternal</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_refreshInternal</code>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -4116,7 +4116,7 @@ on the internal index, making the documents visible to search immediately.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/_autoRefresh</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_autoRefresh</code>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 
 <p>Query</p>
@@ -4176,7 +4176,7 @@ immediately after each write request, forcing the documents to be immediately vi
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/ms/_ping</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_ping</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -4373,7 +4373,7 @@ It is internaly based on Redis. You can access most of Redis functions (all lowe
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_listSubscriptions</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_listSubscriptions</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -4430,8 +4430,8 @@ It is internaly based on Redis. You can access most of Redis functions (all lowe
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_publish</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_publish</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -4587,7 +4587,7 @@ who have subscribed to a subscription for which the filters match the message co
 <section class="others"></section>
 <pre class="highlight html"><code><span class="nt">&lt;script&gt;</span>
   <span class="kd">var</span>
-    <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://localhost:7513"</span><span class="p">),</span>
+    <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://localhost:7512"</span><span class="p">),</span>
     <span class="nx">channel</span><span class="p">;</span>
 
   <span class="nx">socket</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">payload</span><span class="p">)</span> <span class="p">{</span>
@@ -4776,8 +4776,8 @@ In practice, your subscription won&rsquo;t receive any new message on the room o
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;index&gt;/&lt;collection&gt;/_validate</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_validate</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -4837,8 +4837,8 @@ In any ways, the document is <strong>not</strong> stored nor published.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/&lt;userId&gt;/_createFirstAdmin[?reset=1]</code> or <code class="prettyprint">http://kuzzle:7511/_createFirstAdmin[?reset=1]</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;userId&gt;/_createFirstAdmin[?reset=1]</code> or <code class="prettyprint">http://kuzzle:7512/_createFirstAdmin[?reset=1]</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -4932,8 +4932,8 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/&lt;profileId&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profileId&gt;</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -5031,8 +5031,8 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/&lt;roleId&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -5116,8 +5116,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/&lt;userId&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -5184,8 +5184,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/&lt;profileId&gt;/_create</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profileId&gt;/_create</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -5286,8 +5286,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/&lt;roleId&gt;/_create</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;/_create</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -5372,8 +5372,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/&lt;userId&gt;/_create</code> or <code class="prettyprint">http://kuzzle:7511/users/_create</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_create</code> or <code class="prettyprint">http://kuzzle:7512/users/_create</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -5470,8 +5470,8 @@ If not provided, the <code class="prettyprint">_id</code> will be auto-generated
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/&lt;userId&gt;/_createRestricted</code> or <code class="prettyprint">http://kuzzle:7511/users/_createRestricted</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_createRestricted</code> or <code class="prettyprint">http://kuzzle:7512/users/_createRestricted</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -5563,7 +5563,7 @@ This route is especially useful to allow anonymous users to create a user.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_profiles/&lt;profileId&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -5609,7 +5609,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/&lt;roleId&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -5654,7 +5654,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/&lt;userId&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -5699,7 +5699,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_profiles/&lt;profileId&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -5747,7 +5747,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mapping</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mapping</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -5828,7 +5828,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_profiles/&lt;profileId&gt;/_rights</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;/_rights</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -5879,7 +5879,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/&lt;role id&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;role id&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -5930,7 +5930,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mapping</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mapping</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -5974,7 +5974,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/&lt;userId&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -6020,7 +6020,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_mapping</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mapping</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -6107,7 +6107,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_users/&lt;userId&gt;/_rights</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_users/&lt;userId&gt;/_rights</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -6155,8 +6155,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mDelete</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mDelete</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -6207,8 +6207,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mDelete</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mDelete</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -6259,8 +6259,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_mDelete</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mDelete</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -6312,8 +6312,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mGet</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mGet</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -6367,8 +6367,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mGet</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mGet</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -6442,8 +6442,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_search[?from=0][&amp;size=42]</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_search[?from=0][&amp;size=42]</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -6554,8 +6554,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_search[?from=0][&amp;size=42]</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_search[?from=0][&amp;size=42]</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -6653,8 +6653,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_search[?from=0][&amp;size=42]</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_search[?from=0][&amp;size=42]</code>
+<strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -6756,8 +6756,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/&lt;profile id&gt;/_update</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profile id&gt;/_update</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -6851,7 +6851,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/profiles/_mapping</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mapping</code>
 <strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
@@ -6936,8 +6936,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/&lt;roleId&gt;/_update</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;/_update</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -7016,7 +7016,7 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/roles/_mapping</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mapping</code>
 <strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
@@ -7101,8 +7101,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/&lt;userId&gt;/_update</code><br>
-<strong>Method:</strong> <code class="prettyprint">PUT</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_update</code>
+<strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -7160,7 +7160,7 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/users/_mapping</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mapping</code>
 <strong>Method:</strong> <code class="prettyprint">PUT</code>
 <strong>Body:</strong></p>
 </blockquote>
@@ -7247,7 +7247,7 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_adminExists</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_adminExists</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -7287,7 +7287,7 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_getAllStats</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getAllStats</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -7359,7 +7359,7 @@ By default, snapshots are made every 10s, and these snapshots are stored for 1hr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_getConfig</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getConfig</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -7665,7 +7665,7 @@ By default, snapshots are made every 10s, and these snapshots are stored for 1hr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_getLastStats</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getLastStats</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -7732,7 +7732,7 @@ By default, snapshots are made every 10s.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_getStats[?startTime=123456789][&amp;stopTime=234567890]</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getStats[?startTime=123456789][&amp;stopTime=234567890]</code>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -7809,7 +7809,7 @@ By default, snapshots are made every 10s.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_serverInfo</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_serverInfo</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -7934,7 +7934,7 @@ By default, snapshots are made every 10s.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7511/_now</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_now</code>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
