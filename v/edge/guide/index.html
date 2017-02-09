@@ -1503,10 +1503,6 @@ If you are running Kuzzle in a Docker container, you will have to [enter the Kuz
 
 <p>Kuzzle relies on the Redis service to store some frequently accessed internal data. If you need to restart Kuzzle with a fresh cache, this command can come in hand.</p>
 
-<h3 id="plugins">plugins</h3>
-
-<p>Please refer to the <a href="#managing-plugins-using-the-cli">dedicated plugin CLI documentation</a>.</p>
-
 <h3 id="reset">reset</h3>
 <pre class="highlight plaintext"><code>$ ./bin/kuzzle reset --help
 
@@ -1619,18 +1615,21 @@ Kuzzle ships with a Protocol Plugin already bundled in its Community Edition, th
 
 <p>This example is a very dummy one. We are going to install the <strong>Hello World Controller Plugin</strong>, which opens a new API endpoint that simply&hellip; Greets the client! Not very useful, except for the sake of this example.</p>
 
-<p>In Kuzzle, you can use the CLI to manage your Plugins. The <code class="prettyprint">plugins --install</code> command enables you to install a Plugin from a Git repository, an NPM package or a local path on your machine.</p>
+<p>To install a Plugin, you just need to make it accessible within the <code class="prettyprint">plugins/enabled</code> directory (relative to the path of the Kuzzle installation directory). A common practice is to copy the Plugin code in <code class="prettyprint">plugins/available</code> and create a symbolic link in <code class="prettyprint">plugins/enabled</code> pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
 
 <aside class="notice">
-If you are running Kuzzle in a Docker container, you will need to enter the container to use the CLI.
+If you are running Kuzzle in a Docker container, you will need to enter the container to access the installation directory.
 </aside>
 
 <p>Go to the Kuzzle installation directory and type:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>bin/kuzzle plugins --install --url https://github.com/kuzzleio/kuzzle-plugin-helloworld.git
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd </span>plugins/available
+<span class="gp">$ </span>git clone https://github.com/kuzzleio/kuzzle-plugin-helloworld.git
+<span class="gp">$ </span><span class="nb">cd</span> ../enabled
+<span class="gp">$ </span>ln -s ../available/kuzzle-plugin-helloworld .
 <span class="gp">$ </span>pm2 restart KuzzleServer
 </code></pre>
 
-<p>Once Kuzzle has restarted (that&rsquo;s what the second command is for) you can check the server information at <code class="prettyprint">http://localhost:7511/?pretty=true</code> for the new <code class="prettyprint">hello</code> endpoint:</p>
+<p>Once Kuzzle has restarted (that&rsquo;s what the last command is for) you can check the server information at <code class="prettyprint">http://localhost:7511/?pretty=true</code> for the new <code class="prettyprint">hello</code> endpoint:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="err">...</span><span class="w">
     </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1669,229 +1668,30 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 
 <p>To get a deeper insight on how Plugins work in Kuzzle, please refer to the <a href="/plugin-reference">Plugin Reference</a>.</p>
 
-<h3 id="managing-plugins-using-the-cli">Managing plugins using the CLI</h3>
+<h3 id="managing-plugins">Managing Plugins</h3>
 
-<p>Plugins can be managed using the Kuzzle command-line interface:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --help
+<p>As seen in the previous example, managing Plugins is really just a matter of moving files and symbolic links around.</p>
 
-  Usage: plugins [options] [name]
+<h4 id="installing-removing-enabling-and-disabling-plugins">Installing, removing, enabling and disabling Plugins</h4>
 
-  manage plugins
+<p>When starting, Kuzzle (both Core and Proxy) looks for Plugins in the <code class="prettyprint">plugins/enabled</code> directory. Valid Plugins are well-formed NPM modules (i.e. they have a <code class="prettyprint">package.json</code> at their root) or simple NodeJS requireables (i.e. they have at their root a valid <code class="prettyprint">index.js</code>).</p>
 
-  Options:
+<p>A common practice is to copy the Plugin code in <code class="prettyprint">plugins/available</code> and create a symbolic link in <code class="prettyprint">plugins/enabled</code> pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
 
-    -h, --help                      output usage information
-        --list                      list currently installed plugins
-        --install                   if plugin [name] is provided, install it from --version, --url or --path, otherwise, (re-)install all listed plugins
-        --remove                    remove plugin [name] from Kuzzle
-        --activate                  mark the plugin as "activated"
-        --deactivate                mark the plugin as "deactivated"
-        --importConfig &lt;file&gt;       import plugin [name] configuration from &lt;file&gt;
-        --get                       get plugin [name] configuration stored in Kuzzle
-        --set &lt;JSONObject&gt;          merge plugin [name] configuration with JSONObject
-        --unset &lt;property&gt;          unset property from the plugin configuration
-        --replace &lt;JSONObject&gt;      erase the plugin configuration and apply JSONObject instead
-    -v, --packageVersion &lt;version&gt;  plugin &lt;version&gt; to install (npm repository or git only)
-    -u, --url &lt;url&gt;                 install plugin from a git repository or a remote tarball
-    -p, --path &lt;path&gt;               install plugin from the file system
+<h4 id="configuring-plugins">Configuring Plugins</h4>
 
-</code></pre>
+<p>When initializing a Plugin, Kuzzle (both Core and Proxy) calls its <code class="prettyprint">init(customConfig, context)</code> method, passing the <a href="/plugin-reference/#the-plugin-context">context</a> and the custom configuration. Custom configuration parameters are specified for each plugin in the <code class="prettyprint">plugins</code> object of the <a href="#configuring-kuzzle">Kuzzle configuration file</a>.</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"kuzzle-plugin-foobar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"option_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"option_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<aside class="warning">Restarting Kuzzle is required to apply any change made to plugins using the command-line interface</aside>
-
-<h4 id="list-installed-plugins">List installed plugins</h4>
-
-<aside class="note">Installed plugins are copied into the node_modules directory of a Kuzzle server instance, even if installed from a directory path</aside>
-
-<p>You can get an overview of installed plugins and their activation status using the <code class="prettyprint">--list</code> option:</p>
-<pre class="highlight plaintext"><code>./bin/kuzzle plugins --list
-{ 'kuzzle-plugin-logger':
-   { version: '2.0.4',
-     activated: true,
-     config:
-      { services:
-         { file:
-            { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-              addDate: true },
-           stdout: { level: 'info' } } } },
-  'kuzzle-plugin-auth-passport-local':
-   { version: '2.0.4',
-     activated: true,
-     config: { secret: 'changeme', algorithm: 'sha1', digest: 'hex' } } }
-</code></pre>
-
-<h4 id="install-a-plugin">Install a plugin</h4>
-
-<p>Kuzzle CLI supports most <a href="https://docs.npmjs.com/cli/install">npm installation methodes</a>.</p>
-
-<h5 id="from-npm-repositories">from npm repositories</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion x.y.z] name
-</code></pre>
-
-<p>If <code class="prettyprint">--packageVersion</code> is not provided, the <code class="prettyprint">latest</code> version will be installed.</p>
-
-<h5 id="from-a-git-repository">from a git repository</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion commit-ish] --url https://git.repository.url/project.git
-</code></pre>
-
-<p>The version can be anything related to commits: branch, tag, commit sha1.</p>
-
-<p>If no version is provided, the <code class="prettyprint">master</code> branch is used.</p>
-
-<h5 id="from-a-remote-tarball">from a remote tarball</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --url http://remote.com/plugin.tar.gz
-</code></pre>
-
-<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
-
-<h5 id="from-a-local-tarball">from a local tarball</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --path /path/to/plugin.tar.gz
-</code></pre>
-
-<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
-
-<h5 id="from-a-local-directory">from a local directory</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plgins --install --path /path/to/plugin
-</code></pre>
-
-<aside class="note">The directory content will be copied in the node_modules directory</aside>
-
-<h4 id="view-plugins-configuration">View plugins configuration</h4>
-
-<p>To view a plugin configuration, use the <code class="prettyprint">--get</code> option.</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ npmVersion: '2.0.2',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-</code></pre>
-
-<h4 id="modify-a-plugin-configuration">Modify a plugin configuration</h4>
-
-<p>Plugin configurations are stored in the <code class="prettyprint">config</code> part of plugins properties.</p>
-
-<p>There are multiple ways of changing a plugin configuration:</p>
-
-<ul>
-<li>perform a partial update, using the <code class="prettyprint">--set</code> action. This allows adding or updating parts of the configuration</li>
-<li>replace the entire plugin configuration on the command-line, with the <code class="prettyprint">--replace</code> action</li>
-<li>replace the entire plugin configuration by loading a JSON file, with the <code class="prettyprint">--importConfig &lt;file&gt;</code> action</li>
-</ul>
-
-<p>Updating a plugin configuration:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } } } }
-$ ./bin/kuzzle plugins --set '{ "stdout": { "level": "debug"} }' kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } },
-     stdout: { level: 'debug' } } }
-</code></pre>
-
-<p>Replacing a plugin configuration on the command-line:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } } } }
-$ ./bin/kuzzle plugins --replace '{"stdout": {"level": "debug", "addDate": true}}' kuzzle-plugin-logger
-
-{ version: '2.0.4',
-  activated: true,
-  config: { stdout: { level: 'debug', addDate: true } } }
-</code></pre>
-
-<p>Replacing a plugin configuration using a JSON file:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --importConfig foo.json kuzzle-plugin-logger
-[✔] Successfully imported configuration
-$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ npmVersion: '2.0.4', activated: true, config: { foo: 'bar' } }
-</code></pre>
-
-<h4 id="removing-a-plugin-configuration-property">Removing a plugin configuration property</h4>
-
-<p>You can remove a plugin configuration property by using the <code class="prettyprint">--unset</code> action:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-$ ./bin/kuzzle plugins --unset 'services' kuzzle-plugin-logger
-  { npmVersion: '2.0.4',
-    activated: true }
-</code></pre>
-
-<aside class="notice">NB: Only root properties can be unset</aside>
-
-<h4 id="uninstalling-a-plugin">Uninstalling a plugin</h4>
-
-<p>Plugins can be uninstalled using the <code class="prettyprint">--remove</code> option.</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --remove kuzzle-plugin-socketio
-<span class="o">{</span> acknowledged: <span class="nb">true</span> <span class="o">}</span>
-</code></pre>
-
-<h4 id="activating-deactivating-a-plugin">Activating/Deactivating a plugin</h4>
-
-<p>By default, a plugin is activated when installed, meaning it will be loaded and used by Kuzzle on the next restart.</p>
-
-<p>You may want to activate or deactivate a plugin, without uninstalling it.</p>
-
-<p>To deactivate a plugin:</p>
-<pre class="highlight plaintext"><code>./bin/kuzzle plugins --deactivate kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: false,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-</code></pre>
-
-<p>To activate a plugin:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --activate kuzzle-plugin-logger
-  { version: '2.0.4',
-    activated: true,
-    config:
-     { services:
-        { file:__
-           { outputs:
-              { error: { level: 'error', filename: 'kuzzle-error.log' },
-                warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-             addDate: true },
-          stdout: { level: 'info', addDate: true } } } }
-</code></pre>
+<p>Each Plugin is responsible of handling the custom configuration parameters and Kuzzle has no opinion on how to do it. Whether the custom configuration is merged with the defaults or not entirely depends on the implementation of the <code class="prettyprint">init</code> function.</p>
 
             <h1 id="kuzzle-in-depth">Kuzzle in depth</h1>
 
