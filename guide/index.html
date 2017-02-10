@@ -156,18 +156,18 @@ The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <
 <pre class="highlight plaintext"><code>kuzzle_1         | [✔] Kuzzle server ready
 </code></pre>
 
-<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7511?pretty=true">http://localhost:7511?pretty=true</a> or via cURL on the command line:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7511/?pretty=true"</span>
+<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7512?pretty=true">http://localhost:7512?pretty=true</a> or via cURL on the command line:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7512/?pretty=true"</span>
 </code></pre>
 
 <p>Kuzzle will respond you with a list of the existing routes.</p>
 
 <aside class="success">
-Kuzzle is up and running. It will accept requests at the following addresses:
+Kuzzle is up and running. It will accept requests at <code>localhost:7512</code>:
 <ul>
-  <li><code>localhost:7511</code> via <strong>standard HTTP requests,</strong></li>
-  <li><code>localhost:7513</code> via a <strong>Websocket</strong> client (like the <a href="https://github.com/kuzzleio/sdk-javascript">Javascript SDK</a>),</li>
-  <li><code>localhost:7512</code> via <strong>Socket.IO</strong> (used as a fallback by the SDK on browsers that do not provide Websocket support).</li>
+  <li>via <strong>standard HTTP requests,</strong></li>
+  <li>via a <strong>Websocket</strong> client (like the <a href="https://github.com/kuzzleio/sdk-javascript">Javascript SDK</a>),</li>
+  <li>via <strong>Socket.IO</strong> (used as a fallback by the SDK on browsers that do not provide Websocket support).</li>
 </ul>
 </aside>
 
@@ -181,7 +181,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle">Get in touch with us
 
 <ul>
 <li><a href="#running-kuzzle-backoffice">installing the Backoffice</a>, a handy way to manage data and security in Kuzzle;</li>
-<li>installing one of the available <a href="http://kuzzle.io/documentation/sdk-reference/">Kuzzle SDK</a> to power-up one of your projects:
+<li>installing one of the available <a href="/sdk-reference/">Kuzzle SDK</a> to power-up one of your projects:
 
 <ul>
 <li><a href="https://github.com/kuzzleio/sdk-javascript">Javascript</a> (check the <a href="#sdk-play-time">SDK play time</a> section below),</li>
@@ -189,7 +189,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle">Get in touch with us
 <li><a href="https://github.com/kuzzleio/sdk-ios">iOS</a>,</li>
 <li><a href="https://github.com/kuzzleio/sdk-android">Android</a>;</li>
 </ul></li>
-<li>exploring the <a href="http://kuzzle.io/documentation/api-reference/">Kuzzle API reference</a>;</li>
+<li>exploring the <a href="/api-reference/">Kuzzle API reference</a>;</li>
 <li><a href="#manual-install">setting-up a Kuzzle Server without Docker</a>.</li>
 </ul>
 
@@ -199,7 +199,7 @@ You can also <a href="#installing-kuzzle-manually-on-linux">install Kuzzle manua
 
 <h2 id="sdk-play-time">SDK play time</h2>
 
-<p>It&rsquo;s time to play with the <a href="http://kuzzle.io/documentation/sdk-reference">Kuzzle SDK</a>. In this section, we will persist a document and subscribe to notifications in Kuzzle using the JS SDK.</p>
+<p>It&rsquo;s time to play with the <a href="/sdk-reference">Kuzzle SDK</a>. In this section, we will persist a document and subscribe to notifications in Kuzzle using the JS SDK.</p>
 
 <p>Before proceeding, ensure that your system matches the following requisites:</p>
 
@@ -210,7 +210,7 @@ You can also <a href="#installing-kuzzle-manually-on-linux">install Kuzzle manua
 
 <h3 id="create-your-first-quot-hello-world-quot-document">Create your first &ldquo;Hello World&rdquo; document</h3>
 
-<p>Create your playground directory and install the <a href="http://kuzzle.io/documentation/sdk-reference">Javascript SDK</a> from the command line using npm:</p>
+<p>Create your playground directory and install the <a href="/sdk-reference">Javascript SDK</a> from the command line using npm:</p>
 <pre class="highlight shell"><code><span class="gp">$ </span>mkdir kuzzle-playground
 <span class="gp">$ </span><span class="nb">cd </span>kuzzle-playground
 <span class="gp">$ </span>npm install kuzzle-sdk
@@ -225,7 +225,7 @@ You can also <a href="#installing-kuzzle-manually-on-linux">install Kuzzle manua
   <span class="p">})</span>
 
 <span class="c1">// get a reference to the a collection</span>
-<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">dataCollectionFactory</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
 
 <span class="c1">// define the document itself</span>
 <span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="p">{</span>
@@ -248,11 +248,11 @@ You have persisted your first document in Kuzzle. If you are running the Backoff
 Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with us on Gitter!</a> We&rsquo;ll be happy to help.
 </aside>
 
-<p><em>You can find more resources about Kuzzle SDK in the <a href="http://kuzzle.io/documentation/sdk-reference">SDK Documentation</a>.</em></p>
+<p><em>You can find more resources about Kuzzle SDK in the <a href="/sdk-reference">SDK Documentation</a>.</em></p>
 
 <h3 id="subscribe-to-data-changes-pub-sub">Subscribe to data changes (pub/sub)</h3>
 
-<p>Kuzzle provides pub/sub features that allow you to be notified in real-time on the state of your data (check the <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">KuzzleRoom Class Documentation</a> for a deep-dive on notifications).</p>
+<p>Kuzzle provides pub/sub features that allow you to be notified in real-time on the state of your data (check the <a href="/sdk-reference/#room">Room Class Documentation</a> for a deep-dive on notifications).</p>
 
 <p>Let&rsquo;s get started. Open a new termnial in the playground directory you created before and create the <code class="prettyprint">subscribe.js</code> file containing the following code:</p>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Kuzzle</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kuzzle-sdk'</span><span class="p">)</span>
@@ -263,7 +263,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
   <span class="p">})</span>
 
 <span class="c1">// create a reference to the data collection</span>
-<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">dataCollectionFactory</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'mycollection'</span><span class="p">)</span>
 
 <span class="c1">// define a filter</span>
 <span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="p">{</span>
@@ -300,9 +300,9 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 <p>Now that you are started and operational with Kuzzle, you can fully leverage its power by:</p>
 
 <ul>
-<li><a href="http://kuzzle.io/documentation/sdk-reference">taking a look at the SDK reference</a>;</li>
-<li><a href="http://kuzzle.io/documentation/real-time-filters">mastering the Kuzzle real-time filtering syntax</a> to create incredibly fine-grained and blazing-fast subscriptions;</li>
-<li><a href="http://kuzzle.io/documentation/guide/#security">learning how to manage users and set-up fine-grained permission rights</a>.</li>
+<li><a href="/sdk-reference">taking a look at the SDK reference</a>;</li>
+<li><a href="/real-time-filters">mastering the Kuzzle real-time filtering syntax</a> to create incredibly fine-grained and blazing-fast subscriptions;</li>
+<li><a href="/guide/#security">learning how to manage users and set-up fine-grained permission rights</a>.</li>
 </ul>
 
             <h1 id="essentials">Essentials</h1>
@@ -320,12 +320,11 @@ You can create a subscription by selecting a set of data. Selections (also calle
 
 <h4 id="sdk">SDK</h4>
 
-<p>Kuzzle ships with a set of open-source <a href="http://kuzzle.io/documentation/sdk-reference">SDK</a> for a variety of languages:</p>
+<p>Kuzzle ships with a set of open-source <a href="/sdk-reference">SDK</a> for a variety of languages:</p>
 
 <ul>
 <li><a href="https://github.com/kuzzleio/sdk-javascript">Javascript</a> (NodeJS &amp; Browsers)</li>
 <li><a href="https://github.com/kuzzleio/sdk-android">Android</a></li>
-<li><a href="https://github.com/kuzzleio/sdk-ios">iOS</a></li>
 <li><a href="https://github.com/kuzzleio/sdk-php">PHP</a></li>
 <li>C (planned)</li>
 </ul>
@@ -396,8 +395,8 @@ The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <
 <pre class="highlight plaintext"><code>kuzzle_1         | [✔] Kuzzle server ready
 </code></pre>
 
-<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7511">http://localhost:7511</a> or via cURL on the command line:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7511/?pretty"</span>
+<p>Your Kuzzle server is now ready to be used. For instance, you can hit the main HTTP API endpoint by browsing the page <a href="http://localhost:7512">http://localhost:7512</a> or via cURL on the command line:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"http://localhost:7512/?pretty"</span>
 </code></pre>
 
 <p>Kuzzle will respond you with a list of the existing routes.</p>
@@ -493,8 +492,8 @@ By default, Kuzzle expects all the components to be running on localhost. You ca
 </code></pre>
 
 <p>The Kuzzle Back-office can be reached on http://localhost:3000.<br>
-Kuzzle HTTP API can be reached on http://localhost:7511/<br>
-Socket IO and Websocket channels can respectively be reached on ports 7512 and 7513.</p>
+Kuzzle HTTP API can be reached on http://localhost:7512/<br>
+Socket IO and Websocket channels can be reached over the HTTP server, on port 7512.</p>
 
 <h5 id="change-external-services-hosts-or-ports">Change external services hosts or ports</h5>
 
@@ -517,7 +516,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <h3 id="select-the-kuzzle-server-to-connect-to">Select the Kuzzle server to connect to</h3>
 
-<p>The Kuzzle Backoffice automatically looks for a Kuzzle server on <code class="prettyprint">localhost:7513</code>. If none is present, you will be prompted to choose a Kuzzle instance to connect to.</p>
+<p>The Kuzzle Backoffice automatically looks for a Kuzzle server on <code class="prettyprint">localhost:7512</code>. If none is present, you will be prompted to choose a Kuzzle instance to connect to.</p>
 
 <p>You can tell the Backoffice to connect to any Kuzzle server by clicking on the <strong>&ldquo;Choose Environment&rdquo;</strong> dropdown menu, then by selecting <strong>&ldquo;Create new&rdquo;</strong>.</p>
 
@@ -592,7 +591,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
   <span class="s">proxy</span><span class="pi">:</span>
     <span class="s">image</span><span class="pi">:</span> <span class="s">kuzzleio/proxy</span>
     <span class="s">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s2">"</span><span class="s">7511-7513:7511-7513"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">7512:7512"</span>
 
   <span class="s">kuzzle</span><span class="pi">:</span>
     <span class="s">image</span><span class="pi">:</span> <span class="s">kuzzleio/kuzzle</span>
@@ -634,7 +633,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Kuzzle ships with a full data <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> API that enables you to operate in many ways on your documents.</p>
 
-<p>Let&rsquo;s <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#create"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol. This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7511/myindex/mycollection/_create</code> with the body set to</p>
+<p>Let&rsquo;s <a href="/api-reference/#create48"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol. This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7512/myindex/mycollection/_create</code> with the body set to</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -680,7 +679,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Take some time to examine the content of a <a href="#kuzzle-response-objects">Kuzzle Response</a>. You may notice that it contains useful information like the name of the <a href="/#core-architecture">controller and action</a> that correspond to the HTTP route we hit with our request, or the complete KuzzleDocument object we just created.</p>
 
-<p>One more thing you may notice is that <code class="prettyprint">myindex</code> and <code class="prettyprint">mycollection</code> are created on-the-fly along with the document. Let&rsquo;s verify it by <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#listcollections"><strong>getting the list of collections</strong></a> stored in <code class="prettyprint">myindex</code> by sending a <code class="prettyprint">GET</code> request to <code class="prettyprint">http://localhost:7511/myindex/_list</code>.</p>
+<p>One more thing you may notice is that <code class="prettyprint">myindex</code> and <code class="prettyprint">mycollection</code> are created on-the-fly along with the document. Let&rsquo;s verify it by <a href="/api-reference/?http#list"><strong>getting the list of collections</strong></a> stored in <code class="prettyprint">myindex</code> by sending a <code class="prettyprint">GET</code> request to <code class="prettyprint">http://localhost:7512/myindex/_list</code>.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -705,7 +704,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Take a look at the <code class="prettyprint">result</code> field in the Response from Kuzzle. It contains an array of <code class="prettyprint">collections</code>, each one defined by a <code class="prettyprint">name</code> and a <code class="prettyprint">type</code>. <code class="prettyprint">mycollection</code> is of type <code class="prettyprint">stored</code> (which stands for persistent). This is made to distinguish persisted collection from the <code class="prettyprint">realtime</code> (or volatile) collections, used to identify <a href="#realtime-notifications">real-time documents</a>.</p>
 
-<p>Let&rsquo;s <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#update"><strong>modify to our brand new document</strong></a> by sending a <code class="prettyprint">PUT</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0/_update</code> with the body set to:</p>
+<p>Let&rsquo;s <a href="/api-reference/?http#update"><strong>modify to our brand new document</strong></a> by sending a <code class="prettyprint">PUT</code> request to <code class="prettyprint">http://localhost:7512/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0/_update</code> with the body set to:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in a bottle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"an_englishman"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in New York"</span><span class="w">
@@ -740,13 +739,13 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>&hellip;telling us that the document has been successfully updated.</p>
 
-<p>Now, we&rsquo;ll let you figure out what happens when we send a <code class="prettyprint">DELETE</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0</code> with an empty body (take a look at the <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#delete">API Reference</a> if you don&rsquo;t want to try).</p>
+<p>Now, we&rsquo;ll let you figure out what happens when we send a <code class="prettyprint">DELETE</code> request to <code class="prettyprint">http://localhost:7512/myindex/mycollection/AVkDBl3YsT6qHI7MxLz0</code> with an empty body (take a look at the <a href="/api-reference/?http#delete">API Reference</a> if you don&rsquo;t want to try).</p>
 
 <h3 id="document-search">Document Search</h3>
 
 <p>One thing that Elasticsearch is <em>really</em> good at doing is&hellip; Searching! It enables to create extremely precise search queries, thanks to its powerful query DSL. We wrote a <a href="#elasticsearch-cookbook">comprehensive cookbook</a> to help you understand how it works in detail, but let&rsquo;s take a look at a couple of simple examples, just to get started.</p>
 
-<p>Say we want to <a href="http://kuzzleio.github.io/kuzzle-api-documentation/?rest#search"><strong>find</strong></a> all the documents within <code class="prettyprint">mycollection</code>, via the HTTP protocol. To do it, we send a <code class="prettyprint">POST</code> request to <code class="prettyprint">http://localhost:7511/myindex/mycollection/_search</code> (we leave the body empty since we have no filters to apply to our query). Depending on the documents you have created in your database, the response will look like:</p>
+<p>Say we want to <a href="/api-reference/?http#search"><strong>find</strong></a> all the documents within <code class="prettyprint">mycollection</code>, via the HTTP protocol. To do it, we send a <code class="prettyprint">POST</code> request to <code class="prettyprint">http://localhost:7512/myindex/mycollection/_search</code> (we leave the body empty since we have no filters to apply to our query). Depending on the documents you have created in your database, the response will look like:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -895,7 +894,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>This way, every time Kuzzle receives a data input, it checks it against the validation schema and returns a <strong>standard error</strong> when the validation fails.</p>
 
-<p>You can specify the validation rules in the kuzzle <a href="http://localhost/guide/#configuring-kuzzle">configuration file</a> in the <code class="prettyprint">validation</code> field.</p>
+<p>You can specify the validation rules in the kuzzle <a href="/guide/#configuring-kuzzle">configuration file</a> in the <code class="prettyprint">validation</code> field.</p>
 
 <p>You can take a look at the <a href="/validation-reference/">Kuzzle Data Validation Reference</a> for a straight dive, or keep reading for a smoother introduction.</p>
 
@@ -991,7 +990,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 <li><strong>changes happening on a given set of documents</strong> (e.g. clients must play a sound every time an item containing the word &ldquo;URGENT&rdquo; is created).</li>
 </ol>
 
-<p>The scope of possibilities is huge. Take a look at the <a href="http://docs.kuzzle.io/api-reference/?others#notifications">Notifications section</a> in the API Reference for more details.</p>
+<p>The scope of possibilities is huge. Take a look at the <a href="/api-reference/?others#notifications">Notifications section</a> in the API Reference for more details.</p>
 
 <h3 id="examples">Examples</h3>
 
@@ -1000,7 +999,7 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 <p>Let&rsquo;s dive into the implementation of the Collaborative TO-DO list application.</p>
 
 <aside class="notice">
-All the following examples are written in Javascript, therefore using the Javascript Kuzzle SDK. If this is not your usual development language, take a look at the different flavors of the `subscribe` method in the [SDK Reference](http://docs.kuzzle.io/sdk-reference/#subscribe).
+All the following examples are written in Javascript, therefore using the Javascript Kuzzle SDK. If this is not your usual development language, take a look at the different flavors of the `subscribe` method in the [SDK Reference](/sdk-reference/#subscribe).
 </aside>
 
 <h4 id="the-basic-subscription">The basic subscription</h4>
@@ -1016,7 +1015,7 @@ All the following examples are written in Javascript, therefore using the Javasc
     <span class="p">})</span>
 </code></pre>
 
-<p>This code isn&rsquo;t very useful but it shows the capability to react to a notification coming from the server. </p>
+<p>This code isn&rsquo;t very useful but it shows the capability to react to a notification coming from the server.</p>
 
 <p>Here, we call the <code class="prettyprint">subscribe</code> method on the <code class="prettyprint">todos</code> collection with two arguments:</p>
 
@@ -1055,15 +1054,15 @@ All the following examples are written in Javascript, therefore using the Javasc
 <li>the <code class="prettyprint">result</code> shows <em>the consequence</em> of what just happened (in this case, the newly created document).</li>
 </ul>
 
-<p>We won&rsquo;t analyze the other attributes for the moment. Take a look at the <a href="http://kuzzleio.github.io/kuzzle-api-documentation/#notifications">Notifications section of the API Reference</a> for a comprehensive list of the available notification events.</p>
+<p>We won&rsquo;t analyze the other attributes for the moment. Take a look at the <a href="/api-reference/#notifications">Notifications section of the API Reference</a> for a comprehensive list of the available notification events.</p>
 
-<p>This subscription is very handy and will notify Tom about the events 1, 2 and 3 of the list above (the <code class="prettyprint">controller</code>, <code class="prettyprint">action</code> and <code class="prettyprint">result</code> will vary depending on the case). But what about the event number 4? How does Tom subscribe to items that only contain the word <code class="prettyprint">URGENT</code> in their <code class="prettyprint">label</code> field? Looks like a job for the <a href="http://docs.kuzzle.io/real-time-filters/">Real-time Filtering DSL</a> coming up in the following section.</p>
+<p>This subscription is very handy and will notify Tom about the events 1, 2 and 3 of the list above (the <code class="prettyprint">controller</code>, <code class="prettyprint">action</code> and <code class="prettyprint">result</code> will vary depending on the case). But what about the event number 4? How does Tom subscribe to items that only contain the word <code class="prettyprint">URGENT</code> in their <code class="prettyprint">label</code> field? Looks like a job for the <a href="/real-time-filters/">Real-time Filtering DSL</a> coming up in the following section.</p>
 
 <h4 id="subscription-with-filters">Subscription with filters</h4>
 
-<p>Kuzzle ships with a powerful <a href="http://docs.kuzzle.io/real-time-filters/">Filtering DSL for Live Subscriptions</a>. It is heavily inspired in the Elasticsearch DSL and enables you to perform fine-grained selections on the documents you want to subscribe to.</p>
+<p>Kuzzle ships with a powerful <a href="/real-time-filters/">Filtering DSL for Live Subscriptions</a>. It is heavily inspired in the Elasticsearch DSL and enables you to perform fine-grained selections on the documents you want to subscribe to.</p>
 
-<p>In our case, we want to select all the documents that contain the <code class="prettyprint">URGENT</code> word in the <code class="prettyprint">label</code> field. The best pick for this case is the <a href="http://docs.kuzzle.io/real-time-filters/#regexp">regexp</a> filter.</p>
+<p>In our case, we want to select all the documents that contain the <code class="prettyprint">URGENT</code> word in the <code class="prettyprint">label</code> field. The best pick for this case is the <a href="/real-time-filters/#regexp">regexp</a> filter.</p>
 <pre class="highlight javascript"><code><span class="nx">kuzzle</span>
     <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'todos'</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">subscribe</span><span class="p">({</span>
@@ -1078,7 +1077,7 @@ All the following examples are written in Javascript, therefore using the Javasc
     <span class="p">})</span>
 </code></pre>
 
-<p>This way, Tom will be notified about urgent TO-DO items. Take a look at the <a href="http://docs.kuzzle.io/real-time-filters/">Filtering DSL Refernce</a> for a comprehensive list of the available filters.</p>
+<p>This way, Tom will be notified about urgent TO-DO items. Take a look at the <a href="/real-time-filters/">Filtering DSL Refernce</a> for a comprehensive list of the available filters.</p>
 
 <p>There are a few things that deserve to be noticed here:</p>
 
@@ -1093,7 +1092,7 @@ All the following examples are written in Javascript, therefore using the Javasc
 
 <p>The <code class="prettyprint">subscribe</code> method can be called with an extra argument, which is an object containing a set of options to be passed to the subscription Room.</p>
 
-<p>We just introduced a new concept here, the Room. A <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">Room</a> is a class representing a single subscription and its constructor is called internally by the <code class="prettyprint">subscribe</code> method. The &ldquo;options&rdquo; are passed directly to the <a href="http://kuzzleio.github.io/sdk-documentation/#constructors72">Room Constructor</a>.</p>
+<p>We just introduced a new concept here, the Room. A <a href="/sdk-reference/#room">Room</a> is a class representing a single subscription and its constructor is called internally by the <code class="prettyprint">subscribe</code> method. The &ldquo;options&rdquo; are passed directly to the <a href="/sdk-reference/#constructors82">Room Constructor</a>.</p>
 
 <p>The option we are looking for is <code class="prettyprint">subscribeToSelf</code>, which is set to <code class="prettyprint">true</code> by default.</p>
 <pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">kuzzle</span>
@@ -1103,7 +1102,7 @@ All the following examples are written in Javascript, therefore using the Javasc
         <span class="na">regexp</span><span class="p">:</span> <span class="p">{</span>
           <span class="na">label</span><span class="p">:</span> <span class="s1">'.*URGENT.*'</span>
         <span class="p">}</span>
-      <span class="p">},</span> 
+      <span class="p">},</span>
       <span class="p">{</span> <span class="c1">// The Options object</span>
         <span class="na">subscribeToSelf</span><span class="p">:</span> <span class="kc">false</span>
       <span class="p">},</span>
@@ -1117,7 +1116,7 @@ All the following examples are written in Javascript, therefore using the Javasc
 
 <p>In the code right above, we added the extra &ldquo;options&rdquo; object as the second argument to avoid subscribing Tom to his own events.</p>
 
-<p>You may have noticed that, on the very first line, we stored the return value of the <code class="prettyprint">subscribe</code> method in a variable. Guess what type is its value? <a href="http://kuzzleio.github.io/sdk-documentation/#kuzzleroom">Room</a>.</p>
+<p>You may have noticed that, on the very first line, we stored the return value of the <code class="prettyprint">subscribe</code> method in a variable. Guess what type is its value? <a href="/sdk-reference/#room">Room</a>.</p>
 
             <h2 id="security">Security</h2>
 
@@ -1191,7 +1190,7 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 </ul>
 
 <p>You can find a <strong>comprehensive summary of all the available controllers</strong> and actions by sending a <code class="prettyprint">GET</code> request to the root endpoint of the Kuzzle API via the HTTP protocol:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -XGET http://localhost:7511/<span class="se">\?</span>pretty<span class="se">\=</span><span class="nb">true</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -XGET http://localhost:7512/<span class="se">\?</span>pretty<span class="se">\=</span><span class="nb">true</span>
 </code></pre>
 
 <p>Take a look at the example below:</p>
@@ -1504,10 +1503,6 @@ If you are running Kuzzle in a Docker container, you will have to [enter the Kuz
 
 <p>Kuzzle relies on the Redis service to store some frequently accessed internal data. If you need to restart Kuzzle with a fresh cache, this command can come in hand.</p>
 
-<h3 id="plugins">plugins</h3>
-
-<p>Please refer to the <a href="#managing-plugins-using-the-cli">dedicated plugin CLI documentation</a>.</p>
-
 <h3 id="reset">reset</h3>
 <pre class="highlight plaintext"><code>$ ./bin/kuzzle reset --help
 
@@ -1620,18 +1615,21 @@ Kuzzle ships with a Protocol Plugin already bundled in its Community Edition, th
 
 <p>This example is a very dummy one. We are going to install the <strong>Hello World Controller Plugin</strong>, which opens a new API endpoint that simply&hellip; Greets the client! Not very useful, except for the sake of this example.</p>
 
-<p>In Kuzzle, you can use the CLI to manage your Plugins. The <code class="prettyprint">plugins --install</code> command enables you to install a Plugin from a Git repository, an NPM package or a local path on your machine.</p>
+<p>To install a Plugin, you just need to make it accessible within the <code class="prettyprint">plugins/enabled</code> directory (relative to the path of the Kuzzle installation directory). A common practice is to copy the Plugin code in <code class="prettyprint">plugins/available</code> and create a symbolic link in <code class="prettyprint">plugins/enabled</code> pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
 
 <aside class="notice">
-If you are running Kuzzle in a Docker container, you will need to enter the container to use the CLI.
+If you are running Kuzzle in a Docker container, you will need to enter the container to access the installation directory.
 </aside>
 
 <p>Go to the Kuzzle installation directory and type:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>bin/kuzzle plugins --install --url https://github.com/kuzzleio/kuzzle-plugin-helloworld.git
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd </span>plugins/available
+<span class="gp">$ </span>git clone https://github.com/kuzzleio/kuzzle-plugin-helloworld.git
+<span class="gp">$ </span><span class="nb">cd</span> ../enabled
+<span class="gp">$ </span>ln -s ../available/kuzzle-plugin-helloworld .
 <span class="gp">$ </span>pm2 restart KuzzleServer
 </code></pre>
 
-<p>Once Kuzzle has restarted (that&rsquo;s what the second command is for) you can check the server information at <code class="prettyprint">http://localhost:7511/?pretty=true</code> for the new <code class="prettyprint">hello</code> endpoint:</p>
+<p>Once Kuzzle has restarted (that&rsquo;s what the last command is for) you can check the server information at <code class="prettyprint">http://localhost:7512/?pretty=true</code> for the new <code class="prettyprint">hello</code> endpoint:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="err">...</span><span class="w">
     </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1654,7 +1652,7 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 
 </span></code></pre>
 
-<p>Which means you can call the <code class="prettyprint">http://localhost:7511/kuzzle-plugin-helloworld/hello/</code> route and get the following response:</p>
+<p>Which means you can call the <code class="prettyprint">http://localhost:7512/kuzzle-plugin-helloworld/hello/</code> route and get the following response:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"66265614-e908-4a91-a492-135e40e64aa3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -1670,229 +1668,30 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 
 <p>To get a deeper insight on how Plugins work in Kuzzle, please refer to the <a href="/plugin-reference">Plugin Reference</a>.</p>
 
-<h3 id="managing-plugins-using-the-cli">Managing plugins using the CLI</h3>
+<h3 id="managing-plugins">Managing Plugins</h3>
 
-<p>Plugins can be managed using the Kuzzle command-line interface:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --help
+<p>As seen in the previous example, managing Plugins is really just a matter of moving files and symbolic links around.</p>
 
-  Usage: plugins [options] [name]
+<h4 id="installing-removing-enabling-and-disabling-plugins">Installing, removing, enabling and disabling Plugins</h4>
 
-  manage plugins
+<p>When starting, Kuzzle (both Core and Proxy) looks for Plugins in the <code class="prettyprint">plugins/enabled</code> directory. Valid Plugins are well-formed NPM modules (i.e. they have a <code class="prettyprint">package.json</code> at their root) or simple NodeJS requireables (i.e. they have at their root a valid <code class="prettyprint">index.js</code>).</p>
 
-  Options:
+<p>A common practice is to copy the Plugin code in <code class="prettyprint">plugins/available</code> and create a symbolic link in <code class="prettyprint">plugins/enabled</code> pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
 
-    -h, --help                      output usage information
-        --list                      list currently installed plugins
-        --install                   if plugin [name] is provided, install it from --version, --url or --path, otherwise, (re-)install all listed plugins
-        --remove                    remove plugin [name] from Kuzzle
-        --activate                  mark the plugin as "activated"
-        --deactivate                mark the plugin as "deactivated"
-        --importConfig &lt;file&gt;       import plugin [name] configuration from &lt;file&gt;
-        --get                       get plugin [name] configuration stored in Kuzzle
-        --set &lt;JSONObject&gt;          merge plugin [name] configuration with JSONObject
-        --unset &lt;property&gt;          unset property from the plugin configuration
-        --replace &lt;JSONObject&gt;      erase the plugin configuration and apply JSONObject instead
-    -v, --packageVersion &lt;version&gt;  plugin &lt;version&gt; to install (npm repository or git only)
-    -u, --url &lt;url&gt;                 install plugin from a git repository or a remote tarball
-    -p, --path &lt;path&gt;               install plugin from the file system
+<h4 id="configuring-plugins">Configuring Plugins</h4>
 
-</code></pre>
+<p>When initializing a Plugin, Kuzzle (both Core and Proxy) calls its <code class="prettyprint">init(customConfig, context)</code> method, passing the <a href="/plugin-reference/#the-plugin-context">context</a> and the custom configuration. Custom configuration parameters are specified for each plugin in the <code class="prettyprint">plugins</code> object of the <a href="#configuring-kuzzle">Kuzzle configuration file</a>.</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"kuzzle-plugin-foobar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"option_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"option_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<aside class="warning">Restarting Kuzzle is required to apply any change made to plugins using the command-line interface</aside>
-
-<h4 id="list-installed-plugins">List installed plugins</h4>
-
-<aside class="note">Installed plugins are copied into the node_modules directory of a Kuzzle server instance, even if installed from a directory path</aside>
-
-<p>You can get an overview of installed plugins and their activation status using the <code class="prettyprint">--list</code> option:</p>
-<pre class="highlight plaintext"><code>./bin/kuzzle plugins --list
-{ 'kuzzle-plugin-logger':
-   { version: '2.0.4',
-     activated: true,
-     config:
-      { services:
-         { file:
-            { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-              addDate: true },
-           stdout: { level: 'info' } } } },
-  'kuzzle-plugin-auth-passport-local':
-   { version: '2.0.4',
-     activated: true,
-     config: { secret: 'changeme', algorithm: 'sha1', digest: 'hex' } } }
-</code></pre>
-
-<h4 id="install-a-plugin">Install a plugin</h4>
-
-<p>Kuzzle CLI supports most <a href="https://docs.npmjs.com/cli/install">npm installation methodes</a>.</p>
-
-<h5 id="from-npm-repositories">from npm repositories</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion x.y.z] name
-</code></pre>
-
-<p>If <code class="prettyprint">--packageVersion</code> is not provided, the <code class="prettyprint">latest</code> version will be installed.</p>
-
-<h5 id="from-a-git-repository">from a git repository</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install <span class="o">[</span>--packageVersion commit-ish] --url https://git.repository.url/project.git
-</code></pre>
-
-<p>The version can be anything related to commits: branch, tag, commit sha1.</p>
-
-<p>If no version is provided, the <code class="prettyprint">master</code> branch is used.</p>
-
-<h5 id="from-a-remote-tarball">from a remote tarball</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --url http://remote.com/plugin.tar.gz
-</code></pre>
-
-<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
-
-<h5 id="from-a-local-tarball">from a local tarball</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --install --path /path/to/plugin.tar.gz
-</code></pre>
-
-<aside class="note">The tarball will be decompressed in the node_modules directory</aside>
-
-<h5 id="from-a-local-directory">from a local directory</h5>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plgins --install --path /path/to/plugin
-</code></pre>
-
-<aside class="note">The directory content will be copied in the node_modules directory</aside>
-
-<h4 id="view-plugins-configuration">View plugins configuration</h4>
-
-<p>To view a plugin configuration, use the <code class="prettyprint">--get</code> option.</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ npmVersion: '2.0.2',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-</code></pre>
-
-<h4 id="modify-a-plugin-configuration">Modify a plugin configuration</h4>
-
-<p>Plugin configurations are stored in the <code class="prettyprint">config</code> part of plugins properties.</p>
-
-<p>There are multiple ways of changing a plugin configuration:</p>
-
-<ul>
-<li>perform a partial update, using the <code class="prettyprint">--set</code> action. This allows adding or updating parts of the configuration</li>
-<li>replace the entire plugin configuration on the command-line, with the <code class="prettyprint">--replace</code> action</li>
-<li>replace the entire plugin configuration by loading a JSON file, with the <code class="prettyprint">--importConfig &lt;file&gt;</code> action</li>
-</ul>
-
-<p>Updating a plugin configuration:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } } } }
-$ ./bin/kuzzle plugins --set '{ "stdout": { "level": "debug"} }' kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } },
-     stdout: { level: 'debug' } } }
-</code></pre>
-
-<p>Replacing a plugin configuration on the command-line:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs: { error: { level: 'warn', filename: 'kuzzle.log' } },
-           addDate: true },
-        stdout: { level: 'info' } } } }
-$ ./bin/kuzzle plugins --replace '{"stdout": {"level": "debug", "addDate": true}}' kuzzle-plugin-logger
-
-{ version: '2.0.4',
-  activated: true,
-  config: { stdout: { level: 'debug', addDate: true } } }
-</code></pre>
-
-<p>Replacing a plugin configuration using a JSON file:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --importConfig foo.json kuzzle-plugin-logger
-[✔] Successfully imported configuration
-$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ npmVersion: '2.0.4', activated: true, config: { foo: 'bar' } }
-</code></pre>
-
-<h4 id="removing-a-plugin-configuration-property">Removing a plugin configuration property</h4>
-
-<p>You can remove a plugin configuration property by using the <code class="prettyprint">--unset</code> action:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --get kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: true,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-$ ./bin/kuzzle plugins --unset 'services' kuzzle-plugin-logger
-  { npmVersion: '2.0.4',
-    activated: true }
-</code></pre>
-
-<aside class="notice">NB: Only root properties can be unset</aside>
-
-<h4 id="uninstalling-a-plugin">Uninstalling a plugin</h4>
-
-<p>Plugins can be uninstalled using the <code class="prettyprint">--remove</code> option.</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>kuzzle plugins --remove kuzzle-plugin-socketio
-<span class="o">{</span> acknowledged: <span class="nb">true</span> <span class="o">}</span>
-</code></pre>
-
-<h4 id="activating-deactivating-a-plugin">Activating/Deactivating a plugin</h4>
-
-<p>By default, a plugin is activated when installed, meaning it will be loaded and used by Kuzzle on the next restart.</p>
-
-<p>You may want to activate or deactivate a plugin, without uninstalling it.</p>
-
-<p>To deactivate a plugin:</p>
-<pre class="highlight plaintext"><code>./bin/kuzzle plugins --deactivate kuzzle-plugin-logger
-{ version: '2.0.4',
-  activated: false,
-  config:
-   { services:
-      { file:
-         { outputs:
-            { error: { level: 'error', filename: 'kuzzle-error.log' },
-              warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-           addDate: true },
-        stdout: { level: 'info', addDate: true } } } }
-</code></pre>
-
-<p>To activate a plugin:</p>
-<pre class="highlight plaintext"><code>$ ./bin/kuzzle plugins --activate kuzzle-plugin-logger
-  { version: '2.0.4',
-    activated: true,
-    config:
-     { services:
-        { file:__
-           { outputs:
-              { error: { level: 'error', filename: 'kuzzle-error.log' },
-                warning: { level: 'warn', filename: 'kuzzle-warning.log' } },
-             addDate: true },
-          stdout: { level: 'info', addDate: true } } } }
-</code></pre>
+<p>Each Plugin is responsible of handling the custom configuration parameters and Kuzzle has no opinion on how to do it. Whether the custom configuration is merged with the defaults or not entirely depends on the implementation of the <code class="prettyprint">init</code> function.</p>
 
             <h1 id="kuzzle-in-depth">Kuzzle in depth</h1>
 
@@ -1948,7 +1747,7 @@ $ ./bin/kuzzle plugins --unset 'services' kuzzle-plugin-logger
 <p><img alt="read_scenario_http_details" src="images/request-scenarios/read-http/details.png" /></p>
 
 <ul>
-<li>The HTTP client asks for a document via a HTTP GET Request. For instance, to retrieve the document &lsquo;739c26bc-7a09-469a-803d-623c4045b0cb&rsquo; in the collection <code class="prettyprint">users</code>: <code class="prettyprint">GET http://kuzzle:7511/mainindex/users/739c26bc-7a09-469a-803d-623c4045b0cb</code>.</li>
+<li>The HTTP client asks for a document via a HTTP GET Request. For instance, to retrieve the document &lsquo;739c26bc-7a09-469a-803d-623c4045b0cb&rsquo; in the collection <code class="prettyprint">users</code>: <code class="prettyprint">GET http://kuzzle:7512/mainindex/users/739c26bc-7a09-469a-803d-623c4045b0cb</code>.</li>
 <li>The proxy forwards the Request through the HTTP Entry point to the Router, which handles it and forwards the formatted Request to the Funnel.</li>
 </ul>
 
@@ -2087,7 +1886,7 @@ $ ./bin/kuzzle plugins --unset 'services' kuzzle-plugin-logger
 
 <h4 id="writing-persistent-data">Writing persistent data</h4>
 
-<p>This subsection describes the process for <strong>persistent</strong> data, with an example using the &ldquo;<em>create</em>&rdquo; action (see also <a href="http://kuzzle.io/documentation/api-reference/#create">API Documentation</a>).</p>
+<p>This subsection describes the process for <strong>persistent</strong> data, with an example using the &ldquo;<em>create</em>&rdquo; action (see also <a href="/api-reference/#create48">API Documentation</a>).</p>
 
 <p><img alt="persistence_overview" src="images/request-scenarios/persistence/overview.png" /></p>
 
@@ -2231,7 +2030,7 @@ Kuzzle will get back to him with a corresponding Room ID and a Room Channel usin
 <li>A new content is published to the Notifier component. The <code class="prettyprint">_publish_</code> method can be triggered:
 
 <ul>
-<li>either directly by the Document Controller for non persistent data (using the <a href="http://kuzzle.io/documentation/api-reference/#publish">publish</a> action).</li>
+<li>either directly by the Document Controller for non persistent data (using the <a href="/api-reference/#publish">publish</a> action).</li>
 <li>or by the Plugins Manager when a &#39;document:create&rsquo; event is triggered, to notify users in real-time before the data are sent to the storage Engine.</li>
 </ul></li>
 <li>The Notifier calls the DSL component to test registered filters that match the content, and get related rooms.</li>

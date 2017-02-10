@@ -426,7 +426,7 @@ By defaut, the search endpoint will return the <strong>10</strong> first results
 The <code class="prettyprint">match_all</code> query returns all the documents in the collection, it can be useful with other queries in a <code class="prettyprint">bool</code> query for instance.</p>
 
 <h3 id="without-query-parameters">Without query parameters</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -520,7 +520,7 @@ The <code class="prettyprint">match_all</code> query returns all the documents i
 <h3 id="with-from-and-size-query-parameters">With <code class="prettyprint">from</code> and <code class="prettyprint">size</code> query parameters</h3>
 
 <p>To change this behaviour, 2 query parameters are available : <code class="prettyprint">from</code> and <code class="prettyprint">size</code>:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty&amp;from=3&amp;size=2"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty&amp;from=3&amp;size=2"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -581,7 +581,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-ids-query">The <code class="prettyprint">ids</code> query</h2>
 
 <p>Returns the documents with the matching <code class="prettyprint">id</code>.</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"ids"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="p">]</span><span class="w">
@@ -636,7 +636,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-query_string-query">The <code class="prettyprint">query_string</code> query</h2>
 
 <p>The <code class="prettyprint">query_string</code> query is a way to &ldquo;talk&rdquo; directly to the core engine of Elasticsearch. If you are used to use Solr, it will look familiar.</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"query_string"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_id:1 OR _id:2"</span><span class="w">
@@ -693,7 +693,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <p>The <code class="prettyprint">match</code> query is the one you want to use to perform a full text search. The query you use (here: &ldquo;hate cake&rdquo;) is analyzed (lowercased, tokenized &hellip;) and then is applied against the analyzed version of the field (which is also lowercased, tokenized&hellip;). As a result, the choice of the analyzer applied to a field is very important. To know more about analyzers, We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-analyzers.html">Elasticsearch documentation</a>.</p>
 
 <p>It results in a set of documents where a score is applied.</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"hate cake"</span><span class="w">
@@ -746,7 +746,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </span></code></pre>
 
 <p>You can see that the second document does not contain cake at all but is still matching. This is because, by default, the <code class="prettyprint">match</code> query operator applies a <code class="prettyprint">or</code> operand to the provided searched terms. To return documents matching all tokens, you have to use the <code class="prettyprint">and</code> operator:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -791,7 +791,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-prefix-query">The <code class="prettyprint">prefix</code> query</h2>
 
 <p>The <code class="prettyprint">prefix</code> query matches all the documents where the given field has a value that begins with the given string. In the following example, we want to match all the documents where the value of field status begins with <code class="prettyprint">pub</code>:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"pub"</span><span class="w">
@@ -846,7 +846,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-range-query">The <code class="prettyprint">range</code> query</h2>
 
 <p>The <code class="prettyprint">range</code> query matches all the documents where the value of the given field is included within the specified range. In the following example, we want to match all the document where <code class="prettyprint">published_date</code> is included within the two specified dates:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"publish_date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -919,7 +919,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-term-query">The <code class="prettyprint">term</code> query</h2>
 
 <p>The <code class="prettyprint">term</code> query is used to find exact matches on the <em>indexed</em> value of a field. It should not be used on analyzed fields: the analyzed value that is indexed is a modified version of the input value. Analyzers are explain during the cookbook you can come back when it is clearer.</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"term"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
@@ -974,7 +974,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-terms-query">The <code class="prettyprint">terms</code> query</h2>
 
 <p>Behaves exactly like <code class="prettyprint">term</code>, but with multiple possible exact matches.</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"pending"</span><span class="p">,</span><span class="w"> </span><span class="s2">"archived"</span><span class="p">]</span><span class="w">
@@ -1043,7 +1043,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-exists-query">The <code class="prettyprint">exists</code> query</h2>
 
 <p>The <code class="prettyprint">exists</code> query matches the documents where a given field is present:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"exists"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"author"</span><span class="w">
@@ -1137,7 +1137,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="the-missing-query">The <code class="prettyprint">missing</code> query</h2>
 
 <p>The <code class="prettyprint">missing</code> query is deprecated. Elasticsearch recommends to use the <code class="prettyprint">exists</code> query in a <code class="prettyprint">must_not</code> occurence of a <code class="prettyprint">bool</code> compound query (and this will introduce you to the <code class="prettyprint">bool</code> query :-) ).</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must_not"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1170,7 +1170,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h2 id="sorting-the-result-set">Sorting the result set</h2>
 
 <p>If you want to sort your result set in a different order than the <code class="prettyprint">_score</code> default sort or compound the <code class="prettyprint">_score</code> sort with other fields, you can specify the sort order alongside to the query:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -1282,7 +1282,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </ul>
 
 <p>This is what it looks like when we use every occurence types:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1363,7 +1363,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <p>Each example is equivalent from one to the others. As you will see there are different ways to achieve the same result using the <code class="prettyprint">filter</code> occurence type.</p>
 
 <h3 id="using-a-logical-and-operator-between-fields">Using a logical <code class="prettyprint">AND</code> operator between fields</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1375,7 +1375,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1433,7 +1433,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <p>You can notice that the score of both documents is <em>0</em>: this is because we only use the <code class="prettyprint">filter</code> occurence type of the <code class="prettyprint">bool</code> query.</p>
 
 <h3 id="using-a-logical-and-operator-between-terms">Using a logical <code class="prettyprint">AND</code> operator between terms</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1445,7 +1445,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1460,7 +1460,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1516,7 +1516,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </span></code></pre>
 
 <h3 id="using-a-logical-or-operator-between-fields">Using a logical <code class="prettyprint">OR</code> operator between fields</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1528,7 +1528,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1588,7 +1588,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </span></code></pre>
 
 <h3 id="using-a-logical-or-operator-between-terms">Using a logical <code class="prettyprint">OR</code> operator between terms</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1600,7 +1600,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1617,7 +1617,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1708,7 +1708,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h3 id="using-a-logical-not-operator">Using a logical <code class="prettyprint">NOT</code> operator</h3>
 
 <p>In this example we are using a <code class="prettyprint">bool</code> query in the <code class="prettyprint">filter</code> occurence type.</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1720,7 +1720,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1796,7 +1796,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <p>The <code class="prettyprint">must_not</code> occurrence type allows to specify a query that will excludes documents from the result set. It acts like a logical <code class="prettyprint">NOT</code>.</p>
 
 <h3 id="usage-of-must_not-with-one-query">Usage of <code class="prettyprint">must_not</code> with one query</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must_not"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1868,7 +1868,7 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 <h3 id="usage-of-must_not-with-multiple-queries">Usage of <code class="prettyprint">must_not</code> with multiple queries</h3>
 
 <p>If you need to use more than one query to use in the <code class="prettyprint">must_not</code> occurence type, you can replace the object query by an array of query objects. It will evict all documents where the field <code class="prettyprint">status</code> is equal to &ldquo;pending&rdquo; or the field <code class="prettyprint">tags</code> contains &ldquo;pet&rdquo;:</p>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must_not"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1931,7 +1931,7 @@ Let&rsquo;s take a look at all the scores we get by replacing  the <code class="
 The <code class="prettyprint">AND</code> examples give the same score for all documents. It is due to the little number of documents we use, their size and the small size of the corpus.</p>
 
 <h3 id="using-a-logical-and-operator-between-fields">Using a logical <code class="prettyprint">AND</code> operator between fields</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1943,7 +1943,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2000,7 +2000,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
 </span></code></pre>
 
 <h3 id="using-a-logical-and-operator-between-terms">Using a logical <code class="prettyprint">AND</code> operator between terms</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2012,7 +2012,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2027,7 +2027,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2084,7 +2084,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
 </span></code></pre>
 
 <h3 id="using-a-logical-or-operator-between-fields">Using a logical <code class="prettyprint">OR</code> operator between fields</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2096,7 +2096,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2157,7 +2157,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
 </span></code></pre>
 
 <h3 id="using-a-logical-or-operator-between-terms">Using a logical <code class="prettyprint">OR</code> operator between terms</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2169,7 +2169,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2186,7 +2186,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2272,7 +2272,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
 </span></code></pre>
 
 <h3 id="using-a-logical-not-operator">Using a logical <code class="prettyprint">NOT</code> operator</h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2284,7 +2284,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2363,7 +2363,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
 <p>The <code class="prettyprint">should</code> occurrence type is different from the 3 others as it allows to specify queries that &ldquo;SHOULD&rdquo; match the documents. If used without <code class="prettyprint">filter</code> or <code class="prettyprint">must</code> occurence types, at least one query will have to match the document. It could be seen as a logical <code class="prettyprint">OR</code> operator. Its behaviour can be modified by the <code class="prettyprint">minimum_should_match</code>. It allows to specify a number or a percentage of queries that have to match in order to select the document. You can see all available value formats of <code class="prettyprint">minimum_should_match</code> in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html">Elasticsearch documentation</a>.</p>
 
 <h3 id="usage-of-minimum_should_match">Usage of <code class="prettyprint">minimum_should_match</code></h3>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"should"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2433,7 +2433,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"should"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
