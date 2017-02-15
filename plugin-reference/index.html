@@ -145,40 +145,17 @@
 
 <p>Each Plugin is responsible of handling the custom configuration parameters and Kuzzle has no opinion on how to do it. Whether the custom configuration is merged with the defaults or not entirely depends on the implementation of the <code class="prettyprint">init</code> function.</p>
 
-<p>Within custom configuration, there are a few reserved words used by Kuzzle to configure how a plugin is loaded:</p>
+<p>Within the custom configuration, the <code class="prettyprint">threads</code> attribute is reserved and it is used to parallelize the execution of the plugin.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"kuzzle-plugin-foobar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"threads"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"privileged"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="nt">"threads"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Where:</p>
-
-<table><thead>
-<tr>
-<th>Keyword</th>
-<th>Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">threads</code></td>
-<td><code class="prettyprint">unsigned integer</code></td>
-<td><code class="prettyprint">0</code></td>
-<td>If &gt; 0, the plugin will be treated as a worker plugin (see below)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">privileged</code></td>
-<td><code class="prettyprint">boolean</code></td>
-<td><code class="prettyprint">false</code></td>
-<td>If <code class="prettyprint">true</code>, the plugin is loaded with privileged access to the running Kuzzle instance (see Plugin Context below)<br/>Ignored if <code class="prettyprint">threads</code> is greater than <code class="prettyprint">0</code></td>
-</tr>
-</tbody></table>
+<p>If <code class="prettyprint">threads</code> is greater than 0, the plugin will be executed on as many processes as indicated by the value.</p>
 
 <h3 id="plugin-init-function">Plugin init function</h3>
 
