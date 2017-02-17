@@ -2137,6 +2137,34 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 </tr>
 </tbody></table>
 
+<h2 id="request">request</h2>
+
+<p>Global events triggered on requests execution.</p>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">request:onAuthorized</code></td>
+<td>Triggered when a request passed authorization checks and is ready to be processed. Triggered before any <code class="prettyprint">&lt;controller&gt;:before&lt;Action&gt;</code> event</td>
+<td>Type: Request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">request:onError</code></td>
+<td>Triggered when a request execution fails. Triggered after any <code class="prettyprint">&lt;controller&gt;:after&lt;Action&gt;</code> event</td>
+<td>Type: Request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">request:onSuccess</code></td>
+<td>Triggered when a request execution succeeds. Triggered after any <code class="prettyprint">&lt;controller&gt;:after&lt;Action&gt;</code> event</td>
+<td>Type: Request</td>
+</tr>
+</tbody></table>
+
 <h2 id="room">room</h2>
 
 <p>Events triggered on subscription rooms activity.</p>
