@@ -1118,11 +1118,16 @@ This API route does not require to be logged in.</p>
 
 <section class="http"></section>
 <pre class="highlight literate_coffeescript"><code>{
-  // authentication strategy identifier (optionnal : kuzzle will use "local" strategy if not set)
+  // authentication strategy identifier (optional : kuzzle will use the "local" strategy if not set)
   "strategy": "<span class="nt">&lt;passportjs</span><span class="na">_strategy</span><span class="nt">&gt;</span>",
 
-  // jwt token expiration time (optional - kuzzle will use server default value if not set)
-  // expressed in seconds or a string describing a time span. Eg: 60, "2 days", "10h", "7d", "1y"
+  // JWT expiration delay (optional - kuzzle will use server default value if not set)
+  //   - if this option is a raw number (not enclosed between quotes), then
+  //     it represents the expiration delay in milliseconds
+  //   - if this option is a string, then its content is parsed by the "ms" library
+  //     For instance: "6d" (6 days), "10h" (10 hours), ...
+  //     (see https://www.npmjs.com/package/ms for the complete list of accepted
+  //      formats)
   "expiresIn": "<span class="nt">&lt;expiresIn&gt;</span>",
 
   // set of parameters depending of the chosen strategy. Example for "local" strategy:
@@ -1143,11 +1148,16 @@ This API route does not require to be logged in.</p>
   "action": "login",
 
   "body": {
-    <span class="o">//</span> <span class="nx">authentication</span> <span class="nx">strategy</span> <span class="nx">identifier</span> <span class="p">(</span><span class="nx">optional</span> <span class="o">-</span> <span class="nx">kuzzle</span> <span class="nx">will</span> <span class="nx">use</span> <span class="s">"local"</span> <span class="nx">strategy</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">set</span><span class="p">)</span>
+    <span class="o">//</span> <span class="nx">authentication</span> <span class="nx">strategy</span> <span class="nx">identifier</span> <span class="p">(</span><span class="nx">optional</span> <span class="o">-</span> <span class="nx">kuzzle</span> <span class="nx">will</span> <span class="nx">use</span> <span class="nx">the</span> <span class="s">"local"</span> <span class="nx">strategy</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">set</span><span class="p">)</span>
     <span class="s">"strategy"</span><span class="o">:</span> <span class="s">"&lt;passportjs_strategy&gt;"</span><span class="p">,</span>
 
-    <span class="o">//</span> <span class="nx">jwt</span> <span class="nx">token</span> <span class="nx">expiration</span> <span class="nx">time</span> <span class="p">(</span><span class="nx">optional</span> <span class="o">-</span> <span class="nx">kuzzle</span> <span class="nx">will</span> <span class="nx">use</span> <span class="nx">server</span> <span class="nx">default</span> <span class="nx">value</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">set</span><span class="p">)</span>
-    <span class="o">//</span> <span class="nx">expressed</span> <span class="k">in</span> <span class="nx">seconds</span> <span class="o">or</span> <span class="nx">a</span> <span class="nx">string</span> <span class="nx">describing</span> <span class="nx">a</span> <span class="nx">time</span> <span class="nx">span</span><span class="p">.</span> <span class="na">Eg</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s">"2 days"</span><span class="p">,</span> <span class="s">"10h"</span><span class="p">,</span> <span class="s">"7d"</span><span class="p">,</span> <span class="s">"1y"</span>
+    <span class="o">//</span> <span class="nx">JWT</span> <span class="nx">expiration</span> <span class="nx">delay</span> <span class="p">(</span><span class="nx">optional</span> <span class="o">-</span> <span class="nx">kuzzle</span> <span class="nx">will</span> <span class="nx">use</span> <span class="nx">server</span> <span class="nx">default</span> <span class="nx">value</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">set</span><span class="p">)</span>
+    <span class="o">//</span>   <span class="o">-</span> <span class="k">if</span> <span class="k">this</span> <span class="nx">option</span> <span class="o">is</span> <span class="nx">a</span> <span class="nx">raw</span> <span class="nx">number</span> <span class="p">(</span><span class="o">not</span> <span class="nx">enclosed</span> <span class="nx">between</span> <span class="nx">quotes</span><span class="p">),</span> <span class="k">then</span>
+    <span class="o">//</span>     <span class="nx">it</span> <span class="nx">represents</span> <span class="nx">the</span> <span class="nx">expiration</span> <span class="nx">delay</span> <span class="k">in</span> <span class="nx">milliseconds</span>
+    <span class="o">//</span>   <span class="o">-</span> <span class="k">if</span> <span class="k">this</span> <span class="nx">option</span> <span class="o">is</span> <span class="nx">a</span> <span class="nx">string</span><span class="p">,</span> <span class="k">then</span> <span class="nx">its</span> <span class="nx">content</span> <span class="o">is</span> <span class="nx">parsed</span> <span class="k">by</span> <span class="nx">the</span> <span class="s">"ms"</span> <span class="nx">library</span>
+    <span class="o">//</span>     <span class="nx">For</span> <span class="na">instance</span><span class="o">:</span> <span class="s">"6d"</span> <span class="p">(</span><span class="mi">6</span> <span class="nx">days</span><span class="p">),</span> <span class="s">"10h"</span> <span class="p">(</span><span class="mi">10</span> <span class="nx">hours</span><span class="p">),</span> <span class="p">...</span>
+    <span class="o">/</span><span class="sr">/     (see https:/</span><span class="o">/</span><span class="nx">www</span><span class="p">.</span><span class="na">npmjs</span><span class="p">.</span><span class="na">com</span><span class="o">/</span><span class="nx">package</span><span class="o">/</span><span class="nx">ms</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">complete</span> <span class="nx">list</span> <span class="k">of</span> <span class="nx">accepted</span>
+    <span class="o">//</span>      <span class="nx">formats</span><span class="p">)</span>
     <span class="s">"expiresIn"</span><span class="o">:</span> <span class="s">"&lt;expiresIn&gt;"</span><span class="p">,</span>
 
     <span class="o">//</span> <span class="nx">set</span> <span class="k">of</span> <span class="nx">parameters</span> <span class="nx">depending</span> <span class="k">of</span> <span class="nx">the</span> <span class="nx">chosen</span> <span class="nx">strategy</span><span class="p">.</span> <span class="na">Example</span> <span class="k">for</span> <span class="s">"local"</span> <span class="na">strategy</span><span class="o">:</span>
@@ -2503,7 +2513,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <pre class="highlight literate_coffeescript"><code>{
   // A set of filters or queries matching documents you are looking for.
   // Use "query" instead of "filter" if you want to perform a query instead.
-  "filter": {
+  "query": {
     <span class="p">...</span>
   }
 }
@@ -2522,10 +2532,9 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
   "controller": "document",
   "action": "deleteByQuery",
 
-  // A set of filters or queries matching documents you are looking for.
-  // Use "query" instead of "filter" if you want to perform a query instead.
+  // A set of queries matching documents you are looking for.
   "body": {
-    <span class="s">"filter"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s">"query"</span><span class="o">:</span> <span class="p">{</span>
       <span class="p">...</span>
     <span class="p">}</span>
   }
@@ -2552,7 +2561,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 
 <p>Deletes all the documents matching the given filter or query from Kuzzle&rsquo;s database.</p>
 
-<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
+<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.2/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
 
 <h2 id="get">get</h2>
 

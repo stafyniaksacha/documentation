@@ -113,6 +113,35 @@
         <div class="dark-box"></div>
         <div class="content">
           
+            <h3 id="managing-plugins">Managing Plugins</h3>
+
+<h4 id="installing-removing-enabling-and-disabling-plugins">Installing, removing, enabling and disabling plugins</h4>
+
+<p>When starting, Kuzzle (both Core and Proxy) looks for directories in the <code class="prettyprint">plugins/enabled</code> directory. Valid Plugins directories either contain a well-formed NPM module (i.e. they have a <code class="prettyprint">package.json</code> file in their root directory), or are a simple NodeJS requireables (i.e. they have a valid <code class="prettyprint">index.js</code> file in their root directory).</p>
+
+<p>In either cases, a plugin must meet a certain number of <a href="/plugin-reference/#plugin-creation-prerequisites">prerequisites</a> to allow Kuzzle to use it.</p>
+
+<p>TO install a plugin, the recommended practice is to copy the directory containing it in the <code class="prettyprint">plugins/available</code> folder and to create a symbolic link in the <code class="prettyprint">plugins/enabled</code> one, pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
+
+<p>Each plugin is a separate and independant entity, and Kuzzle will try to load it as is. If it has dependencies, you must ensure these are installed. For instance, by running the command <code class="prettyprint">npm install</code> from inside a plugin directory, if the plugin is a NPM module.</p>
+
+<h4 id="configuring-plugins">Configuring Plugins</h4>
+
+<p>When initializing a Plugin, Kuzzle (both Core and Proxy) calls its <code class="prettyprint">init(customConfig, context)</code> method, passing the <a href="/plugin-reference/#the-plugin-context">context</a> and the custom configuration.</p>
+
+<p>Custom configuration parameters are specified for each plugin in the <code class="prettyprint">plugins</code> object of the <a href="#configuring-kuzzle">Kuzzle configuration file</a>.</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"kuzzle-plugin-foobar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"option_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"option_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Each Plugin is responsible of handling its own custom configuration parameters and Kuzzle has no opinion on how to do it. Whether the custom configuration is merged with the defaults or not entirely depends on the implementation of the plugin&rsquo;s <code class="prettyprint">init</code> function.</p>
+
             <h1 id="plugin-creation-prerequisites">Plugin creation prerequisites</h1>
 
 <h3 id="writing-plugin-code">Writing plugin code</h3>
@@ -132,7 +161,9 @@
 
 <h3 id="custom-plugin-configuration">Custom Plugin configuration</h3>
 
-<p>When initializing a Plugin, Kuzzle calls its <code class="prettyprint">init(customConfig, context)</code> method, passing the <a href="/plugin-reference/#the-plugin-context">context</a> and the custom configuration. Custom configuration parameters are specified for each plugin in the <code class="prettyprint">plugins</code> object of the <a href="#configuring-kuzzle">Kuzzle configuration file</a>.</p>
+<p>When initializing a Plugin, Kuzzle calls its <code class="prettyprint">init(customConfig, context)</code> method, passing the <a href="/plugin-reference/#the-plugin-context">context</a> and the plugin&rsquo;s custom configuration.</p>
+
+<p>Custom configuration parameters are specified for each plugin in the <code class="prettyprint">plugins</code> object of the <a href="#configuring-kuzzle">Kuzzle configuration file</a>.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"kuzzle-plugin-foobar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -145,12 +176,13 @@
 
 <p>Each Plugin is responsible of handling the custom configuration parameters and Kuzzle has no opinion on how to do it. Whether the custom configuration is merged with the defaults or not entirely depends on the implementation of the <code class="prettyprint">init</code> function.</p>
 
-<p>Within custom configuration, there are a few reserved words used by Kuzzle to configure how a plugin is loaded:</p>
+<p>Within a plugin&rsquo;s custom configuration, there are a few reserved words used by Kuzzle to configure how a plugin is loaded:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"kuzzle-plugin-foobar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"threads"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"privileged"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="nt">"killTimeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">6000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"maxMemoryRestart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200M"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"threads"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -167,16 +199,22 @@
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">killTimeout</code></td>
+<td><code class="prettyprint">unsigned integer</code></td>
+<td><code class="prettyprint">6000</code></td>
+<td>(if <code class="prettyprint">threads</code> &gt; 0) Time (in milliseconds) to wait for a plugin to shut down before killing it</td>
+</tr>
+<tr>
+<td><code class="prettyprint">maxMemoryRestart</code></td>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">1G</code></td>
+<td>(if <code class="prettyprint">threads</code> &gt; 0) Maximum memory usage of a worker plugin. If exceeded, the plugin is restarted. <br>Examples: <code class="prettyprint">10K</code> (10KB), <code class="prettyprint">200M</code> (200MB), <code class="prettyprint">3G</code> (3GB)</td>
+</tr>
+<tr>
 <td><code class="prettyprint">threads</code></td>
 <td><code class="prettyprint">unsigned integer</code></td>
 <td><code class="prettyprint">0</code></td>
 <td>If &gt; 0, the plugin will be treated as a worker plugin (see below)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">privileged</code></td>
-<td><code class="prettyprint">boolean</code></td>
-<td><code class="prettyprint">false</code></td>
-<td>If <code class="prettyprint">true</code>, the plugin is loaded with privileged access to the running Kuzzle instance (see Plugin Context below)<br/>Ignored if <code class="prettyprint">threads</code> is greater than <code class="prettyprint">0</code></td>
 </tr>
 </tbody></table>
 
@@ -806,8 +844,12 @@ Each plugin receives its own plugin context instance.</p>
 <td>Constructor for the Validation Type base constructor</td>
 </tr>
 <tr>
-<td><code class="prettyprint">errors.&lt;ErrorConstructor&gt;</code></td>
+<td><code class="prettyprint">context.errors.&lt;ErrorConstructor&gt;</code></td>
 <td>Kuzzle error constructors, built dynamically from available Kuzzle error objects at runtime</td>
+</tr>
+<tr>
+<td><code class="prettyprint">context.log.&lt;level&gt;(message)</code></td>
+<td>Provides methods to log messages depending on their priority level</td>
 </tr>
 </tbody></table>
 
@@ -1357,7 +1399,7 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 <tr>
 <td><code class="prettyprint">data</code></td>
 <td><code class="prettyprint">object</code></td>
-<td>Passed to <a href="https://github.com/kuzzleio/kuzzle-common-objects/blob/master/README.md#modelsrequestinput">RequestInput</a> constructor</td>
+<td>JSON object following the same standard than for non-HTTP <a href="http://docs.kuzzle.io/api-reference/#query-syntax">API calls</a><br>See the  <a href="https://github.com/kuzzleio/kuzzle-common-objects/blob/master/README.md#modelsrequestinput">RequestInput</a> constructor for more information</td>
 </tr>
 <tr>
 <td><code class="prettyprint">options</code></td>
@@ -1365,8 +1407,6 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 <td>Optional initialization parameters</td>
 </tr>
 </tbody></table>
-
-<p><code class="prettyprint">RequestContext</code> is usually obtained with <code class="prettyprint">context.accessors.router.newConnection</code>.  </p>
 
 <p>If a raw <code class="prettyprint">options</code> object is provided, it may contain:</p>
 
@@ -1772,9 +1812,86 @@ As Kuzzle supports the HTTP protocol natively, this object handles HTTP headers 
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">err</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">context</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">UnauthorizedError</span><span class="p">(</span><span class="s1">'error message'</span><span class="p">);</span>
 </code></pre>
 
+<h2 id="log">Log</h2>
+
+<p>These methods can be used to send messages to Kuzzle&rsquo;s log system.<br>
+Different log level are provided, and lower priority levels may be ignored depending on how the Kuzzle server is configured.</p>
+
+<p>The lower a log level is, the higher its priority.</p>
+
+<h3 id="debug"><code class="prettyprint">debug</code></h3>
+
+<p>Priority: 4</p>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s1">'message'</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="error"><code class="prettyprint">error</code></h3>
+
+<p>Priority: 0 (highest priority)</p>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'error message'</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="info"><code class="prettyprint">info</code></h3>
+
+<p>Priority: 2</p>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'message'</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="silly"><code class="prettyprint">silly</code></h3>
+
+<p>Priority: 5 (lowest priority)</p>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">silly</span><span class="p">(</span><span class="s1">'message'</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="verbose"><code class="prettyprint">verbose</code></h3>
+
+<p>Priority: 3</p>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">verbose</span><span class="p">(</span><span class="s1">'message'</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="warn"><code class="prettyprint">warn</code></h3>
+
+<p>Priority: 1</p>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">'message'</span><span class="p">);</span>
+</code></pre>
+
             <h1 id="kuzzle-events-list">Kuzzle events list</h1>
 
-<p>Every time Kuzzle receives a request coming from a client, it routes it towards a Controller and an Action, that process it and send the results back to the client. Each step of this life-cycle triggers an event. Below are the different types of events that Plugins can listen to.</p>
+<p>Every time Kuzzle receives a request coming from a client, it routes it towards a Controller and an Action, which processes it and sends the result back to the client. Each step of this life-cycle triggers an event. Below are the different types of events that Plugins can listen to.</p>
+
+<h2 id="plugins-events">[Plugins events]</h2>
+
+<p><a href="/plugin-reference/#adding-a-controller-route">Plugins</a> may add new controllers and actions to Kuzzle&rsquo;s API. These do not differ from native controllers/actions and these, too, trigger events that can be listened by plugins.</p>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">&lt;pluginName&gt;/&lt;controller&gt;:after&lt;Action&gt;</code></td>
+<td>Triggered after the action <code class="prettyprint">action</code> of the controller <code class="prettyprint">controller</code> added by the plugin <code class="prettyprint">pluginName</code> has completed</td>
+<td>Type: Request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">&lt;pluginName&gt;/&lt;controller&gt;:before&lt;Action&gt;</code></td>
+<td>Triggered before the action <code class="prettyprint">action</code> of the controller <code class="prettyprint">controller</code> added by the plugin <code class="prettyprint">pluginName</code> has started</td>
+<td>Type: Request</td>
+</tr>
+</tbody></table>
+
+<p><strong>Example:</strong></p>
+
+<p>The plugin <code class="prettyprint">foo</code> adds a controller named <code class="prettyprint">fooController</code>, containing an action named <code class="prettyprint">fooAction</code>.</p>
+
+<p>When an API request invokes this new API route, Kuzzle will automatically trigger the following events:</p>
+
+<ul>
+<li><code class="prettyprint">foo/fooController:beforeFooAction</code> (before the request starts)</li>
+<li><code class="prettyprint">foo/fooController:afterFooAction</code> (after the request completes)</li>
+</ul>
 
 <h2 id="auth">auth</h2>
 

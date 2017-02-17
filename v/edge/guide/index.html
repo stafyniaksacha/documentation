@@ -384,7 +384,7 @@ For the time being, Kuzzle supports the following protocols:</p>
 
 <p>To persist this changes add this line to your /etc/sysctl.conf
 <code class="prettyprint">
-m.max_map_count=262144
+vm.max_map_count=262144
 </code></p>
 
 <aside class="notice">
@@ -401,9 +401,22 @@ The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <
 
 <p>Kuzzle will respond you with a list of the existing routes.</p>
 
-<p>Docker-compose will get the missing images for you on the first run, but it will not keep them up to date. To fetch the latest versions of all the images that compose the Kuzzle stack, you can use the following command:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>docker-compose -f &lt;docker-compose-file.yml&gt; pull
-</code></pre>
+<h5 id="useful-commands-list">Useful commands list</h5>
+
+<ul>
+<li>Updating docker images used by Kuzzle:<br>
+<code class="prettyprint">docker-compose -f &lt;docker-compose-file.yml&gt; pull</code></li>
+<li>Showing Kuzzle core or Kuzzle proxy logs:<br>
+<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 logs</code></li>
+<li>Restarting Kuzzle core or Kuzzle proxy:<br>
+<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 restart all</code></li>
+<li>Stopping Kuzzle core or Kuzzle proxy:<br>
+<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 stop all</code></li>
+<li>Starting Kuzzle core or Kuzzle proxy:<br>
+<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 start all</code></li>
+<li>Accessing Kuzzle CLI:<br>
+<code class="prettyprint">docker exec -ti &lt;docker core image name&gt; bin/kuzzle -h</code></li>
+</ul>
 
 <h3 id="manually-on-linux">Manually (on Linux)</h3>
 
@@ -475,8 +488,7 @@ By default, Kuzzle expects all the components to be running on localhost. You ca
      script: </span><span class="k">${</span><span class="nv">KUZZLE_CORE_INSTALL_DIR</span><span class="k">}</span><span class="s2">/bin/kuzzle
      args: start
      env:
-       kuzzle_server__http__port: 7510
-       kuzzle_services__proxyBroker__host: localhost
+       NODE_ENV: production
   "</span> &gt; ~/kuzzle/pm2.conf.yml
 </code></pre>
 
@@ -500,6 +512,19 @@ Socket IO and Websocket channels can be reached over the HTTP server, on port 75
 <p>If you are running some of the service(s) externally, you can configure their host and port using some environment variables and/or a <code class="prettyprint">.kuzzlerc</code> file.</p>
 
 <p>Please refer to <a href="#configuration">Kuzzle configuration section</a> for more information.</p>
+
+<h5 id="useful-commands-list">Useful commands list</h5>
+
+<ul>
+<li>Showing Kuzzle logs:<br>
+<code class="prettyprint">pm2 logs</code></li>
+<li>Starting, restarting or stopping Kuzzle core :<br>
+<code class="prettyprint">pm2 &lt;start|stop|restart&gt; KuzzleServer</code></li>
+<li>Starting, restarting or stopping Kuzzle core :<br>
+<code class="prettyprint">pm2 &lt;start|stop|restart&gt; KuzzleProxy</code></li>
+<li>Accessing Kuzzle CLI:<br>
+<code class="prettyprint">~/kuzzle/bin/kuzzle -h</code></li>
+</ul>
 
 <h2 id="running-kuzzle-backoffice">Running Kuzzle Backoffice</h2>
 
@@ -1566,7 +1591,7 @@ That&rsquo;s quite legitimate: some logic is sensible and cannot live on the cli
 
 <p>For example, imagine your application needs to leverage a <strong>third-party payment system</strong>, such as Braintree. You don&rsquo;t want to put the client in charge of bearing API keys and tokens. Also, you will probably want to <strong>keep track of orders</strong> and payments, once the transactions successfully end. This should be also a concern of your backend. Also, you are not likely to allow your customers to purchase more items than available, right? At some point, <strong>your backend has to validate the transaction</strong> by comparing the ordered quantity with the available stocks.</p>
 
-<p>To solve this problem, Kuzzle ships with a powerful <strong><a href="/plugin-reference">Plugin System</a></strong> that enables you to add features to your server in a modular fashion. With Kuzzle Plugins you can</p>
+<p>To make sure Kuzzle fits whatever needs you might have, it includes a powerful <strong><a href="/plugin-reference">Plugin System</a></strong> allowing you to add features to your server in a modular fashion. With Kuzzle Plugins you can:</p>
 
 <ul>
 <li>use an existing plugin from the Kuzzle Plugins ecosystem (such as the <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth">OAuth2 Authentication strategy</a> or the <a href="https://github.com/kuzzleio/kuzzle-plugin-mqtt">MQTT Protocol</a>);</li>
@@ -1579,28 +1604,28 @@ That&rsquo;s quite legitimate: some logic is sensible and cannot live on the cli
 
 <h4 id="core-plugins">Core Plugins</h4>
 
-<p>They are the most common type of plugins and are meant to extend the Kuzzle Core features. They are plugged on the Kuzzle Core at startup and execute on its same thread. A Core Plugin can extend Kuzzle with the following features:</p>
+<p>They are the most common type of plugins and are meant to extend the Kuzzle Core features. They are plugged on the Kuzzle Core at startup and they share its execution thread. A Core Plugin can extend Kuzzle with the following features:</p>
 
-<p><a href="/plugin-reference#listener-plugins">Listen asynchronously</a>, and perform operations that depend on data-related events. The chunk of data involved with the event is passed to the triggered callback, but the Kuzzle Core continues its execution without waiting for the callback to return, nor receiving the return value of the callback.</p>
+<p><a href="/plugin-reference#listener-plugins">Listen asynchronously</a>, and perform operations that depend on data-related events. The chunk of data involved with the event is passed to the triggered callback, but the Kuzzle Core continues its execution without waiting for the callback to return.</p>
 
 <p><em>Example - &ldquo;Write a log to a third-party log system every time a document is deleted&rdquo;</em>. The <a href="https://github.com/kuzzleio/kuzzle-plugin-logger">Logger Plugin</a>, shipped with Kuzzle, uses this feature to log all the data-related events.</p>
 
-<p><a href="/plugin-reference#pipe-plugins">Listen synchronously</a>, and perform operations that depend on data-related events. many synchronous listeners can be chained, forming a pipeline. The chunk of data involved with the event is passed to the plugin pipeline and can be modified. The Kuzzle Core waits for the pipeline to return and receives the returned value (which must be the processed chunk of data). The pipeline can even stop a request life-cycle, returning a standard Error to the Kuzzle Core.</p>
+<p><a href="/plugin-reference#pipe-plugins">Listen synchronously</a>, and perform operations that depend on data-related events. Multiple synchronous listeners can be chained, forming a pipeline. The chunk of data involved with the event is passed to one plugin to another in the pipeline, and it can be modified. The Kuzzle Core waits for the pipeline to return and receives then processes the potentially modified value. A plugin can even stop a request life-cycle, by returning a standard Error to the Kuzzle Core.</p>
 
-<p><em>Example - &ldquo;Compare the ordered quantity with the available stocks and return an error if ordered is greater than stocks&rdquo;</em>.</p>
+<p><em>Example - &ldquo;Compare the ordered quantity with the available stocks and return an error if the amount of ordered items exceeds the stocks&rdquo;</em>.</p>
 
 <p><a href="/plugin-reference#controllers">Add a controller route</a> to expose new actions to the API.</p>
 
 <p><em>Example - &ldquo;Expose a <code class="prettyprint">checkout</code> API endpoint that handles the Braintree payment process&rdquo;</em>.</p>
 
-<p><a href="/plugin-reference#authentication-plugin">Add an authentication strategy</a> the User authentication system.</p>
+<p><a href="/plugin-reference#authentication-plugin">Add an authentication strategy</a> to the User authentication system.</p>
 
 <p><em>Example - &ldquo;Enable Kuzzle to authenticate users via the OAuth strategy&rdquo;</em>
-  Kuzzle ships with an Authentication Plugin already bundled in its Community Edition, the <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-local">Local Strategy Plugin</a>.</p>
+  Kuzzle ships with an Authentication Plugin already bundled in its Community Edition, the <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-local">Local Strategy Plugin</a>. Thanks to PassportJS, more than 300 authentication strategies are readily available.</p>
 
 <h4 id="worker-plugins">Worker Plugins</h4>
 
-<p><a href="/plugin-reference#worker-plugins">Workers Plugins</a> are Core Plugins that run on a separate process. The only feature they can add is to <a href="/plugin-reference#listener-plugins">asynchronously listen to data-related events</a>. They are useful when performing costly operations as they have no impact on Kuzzle performances.</p>
+<p><a href="/plugin-reference#worker-plugins">Workers Plugins</a> are Core Plugins running on separate processes. The only feature they can add is to <a href="/plugin-reference#listener-plugins">asynchronously listen to data-related events</a>. They are useful when performing costly operations as they have no impact on Kuzzle performances.</p>
 
 <p><em>Example - &ldquo;Compute a complex data-mining operation and commit the result to a third-party Business-Intelligence platform every time a document is changed&rdquo;.</em></p>
 
@@ -1609,13 +1634,13 @@ That&rsquo;s quite legitimate: some logic is sensible and cannot live on the cli
 <p><a href="/plugin-reference#protocol-plugins">Protocol Plugins</a> extend Kuzzle networking capabilities by adding new network protocols.</p>
 
 <p><em>Example - &ldquo;Enable Kuzzle to interact with XMPP-oriented services&rdquo;</em>
-Kuzzle ships with a Protocol Plugin already bundled in its Community Edition, the <a href="https://github.com/kuzzleio/kuzzle-plugin-websocket">Websocket Plugin</a>.</p>
+Kuzzle ships with a Protocol Plugin already bundled in its Community Edition, the <a href="https://github.com/kuzzleio/kuzzle-plugin-mqtt">MQTT Plugin</a>.</p>
 
 <h3 id="examples">Examples</h3>
 
-<p>This example is a very dummy one. We are going to install the <strong>Hello World Controller Plugin</strong>, which opens a new API endpoint that simply&hellip; Greets the client! Not very useful, except for the sake of this example.</p>
+<p>This example is a simplistic one: we are going to install the <strong>Hello World Plugin</strong>, adding a new API endpoint that simply&hellip; greets the client! Not very useful, except for the sake of this example.</p>
 
-<p>To install a Plugin, you just need to make it accessible within the <code class="prettyprint">plugins/enabled</code> directory (relative to the path of the Kuzzle installation directory). A common practice is to copy the Plugin code in <code class="prettyprint">plugins/available</code> and create a symbolic link in <code class="prettyprint">plugins/enabled</code> pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
+<p>To install a Plugin, you just need to make it accessible within the <code class="prettyprint">plugins/enabled</code> directory (relative to the path of the Kuzzle installation directory). A common practice is to copy the Plugin code in the <code class="prettyprint">plugins/available</code> directory, and to create a symbolic link in <code class="prettyprint">plugins/enabled</code> pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
 
 <aside class="notice">
 If you are running Kuzzle in a Docker container, you will need to enter the container to access the installation directory.
@@ -1652,7 +1677,7 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 
 </span></code></pre>
 
-<p>Which means you can call the <code class="prettyprint">http://localhost:7512/kuzzle-plugin-helloworld/hello/</code> route and get the following response:</p>
+<p>Which means you can call the <code class="prettyprint">http://localhost:7512/_plugin/kuzzle-plugin-helloworld/hello/</code> route and get the following response:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"66265614-e908-4a91-a492-135e40e64aa3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -1670,28 +1695,7 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
 
 <h3 id="managing-plugins">Managing Plugins</h3>
 
-<p>As seen in the previous example, managing Plugins is really just a matter of moving files and symbolic links around.</p>
-
-<h4 id="installing-removing-enabling-and-disabling-plugins">Installing, removing, enabling and disabling Plugins</h4>
-
-<p>When starting, Kuzzle (both Core and Proxy) looks for Plugins in the <code class="prettyprint">plugins/enabled</code> directory. Valid Plugins are well-formed NPM modules (i.e. they have a <code class="prettyprint">package.json</code> at their root) or simple NodeJS requireables (i.e. they have at their root a valid <code class="prettyprint">index.js</code>).</p>
-
-<p>A common practice is to copy the Plugin code in <code class="prettyprint">plugins/available</code> and create a symbolic link in <code class="prettyprint">plugins/enabled</code> pointing to it. This way, enabling and disabling a plugin is just a matter of creating or deleting a symbolic link.</p>
-
-<h4 id="configuring-plugins">Configuring Plugins</h4>
-
-<p>When initializing a Plugin, Kuzzle (both Core and Proxy) calls its <code class="prettyprint">init(customConfig, context)</code> method, passing the <a href="/plugin-reference/#the-plugin-context">context</a> and the custom configuration. Custom configuration parameters are specified for each plugin in the <code class="prettyprint">plugins</code> object of the <a href="#configuring-kuzzle">Kuzzle configuration file</a>.</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"kuzzle-plugin-foobar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"option_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"option_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_value"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Each Plugin is responsible of handling the custom configuration parameters and Kuzzle has no opinion on how to do it. Whether the custom configuration is merged with the defaults or not entirely depends on the implementation of the <code class="prettyprint">init</code> function.</p>
+<p>To learn about how to manage or configure plugins, please check our [Plugin reference documentation].</p>
 
             <h1 id="kuzzle-in-depth">Kuzzle in depth</h1>
 

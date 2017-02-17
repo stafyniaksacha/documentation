@@ -537,43 +537,53 @@ This property must be set with a function returning an array of objects with the
 <table><thead>
 <tr>
 <th>Event Name</th>
+<th>Callback arguments</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">connected</code></td>
+<td><em>(none)</em></td>
 <td>Fired when the SDK has successfully connected to Kuzzle</td>
 </tr>
 <tr>
 <td><code class="prettyprint">disconnected</code></td>
+<td><em>(none)</em></td>
 <td>Fired when the current session has been unexpectedly disconnected</td>
 </tr>
 <tr>
 <td><code class="prettyprint">error</code></td>
+<td><code class="prettyprint">error</code> (object)</td>
 <td>Fired when the SDK has failed to connect to Kuzzle. Does not trigger offline mode.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">jwtTokenExpired</code></td>
-<td>Fired when Kuzzle rejected a request because the authentication token expired.<br/>Provides the request and its associated callback to its listeners</td>
+<td><em>(none)</em></td>
+<td>Fired when Kuzzle rejected a request because the authentication token expired</td>
 </tr>
 <tr>
 <td><code class="prettyprint">loginAttempt</code></td>
-<td>Fired when a login attempt completes, either with a success or a failure result.<br/>Provides a JSON object with the login status to its listeners (see the <code class="prettyprint">login</code> method documentation)</td>
+<td><code class="prettyprint">{ &quot;success&quot;: &lt;boolean&gt;, &quot;error&quot;: &quot;&lt;error message&gt;&quot; }</code></td>
+<td>Fired when a login attempt completes, either with a success or a failure result</td>
 </tr>
 <tr>
 <td><code class="prettyprint">offlineQueuePop</code></td>
-<td>Fired whenever a request is removed from the offline queue. <br/>Provides the removed request to its listeners</td>
+<td><code class="prettyprint">query</code> (object)</td>
+<td>Fired whenever a request is removed from the offline queue.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">offlineQueuePush</code></td>
-<td>Fired whenever a request is added to the offline queue.<br/>Provides to its listeners an object containing a <code class="prettyprint">query</code> property, describing the queued request, and an optional <code class="prettyprint">cb</code> property containing the corresponding callback</td>
+<td><code class="prettyprint">{ &quot;query&quot;: &lt;object&gt;, &quot;cb&quot;: &lt;function&gt; }</code></td>
+<td>Fired whenever a request is added to the offline queue</td>
 </tr>
 <tr>
 <td><code class="prettyprint">queryError</code></td>
+<td><code class="prettyprint">error</code> (object), <code class="prettyprint">query</code> (object)</td>
 <td>Fired whenever Kuzzle responds with an error</td>
 </tr>
 <tr>
 <td><code class="prettyprint">reconnected</code></td>
+<td><em>(none)</em></td>
 <td>Fired when the current session has reconnected to Kuzzle after a disconnection, and only if <code class="prettyprint">autoReconnect</code> is set to <code class="prettyprint">true</code></td>
 </tr>
 </tbody></table>
@@ -581,14 +591,14 @@ This property must be set with a function returning an array of objects with the
 <p><strong>Note:</strong> listeners are called in the order of their insertion.</p>
 
 <h2 id="addlistener">addListener</h2>
-<pre class="highlight javascript"><code>  <span class="kd">var</span> <span class="nx">listenerId</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="s1">'connected'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">room</span><span class="p">,</span> <span class="nx">subscription</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Actions to perform when receiving a 'subscribed' global event</span>
+<pre class="highlight javascript"><code>  <span class="kd">var</span> <span class="nx">listenerId</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="s1">'connected'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Actions to perform when receiving a 'connected' global event</span>
   <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">String</span> <span class="n">listenerId</span> <span class="o">=</span> <span class="n">kuzzle</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">connected</span><span class="o">,</span> <span class="k">new</span> <span class="n">EventListener</span><span class="o">()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="n">trigger</span><span class="o">(</span><span class="n">Object</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// Actions to perform when receiving a 'subscribed' global event</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">trigger</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// Actions to perform when receiving a 'connected' global event</span>
   <span class="o">}</span>
 <span class="o">});</span>
 </code></pre>
@@ -601,6 +611,8 @@ This property must be set with a function returning an array of objects with the
 </code></pre>
 
 <p>Adds a listener to a Kuzzle global event. When an event is fired, listeners are called in the order of their insertion.</p>
+
+<p>See the <a href="docs.kuzzle.io/sdk-reference/#event-handling">event handling</a> section for a full events list.</p>
 
 <aside class="notice">
 The ID returned by this function is required if you want to remove this listener later.
@@ -3311,7 +3323,7 @@ immediately after each write request, forcing the documents to be immediately vi
 <pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
 <span class="nx">kuzzle</span>
   <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">createDocument</span><span class="p">(</span><span class="s1">'foobar'</span><span class="p">,</span> <span class="p">{</span><span class="na">title</span><span class="p">:</span> <span class="s1">'foo'</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">},</span> <span class="p">{</span><span class="na">updateIfExist</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">createDocument</span><span class="p">(</span><span class="s1">'foobar'</span><span class="p">,</span> <span class="p">{</span><span class="na">title</span><span class="p">:</span> <span class="s1">'foo'</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">},</span> <span class="p">{</span><span class="na">ifExist</span><span class="p">:</span> <span class="s1">'replace'</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// callback called once the create action has been completed</span>
     <span class="c1">// =&gt; the result is a Document object</span>
   <span class="p">});</span>
@@ -3319,7 +3331,7 @@ immediately after each write request, forcing the documents to be immediately vi
 <span class="c1">// Using promises (NodeJS only)</span>
 <span class="nx">kuzzle</span>
  <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
- <span class="p">.</span><span class="nx">createDocumentPromise</span><span class="p">(</span><span class="s1">'foobar'</span><span class="p">,</span> <span class="p">{</span><span class="na">title</span><span class="p">:</span> <span class="s1">'foo'</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">},</span> <span class="p">{</span><span class="na">updateIfExist</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
+ <span class="p">.</span><span class="nx">createDocumentPromise</span><span class="p">(</span><span class="s1">'foobar'</span><span class="p">,</span> <span class="p">{</span><span class="na">title</span><span class="p">:</span> <span class="s1">'foo'</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">},</span> <span class="p">{</span><span class="na">ifExist</span><span class="p">:</span> <span class="s1">'replace'</span><span class="p">})</span>
  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
    <span class="c1">// promise resolved once the create action has been completed</span>
    <span class="c1">// =&gt; the result is a Document object</span>
@@ -3328,6 +3340,9 @@ immediately after each write request, forcing the documents to be immediately vi
 <pre class="highlight java"><code><span class="n">Document</span> <span class="n">myDocument</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="n">collection</span><span class="o">);</span>
 <span class="n">myDocument</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="s">"title"</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">);</span>
 <span class="n">myDocument</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="s">"content"</span><span class="o">,</span> <span class="s">"bar"</span><span class="o">);</span>
+
+<span class="n">Options</span> <span class="n">opts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Options</span><span class="o">();</span>
+<span class="n">opts</span><span class="o">.</span><span class="na">setIfExist</span> <span class="o">=</span> <span class="s">"replace"</span><span class="o">;</span>
 
 <span class="n">kuzzle</span>
   <span class="o">.</span><span class="na">collection</span><span class="o">(</span><span class="s">"collection"</span><span class="o">,</span> <span class="s">"index"</span><span class="o">)</span>
@@ -3437,9 +3452,9 @@ immediately after each write request, forcing the documents to be immediately vi
 <td><code class="prettyprint">undefined</code></td>
 </tr>
 <tr>
-<td><code class="prettyprint">updateIfExist</code></td>
-<td>boolean</td>
-<td>If the same document already exists: throw an error if sets to <code class="prettyprint">false</code>. Update the existing document otherwise</td>
+<td><code class="prettyprint">ifExist</code></td>
+<td>string</td>
+<td>If the same document already exists: resolves to an error if sets to <code class="prettyprint">error</code>. Replaces the existing document if set to <code class="prettyprint">replace</code></td>
 <td><code class="prettyprint">false</code></td>
 </tr>
 </tbody></table>
