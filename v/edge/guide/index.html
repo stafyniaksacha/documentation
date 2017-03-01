@@ -1196,8 +1196,8 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
   <span class="na">controllers</span><span class="p">:</span> <span class="p">{</span>
     <span class="o">&lt;</span> <span class="nx">controller</span><span class="o">|*</span> <span class="o">&gt;</span><span class="p">:</span> <span class="p">{</span>
       <span class="nl">actions</span><span class="p">:</span> <span class="p">{</span>
-        <span class="o">&lt;</span> <span class="nx">action</span><span class="o">|*</span> <span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span> <span class="nx">action</span> <span class="nx">permission</span><span class="o">*</span> <span class="o">&gt;</span><span class="p">,</span>
-        <span class="o">&lt;</span> <span class="nx">action</span><span class="o">|*</span> <span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span> <span class="nx">action</span> <span class="nx">permission</span><span class="o">*</span> <span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span> <span class="nx">action</span><span class="o">|*</span> <span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span> <span class="nx">action</span> <span class="nx">permission</span><span class="o">|*</span> <span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span> <span class="nx">action</span><span class="o">|*</span> <span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span> <span class="nx">action</span> <span class="nx">permission</span><span class="o">|*</span> <span class="o">&gt;</span><span class="p">,</span>
         <span class="p">...</span>
       <span class="p">}</span>
     <span class="p">}</span>
@@ -1206,6 +1206,8 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 </code></pre>
 
 <p>Each entry of the <code class="prettyprint">controllers</code>, <code class="prettyprint">actions</code> tree can be set to either an explicit value or the &ldquo;&#42;&rdquo; wildcard.</p>
+
+<p>When <code class="prettyprint">controller</code> is declared within a Plugin, its name must be prefixed with the name of the Plugin, like <code class="prettyprint">&lt; plugin-name/controller-name &gt;</code>.</p>
 
 <p>The <code class="prettyprint">action permission</code> value can be set either to:</p>
 
