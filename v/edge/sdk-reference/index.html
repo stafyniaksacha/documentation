@@ -139,8 +139,6 @@
 <p>This is the main entry point to communicate with Kuzzle. Every other objects inherits properties from this one.</p>
 
 <h2 id="constructors">Constructors</h2>
-
-<p>Connects to a Kuzzle instance.</p>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">defaultIndex</span><span class="p">:</span> <span class="s1">'some index'</span><span class="p">,</span>
   <span class="na">autoReconnect</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -180,6 +178,8 @@
   <span class="s1">'port'</span> <span class="o">=&gt;</span> <span class="mi">7512</span>
 <span class="p">]);</span>
 </code></pre>
+
+<p>Connects to a Kuzzle instance.</p>
 
 <h3 id="kuzzle-host-options-callback">Kuzzle(host, [options], [callback])</h3>
 
@@ -736,7 +736,7 @@ This method is non-queuable, meaning that during offline mode, it will be discar
 <p>A JSON object with a <code class="prettyprint">valid</code> boolean property.<br>
 If the token is valid, a <code class="prettyprint">expiresAt</code> property is set with the expiration timestamp. If not, a <code class="prettyprint">state</code> property is set explaining why the token is invalid.</p>
 
-<h2 id="collection">collection</h2>
+<h2 id="collection-property">collection (property)</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">);</span>
 
 <span class="c1">// or using a default index:</span>
@@ -2044,7 +2044,7 @@ This method is non-queuable, meaning that during offline mode, it will be discar
 <p>Resolves to the <code class="prettyprint">Kuzzle</code> object itself once the logout process is complete, either successfully or not.<br>
 The <code class="prettyprint">Kuzzle</code> object will unset the property <code class="prettyprint">jwtToken</code> if the user is successfully logged out.</p>
 
-<h2 id="memorystorage">memoryStorage</h2>
+<h2 id="memorystorage-property">memoryStorage (property)</h2>
 
 <p>A <code class="prettyprint">MemoryStorage</code> singleton.</p>
 
@@ -2506,7 +2506,7 @@ By default, this operation can take up to 1 second.</p>
 
 <p>Returns the <code class="prettyprint">Kuzzle</code> object to allow chaining.</p>
 
-<h2 id="security">security</h2>
+<h2 id="security-property">security (property)</h2>
 
 <p>A <code class="prettyprint">Security</code> singleton.</p>
 
@@ -4272,7 +4272,7 @@ There is a small delay between documents creation and their existence in our sea
 
 <p>Resolves to an updated <code class="prettyprint">Document</code> object.</p>
 
-<h2 id="room">room</h2>
+<h2 id="room-property">room (property)</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">kuzzle</span>
   <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">room</span><span class="p">()</span>
@@ -6111,8 +6111,6 @@ It is internally based on Redis. You can access most of Redis functions (all low
 </code></pre>
 
 <h2 id="example">Example</h2>
-
-<p>Here is an example with the <code class="prettyprint">ping</code> command.</p>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">memoryStorage</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">memoryStorage</span><span class="p">;</span>
 
 <span class="nx">memoryStorage</span><span class="p">.</span><span class="nx">ping</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -6149,8 +6147,9 @@ It is internally based on Redis. You can access most of Redis functions (all low
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">}</span>
-
 </code></pre>
+
+<p>Here is an example with the <code class="prettyprint">ping</code> command.</p>
 
             <h1 id="room">Room</h1>
 
