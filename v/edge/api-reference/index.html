@@ -12420,7 +12420,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 <pre class="highlight literate_coffeescript"><code>{
   // A roles array containing a list of role IDs can be added
-  "policies":  <span class="err">[</span>
+  "roles": <span class="err">[</span>
     <span class="s">"myrole"</span><span class="p">,</span>
     <span class="s">"admin"</span>
   ],
@@ -12438,8 +12438,8 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "action": "searchProfiles",
   "body": {
-    <span class="o">//</span> <span class="nx">A</span> <span class="nx">roles</span> <span class="nx">array</span> <span class="nx">containing</span> <span class="nx">a</span> <span class="nx">list</span> <span class="k">of</span> <span class="nx">role</span> <span class="nx">IDs</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">added</span>
-    <span class="s">"policies"</span><span class="o">:</span>  <span class="p">[</span>
+    <span class="o">//</span> <span class="nx">A</span> <span class="nx">roles</span> <span class="nx">array</span> <span class="nx">containing</span> <span class="nx">a</span> <span class="nx">list</span> <span class="k">of</span> <span class="nx">roleIds</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">added</span>
+    <span class="s">"roles"</span><span class="o">:</span> <span class="p">[</span>
       <span class="s">"myrole"</span><span class="p">,</span>
       <span class="s">"admin"</span>
     <span class="p">]</span>
