@@ -411,26 +411,35 @@ The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <
 <li>Updating docker images used by Kuzzle:<br>
 <code class="prettyprint">docker-compose -f &lt;docker-compose-file.yml&gt; pull</code></li>
 <li>Showing Kuzzle core or Kuzzle proxy logs:<br>
-<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 logs</code></li>
+<code class="prettyprint">docker exec -ti &lt;docker core or proxy container name&gt; pm2 logs</code></li>
 <li>Restarting Kuzzle core or Kuzzle proxy:<br>
-<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 restart all</code></li>
+<code class="prettyprint">docker exec -ti &lt;docker core or proxy container name&gt; pm2 restart all</code></li>
 <li>Stopping Kuzzle core or Kuzzle proxy:<br>
-<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 stop all</code></li>
+<code class="prettyprint">docker exec -ti &lt;docker core or proxy container name&gt; pm2 stop all</code></li>
 <li>Starting Kuzzle core or Kuzzle proxy:<br>
-<code class="prettyprint">docker exec -ti &lt;docker core/proxy image name&gt; pm2 start all</code></li>
+<code class="prettyprint">docker exec -ti &lt;docker core or proxy container name&gt; pm2 start all</code></li>
 <li>Accessing Kuzzle CLI:<br>
-<code class="prettyprint">docker exec -ti &lt;docker core image name&gt; bin/kuzzle -h</code></li>
+<code class="prettyprint">docker exec -ti &lt;docker core container name&gt; bin/kuzzle -h</code></li>
 </ul>
 
-<h3 id="manually-on-linux">Manually (on Linux)</h3>
+<h3 id="manually">Manually</h3>
 
 <p>In this section we will cover the manual installation on Linux systems, since this is the environment all the components of the Kuzzle stack work natively in.</p>
 
 <aside class="notice">
-By default, Kuzzle expects all the components to be running on localhost. You can use the <a href="#configuring-kuzzle">configuration parameters</a> to change this behavior.
+  By default, Kuzzle expects all the components to be running on localhost. You can use the <a href="#configuring-kuzzle">configuration parameters</a> to change this behavior.
 </aside>
 
 <p>We will run the Kuzzle stack using <a href="http://pm2.keymetrics.io/">pm2</a>, from the current user home directory.</p>
+
+<h4 id="supported-operating-systems">Supported operating systems</h4>
+
+<p>The following operating systems are actively supported:</p>
+
+<ul>
+<li>Ubuntu: 14.04 and 16.04</li>
+<li>Debian: 7 and 8</li>
+</ul>
 
 <h4 id="prerequisites">Prerequisites</h4>
 
