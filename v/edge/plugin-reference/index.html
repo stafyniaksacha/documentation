@@ -2041,6 +2041,26 @@ Different log level are provided, and lower priority levels may be ignored depen
 <td>Triggered when the overload cache is filling up</td>
 <td>Overload percentage. Type: Number</td>
 </tr>
+<tr>
+<td><code class="prettyprint">core:profileRepository:save</code></td>
+<td>Triggered when a profile is created or updated</td>
+<td>{_id, policies}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">core:profileRepository:delete</code></td>
+<td>Triggered when a profile is deleted</td>
+<td>{_id}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">core:roleRepository:save</code></td>
+<td>Triggered when a role is created or updated</td>
+<td>{_id, controllers}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">core:roleRepository:delete</code></td>
+<td>Triggered when a role is deleted</td>
+<td>{_id}</td>
+</tr>
 </tbody></table>
 
 <h2 id="index">index</h2>
