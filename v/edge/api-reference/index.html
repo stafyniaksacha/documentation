@@ -12120,7 +12120,7 @@ that the related roles will NOT be deleted.</p>
 
 <p>Given a <code class="prettyprint">user id</code>, gets the matching user&rsquo;s rights from Kuzzle&rsquo;s dabatase layer.</p>
 
-<h2 id="mdeleteprofile">mDeleteProfile</h2>
+<h2 id="mdeleteprofiles">mDeleteProfiles</h2>
 
 <section class="http"></section>
 
@@ -12146,7 +12146,7 @@ that the related roles will NOT be deleted.</p>
 <section class="others"></section>
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
-  "action": "mDeleteProfile",
+  "action": "mDeleteProfiles",
   "body": {
     <span class="o">//</span> <span class="nx">ids</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">an</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">profile</span> <span class="nx">ids</span>
     <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstProfile"</span><span class="p">,</span> <span class="s">"mySecondProfile"</span><span class="p">]</span>
@@ -12160,7 +12160,7 @@ that the related roles will NOT be deleted.</p>
 <pre class="highlight literate_coffeescript"><code>{
   "status": 200,                      // Assuming everything went well
   "error": null,                      // Assuming everything went well
-  "action": "mDeleteProfile",
+  "action": "mDeleteProfiles",
   "controller": "security",
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": <span class="err">[</span>
@@ -12172,7 +12172,7 @@ that the related roles will NOT be deleted.</p>
 
 <p>Deletes a list of <code class="prettyprint">profile</code> objects from Kuzzle&rsquo;s database layer given a list of profile ids.</p>
 
-<h2 id="mdeleterole">mDeleteRole</h2>
+<h2 id="mdeleteroles">mDeleteRoles</h2>
 
 <section class="http"></section>
 
@@ -12198,7 +12198,7 @@ that the related roles will NOT be deleted.</p>
 <section class="others"></section>
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
-  "action": "mDeleteRole",
+  "action": "mDeleteRoles",
   "body": {
     <span class="o">//</span> <span class="nx">ids</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">an</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">profile</span> <span class="nx">ids</span>
     <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstRole"</span><span class="p">,</span> <span class="s">"mySecondRole"</span><span class="p">]</span>
@@ -12212,7 +12212,7 @@ that the related roles will NOT be deleted.</p>
 <pre class="highlight literate_coffeescript"><code>{
   "status": 200,                      // Assuming everything went well
   "error": null,                      // Assuming everything went well
-  "action": "mDeleteRole",
+  "action": "mDeleteRoles",
   "controller": "security",
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": <span class="err">[</span>
@@ -12224,7 +12224,7 @@ that the related roles will NOT be deleted.</p>
 
 <p>Deletes a list of <code class="prettyprint">roles</code> objects from Kuzzle&rsquo;s database layer given a list of role ids.</p>
 
-<h2 id="mdeleteuser">mDeleteUser</h2>
+<h2 id="mdeleteusers">mDeleteUsers</h2>
 
 <section class="http"></section>
 
@@ -12250,7 +12250,7 @@ that the related roles will NOT be deleted.</p>
 <section class="others"></section>
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
-  "action": "mDeleteRole",
+  "action": "mDeleteRoles",
   "body": {
     <span class="o">//</span> <span class="nx">ids</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">an</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">profile</span> <span class="nx">ids</span>
     <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstUserId"</span><span class="p">,</span> <span class="s">"mySecondUserId"</span><span class="p">]</span>
@@ -12264,7 +12264,7 @@ that the related roles will NOT be deleted.</p>
 <pre class="highlight literate_coffeescript"><code>{
   "status": 200,                      // Assuming everything went well
   "error": null,                      // Assuming everything went well
-  "action": "mDeleteRole",
+  "action": "mDeleteRoles",
   "controller": "security",
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": <span class="err">[</span>
