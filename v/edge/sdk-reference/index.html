@@ -844,6 +844,90 @@ Has no effect if <code class="prettyprint">connect</code> is set to <code class=
 
 <p>Returns the <code class="prettyprint">Kuzzle</code> object to allow chaining.</p>
 
+<h2 id="createindex">createIndex</h2>
+<pre class="highlight javascript"><code><span class="c1">// Using callbacks (node.js or browser)</span>
+<span class="nx">kuzzle</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">(</span><span class="s1">'myIndex'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>     <span class="c1">// {acknowledge: true}</span>
+<span class="p">});</span>
+
+<span class="c1">// Using promises (node.js)</span>
+<span class="nx">kuzzle</span>
+  <span class="p">.</span><span class="nx">createIndexPromise</span><span class="p">(</span><span class="s1">'myIndex'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>   <span class="c1">// {acknowledge: true}</span>
+  <span class="p">});</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">createIndex</span><span class="o">(</span><span class="s">"myIndex"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// result var contains the creation status of myIndex.</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onError</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Handle error</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
+
+<span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">createIndex</span><span class="p">(</span><span class="s1">'myIndex'</span><span class="p">);</span>
+
+<span class="c1">// $result = [acknowledge =&gt; true]
+</span></code></pre>
+
+<p>Create a new empty data index, with no associated mapping.</p>
+
+<h4 id="createindex-index-options-callback">createIndex([index], [options], callback)</h4>
+
+<table><thead>
+<tr>
+<th>Arguments</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">index</code></td>
+<td>string</td>
+<td>Optional index to query. If no set, defaults to <a href="#properties">Kuzzle.defaultIndex</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td>JSON object</td>
+<td>Optional parameters</td>
+</tr>
+<tr>
+<td><code class="prettyprint">callback</code></td>
+<td>function</td>
+<td>Callback handling the response</td>
+</tr>
+</tbody></table>
+
+<p>Available options:</p>
+
+<table><thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">queuable</code></td>
+<td>boolean</td>
+<td>Mark this request as (not) queuable</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="callback-response">Callback response</h4>
+
+<p>The response is a an object reflecting the index <code class="prettyprint">create</code> status.</p>
+
 <h2 id="getallstatistics">getAllStatistics</h2>
 <pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
 <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">getAllStatistics</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="p">{</span>
