@@ -434,8 +434,14 @@ By default, Kuzzle expects all the components to be running on localhost. You ca
 <li>A <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> v5.x instance running on localhost:9200 (<em>preferred version: v5.0, but v2.x is also supported</em>).</li>
 <li>A <a href="http://redis.io/">Redis</a> v3.x instance running on localhost:6379 (<em>preferred version: v3.2</em>).</li>
 <li><a href="https://nodejs.org/en/download/package-manager/">NodeJS</a> v6.x or upper.</li>
-<li><code class="prettyprint">gcc</code> and <code class="prettyprint">python</code>. On Debian-based systems: <code class="prettyprint">sudo apt-get install build-essential python</code>.</li>
+<li><a href="https://www.python.org/">Python</a> v2.7 preferred.</li>
+<li>a C++11 compatible compiler.</li>
+<li><a href="https://www.gnu.org/software/gdb/">GDB</a> v7.7+.</li>
 </ul>
+
+<aside class="notice">
+ The last three prerequisites can be fulfilled on Debian-based systems by installing packages : `build-essential`, `gdb` and `python`.
+</aside>
 
 <h4 id="step-1-retrieve-kuzzle-components-source-code">Step 1 - Retrieve Kuzzle components source code</h4>
 
