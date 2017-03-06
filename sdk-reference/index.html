@@ -327,110 +327,97 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <th>Property name</th>
 <th>Type</th>
 <th>Description</th>
-<th>get/set</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">autoQueue</code></td>
 <td>boolean</td>
 <td>Automatically queue all requests during offline mode</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">autoReconnect</code></td>
 <td>boolean</td>
 <td>Automatically reconnect after a connection loss</td>
-<td>get</td>
 </tr>
 <tr>
 <td><code class="prettyprint">autoReplay</code></td>
 <td>boolean</td>
 <td>Automatically replay queued requests on a <code class="prettyprint">reconnected</code> event</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">autoResubscribe</code></td>
 <td>boolean</td>
 <td>Automatically renew all subscriptions on a <code class="prettyprint">reconnected</code> event</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">defaultIndex</code></td>
 <td>string</td>
 <td>Kuzzle&rsquo;s default index to use</td>
-<td>get</td>
 </tr>
 <tr>
 <td><code class="prettyprint">headers</code></td>
 <td>JSON object</td>
 <td>Common headers for all sent documents.</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">host</code></td>
 <td>string</td>
 <td>Target Kuzzle host name/address</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">jwtToken</code></td>
 <td>string</td>
 <td>Token used in requests for authentication.</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">metadata</code></td>
 <td>JSON object</td>
 <td>Common metadata, will be sent to all future requests</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">offlineQueue</code></td>
 <td>JSON object</td>
 <td>Contains the queued requests during offline mode</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">offlineQueueLoader</code></td>
 <td>function</td>
 <td>Called before dequeuing requests after exiting offline mode, to add items at the beginning of the offline queue</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">port</code></td>
 <td>integer</td>
 <td>Kuzzle network port</td>
-<td>7512</td>
 </tr>
 <tr>
 <td><code class="prettyprint">queueFilter</code></td>
 <td>function</td>
 <td>Called during offline mode. Takes a request object as arguments and returns a boolean, indicating if a request can be queued</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">queueMaxSize</code></td>
 <td>integer</td>
 <td>Number of maximum requests kept during offline mode</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">queueTTL</code></td>
 <td>integer</td>
 <td>Time a queued request is kept during offline mode, in milliseconds</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">replayInterval</code></td>
 <td>integer</td>
 <td>Delay between each replayed requests</td>
-<td>get/set</td>
 </tr>
 <tr>
 <td><code class="prettyprint">reconnectionDelay</code></td>
 <td>integer</td>
-<td>number of milliseconds between reconnection attempts</td>
-<td>get</td>
+<td>Number of milliseconds between reconnection attempts</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sslConnection</code></td>
+<td>boolean</td>
+<td>Connect to Kuzzle using SSL</td>
 </tr>
 </tbody></table>
 
@@ -445,7 +432,7 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <li>The offline buffer acts like a FIFO queue, meaning that if the <code class="prettyprint">queueMaxSize</code> limit is reached, older requests are discarded to make room for new requests</li>
 <li>if <code class="prettyprint">queueMaxSize</code> is set to <code class="prettyprint">0</code>, an unlimited number of requests is kept until the buffer is flushed</li>
 <li>the <code class="prettyprint">offlineQueueLoader</code> must be set with a function, taking no argument, and returning an array of objects containing a <code class="prettyprint">query</code> member with a Kuzzle query to be replayed, and an optional <code class="prettyprint">cb</code> member with the corresponding callback to invoke with the query result</li>
-<li>the <code class="prettyprint">host</code> and <code class="prettyprint">port</code> properties can be changed, but it will only be in effect at the next <code class="prettyprint">connect</code> call</li>
+<li>updates to <code class="prettyprint">host</code>, <code class="prettyprint">port</code>, <code class="prettyprint">autoReconnect</code>, <code class="prettyprint">reconnectionDelay</code> and <code class="prettyprint">sslConnection</code> properties will only take effect on next <code class="prettyprint">connect</code> call</li>
 </ul>
 
 <h2 id="offline-mode">Offline mode</h2>
