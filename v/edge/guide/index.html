@@ -1174,7 +1174,7 @@ More information on the login process [here](/api-reference/#login).
 
 <h4 id="users-profiles-and-roles">Users, profiles and roles</h4>
 
-<p>Kuzzle associates <code class="prettyprint">users</code> to a <code class="prettyprint">profile</code>.<br>
+<p>Kuzzle associates <code class="prettyprint">users</code> to one or more <code class="prettyprint">profiles</code>.<br>
 You can think to a <code class="prettyprint">profile</code> as a user group. All the <code class="prettyprint">users</code> that share the same <code class="prettyprint">profile</code> will get the same privileges.</p>
 
 <p>Because some sets of permissions can be shared between several <code class="prettyprint">profiles</code>, Kuzzle includes an additional level of abstraction below the <code class="prettyprint">profile</code>: the <code class="prettyprint">roles</code>.</p>
@@ -1222,7 +1222,7 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 
 <p>Take a look at the example below:</p>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">anonymousRole</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">controllers</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">controllers</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">actions</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">login</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -1240,10 +1240,22 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 
 <h4 id="profile-definition">Profile definition</h4>
 
-<p>A <code class="prettyprint">profile</code> definition is a Javascript object that contains an array of roles, identified by their IDs:</p>
+<p>A <code class="prettyprint">profile</code> definition is a Javascript object that contains an array of policies, composed by a roleId and restrictions:</p>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">myProfileDefinition</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">roles</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span><span class="na">_id</span><span class="p">:</span> <span class="o">&lt;</span> <span class="nx">role</span> <span class="nx">Id</span> <span class="o">&gt;</span> <span class="p">(,</span> <span class="na">restrictedTo</span><span class="p">:</span> <span class="o">&lt;</span> <span class="nx">role</span> <span class="nx">restrictions</span> <span class="o">&gt;</span> <span class="p">)</span> <span class="p">},</span>
+  <span class="na">policies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">roleId</span><span class="p">:</span> <span class="s2">"&lt; role Id &gt;"</span><span class="p">,</span>
+      <span class="na">restrictedTo</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="na">index</span><span class="p">:</span> <span class="s2">"&lt; some index &gt;"</span><span class="p">,</span>
+          <span class="na">collections</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"&lt; a collection &gt;"</span><span class="p">,</span>
+            <span class="s2">"&lt; another collection &gt;"</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">...</span>
+      <span class="p">]</span>  
+    <span class="p">},</span>
     <span class="o">&lt;</span><span class="nx">another</span> <span class="nx">role</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="p">...</span>
   <span class="p">]</span>
@@ -1252,10 +1264,10 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 
 <p>A role can be applied globally on the profile, or it can be restricted to a list of indexes or index/collections pairs.</p>
 
-<p>For example, if we have a &ldquo;publisher&rdquo; role which allows to request any action of the <code class="prettyprint">write</code> controller:</p>
+<p>For example, if we have a &ldquo;publisher&rdquo; role which allows to request any action of the <code class="prettyprint">document</code> controller:</p>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">publisherRole</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">controllers</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">write</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">controllers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">document</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">actions</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">'*'</span><span class="p">:</span> <span class="kc">true</span>
       <span class="p">}</span>
@@ -1294,9 +1306,9 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 <p>With this sample profiles:</p>
 
 <ul>
-<li>users with <code class="prettyprint">profile1</code> are allowed to use all <code class="prettyprint">write</code> controller actions on all indexes and collections.</li>
-<li>users with <code class="prettyprint">profile2</code> are only allowed to use <code class="prettyprint">write</code> controller actions on collections stored in index <code class="prettyprint">index1</code>.</li>
-<li>users with <code class="prettyprint">profile3</code> are only allowed to use <code class="prettyprint">write</code> controller actions on:
+<li>users with <code class="prettyprint">profile1</code> are allowed to use all <code class="prettyprint">document</code> controller actions on all indexes and collections.</li>
+<li>users with <code class="prettyprint">profile2</code> are only allowed to use <code class="prettyprint">document</code> controller actions on collections stored in index <code class="prettyprint">index1</code>.</li>
+<li>users with <code class="prettyprint">profile3</code> are only allowed to use <code class="prettyprint">document</code> controller actions on:
 
 <ul>
 <li>all collections stored in index <code class="prettyprint">index2</code></li>
@@ -1308,9 +1320,12 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 
 <p>In Kuzzle, permissions follow the <a href="https://en.wikipedia.org/wiki/Whitelist">Whitelist</a> strategy, which means that <strong>an action must be explicitly allowed</strong> by at least one role of the user profile (including restrictions).</p>
 
-<p>That means:
-* If a role allows it, the action is authorized, <em>even if another role denies it</em>.
-* If no role explicitly allows it, the action if denied, even if no role explicitly denies it as well.</p>
+<p>That means:</p>
+
+<ul>
+<li>If a role allows it, the action is authorized, <em>even if another role denies it</em>.</li>
+<li>If no role explicitly allows it, the action if denied, even if no role explicitly denies it as well.</li>
+</ul>
 
 <h4 id="actions-permissions-functions">Actions permissions functions</h4>
 
