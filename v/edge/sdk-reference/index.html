@@ -4991,6 +4991,51 @@ To subscribe to the entire data collection, simply provide an empty filter.
 </tr>
 </tbody></table>
 
+<p>Available options:</p>
+
+<table><thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">metadata</code></td>
+<td>JSON Object</td>
+<td>Additional information passed to notifications to other users</td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">scope</code></td>
+<td>string</td>
+<td>Filter document notifications depending on their scope status. You may receive entering documents (scope: <code class="prettyprint">in</code>), leaving documents (scope: <code class="prettyprint">out</code>), all documents changes (scope: <code class="prettyprint">all</code>) or filter these notifications completely (scope: <code class="prettyprint">none</code>). This filter does not affect pub/sub messages or user events.</td>
+<td><code class="prettyprint">all</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">state</code></td>
+<td>string</td>
+<td>Filter document notifications depending on the state of the modifying request. You may receive real-time notifications when a document is about to be changed (state: <code class="prettyprint">pending</code>), or be notified when the change has been fully written in the database (state: <code class="prettyprint">done</code>), or both (state: <code class="prettyprint">all</code>). This filter does not affect pub/sub messages or user events.</td>
+<td><code class="prettyprint">done</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">subscribeToSelf</code></td>
+<td>boolean</td>
+<td>(Don&rsquo;t) subscribe to notifications fired as a consequence of our own queries</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">users</code></td>
+<td>string</td>
+<td>Filter notifications fired upon a user entering the room (user: <code class="prettyprint">in</code>), leaving the room (user: <code class="prettyprint">out</code>), or both (user: <code class="prettyprint">all</code>). Setting this variable to <code class="prettyprint">none</code> prevents receiving these notifications</td>
+<td><code class="prettyprint">none</code></td>
+</tr>
+</tbody></table>
+
+<p>The <code class="prettyprint">options</code> object is directly passed to the Room constructor.
+See the <a href="#room">Room object</a> documentation for more information about these options and notifications. </p>
+
 <h3 id="return-value">Return value</h3>
 
 <p>Returns an object exposing the following method:<br>
