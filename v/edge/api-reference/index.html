@@ -10910,12 +10910,12 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 <section class="http"></section>
 <pre class="highlight literate_coffeescript"><code>{
   // The new array of role IDs and restrictions (cannot be empty)
-  "roles": <span class="err">[</span>
+  "policies": <span class="err">[</span>
     <span class="p">{</span>
-      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
+      <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;anotherRoleId&gt;"</span><span class="p">,</span>
+      <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;anotherRoleId&gt;"</span><span class="p">,</span>
       <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
           <span class="s">"index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span>
@@ -10944,17 +10944,17 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
   "action": "createOrReplaceProfile",
-  "_id": "<span class="nt">&lt;profileId&gt;</span>",
+  "_id": "<span class="nt">&lt;profileId&gt;</span>",               // Mandatory. The id of the profile
 
   // the profile definition
   "body": {
     <span class="o">//</span> <span class="nx">The</span> <span class="k">new</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">role</span> <span class="nx">IDs</span> <span class="o">and</span> <span class="nx">restrictions</span> <span class="p">(</span><span class="nx">cannot</span> <span class="nx">be</span> <span class="nx">empty</span><span class="p">)</span>
-    <span class="s">"roles"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;anotherRoleId&gt;"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
         <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
           <span class="p">{</span>
             <span class="s">"index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span>
@@ -10985,6 +10985,9 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
     <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
     <span class="s">"_type"</span><span class="o">:</span> <span class="s">"profiles"</span><span class="p">,</span>
     <span class="s">"_version"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
     <span class="s">"created"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
   },
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
@@ -10994,7 +10997,7 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 }
 </code></pre>
 
-<p>Creates (if no <code class="prettyprint">_id</code> provided) or updates (if <code class="prettyprint">_id</code> matches an existing one) a profile with a new list of roles.</p>
+<p>Creates or replaces (if <code class="prettyprint">_id</code> matches an existing one) a profile with a list of policies.</p>
 
 <h2 id="createorreplacerole">createOrReplaceRole</h2>
 
@@ -11028,7 +11031,7 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
   "action": "createOrReplaceRole",
-  "_id": "<span class="nt">&lt;roleId&gt;</span>",
+  "_id": "<span class="nt">&lt;roleId&gt;</span>",                  // Mandatory. The id of the role
 
   // the role definition
   "body": {
@@ -11074,12 +11077,10 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 
 <p>Validates and stores a role in Kuzzle&rsquo;s persistent data storage.</p>
 
-<p>The body content needs to match Kuzzle&rsquo;s role definition.
-To get some more detailed information on the expected role definition,
-please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/security/roles-reference.md">Kuzzle&rsquo;s role reference definition documentation</a>.</p>
+<p>The body content needs to match Kuzzle&rsquo;s role definition.</p>
 
-<p>To get some more detailed information about Kuzzle&rsquo;s user management model,
-please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/security/">Kuzzle&rsquo;s security documentation</a>.</p>
+<p>To get more detailed information about the expected role definition or Kuzzle&rsquo;s user management model,
+please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s permissions documentation</a>.</p>
 
 <h2 id="createorreplaceuser">createOrReplaceUser</h2>
 
@@ -11093,8 +11094,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 
 <section class="http"></section>
 <pre class="highlight literate_coffeescript"><code>{
-  "profileIds": <span class="p">[</span><span class="nv">"&lt;profileId&gt;", "anotherProfileId", "..."</span><span class="p">]</span> // Mandatory. The profile ids for the user
-  "name": "John Doe",                                      // Additional optional User properties
+  "profileIds": <span class="p">[</span><span class="nv">"&lt;profileId&gt;", "&lt;anotherProfileId&gt;", "..."</span><span class="p">]</span> // Mandatory. The profile ids for the user
+  "name": "John Doe",                                        // Additional optional User properties
   ...
 }
 </code></pre>
@@ -11111,8 +11112,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
   "action": "createOrReplaceUser",
   "_id": "<span class="nt">&lt;userId&gt;</span>",
   "body": {
-    <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">[</span><span class="s">"&lt;profileId&gt;"</span><span class="p">,</span> <span class="s">"anotherProfileId"</span><span class="p">,</span> <span class="s">"..."</span><span class="p">]</span> <span class="o">//</span> <span class="nx">Mandatory</span><span class="p">.</span> <span class="na">The</span> <span class="nx">profile</span> <span class="nx">ids</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">user</span>
-    <span class="s">"name"</span><span class="o">:</span> <span class="s">"John Doe"</span><span class="p">,</span>                                      <span class="o">//</span> <span class="nx">Additional</span> <span class="nx">optional</span> <span class="nx">User</span> <span class="nx">properties</span>
+    <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">[</span><span class="s">"&lt;profileId&gt;"</span><span class="p">,</span> <span class="s">"&lt;anotherProfileId&gt;"</span><span class="p">,</span> <span class="s">"..."</span><span class="p">]</span> <span class="o">//</span> <span class="nx">Mandatory</span><span class="p">.</span> <span class="na">The</span> <span class="nx">profile</span> <span class="nx">ids</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">user</span>
+    <span class="s">"name"</span><span class="o">:</span> <span class="s">"John Doe"</span><span class="p">,</span>                                        <span class="o">//</span> <span class="nx">Additional</span> <span class="nx">optional</span> <span class="nx">User</span> <span class="nx">properties</span>
     <span class="p">...</span>
   }
 }
@@ -11134,7 +11135,7 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
     <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;userId&gt;"</span><span class="p">,</span>
     <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
     <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">[</span><span class="s">"&lt;profileId&gt;"</span><span class="p">,</span> <span class="s">"anotherProfileId"</span><span class="p">,</span> <span class="s">"..."</span><span class="p">],</span>
+      <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">[</span><span class="s">"&lt;profileId&gt;"</span><span class="p">,</span> <span class="s">"&lt;anotherProfileId&gt;"</span><span class="p">,</span> <span class="s">"..."</span><span class="p">],</span>
       <span class="s">"name"</span><span class="o">:</span> <span class="s">"John Doe"</span><span class="p">,</span>
       <span class="p">...</span>
     <span class="p">},</span>
@@ -11164,10 +11165,10 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
   // The new array of role IDs and restrictions (cannot be empty)
   "policies": <span class="err">[</span>
     <span class="p">{</span>
-      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
+      <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
+      <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
       <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
           <span class="s">"index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span>
@@ -11196,17 +11197,17 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
   "action": "createProfile",
-  "_id": "<span class="nt">&lt;profileId&gt;</span>",
+  "_id": "<span class="nt">&lt;profileId&gt;</span>",               // Mandatory. The id of the profile
 
   // the profile definition
   "body": {
     <span class="o">//</span> <span class="nx">The</span> <span class="k">new</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">role</span> <span class="nx">IDs</span> <span class="o">and</span> <span class="nx">restrictions</span> <span class="p">(</span><span class="nx">cannot</span> <span class="nx">be</span> <span class="nx">empty</span><span class="p">)</span>
     <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
         <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
           <span class="p">{</span>
             <span class="s">"index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span>
@@ -11283,7 +11284,7 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
   "action": "createRole",
-  "_id": "<span class="nt">&lt;roleId&gt;</span>",
+  "_id": "<span class="nt">&lt;roleId&gt;</span>",                  // Mandatory. The id of the role
 
   // the role definition
   "body": {
@@ -11330,12 +11331,10 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 <p>Validates and stores a role in Kuzzle&rsquo;s persistent data storage.
 <strong>Note:</strong> The <code class="prettyprint">_id</code> parameter is mandatory.</p>
 
-<p>The body content needs to match Kuzzle&rsquo;s role definition.
-To get some more detailed information on the expected role definition,
-please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/security/roles-reference.md">Kuzzle&rsquo;s role reference definition documentation</a>.</p>
+<p>The body content needs to match Kuzzle&rsquo;s role definition.</p>
 
-<p>To get some more detailed information about Kuzzle&rsquo;s user management model,
-please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/security/">Kuzzle&rsquo;s security documentation</a>.</p>
+<p>To get more detailed information about the expected role definition or Kuzzle&rsquo;s user management model,
+please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s permissions documentation</a>.</p>
 
 <h2 id="createuser">createUser</h2>
 
@@ -11548,7 +11547,7 @@ This route is especially useful to allow anonymous users to create a user.</p>
   "controller": "security",
   "action": "deleteProfile",
 
-  // The profile unique identifier. It's the same one that Kuzzle sends you
+  // The profile unique identifier. It's the same you set when you create a profile.
   // in its responses when you create a profile.
   "_id": "<span class="nt">&lt;profileId&gt;</span>"
 }
@@ -11561,7 +11560,7 @@ This route is especially useful to allow anonymous users to create a user.</p>
   "status": 200,                      // Assuming everything went well
   "error": null,                      // Assuming everything went well
   "result": {
-    <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;profileId&gt;"</span><span class="p">,</span>             <span class="o">//</span> <span class="nx">The</span> <span class="nx">profile</span> <span class="nx">id</span>
+    <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;profileId&gt;"</span>              <span class="o">//</span> <span class="nx">The</span> <span class="nx">profile</span> <span class="nx">id</span>
   },
   "index": "%kuzzle",
   "collection": "profiles",
@@ -11594,7 +11593,7 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "action": "deleteRole",
 
-  // The role unique identifier. It's the same one that Kuzzle sends you
+  // The role unique identifier. It's the same you set when you create a role.
   // in its responses when you create a role.
   "_id": "<span class="nt">&lt;roleId&gt;</span>"
 }
@@ -11639,7 +11638,7 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "action": "deleteUser",
 
-  // The role unique identifier. It's the same one that Kuzzle sends you
+  // The role unique identifier. It's the same you set when you create a user.
   // in its responses when you create a role.
   "_id": "<span class="nt">&lt;roleId&gt;</span>"
 }
@@ -11652,7 +11651,7 @@ that the related roles will NOT be deleted.</p>
   "status": 200,                      // Assuming everything went well
   "error": null,                      // Assuming everything went well
   "result": {
-    <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>                 <span class="o">//</span> <span class="nx">The</span> <span class="nx">role</span> <span class="nx">id</span>
+    <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;userId&gt;"</span>                 <span class="o">//</span> <span class="nx">The</span> <span class="nx">user</span> <span class="nx">id</span>
   }
   "index": "%kuzzle",
   "collection": "users",
@@ -11684,8 +11683,7 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "action": "getProfile",
 
-  // The profile unique identifier. It's the same one that Kuzzle sends you
-  // in its responses when you create a profile.
+  // The profile unique identifier. It's the same you set when you create a profile.
   "_id": "<span class="nt">&lt;profileId&gt;</span>"
 }
 </code></pre>
@@ -11745,47 +11743,7 @@ that the related roles will NOT be deleted.</p>
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": {
     <span class="s">"mapping"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"policies"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"_id"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-          <span class="p">},</span>
-          <span class="s">"allowInternalIndex"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"boolean"</span>
-          <span class="p">},</span>
-          <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"collections"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span><span class="p">,</span>
-                <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span><span class="p">,</span>
-                    <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span>
-                  <span class="p">}</span>
-                <span class="p">}</span>
-              <span class="p">},</span>
-              <span class="s">"index"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span><span class="p">,</span>
-                <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span><span class="p">,</span>
-                    <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span>
-                  <span class="p">}</span>
-                <span class="p">}</span>
-              <span class="p">}</span>
-            <span class="p">}</span>
-          <span class="p">},</span>
-          <span class="s">"roleId"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span><span class="p">,</span>
-            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span><span class="p">,</span>
-                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span>
-              <span class="p">}</span>
-            <span class="p">}</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
+      <span class="p">...</span>
     <span class="p">}</span>
   }
 }
@@ -11813,7 +11771,7 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "action": "getProfileRights",
 
-  // The profile unique identifier. It's the same one that Kuzzle sends you
+  // The profile unique identifier. It's the same you set when you create a profile.
   // in its responses when you create a profile.
   "_id": "<span class="nt">&lt;profileId&gt;</span>"
 }
@@ -11864,7 +11822,7 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "action": "getRole",
 
-  // The role unique identifier. It's the same one that Kuzzle sends you
+  // The role unique identifier. It's the same you set when you create a role.
   // in its responses when you create a role.
   "_id": "<span class="nt">&lt;roleId&gt;</span>"
 }
@@ -11879,7 +11837,7 @@ that the related roles will NOT be deleted.</p>
   "result": {
     <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>                <span class="o">//</span> <span class="nx">The</span> <span class="nx">role</span> <span class="nx">id</span>
     <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"indexes"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
         <span class="p">...</span>
       <span class="p">}</span>
     <span class="p">}</span>
@@ -11928,10 +11886,7 @@ that the related roles will NOT be deleted.</p>
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": {
     <span class="s">"mapping"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"object"</span><span class="p">,</span>
-        <span class="s">"enabled"</span><span class="o">:</span> <span class="no">false</span>
-      <span class="p">}</span>
+      <span class="p">...</span>
     <span class="p">}</span>
   }
 }
@@ -11976,7 +11931,7 @@ that the related roles will NOT be deleted.</p>
   "result": {
     <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;userId&gt;"</span><span class="p">,</span>
     <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"profileId"</span><span class="o">:</span> <span class="s">"&lt;profileId&gt;"</span><span class="p">,</span>
+      <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">[</span><span class="s">"&lt;profileId&gt;"</span><span class="p">],</span>
       <span class="p">...</span>                             <span class="o">//</span> <span class="nx">The</span> <span class="nx">user</span> <span class="nx">object</span> <span class="nx">content</span>
     <span class="p">}</span>
   }
@@ -12018,53 +11973,7 @@ that the related roles will NOT be deleted.</p>
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": {
     <span class="s">"mapping"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"hobby"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-      <span class="p">},</span>
-      <span class="s">"name"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"properties"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"first"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-          <span class="p">},</span>
-          <span class="s">"last"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-          <span class="p">},</span>
-          <span class="s">"real"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"keyword"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"ignore_above"</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-                <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"type"</span><span class="o">:</span> <span class="s">"text"</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s">"password"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"index"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-      <span class="p">},</span>
-      <span class="s">"profileIds"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"type"</span><span class="o">:</span> <span class="s">"keyword"</span>
-      <span class="p">}</span>
+      <span class="p">...</span>
     <span class="p">}</span>
   }
 }
@@ -12250,7 +12159,7 @@ that the related roles will NOT be deleted.</p>
 <section class="others"></section>
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "security",
-  "action": "mDeleteRoles",
+  "action": "mDeleteUsers",
   "body": {
     <span class="o">//</span> <span class="nx">ids</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">an</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">profile</span> <span class="nx">ids</span>
     <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstUserId"</span><span class="p">,</span> <span class="s">"mySecondUserId"</span><span class="p">]</span>
@@ -12264,7 +12173,7 @@ that the related roles will NOT be deleted.</p>
 <pre class="highlight literate_coffeescript"><code>{
   "status": 200,                      // Assuming everything went well
   "error": null,                      // Assuming everything went well
-  "action": "mDeleteRoles",
+  "action": "mDeleteUsers",
   "controller": "security",
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": <span class="err">[</span>
@@ -12306,7 +12215,7 @@ that the related roles will NOT be deleted.</p>
   "action": "mGetProfiles",
   "body": {
     <span class="o">//</span> <span class="nx">ids</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">an</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">profile</span> <span class="nx">ids</span>
-    <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstProfile"</span><span class="p">,</span> <span class="s">"MySecondProfile"</span><span class="p">]</span>
+    <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstProfile"</span><span class="p">,</span> <span class="s">"mySecondProfile"</span><span class="p">]</span>
   }
 }
 </code></pre>
@@ -12323,9 +12232,39 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": {
-    <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="p">...</span>
-    <span class="p">}</span>
+     <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
+       <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+       <span class="s">"successful"</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+       <span class="s">"total"</span><span class="o">:</span> <span class="mi">5</span>
+     <span class="p">},</span>
+     <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+       <span class="p">{</span>
+         <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myFirstProfile"</span><span class="p">,</span>
+         <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
+         <span class="s">"_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
+             <span class="o">//</span> <span class="nx">Policies</span> <span class="nx">associated</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">profile</span>
+           <span class="p">]</span>
+         <span class="p">},</span>
+         <span class="s">"_type"</span><span class="o">:</span> <span class="s">"profiles"</span>
+       <span class="p">},</span>
+       <span class="p">{</span>
+         <span class="s">"_id"</span><span class="o">:</span> <span class="s">"mySecondProfile"</span><span class="p">,</span>
+         <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
+         <span class="s">"_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
+             <span class="o">//</span> <span class="nx">Policies</span> <span class="nx">associated</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">profile</span>
+           <span class="p">]</span>
+         <span class="p">},</span>
+         <span class="s">"_type"</span><span class="o">:</span> <span class="s">"profiles"</span>
+       <span class="p">}</span>
+     <span class="p">],</span>
+     <span class="s">"max_score"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
+     <span class="s">"timed_out"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
+     <span class="s">"took"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+     <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
   }
 }
 </code></pre>
@@ -12361,7 +12300,7 @@ that the related roles will NOT be deleted.</p>
   "action": "mGetRoles",
   "body": {
     <span class="o">//</span> <span class="nx">ids</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">an</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">role</span> <span class="nx">id</span>
-    <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstRole"</span><span class="p">,</span> <span class="s">"MySecondRole"</span><span class="p">]</span>
+    <span class="s">"ids"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myFirstRole"</span><span class="p">,</span> <span class="s">"mySecondRole"</span><span class="p">]</span>
   }
 }
 </code></pre>
@@ -12377,8 +12316,7 @@ that the related roles will NOT be deleted.</p>
   "index": "%kuzzle",
   "metadata": {},
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
-  "result":
-  {
+  "result": {
      <span class="s">"_shards"</span><span class="o">:</span> <span class="p">{</span>
        <span class="s">"failed"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
        <span class="s">"successful"</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -12386,12 +12324,24 @@ that the related roles will NOT be deleted.</p>
      <span class="p">},</span>
      <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
        <span class="p">{</span>
-         <span class="s">"_id"</span><span class="o">:</span> <span class="s">"test"</span><span class="p">,</span>
+         <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myFirstRole"</span><span class="p">,</span>
          <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
          <span class="s">"_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
          <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
-           <span class="s">"_id"</span><span class="o">:</span> <span class="s">"test"</span><span class="p">,</span>
-           <span class="s">"indexes"</span><span class="o">:</span> <span class="p">{}</span> <span class="o">//</span> <span class="nx">Rights</span> <span class="k">for</span> <span class="nx">each</span> <span class="nx">indexes</span><span class="p">,</span> <span class="nx">controllers</span><span class="p">,</span> <span class="p">...</span> <span class="na">can</span> <span class="nx">be</span> <span class="nx">found</span> <span class="nx">here</span>
+           <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
+             <span class="o">//</span> <span class="nx">Rights</span> <span class="k">for</span> <span class="nx">each</span> <span class="nx">controllers</span> <span class="o">and</span> <span class="nx">actions</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">found</span> <span class="nx">here</span>
+           <span class="p">}</span>
+         <span class="p">},</span>
+         <span class="s">"_type"</span><span class="o">:</span> <span class="s">"roles"</span>
+       <span class="p">},</span>
+       <span class="p">{</span>
+         <span class="s">"_id"</span><span class="o">:</span> <span class="s">"mySecondRole"</span><span class="p">,</span>
+         <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
+         <span class="s">"_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
+             <span class="o">//</span> <span class="nx">Rights</span> <span class="k">for</span> <span class="nx">each</span> <span class="nx">controllers</span> <span class="o">and</span> <span class="nx">actions</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">found</span> <span class="nx">here</span>
+           <span class="p">}</span>
          <span class="p">},</span>
          <span class="s">"_type"</span><span class="o">:</span> <span class="s">"roles"</span>
        <span class="p">}</span>
@@ -12399,7 +12349,7 @@ that the related roles will NOT be deleted.</p>
      <span class="s">"max_score"</span><span class="o">:</span> <span class="no">null</span><span class="p">,</span>
      <span class="s">"timed_out"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
      <span class="s">"took"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-     <span class="s">"total"</span><span class="o">:</span> <span class="mi">1</span>
+     <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
   },
   "status": 200
 }
@@ -12439,8 +12389,8 @@ that the related roles will NOT be deleted.</p>
   "action": "searchProfiles",
   "body": {
     <span class="o">//</span> <span class="nx">A</span> <span class="nx">roles</span> <span class="nx">array</span> <span class="nx">containing</span> <span class="nx">a</span> <span class="nx">list</span> <span class="k">of</span> <span class="nx">roleIds</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">added</span>
-    <span class="s">"roles"</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s">"myrole"</span><span class="p">,</span>
+    <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s">"myRoleId"</span><span class="p">,</span>
       <span class="s">"admin"</span>
     <span class="p">]</span>
   },
@@ -12465,18 +12415,27 @@ that the related roles will NOT be deleted.</p>
     <span class="p">},</span>
     <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"my-profile-1"</span><span class="p">,</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myProfile1"</span><span class="p">,</span>
         <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
           <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myroleId"</span>
+            <span class="p">{</span>
+              <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"myRoleId"</span><span class="p">,</span>
+              <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
+                <span class="p">...</span>
+              <span class="p">]</span>
+            <span class="p">},</span>
+            <span class="p">...</span>
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"my-profile-2"</span><span class="p">,</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myProfile2"</span><span class="p">,</span>
         <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
           <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myroleId"</span>
+            <span class="p">{</span>
+              <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"admin"</span>
+            <span class="p">},</span>
+            <span class="p">...</span>
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">}</span>
@@ -12531,8 +12490,8 @@ that the related roles will NOT be deleted.</p>
 
 <section class="http"></section>
 <pre class="highlight literate_coffeescript"><code>{
-  // indexes must be an array of index
-  "indexes": <span class="p">[</span><span class="nv">"myindex"</span><span class="p">]</span>
+  // indexes must be an array of controllers
+  "controllers": <span class="p">[</span><span class="nv">"aController", "anotherController"</span><span class="p">]</span>
 }
 </code></pre>
 
@@ -12547,10 +12506,10 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "action": "searchRoles",
   "body": {
-    <span class="s">"indexes"</span><span class="o">:</span> <span class="p">[</span><span class="s">"myindex"</span><span class="p">],</span>
+    <span class="s">"controllers"</span><span class="o">:</span> <span class="p">[</span><span class="s">"aController"</span><span class="p">,</span> <span class="s">"anotherController"</span><span class="p">]</span>
     <span class="o">//</span> <span class="s">"from"</span> <span class="o">and</span> <span class="s">"size"</span> <span class="nx">argument</span> <span class="k">for</span> <span class="nx">pagination</span>
     <span class="s">"from"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s">"size"</span><span class="o">:</span> <span class="mi">10</span>
+    <span class="s">"size"</span><span class="o">:</span> <span class="mi">42</span>
   }
 }
 </code></pre>
@@ -12575,12 +12534,13 @@ that the related roles will NOT be deleted.</p>
      <span class="p">},</span>
      <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
        <span class="p">{</span>
-         <span class="s">"_id"</span><span class="o">:</span> <span class="s">"test"</span><span class="p">,</span>
+         <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
          <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
          <span class="s">"_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
          <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
-           <span class="s">"_id"</span><span class="o">:</span> <span class="s">"test"</span><span class="p">,</span>
-           <span class="s">"indexes"</span><span class="o">:</span> <span class="p">{}</span> <span class="o">//</span> <span class="nx">Rights</span> <span class="k">for</span> <span class="nx">each</span> <span class="nx">indexes</span><span class="p">,</span> <span class="nx">controllers</span><span class="p">,</span> <span class="p">...</span> <span class="na">can</span> <span class="nx">be</span> <span class="nx">found</span> <span class="nx">here</span>
+           <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
+             <span class="o">//</span> <span class="nx">Rights</span> <span class="k">for</span> <span class="nx">each</span> <span class="nx">controllers</span> <span class="o">and</span> <span class="nx">actions</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">found</span> <span class="nx">here</span>
+           <span class="p">}</span>
          <span class="p">},</span>
          <span class="s">"_type"</span><span class="o">:</span> <span class="s">"roles"</span>
        <span class="p">}</span>
@@ -12735,10 +12695,10 @@ that the related roles will NOT be deleted.</p>
 <pre class="highlight literate_coffeescript"><code>{
     <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
         <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
           <span class="p">{</span>
             <span class="s">"index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span>
@@ -12771,10 +12731,10 @@ that the related roles will NOT be deleted.</p>
   "body": {
     <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
+        <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"&lt;roleId&gt;"</span><span class="p">,</span>
         <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
           <span class="p">{</span>
             <span class="s">"index"</span><span class="o">:</span> <span class="s">"&lt;index&gt;"</span>
@@ -12898,8 +12858,8 @@ that the related roles will NOT be deleted.</p>
 
 <p>This mapping is intended to store the basic information of a profile; typically, its policies (roles and restrictions).</p>
 
-<p>But if you want to store more information about your users, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">profiles</code> data mapping using the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
+<p>But if you want to store more information about your profiles, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">profiles</code> data mapping using the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
 
 <h2 id="updaterole">updateRole</h2>
 
@@ -12979,7 +12939,7 @@ In other words, you always need to provide the complete role definition in the b
 <a href="https://github.com/kuzzleio/kuzzle/blob/beta/docs/security/roles-reference.md">Kuzzle&rsquo;s role reference definition documentation</a>.</p>
 
 <p>To get some more detailed information about Kuzzle&rsquo;s user management model,
-please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/security/">Kuzzle&rsquo;s security documentation</a>.</p>
+please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s security documentation</a>.</p>
 
 <h2 id="updaterolemapping">updateRoleMapping</h2>
 
@@ -13063,8 +13023,8 @@ please refer to <a href="https://github.com/kuzzleio/kuzzle/blob/master/docs/sec
 
 <p>This mapping is intended to store the basic information of a role; typically, its allowed controllers and actions.</p>
 
-<p>But if you want to store more information about your users, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">roles</code> data mapping using the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
+<p>But if you want to store more information about your roles, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">roles</code> data mapping using the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
 
 <h2 id="updateuser">updateUser</h2>
 
