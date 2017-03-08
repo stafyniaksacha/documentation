@@ -677,7 +677,8 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
 
 <p>Kuzzle ships with a full data <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> API that enables you to operate in many ways on your documents.</p>
 
-<p>Let&rsquo;s <a href="/api-reference/#create48"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol. This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7512/myindex/mycollection/_create</code> with the body set to</p>
+<p>Let&rsquo;s <a href="/api-reference/#create48"><strong>create a new document</strong></a>, for example, in <code class="prettyprint">mycollection</code>, within <code class="prettyprint">myindex</code> via the HTTP protocol.
+This is done by sending a <code class="prettyprint">POST</code> request to the API endpoint <code class="prettyprint">http://localhost:7512/myindex/mycollection/_create</code> with the body set to</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -920,6 +921,47 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<h3 id="document-mapping">Document mapping</h3>
+
+<p>As previously said, Kuzzle relies on Elasticsearch to persist documents. Elasticsearch uses a mapping internally to match
+a document field to a field type. This mapping is attached to a <code class="prettyprint">collection</code> (a <code class="prettyprint">type</code> in Elasticsearch terminology).
+If no mapping is defined, Elasticsearch will infer it automatically from input documents.</p>
+
+<p>ou may want to define mappings manually, especially to provide more details to Elasticsearch on how it should interpret the documents stored in your collections.
+To do so, Kuzzle expose a mapping creation API route.
+This is done by sending a <code class="prettyprint">PUT</code> request to the API endpoint <code class="prettyprint">http://localhost:7512/myindex/mycollection/_mapping</code> with the body set to your mapping:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"someField"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"date"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Which gives us the response&hellip;</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"updateMapping"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"collection"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8acca50e-592d-4f0d-962c-31719b11e171"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"acknowledged"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w"> 
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Here we defined a new field called <code class="prettyprint">someField</code> of type <code class="prettyprint">date</code> in our collection <code class="prettyprint">mycollection</code>. This is especially useful when
+dealing with capabilities such as specific types (<code class="prettyprint">date</code>, <code class="prettyprint">geo_shape</code>, &hellip;), full-text search and complex data structures (<code class="prettyprint">nested</code>, &hellip;) of Elasticsearch.
+As the mapping of the collection can not be changed once it is set (even if Elasticsearch did it automatically for you),
+you should almost always define mappings when creating collections, preferably before sending documents in them.</p>
+
+<p>The syntax to use is the one defined by <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/mapping.html">Elasticsearch</a>. </p>
 
 <h4 id="where-do-we-go-from-here">Where do we go from here?</h4>
 
