@@ -5647,7 +5647,7 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 }
 </code></pre>
 
-<p>Returns all field names containined in a hash.</p>
+<p>Returns all field names contained in a hash.</p>
 
 <p><a href="https://redis.io/commands/hkeys">[<em>Redis documentation</em>]</a></p>
 
@@ -5856,7 +5856,7 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 }
 </code></pre>
 
-<p>Identical to <a href="#scan">scan</a>, except that <code class="prettyprint">hscan</code> iterates the field contained in a hash.</p>
+<p>Identical to <a href="#scan">scan</a>, except that <code class="prettyprint">hscan</code> iterates the fields contained in a hash.</p>
 
 <p><a href="https://redis.io/commands/hscan">[<em>Redis documentation</em>]</a></p>
 
@@ -8101,7 +8101,7 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <li><code class="prettyprint">ex</code>: set the specified expire time, in seconds</li>
 <li><code class="prettyprint">px</code>: set the specified expire time, in milliseconds</li>
 <li><code class="prettyprint">nx</code>: only set the key if it does not already exist</li>
-<li><code class="prettyprint">xx</code>: only set the key if it already exist</li>
+<li><code class="prettyprint">xx</code>: only set the key if it already exists</li>
 </ul>
 
 <p><strong>Note:</strong> setting <code class="prettyprint">ex</code> and <code class="prettyprint">px</code> options lead to a <code class="prettyprint">BadRequestError</code> as these options are mutually exclusive. Same thing goes for <code class="prettyprint">nx</code> and <code class="prettyprint">xx</code>.</p>
@@ -8544,7 +8544,7 @@ By default, sorting is numeric and elements are compared by their value interpre
 <ul>
 <li><code class="prettyprint">alpha</code>: performs an alphanumerical sort instead of a numeric one</li>
 <li><code class="prettyprint">by</code>: instead of sorting by values directly, sorts by values contained in external keys, using a pattern completed by values of the list/set/sorted set to sort</li>
-<li><code class="prettyprint">direction</code>: sorted in ascendant or descendant order</li>
+<li><code class="prettyprint">direction</code>: sort in ascendant or descendant order</li>
 <li><code class="prettyprint">get</code>: instead of returning the sorted values directly, returns the values contained in external keys, using patterns completed by the sorted values</li>
 <li><code class="prettyprint">limit</code>: limits the result set to <code class="prettyprint">count</code> elements starting from the <code class="prettyprint">offset</code> position in the sorted result set</li>
 <li><code class="prettyprint">store</code>: instead of returning the result set, stores it in a list at <code class="prettyprint">destination</code> key</li>
@@ -9319,7 +9319,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 }
 </code></pre>
 
-<p>Increments the score of a <code class="prettyprint">member</code>in a sorted set by the provided <code class="prettyprint">value</code>.</p>
+<p>Increments the score of a <code class="prettyprint">member</code> in a sorted set by the provided <code class="prettyprint">value</code>.</p>
 
 <p><a href="https://redis.io/commands/zincrby">[<em>Redis documentation</em>]</a></p>
 
