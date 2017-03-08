@@ -2716,8 +2716,10 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
   "action": "scroll",
 
   "body": {
+    <span class="o">//</span> <span class="nx">The</span> <span class="s">"scrollId"</span> <span class="nx">provided</span> <span class="nx">with</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">scroll</span> <span class="nx">response</span><span class="p">,</span>
+    <span class="o">//</span> <span class="o">or</span> <span class="nx">from</span> <span class="nx">the</span> <span class="nx">initial</span> <span class="nx">search</span> <span class="nx">request</span> <span class="k">if</span> <span class="nx">it</span> <span class="o">is</span> <span class="nx">the</span> <span class="nx">first</span> <span class="nx">scroll</span> <span class="nx">call</span> 
     <span class="s">"scrollId"</span><span class="o">:</span> <span class="s">"&lt;scrollId&gt;"</span>
-    <span class="o">//</span> <span class="nx">The</span> <span class="nx">scroll</span> <span class="nx">parameter</span> <span class="nx">tells</span> <span class="nx">Elasticsearch</span> <span class="nx">to</span> <span class="nx">keep</span> <span class="nx">the</span> <span class="nx">search</span> <span class="nx">context</span> <span class="nx">open</span> <span class="k">for</span> <span class="nx">another</span> <span class="mi">1</span><span class="nx">m</span><span class="p">.</span>
+    <span class="o">//</span> <span class="nx">The</span> <span class="nx">scroll</span> <span class="nx">parameter</span> <span class="nx">tells</span> <span class="nx">Elasticsearch</span> <span class="nx">to</span> <span class="nx">keep</span> <span class="nx">the</span> <span class="nx">scroll</span> <span class="nx">session</span> <span class="nx">open</span> <span class="k">for</span> <span class="nx">another</span> <span class="mi">1</span><span class="nx">m</span><span class="p">.</span>
     <span class="s">"scroll"</span><span class="o">:</span> <span class="s">"1m"</span>
   }
 }
@@ -2756,17 +2758,18 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 }
 </code></pre>
 
-<p>While a search request returns a single “page” of results, the scroll API can
+<p>While a <code class="prettyprint">search</code> request returns a single &ldquo;page&rdquo; of results, the scroll API can
 be used to retrieve large numbers of results (or even all results) from a single
-search request, in much the same way as you would use a cursor on a traditional database.</p>
+<code class="prettyprint">search</code> request, in much the same way as you would use a cursor on a traditional database.</p>
 
 <p>Scrolling is not intended for real time user requests, but rather for processing large amounts of data.</p>
 
-<p>In order to use scrolling, the initial search request should specify the scroll parameter in the query string,
-which tells Elasticsearch how long it should keep the “search context” alive.</p>
+<p>In order to use scrolling, the initial <a href="#search"><code class="prettyprint">search</code></a> request must specify the <code class="prettyprint">scroll</code> parameter in the request,
+which tells Elasticsearch how long it should keep the &ldquo;scroll session&rdquo; alive.
+The query defined in the initial <code class="prettyprint">search</code> request will then be used for all <code class="prettyprint">scroll</code> using the provided <code class="prettyprint">_scroll_id</code>.</p>
 
 <aside class="warning">
-  The results that are returned from a scroll request reflect the state of the index at the time
+  The results that are returned from a `scroll` request reflect the state of the index at the time
   that the initial search request was made, like a snapshot in time. Subsequent changes
   to documents (index, update or delete) will only affect later search requests.
 </aside>
@@ -2817,7 +2820,9 @@ which tells Elasticsearch how long it should keep the “search context” alive
   },
   // "from" and "size" argument for pagination
   "from": 0,
-  "size": 42
+  "size": 42,
+  // "scroll" argument to start a scroll session
+  "scroll": "60s"
 }
 </code></pre>
 
@@ -2868,6 +2873,13 @@ which tells Elasticsearch how long it should keep the “search context” alive
 <p><code class="prettyprint">aggregations</code> is not mandatory, see the
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html">Elasticsearch Documentation</a>
 for more details.</p>
+
+<p>If a <code class="prettyprint">scroll</code> argument is provided in the request, a scroll session is started and the response will contain a <code class="prettyprint">_scroll_id</code> that
+can be used with the <a href="#scroll"><code class="prettyprint">scroll</code> action</a>.
+The value of the scroll defines the timeout of the session (it will be refreshed with subsequent <code class="prettyprint">scroll</code> calls).
+ A scroll session is a way to paginate a search request.
+The <code class="prettyprint">search</code> response will contain the first maching documents. After the first search, the <a href="#scroll"><code class="prettyprint">scroll</code> action</a>
+must be used to iterate the pagination.</p>
 
 <h2 id="mcreate">mCreate</h2>
 
