@@ -7125,7 +7125,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
   <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">decr</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">del</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -7446,7 +7446,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$status</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">memoryStorage</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">expire</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="mi">1488372354</span><span class="p">);</span>
+  <span class="nv">$status</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">memoryStorage</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">expireat</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="mi">1488372354</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
 
@@ -8813,7 +8813,7 @@ The returned distance is expressed in meters by default.</p>
   <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">fields</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"field1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"field2"</span><span class="o">);</span>
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">decr</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">fields</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hdel</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">fields</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -14764,7 +14764,7 @@ The scan terminates when the next position cursor returned by the server is <cod
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$status</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">memoryStorage</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">hsetnx</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
+  <span class="nv">$status</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">memoryStorage</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setnx</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
 
@@ -15262,7 +15262,7 @@ The scan terminates when the next position cursor returned by the server is <cod
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">decr</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"destination"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">smove</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"destination"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -16684,7 +16684,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <span class="p">];</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">memoryStorage</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">decr</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
+  <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">memoryStorage</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">zadd</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="nx">elements</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
 
