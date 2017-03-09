@@ -2692,17 +2692,9 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_scroll/&lt;scrollId&gt;</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
-<strong>Body:</strong></p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_scroll/&lt;scrollId&gt;[?scroll=&lt;scroll ttl]</code><br>
+<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
 </blockquote>
-
-<section class="http"></section>
-<pre class="highlight literate_coffeescript"><code>{
-  // The scroll parameter tells Elasticsearch to keep the search context open for another 1m.
-  "scroll": "1m"
-}
-</code></pre>
 
 <section class="others"></section>
 
@@ -2714,13 +2706,10 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <pre class="highlight literate_coffeescript"><code>{
   "controller": "document",
   "action": "scroll",
+  "scrollId": "<span class="nt">&lt;scrollId&gt;</span>",
 
-  "body": {
-    <span class="o">//</span> <span class="nx">The</span> <span class="s">"scrollId"</span> <span class="nx">provided</span> <span class="nx">with</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">scroll</span> <span class="nx">response</span><span class="p">,</span>
-    <span class="o">//</span> <span class="o">or</span> <span class="nx">from</span> <span class="nx">the</span> <span class="nx">initial</span> <span class="nx">search</span> <span class="nx">request</span> <span class="k">if</span> <span class="nx">it</span> <span class="o">is</span> <span class="nx">the</span> <span class="nx">first</span> <span class="nx">scroll</span> <span class="nx">call</span> 
-    <span class="s">"scrollId"</span><span class="o">:</span> <span class="s">"&lt;scrollId&gt;"</span>
-    <span class="o">//</span> <span class="nx">The</span> <span class="nx">scroll</span> <span class="nx">parameter</span> <span class="nx">tells</span> <span class="nx">Elasticsearch</span> <span class="nx">to</span> <span class="nx">keep</span> <span class="nx">the</span> <span class="nx">scroll</span> <span class="nx">session</span> <span class="nx">open</span> <span class="k">for</span> <span class="nx">another</span> <span class="mi">1</span><span class="nx">m</span><span class="p">.</span>
-    <span class="s">"scroll"</span><span class="o">:</span> <span class="s">"1m"</span>
+  // Optional: time to live of the cursor
+  "scroll": "1m"
   }
 }
 </code></pre>
