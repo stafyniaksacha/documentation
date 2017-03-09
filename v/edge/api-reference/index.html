@@ -9533,58 +9533,6 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 
 <p><a href="https://redis.io/commands/zrangebylex">[<em>Redis documentation</em>]</a></p>
 
-<h2 id="zrevrangebylex">zrevrangebylex</h2>
-
-<section class="http"></section>
-
-<blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrangebylex/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
-</blockquote>
-
-<section class="others"></section>
-
-<blockquote>
-<p>Query</p>
-</blockquote>
-
-<section class="others"></section>
-<pre class="highlight literate_coffeescript"><code>{
-  "controller": "ms",
-  "action": "zrevrangebylex",
-  "_id": "<span class="nt">&lt;key&gt;</span>",
-  "min": "<span class="nt">&lt;min</span> <span class="na">interval</span><span class="nt">&gt;</span>",
-  "max": "<span class="nt">&lt;max</span> <span class="na">interval</span><span class="nt">&gt;</span>",
-
-  // optional
-  "limit": <span class="p">[</span><span class="nv">&lt;offset&gt;, &lt;count&gt;</span><span class="p">]</span>
-}
-</code></pre>
-
-<blockquote>
-<p>Response</p>
-</blockquote>
-<pre class="highlight literate_coffeescript"><code>{
-  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
-  "status": 200,
-  "error": null,
-  "controller": "ms",
-  "action": "zrevrangebylex",
-  "collection": null,
-  "index": null,
-  "metadata": null,
-  "result": <span class="err">[</span>
-    <span class="s">"..."</span><span class="p">,</span>
-    <span class="s">"element2"</span><span class="p">,</span>
-    <span class="s">"element1"</span>
-  ]
-}
-</code></pre>
-
-<p>Identical to <a href="#zrangebylex">zrangebylex</a> except that the sorted set is traversed in descending order.</p>
-
-<p><a href="https://redis.io/commands/zrevrangebylex">[<em>Redis documentation</em>]</a></p>
-
 <h2 id="zrangebyscore">zrangebyscore</h2>
 
 <section class="http"></section>
@@ -9959,6 +9907,58 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <p>Identical to <a href="#zrange">zrange</a>, except that the sorted set is traversed in descending order.</p>
 
 <p><a href="https://redis.io/commands/zrevrange">[<em>Redis documentation</em>]</a></p>
+
+<h2 id="zrevrangebylex">zrevrangebylex</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrangebylex/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count]</code><br>
+<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "ms",
+  "action": "zrevrangebylex",
+  "_id": "<span class="nt">&lt;key&gt;</span>",
+  "min": "<span class="nt">&lt;min</span> <span class="na">interval</span><span class="nt">&gt;</span>",
+  "max": "<span class="nt">&lt;max</span> <span class="na">interval</span><span class="nt">&gt;</span>",
+
+  // optional
+  "limit": <span class="p">[</span><span class="nv">&lt;offset&gt;, &lt;count&gt;</span><span class="p">]</span>
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "status": 200,
+  "error": null,
+  "controller": "ms",
+  "action": "zrevrangebylex",
+  "collection": null,
+  "index": null,
+  "metadata": null,
+  "result": <span class="err">[</span>
+    <span class="s">"..."</span><span class="p">,</span>
+    <span class="s">"element2"</span><span class="p">,</span>
+    <span class="s">"element1"</span>
+  ]
+}
+</code></pre>
+
+<p>Identical to <a href="#zrangebylex">zrangebylex</a> except that the sorted set is traversed in descending order.</p>
+
+<p><a href="https://redis.io/commands/zrevrangebylex">[<em>Redis documentation</em>]</a></p>
 
 <h2 id="zrevrangebyscore">zrevrangebyscore</h2>
 
