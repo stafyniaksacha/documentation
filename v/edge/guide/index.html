@@ -922,6 +922,94 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<h3 id="document-metadata">Document metadata</h3>
+
+<p>When you create or update a document, Kuzzle adds metadatas. These metadatas describe the life-cycle of the document.
+They are available in the <code class="prettyprint">_kuzzle_info</code> part of a document:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AVkDLAdCsT6qHI7MxLz4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25811607</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey! Ho!"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816934209</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updater"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deletedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<ul>
+<li><code class="prettyprint">author</code>: The author identifier</li>
+<li><code class="prettyprint">createdAt</code>: The UNIX Timestamp of the document creation (create or replace)</li>
+<li><code class="prettyprint">updatedAt</code>: The UNIX Timestamp of the last document update, or <code class="prettyprint">null</code> if no update has been made</li>
+<li><code class="prettyprint">updater</code>: The updater identifier, or <code class="prettyprint">null</code> if no update has been made</li>
+<li><code class="prettyprint">active</code>: Always <code class="prettyprint">true</code> for now</li>
+<li><code class="prettyprint">deletedAt</code>: Always <code class="prettyprint">null</code> for now</li>
+</ul>
+
+<p>They can be used in search queries to filter and sort documents like a normal document field:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"_kuzzle_info.createdAt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"lte"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816930000</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Which gives, as a result, the following response:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e00cf6d6-8983-498b-8481-96a1fe1b5d46"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"took"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timed_out"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_shards"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"successful"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"hits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AVkDK9iNsT6qHI7MxLz3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816922252</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updater"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"deletedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"max_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25811607</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <h3 id="document-mapping">Document mapping</h3>
 
 <p>As previously said, Kuzzle relies on Elasticsearch to persist documents. Elasticsearch uses a mapping internally to match
