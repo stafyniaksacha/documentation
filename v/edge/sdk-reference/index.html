@@ -4402,10 +4402,11 @@ There is a small delay between documents creation and their existence in our sea
 <p>Returns the newly created <code class="prettyprint">Room</code> object.</p>
 
 <h2 id="scroll">scroll</h2>
-<pre class="highlight javascript"><code><span class="nx">kuzzle</span>
+<pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
+<span class="nx">kuzzle</span>
   <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">scroll</span><span class="p">(</span><span class="nx">scrollId</span><span class="p">,</span> <span class="p">{</span><span class="na">scroll</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">documents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nb">document</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">scroll</span><span class="p">(</span><span class="nx">scrollId</span><span class="p">,</span> <span class="p">{</span><span class="na">scroll</span><span class="p">:</span> <span class="s1">'1m'</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">searchResult</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">searchResult</span><span class="p">.</span><span class="nx">getDocuments</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nb">document</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
     <span class="p">});</span>
   <span class="p">});</span>
@@ -4413,9 +4414,9 @@ There is a small delay between documents creation and their existence in our sea
 <span class="c1">// Using promises (NodeJS only)</span>
 <span class="nx">kuzzle</span>
   <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">scrollPromise</span><span class="p">(</span><span class="nx">scrollId</span><span class="p">,</span> <span class="p">{</span><span class="na">scroll</span><span class="p">:</span> <span class="s2">"1m"</span><span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">documents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nb">document</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">scrollPromise</span><span class="p">(</span><span class="nx">scrollId</span><span class="p">,</span> <span class="p">{</span><span class="na">scroll</span><span class="p">:</span> <span class="s1">'1m'</span><span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">searchResult</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">searchResult</span><span class="p">.</span><span class="nx">getDocuments</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="nb">document</span> <span class="o">=&gt;</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
     <span class="p">});</span>
   <span class="p">});</span>
@@ -4425,16 +4426,16 @@ There is a small delay between documents creation and their existence in our sea
 
 <span class="n">kuzzle</span>
   <span class="o">.</span><span class="na">collection</span><span class="o">(</span><span class="s">"collection"</span><span class="o">,</span> <span class="s">"index"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">scroll</span><span class="o">(</span><span class="n">scrollId</span><span class="o">,</span> <span class="n">opts</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">DocumentList</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="o">.</span><span class="na">scroll</span><span class="o">(</span><span class="n">scrollId</span><span class="o">,</span> <span class="n">opts</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">SearchResult</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">DocumentList</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">for</span> <span class="o">(</span><span class="n">Document</span> <span class="n">doc</span> <span class="o">:</span> <span class="n">result</span><span class="o">.</span><span class="na">getDocuments</span><span class="o">())</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">SearchResult</span> <span class="n">searchResult</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">for</span> <span class="o">(</span><span class="n">Document</span> <span class="n">doc</span> <span class="o">:</span> <span class="n">searchResult</span><span class="o">.</span><span class="na">getDocuments</span><span class="o">())</span> <span class="o">{</span>
         <span class="c1">// Get documents</span>
       <span class="o">}</span>
 
-      <span class="n">result</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span> <span class="c1">// return total of documents returned</span>
+      <span class="n">searchResult</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span> <span class="c1">// return total of documents returned</span>
 
-      <span class="n">result</span><span class="o">.</span><span class="na">getAggregations</span><span class="o">():</span> <span class="c1">// return a JSONObject representing the aggregations response</span>
+      <span class="n">searchResult</span><span class="o">.</span><span class="na">getAggregations</span><span class="o">():</span> <span class="c1">// return a JSONObject representing the aggregations response</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
@@ -4473,13 +4474,8 @@ There is a small delay between documents creation and their existence in our sea
 <blockquote>
 <p>Callback response:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">&lt;Document&gt;</span><span class="p">,</span><span class="w"> </span><span class="err">&lt;Document&gt;</span><span class="p">,</span><span class="w"> </span><span class="err">&lt;Document&gt;</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"aggregations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"aggs_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"aggregation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+
+<p>Resolves to an instantiated <a href="#searchresult">SearchResult</a> object.</p>
 
 <aside class="notice">
   There is a small delay between documents creation and their existence in our search layer, usually a couple of seconds. That means that a document that was just been created won&rsquo;t be returned by this function
@@ -4488,7 +4484,7 @@ There is a small delay between documents creation and their existence in our sea
 <p>Returns the next page of the scroll session, and the <code class="prettyprint">scrollId</code> to be used by the next <code class="prettyprint">scroll</code> action.
 A scroll session is always initiated by a <code class="prettyprint">search</code> action by using the <code class="prettyprint">scroll</code> argument; more information below.</p>
 
-<h3 id="search-filters-options-callback">search(filters, [options], callback)</h3>
+<h3 id="scroll-scrollid-options-callback">scroll(scrollId, [options], callback)</h3>
 
 <table><thead>
 <tr>
@@ -4499,7 +4495,7 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">scrollId</code></td>
-<td>JSON object</td>
+<td>string</td>
 <td>The &ldquo;scrollId&rdquo; provided with the last scroll response or from the initial search request if it is the first scroll call</td>
 </tr>
 <tr>
@@ -4533,7 +4529,7 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 <tr>
 <td><code class="prettyprint">scroll</code></td>
 <td>string</td>
-<td>(mandatory) Re-initializes the scroll session timeout to its value</td>
+<td>Re-initializes the scroll session timeout to its value. If not defined, the scroll timeout is defaulted to a Kuzzle configuration</td>
 <td><code class="prettyprint">undefined</code></td>
 </tr>
 </tbody></table>
@@ -4544,13 +4540,7 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 
 <h3 id="callback-response">Callback response</h3>
 
-<p>Resolves to a <code class="prettyprint">JSON object</code> containing:</p>
-
-<ul>
-<li>the total number of matched documents</li>
-<li>an <code class="prettyprint">array</code> of <code class="prettyprint">Document</code> objects</li>
-<li>an <code class="prettyprint">array</code> of <code class="prettyprint">aggregations</code> objects if some are provided in the request (see the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/search-aggregations.html">Elasticsearch documentation</a> for more details)</li>
-</ul>
+<p>Resolves to an instantiated <a href="#searchresult">SearchResult</a> object.</p>
 
 <h2 id="search">search</h2>
 <pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">filter</span> <span class="o">=</span> <span class="p">{</span>
@@ -4585,10 +4575,11 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
   <span class="p">}</span>
 <span class="p">};</span>
 
+<span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
 <span class="nx">kuzzle</span>
   <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">filter</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">documents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nb">document</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">filter</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">searchResult</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">searchResult</span><span class="p">.</span><span class="nx">getDocuments</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
     <span class="p">});</span>
   <span class="p">});</span>
@@ -4597,8 +4588,8 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 <span class="nx">kuzzle</span>
   <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">searchPromise</span><span class="p">({})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">documents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nb">document</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">searchResult</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">searchResult</span><span class="p">.</span><span class="nx">getDocuments</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="nb">document</span> <span class="o">=&gt;</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
     <span class="p">});</span>
   <span class="p">});</span>
@@ -4646,16 +4637,16 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 
 <span class="n">kuzzle</span>
   <span class="o">.</span><span class="na">collection</span><span class="o">(</span><span class="s">"collection"</span><span class="o">,</span> <span class="s">"index"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">search</span><span class="o">(</span><span class="n">userFilter</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">DocumentList</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="o">.</span><span class="na">search</span><span class="o">(</span><span class="n">filter</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">SearchResult</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">DocumentList</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">for</span> <span class="o">(</span><span class="n">Document</span> <span class="n">doc</span> <span class="o">:</span> <span class="n">result</span><span class="o">.</span><span class="na">getDocuments</span><span class="o">())</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">SearchResult</span> <span class="n">searchResult</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">for</span> <span class="o">(</span><span class="n">Document</span> <span class="n">doc</span> <span class="o">:</span> <span class="n">searchResult</span><span class="o">.</span><span class="na">getDocuments</span><span class="o">())</span> <span class="o">{</span>
         <span class="c1">// Get documents</span>
       <span class="o">}</span>
 
-      <span class="n">result</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span> <span class="c1">// return total of documents returned</span>
+      <span class="n">searchResult</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span> <span class="c1">// return total of documents returned</span>
 
-      <span class="n">result</span><span class="o">.</span><span class="na">getAggregations</span><span class="o">():</span> <span class="c1">// return a JSONObject representing the aggregations response</span>
+      <span class="n">searchResult</span><span class="o">.</span><span class="na">getAggregations</span><span class="o">():</span> <span class="c1">// return a JSONObject representing the aggregations response</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
@@ -4727,16 +4718,11 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 <blockquote>
 <p>Callback response:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">&lt;Document&gt;</span><span class="p">,</span><span class="w"> </span><span class="err">&lt;Document&gt;</span><span class="p">,</span><span class="w"> </span><span class="err">&lt;Document&gt;</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"aggregations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"aggs_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"aggregation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+
+<p>Resolves to an instantiated <a href="#searchresult">SearchResult</a> object.</p>
 
 <aside class="notice">
-There is a small delay between documents creation and their existence in our search layer, usually a couple of seconds. That means that a document that was just been created won&rsquo;t be returned by this function
+  There is a small delay between documents creation and their existence in our search layer, usually a couple of seconds. That means that a document that was just been created won&rsquo;t be returned by this function
 </aside>
 
 <p>Executes a search on the data collection.</p>
@@ -4786,8 +4772,20 @@ There is a small delay between documents creation and their existence in our sea
 <tr>
 <td><code class="prettyprint">scroll</code></td>
 <td>string</td>
-<td>Indicates to start a scroll session by providing the session timeout</td>
+<td>Start a scroll session, with a time to live equals to this parameter&rsquo;s value following the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/common-options.html#time-units">Elastisearch time format</a></td>
 <td><code class="prettyprint">undefined</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">from</code></td>
+<td>number</td>
+<td>Provide the starting offset of the request (used to paginate results)</td>
+<td><code class="prettyprint">0</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">size</code></td>
+<td>number</td>
+<td>Provide the maximum number of results of the request (used to paginate results)</td>
+<td><code class="prettyprint">10</code></td>
 </tr>
 </tbody></table>
 
@@ -4797,13 +4795,7 @@ There is a small delay between documents creation and their existence in our sea
 
 <h3 id="callback-response">Callback response</h3>
 
-<p>Resolves to a <code class="prettyprint">JSON object</code> containing:</p>
-
-<ul>
-<li>the total number of matched documents</li>
-<li>an <code class="prettyprint">array</code> of <code class="prettyprint">Document</code> objects</li>
-<li>an <code class="prettyprint">array</code> of <code class="prettyprint">aggregations</code> objects if some are provided in the request (see the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/search-aggregations.html">Elasticsearch documentation</a> for more details)</li>
-</ul>
+<p>Resolves to an instantiated <a href="#searchresult">SearchResult</a> object.</p>
 
 <h2 id="setheaders">setHeaders</h2>
 <pre class="highlight javascript"><code><span class="nx">kuzzle</span>
@@ -19497,6 +19489,235 @@ Unsubscribes first if this Room object was already listening to events.</p>
 <h3 id="return-value">Return value</h3>
 
 <p>Returns this <code class="prettyprint">Room</code> object to allow chaining.</p>
+
+            <h1 id="searchresult">SearchResult</h1>
+
+<p>This object is the result of a <a href="#search">search</a> or a <a href="#scroll">scroll</a> request, allowing to manipulate the result and do subsequent requests.</p>
+
+<h2 id="constructors">Constructors</h2>
+<pre class="highlight javascript"><code><span class="cm">/*
+ Constructors are not exposed in the JS/Node SDK.
+ SearchResult objects are returned by search and scroll Collection methods.
+ */</span>
+
+<span class="nx">kuzzle</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">).</span><span class="nx">search</span><span class="p">({},</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">searchResult</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// searchResult is a SearchResult object</span>
+<span class="p">});</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">JSONObject</span> <span class="n">filter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+
+<span class="n">kuzzle</span>
+  <span class="o">.</span><span class="na">collection</span><span class="o">(</span><span class="s">"collection"</span><span class="o">,</span> <span class="s">"index"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">search</span><span class="o">(</span><span class="n">filter</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">SearchResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">SearchResult</span> <span class="n">searchResult</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">for</span> <span class="o">(</span><span class="n">Document</span> <span class="n">doc</span> <span class="o">:</span> <span class="n">result</span><span class="o">.</span><span class="na">getDocuments</span><span class="o">())</span> <span class="o">{</span>
+        <span class="c1">// fetched documents</span>
+      <span class="o">}</span>
+
+      <span class="n">result</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span> <span class="c1">// returns the total number of documents returnable</span>
+
+      <span class="n">result</span><span class="o">.</span><span class="na">getAggregations</span><span class="o">():</span> <span class="c1">// returns a JSONObject representing the aggregations response</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onError</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+      <span class="c1">// Handle error</span>
+    <span class="o">}</span>
+  <span class="o">});</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
+
+
+<span class="nv">$filters</span> <span class="o">=</span> <span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">[];</span>
+
+<span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
+<span class="nv">$dataCollection</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$searchResult</span> <span class="o">=</span> <span class="nv">$dataCollection</span><span class="o">-&gt;</span><span class="na">search</span><span class="p">(</span><span class="nv">$filters</span><span class="p">);</span>
+
+  <span class="c1">// $searchResult instanceof SearchResult
+</span>  <span class="nv">$searchResult</span><span class="o">-&gt;</span><span class="na">getTotal</span><span class="p">();</span>
+
+  <span class="k">foreach</span><span class="p">(</span><span class="nv">$searchResult</span><span class="o">-&gt;</span><span class="na">getDocuments</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$document</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// $document instanceof Document
+</span>  <span class="p">}</span>
+
+  <span class="c1">// return an array representing the aggregations response
+</span>  <span class="nv">$searchResult</span><span class="o">-&gt;</span><span class="na">getAggregations</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="document-collection-total-documents-aggregations-options-filters-previous">Document(collection, total, documents, aggregations, options, filters, [previous])</h3>
+
+<table><thead>
+<tr>
+<th>Arguments</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td>Collection</td>
+<td>An instantiated Collection object</td>
+</tr>
+<tr>
+<td><code class="prettyprint">total</code></td>
+<td>integer</td>
+<td>The total number of results of the search/scroll request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">documents</code></td>
+<td>Document[]</td>
+<td>An array of instantiated Document objects</td>
+</tr>
+<tr>
+<td><code class="prettyprint">aggregations</code></td>
+<td>object</td>
+<td>The result of an aggregation produced by a search request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td>object</td>
+<td>The arguments of the search/scroll request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filters</code></td>
+<td>object</td>
+<td>The filters of the search request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">previous</code></td>
+<td>SearchRequest</td>
+<td>The previous SearchResult produced by a previous search/scroll request (see <a href="#fetchnext">fetchNext</a>)</td>
+</tr>
+</tbody></table>
+
+<p><strong>Note:</strong> this constructor is meant to be called internally when retrieving results from a search or a scroll request.</p>
+
+<h2 id="properties">Properties</h2>
+
+<table><thead>
+<tr>
+<th>Property name</th>
+<th>Type</th>
+<th>Description</th>
+<th>get/set</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">aggregations</code></td>
+<td>object</td>
+<td>The result of an aggregation produced by a search request</td>
+<td>get</td>
+</tr>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td>Collection</td>
+<td>The data collection associated to this document</td>
+<td>get</td>
+</tr>
+<tr>
+<td><code class="prettyprint">documents</code></td>
+<td>Document[]</td>
+<td>An array of instantiated Document objects</td>
+<td>get</td>
+</tr>
+<tr>
+<td><code class="prettyprint">fetchedDocument</code></td>
+<td>number</td>
+<td>Represents the offset of the last document in the current SearchResult set</td>
+<td>get/set</td>
+</tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td>object</td>
+<td>The arguments of the search/scroll request</td>
+<td>get</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filters</code></td>
+<td>object</td>
+<td>The filters of the search request</td>
+<td>get</td>
+</tr>
+<tr>
+<td><code class="prettyprint">total</code></td>
+<td>integer</td>
+<td>The total number of results of the search/scroll request</td>
+<td>get</td>
+</tr>
+</tbody></table>
+
+<h2 id="getters">Getters</h2>
+
+<p>| Getter name | Type | Description |
+| <code class="prettyprint">getAggregations()</code> | object | Returns the <code class="prettyprint">aggregation</code> property value |
+| <code class="prettyprint">getCollection()</code> | Collection | Returns the <code class="prettyprint">collection</code> property value |
+| <code class="prettyprint">getDocuments()</code> | Document[] | Returns the <code class="prettyprint">documents</code> property value |
+| <code class="prettyprint">getFetchedDocument()</code> | number | Returns the <code class="prettyprint">fetchedDocument</code> property value |
+| <code class="prettyprint">getOptions()</code> | object | Returns the <code class="prettyprint">options</code> property value |
+| <code class="prettyprint">getFilters()</code> | object | Returns the <code class="prettyprint">filters</code> property value |
+| <code class="prettyprint">getTotal()</code> | integer | Returns the <code class="prettyprint">total</code> property value |</p>
+
+<h2 id="fetchnext">fetchNext</h2>
+<pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
+<span class="nx">searchResult</span><span class="p">.</span><span class="nx">fetchNext</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">nextSearchResult</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// called once the fetchNext action has been completed</span>
+  <span class="c1">// nextSearchResult is an instantiated SearchResult object</span>
+<span class="p">});</span>
+
+<span class="c1">// Using promises (NodeJS)</span>
+<span class="nx">searchResult</span><span class="p">.</span><span class="nx">fetchNextPromise</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">nextSearchResult</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// called once the fetchNext action has been completed</span>
+    <span class="c1">// nextSearchResult is an instantiated SearchResult object</span>
+  <span class="p">});</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">searchResult</span><span class="o">.</span><span class="na">fetchNext</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">SearchResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">SearchResult</span> <span class="n">nextSearchResult</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// called once the fetchNext action has been completed</span>
+    <span class="c1">// nextSearchResult is an instantiated SearchResult object</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onError</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Handle error</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">\Kuzzle\SearchResult</span><span class="p">;</span>
+
+<span class="c1">// ...
+</span>
+<span class="sd">/**
+ * @var $searchResult SearchResult
+ */</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$nextSearchResult</span> <span class="o">=</span> <span class="nv">$searchResult</span><span class="o">-&gt;</span><span class="na">fetchNext</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle error
+</span><span class="p">}</span>
+</code></pre>
+
+<p>Fetches the next SearchResult, by triggering a new search/scroll request depending on the options and filters of the SearchResult.</p>
+
+<p>If the previous request was a search or a scroll action which provided a <code class="prettyprint">scroll</code> argument,
+<code class="prettyprint">fetchNext</code> will use the <code class="prettyprint">scrollId</code> retrieved from the current result to make a new scroll request.</p>
+
+<p>If the previous request was a search action which provided <code class="prettyprint">from</code> and <code class="prettyprint">size</code> arguments,
+<code class="prettyprint">fetchNext</code> will add <code class="prettyprint">size</code> to <code class="prettyprint">from</code> and make a new search request.</p>
 
             <h1 id="security">Security</h1>
 
