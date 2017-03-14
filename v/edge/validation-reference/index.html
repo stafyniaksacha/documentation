@@ -177,7 +177,7 @@
 
 <p>The property name defines the path of the field in the document. The root fields will use their name directly. Sub fields contained in objects will use their path with the pattern &ldquo;objectField/<subField>[/ &hellip;]&rdquo;.</p>
 
-<h3 id="type">type</h3>
+<h2 id="field-type">Field:type</h2>
 
 <p><strong>Possible values (Elasticsearch types)</strong>:</p>
 
@@ -207,7 +207,7 @@
 
 <p><strong>Documentation</strong>: You can find more information about Elasticsearch types in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html">Elasticearch documentation</a></p>
 
-<h3 id="mandatory">mandatory</h3>
+<h2 id="field-mandatory">Field:mandatory</h2>
 
 <p><strong>Possible values</strong>: Boolean true or false</p>
 
@@ -215,7 +215,7 @@
 
 <p><strong>Purpose</strong>: Specifies whether the field must be present and different from the NULL value.</p>
 
-<h3 id="defaultvalue">defaultValue</h3>
+<h2 id="field-defaultvalue">Field:defaultValue</h2>
 
 <p><strong>Possible values</strong>: Any value that fits the type of the field. If the field is multi-valued, the default value <strong>MUST</strong> be an array of values (even if it contains only one value).</p>
 
@@ -223,7 +223,7 @@
 
 <p><strong>Behavior</strong> : Applies the default value to the given field when it is not specified or its value is <code class="prettyprint">null</code>.</p>
 
-<h3 id="description">description</h3>
+<h2 id="field-description">Field:description</h2>
 
 <p><strong>Possible values</strong>: Any string describing the field, its content and its conditions.</p>
 
@@ -231,9 +231,9 @@
 
 <p><strong>Purpose</strong>: Allows the author of the validation specification to remember what is the field&rsquo;s purpose (can also contain keywords to search the field in a configuration file).</p>
 
-<h3 id="multivalued">multivalued</h3>
+<h2 id="field-multivalued">Field:multivalued</h2>
 
-<h4 id="value">value</h4>
+<h3 id="value">value</h3>
 
 <p><strong>Possible values</strong>: Boolean true or false</p>
 
@@ -241,7 +241,7 @@
 
 <p><strong>Purpose</strong>: Specifies whether the field must contain an array of values or not. If true, fields[field].multivalued.minCount and fields[field].multivalued.maxCount can be used. <strong>If true, a scalar can not be provided for the field</strong>.</p>
 
-<h4 id="mincount">minCount</h4>
+<h3 id="mincount">minCount</h3>
 
 <p><strong>Possible values</strong>: A positive integer, less or equal to multivalued.maxCount</p>
 
@@ -249,7 +249,7 @@
 
 <p><strong>Purpose</strong>: Defines the minimum (<strong>inclusive</strong>) count of items provided in the multi-valued field.</p>
 
-<h4 id="maxcount">maxCount</h4>
+<h3 id="maxcount">maxCount</h3>
 
 <p><strong>Possible values</strong>: A positive integer, greater or equal to multivalued.minCount</p>
 
@@ -257,11 +257,11 @@
 
 <p><strong>Purpose</strong>: Defines the maximum (<strong>inclusive</strong>) count of items provided in the multi-valued field.</p>
 
-<h3 id="typeoptions">typeOptions</h3>
+<h2 id="field-typeoptions">Field:typeOptions</h2>
 
 <p>This configuration is available depending on the types of the field.</p>
 
-<h4 id="range">range</h4>
+<h3 id="range">range</h3>
 
 <p><strong>Associated types</strong>: integer, float, date</p>
 
@@ -300,7 +300,7 @@
 
 <aside class="warning">Beware when using dates as range values: always make sure that, at some point, your rule won&rsquo;t prevent all documents from entering the system.</aside>
 
-<h4 id="length">length</h4>
+<h3 id="length">length</h3>
 
 <p><strong>Associated type</strong>: string</p>
 
@@ -317,7 +317,7 @@
 
 <p><strong>Purpose</strong>: Defines a minimum and/or a maximum (<strong>inclusive</strong>) values for the field.</p>
 
-<h4 id="notempty">notEmpty</h4>
+<h3 id="notempty">notEmpty</h3>
 
 <p><strong>Associated type</strong>: email, ip_address, url</p>
 
@@ -327,7 +327,7 @@
 
 <p><strong>Purpose</strong>: Specifies whether a field can contain empty strings or not. If set to false, the field must either be empty or fulfill the field requirement (follow an email format by example).</p>
 
-<h4 id="formats">formats</h4>
+<h3 id="formats">formats</h3>
 
 <p><strong>Associated type</strong>: date</p>
 
@@ -425,7 +425,7 @@ Non strict mode is slightly different from the one explained and implemented by 
 Non strict mode has been implemented to fit Elasticsearch date formats but we recommend to use strict mode when possible.
 </aside>
 
-<h4 id="strict">strict</h4>
+<h3 id="strict">strict</h3>
 
 <p><strong>Associated type</strong>: object</p>
 
@@ -435,7 +435,7 @@ Non strict mode has been implemented to fit Elasticsearch date formats but we re
 
 <p><strong>Purpose</strong>: Specifies whether the field can contain non declared fields. If true, a document that attempts to add a not declared field will be rejected.</p>
 
-<h4 id="values">values</h4>
+<h3 id="values">values</h3>
 
 <p><strong>Associated type</strong>: enum (mandatory)</p>
 
@@ -443,7 +443,7 @@ Non strict mode has been implemented to fit Elasticsearch date formats but we re
 
 <p><strong>Purpose</strong>:Defines all valid values for an enum field. All field values have to match one of the valid values for a multi-valued field.</p>
 
-<h4 id="shapetypes">shapeTypes</h4>
+<h3 id="shapetypes">shapeTypes</h3>
 
 <p><strong>Associated type</strong>: geo_shape (mandatory)</p>
 
@@ -467,13 +467,13 @@ Non strict mode has been implemented to fit Elasticsearch date formats but we re
 
 <p><strong>Documentation</strong>: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html#input-structure">Elasticsearch documentation</a></p>
 
-            <h2 id="validators">Validators</h2>
+            <h1 id="validators">Validators</h1>
 
 <p>The <code class="prettyprint">validators</code> property is an array of <a href="/real-time-filters">DSL filters</a>. Each filters have to match in order for the document to be valid.</p>
 
 <aside class="warning">You have to take care about the fields you allow to be empty or undefined.</aside>
 
-<h4 id="structure">Structure</h4>
+<h2 id="structure">Structure</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"myIndex"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"myCollection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
