@@ -8471,10 +8471,7 @@ The scan terminates when the cursor returned by the server is 0.</p>
   "by": "<span class="nt">&lt;external</span> <span class="na">key</span> <span class="na">pattern</span><span class="nt">&gt;</span>",
   "direction": "<span class="p">[</span><span class="nv">ASC|DESC</span><span class="p">]</span>",
   "get": <span class="p">[</span><span class="nv">"pattern1", "pattern2", "..."</span><span class="p">]</span>,
-  "limit": {
-    <span class="s">"offset"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">offset</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="s">"count"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">count</span><span class="o">&gt;</span>
-  },
+  "limit": <span class="p">[</span><span class="nv">&lt;offset&gt;, &lt;count&gt;</span><span class="p">]</span>,
   "store": "<span class="nt">&lt;destination</span> <span class="na">key</span><span class="nt">&gt;</span>"
 }
 </code></pre>
@@ -8496,10 +8493,7 @@ The scan terminates when the cursor returned by the server is 0.</p>
     <span class="s">"by"</span><span class="o">:</span> <span class="s">"&lt;external key pattern&gt;"</span><span class="p">,</span>
     <span class="s">"direction"</span><span class="o">:</span> <span class="s">"[ASC|DESC]"</span><span class="p">,</span>
     <span class="s">"get"</span><span class="o">:</span> <span class="p">[</span><span class="s">"pattern1"</span><span class="p">,</span> <span class="s">"pattern2"</span><span class="p">,</span> <span class="s">"..."</span><span class="p">],</span>
-    <span class="s">"limit"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"offset"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">offset</span><span class="o">&gt;</span><span class="p">,</span>
-      <span class="s">"count"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">count</span><span class="o">&gt;</span>
-    <span class="p">},</span>
+    <span class="s">"limit"</span><span class="o">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="nx">offset</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">count</span><span class="o">&gt;</span><span class="p">],</span>
     <span class="s">"store"</span><span class="o">:</span> <span class="s">"&lt;destination key&gt;"</span>
   }
 }
@@ -8535,7 +8529,7 @@ By default, sorting is numeric and elements are compared by their value interpre
 <li><code class="prettyprint">by</code>: instead of sorting by values directly, sorts by values contained in external keys, using a pattern completed by values of the list/set/sorted set to sort</li>
 <li><code class="prettyprint">direction</code>: sort in ascendant or descendant order</li>
 <li><code class="prettyprint">get</code>: instead of returning the sorted values directly, returns the values contained in external keys, using patterns completed by the sorted values</li>
-<li><code class="prettyprint">limit</code>: limits the result set to <code class="prettyprint">count</code> elements starting from the <code class="prettyprint">offset</code> position in the sorted result set</li>
+<li><code class="prettyprint">limit</code>: limits the result set to a range of matching elements (similar to <em>SELECT LIMIT offset, count</em> in SQL). Format: <code class="prettyprint">[&lt;offset(int)&gt;, &lt;count(int)&gt;]</code></li>
 <li><code class="prettyprint">store</code>: instead of returning the result set, stores it in a list at <code class="prettyprint">destination</code> key</li>
 </ul>
 
@@ -9811,8 +9805,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 
 <section class="http"></section>
 <pre class="highlight literate_coffeescript"><code>{
-  "min": "<span class="nt">&lt;min</span> <span class="na">interval</span><span class="nt">&gt;</span>",
-  "max": "<span class="nt">&lt;max</span> <span class="na">interval</span><span class="nt">&gt;</span>"
+  "min": <span class="nt">&lt;min</span> <span class="na">interval</span><span class="nt">&gt;</span>,
+  "max": <span class="nt">&lt;max</span> <span class="na">interval</span><span class="nt">&gt;</span>
 }
 </code></pre>
 
@@ -9828,8 +9822,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
   "action": "zremrangebyscore",
   "_id": "<span class="nt">&lt;key&gt;</span>",
   "body": {
-    <span class="s">"min"</span><span class="o">:</span> <span class="s">"&lt;min interval&gt;"</span><span class="p">,</span>
-    <span class="s">"max"</span><span class="o">:</span> <span class="s">"&lt;max interval&gt;"</span>
+    <span class="s">"min"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">min</span> <span class="nx">interval</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">"max"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">max</span> <span class="nx">interval</span><span class="o">&gt;</span>
   }
 }
 </code></pre>

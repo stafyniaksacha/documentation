@@ -6370,7 +6370,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">newLength</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -6475,7 +6475,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">bitcount</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">bitcount</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -6584,7 +6584,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
   <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">sourceKeys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"srckey1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"srckey2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">bitop</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"AND"</span><span class="o">,</span> <span class="n">sourceKeys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">bitop</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"AND"</span><span class="o">,</span> <span class="n">sourceKeys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -6694,7 +6694,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">bitpos</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">bitpos</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -6807,7 +6807,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">dbsize</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">dbsize</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -6898,7 +6898,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">decr</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">decr</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -6998,7 +6998,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">decrby</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">decrby</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -7104,7 +7104,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
   <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">del</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">del</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -7205,7 +7205,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
   <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">exists</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">exists</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -7301,7 +7301,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">expire</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">expire</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -7406,7 +7406,7 @@ It is internally based on Redis, and most of its functions are exposed by Kuzzle
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">expireat</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1488372354</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">expireat</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1488372354</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -7512,7 +7512,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">flushdb</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">flushdb</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -7632,7 +7632,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
     <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"Catania"</span><span class="o">)</span>
   <span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">geoadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">points</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">geoadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">points</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -8479,7 +8479,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">getbit</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">getbit</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">bit</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -8792,7 +8792,7 @@ The returned distance is expressed in meters by default.</p>
   <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">fields</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"field1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"field2"</span><span class="o">);</span>
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hdel</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">fields</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hdel</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">fields</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -8897,7 +8897,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hexists</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field1"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hexists</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field1"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">exists</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -9199,7 +9199,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hincrby</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hincrby</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -9309,7 +9309,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hincrbyfloat</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="mf">3.14159</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hincrbyfloat</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="mf">3.14159</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -9519,7 +9519,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hlen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hlen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -9970,7 +9970,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hset</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hset</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -10080,7 +10080,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hsetnx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hsetnx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -10190,7 +10190,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hstrlen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">hstrlen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"field"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -10391,7 +10391,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">incr</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">incr</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -10491,7 +10491,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">incrby</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="o">-</span><span class="mi">3</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">incrby</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="o">-</span><span class="mi">3</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -10902,7 +10902,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">linsert</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"after"</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="s">"bar"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">linsert</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"after"</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="s">"bar"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -11017,7 +11017,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">llen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">llen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -11215,7 +11215,7 @@ The returned distance is expressed in meters by default.</p>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"foo"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"bar"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"baz"</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">lpush</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">items</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">lpush</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">items</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -11320,7 +11320,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">lpushx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">lpushx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -11534,7 +11534,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">lrem</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">lrem</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -12093,7 +12093,7 @@ The returned distance is expressed in meters by default.</p>
   <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"value"</span><span class="o">,</span> <span class="s">"bar"</span><span class="o">))</span>
   <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"..."</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"value"</span><span class="o">,</span> <span class="s">"..."</span><span class="o">));</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">msetnx</span><span class="o">(</span><span class="n">entries</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">msetnx</span><span class="o">(</span><span class="n">entries</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">String</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -12299,7 +12299,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -12399,7 +12399,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pexpire</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">42000</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pexpire</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">42000</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -12504,7 +12504,7 @@ The returned distance is expressed in meters by default.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pexpireat</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1488540242465</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pexpireat</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1488540242465</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -12612,7 +12612,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"foo"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"bar"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"baz"</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pfadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">elements</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pfadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">elements</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -12719,7 +12719,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pfcount</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pfcount</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -12755,7 +12755,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 
 <p><a href="https://redis.io/commands/pfcount">[<em>Redis documentation</em>]</a></p>
 
-<h3 id="pfcount-key-options-callback">pfcount(key, [options], callback)</h3>
+<h3 id="pfcount-keys-options-callback">pfcount(keys, [options], callback)</h3>
 
 <table><thead>
 <tr>
@@ -12817,7 +12817,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pfmerge</span><span class="o">(</span><span class="err">'</span><span class="n">key</span><span class="err">'</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pfmerge</span><span class="o">(</span><span class="err">'</span><span class="n">key</span><span class="err">'</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -13119,7 +13119,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pttl</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">pttl</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">ttl</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -13723,7 +13723,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"foo"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"bar"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"baz"</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">rpush</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">items</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">rpush</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">items</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -13828,7 +13828,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">rpushx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">rpushx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"foo"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -13935,7 +13935,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"foo"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"bar"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"baz"</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">items</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">items</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -13971,7 +13971,7 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 
 <p><a href="https://redis.io/commands/sadd">[<em>Redis documentation</em>]</a></p>
 
-<h3 id="rpush-key-members-options-callback">rpush(key, members, [options], [callback])</h3>
+<h3 id="sadd-key-members-options-callback">sadd(key, members, [options], [callback])</h3>
 
 <table><thead>
 <tr>
@@ -14164,7 +14164,7 @@ The scan terminates when the next position cursor returned by the server is <cod
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">scard</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">scard</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -14373,7 +14373,7 @@ The scan terminates when the next position cursor returned by the server is <cod
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sdiffstore</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="s">"destination"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sdiffstore</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="s">"destination"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -14724,7 +14724,7 @@ The scan terminates when the next position cursor returned by the server is <cod
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">setnx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">setnx</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -14933,7 +14933,7 @@ The scan terminates when the next position cursor returned by the server is <cod
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sinterstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sinterstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -14987,7 +14987,7 @@ The scan terminates when the next position cursor returned by the server is <cod
 </tr>
 <tr>
 <td><code class="prettyprint">keys</code></td>
-<td>string</td>
+<td>array</td>
 <td>List of sets of unique values to intersect</td>
 </tr>
 <tr>
@@ -15020,6 +15020,10 @@ The scan terminates when the next position cursor returned by the server is <cod
 </tr>
 </tbody></table>
 
+<h3 id="return-value">Return value</h3>
+
+<p>Returns the <code class="prettyprint">MemoryStorage</code> object to allow chaining.</p>
+
 <h3 id="callback-response">Callback response</h3>
 
 <p>Resolves to an integer containing the number of elements in the stored intersection.</p>
@@ -15036,7 +15040,7 @@ The scan terminates when the next position cursor returned by the server is <cod
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sismember</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sismember</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -15241,7 +15245,7 @@ The scan terminates when the next position cursor returned by the server is <cod
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">smove</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"destination"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">smove</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"destination"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -15458,8 +15462,8 @@ While Kuzzle API supports the &ldquo;store&rdquo; option for this command, SDK m
 </tr>
 <tr>
 <td><code class="prettyprint">limit</code></td>
-<td>JSON object</td>
-<td>Limit the result set to <code class="prettyprint">count</code> (int) elements, starting from the <code class="prettyprint">offset</code> (int) position in the sorted result set</td>
+<td>array</td>
+<td>Limit the result set to a range of matching elements (similar to <em>SELECT LIMIT offset, count</em> in SQL).<br/>Format: <code class="prettyprint">[&lt;offset(int)&gt;, &lt;count(int)&gt;]</code></td>
 <td><code class="prettyprint">null</code></td>
 </tr>
 <tr>
@@ -15701,7 +15705,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"member1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"member2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">srem</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">members</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">srem</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">members</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -15931,7 +15935,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">strlen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">strlen</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -16131,7 +16135,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sunionstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">sunionstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -16335,7 +16339,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">touch</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">touch</span><span class="o">(</span><span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -16435,7 +16439,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">ttl</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">ttl</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">ttl</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -16638,7 +16642,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
   <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"score"</span><span class="o">,</span> <span class="mi">2</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"member"</span><span class="o">,</span> <span class="s">"bar"</span><span class="o">))</span>
   <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"score"</span><span class="o">,</span> <span class="mi">3</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"member"</span><span class="o">,</span> <span class="s">"baz"</span><span class="o">));</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">elements</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zadd</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">elements</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -16777,7 +16781,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zcard</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zcard</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -16873,7 +16877,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zcount</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zcount</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -17093,7 +17097,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zinterstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zinterstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -17208,7 +17212,7 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zlexcount</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"[b"</span><span class="o">,</span> <span class="s">"[f"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zlexcount</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"[b"</span><span class="o">,</span> <span class="s">"[f"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -17674,7 +17678,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zrank</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zrank</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -17777,7 +17781,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"foo"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"bar"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"baz"</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zrem</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">members</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zrem</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="n">members</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -17882,7 +17886,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zremrangebylex</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"[b"</span><span class="o">,</span> <span class="s">"(f"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zremrangebylex</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"[b"</span><span class="o">,</span> <span class="s">"(f"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -17992,7 +17996,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zremrangebyrank</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zremrangebyrank</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -18104,7 +18108,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zremrangebyscore</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zremrangebyscore</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -18573,7 +18577,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zrevrank</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zrevrank</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"member"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -18801,7 +18805,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
     <span class="c1">// resolved once the action has completed</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zscore</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"bar"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zscore</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"bar"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">double</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
@@ -18904,7 +18908,7 @@ First position starts at <code class="prettyprint">0</code>.</p>
 </code></pre>
 <pre class="highlight java"><code><span class="n">JSONArray</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"key1"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"key2"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"..."</span><span class="o">);</span>
 
-<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zunionstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;()</span> <span class="o">{</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">memoryStorage</span><span class="o">.</span><span class="na">zunionstore</span><span class="o">(</span><span class="s">"destination"</span><span class="o">,</span> <span class="n">keys</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// callback called once the action has completed</span>
