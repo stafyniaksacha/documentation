@@ -13284,7 +13284,7 @@ By default, snapshots are made every 10s, and these snapshots are stored for 1hr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getConfig</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getConfig</code><br>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -13310,287 +13310,117 @@ By default, snapshots are made every 10s, and these snapshots are stored for 1hr
   "action": "getConfig",
   "controller": "server",
   "result": {
-    <span class="s">"kuzzle"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"_"</span><span class="o">:</span> <span class="p">[</span>
-        <span class="s">"start"</span>
-      <span class="p">],</span>
-      <span class="s">"dump"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"dateFormat"</span><span class="o">:</span> <span class="s">"YYYYMMDD-HHmm"</span><span class="p">,</span>
-        <span class="s">"enabled"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
-        <span class="s">"gcore"</span><span class="o">:</span> <span class="s">"gcore"</span><span class="p">,</span>
-        <span class="s">"handledErrors"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"enabled"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-          <span class="s">"whitelist"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="s">"RangeError"</span><span class="p">,</span>
-            <span class="s">"TypeError"</span><span class="p">,</span>
-            <span class="s">"KuzzleError"</span><span class="p">,</span>
-            <span class="s">"InternalError"</span><span class="p">,</span>
-            <span class="s">"PluginImplementationError"</span>
-          <span class="p">]</span>
-        <span class="p">},</span>
-        <span class="s">"path"</span><span class="o">:</span> <span class="s">"./dump/"</span>
-      <span class="p">},</span>
-      <span class="s">"http"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"accessControlAllowOrigin"</span><span class="o">:</span> <span class="s">"*"</span><span class="p">,</span>
-        <span class="s">"routes"</span><span class="o">:</span> <span class="p">[</span>
-          <span class="p">{</span>
-            <span class="s">"action"</span><span class="o">:</span> <span class="s">"exists"</span><span class="p">,</span>
-            <span class="s">"controller"</span><span class="o">:</span> <span class="s">"collection"</span><span class="p">,</span>
-            <span class="s">"url"</span><span class="o">:</span> <span class="s">"/:index/:collection/_exists"</span><span class="p">,</span>
-            <span class="s">"verb"</span><span class="o">:</span> <span class="s">"get"</span>
-          <span class="p">},</span>
-          <span class="o">/*</span>
-           <span class="o">*</span> <span class="p">...</span> <span class="na">A</span> <span class="nx">long</span> <span class="nx">list</span> <span class="k">of</span> <span class="nx">http</span> <span class="nx">routes</span> <span class="p">...</span>
-           <span class="o">*/</span>
-        <span class="p">]</span>
-      <span class="p">},</span>
-      <span class="s">"plugins"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"common"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"object"</span><span class="o">:</span> <span class="p">{},</span>
-          <span class="s">"pipeTimeout"</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
-          <span class="s">"pipeWarnTime"</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
-          <span class="s">"workerPrefix"</span><span class="o">:</span> <span class="s">"kpw:"</span>
-        <span class="p">},</span>
-        <span class="s">"kuzzle-plugin-auth-passport-local"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"activated"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-          <span class="s">"config"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"algorithm"</span><span class="o">:</span> <span class="s">"sha1"</span><span class="p">,</span>
-            <span class="s">"digest"</span><span class="o">:</span> <span class="s">"hex"</span><span class="p">,</span>
-            <span class="s">"secret"</span><span class="o">:</span> <span class="s">"changeme"</span>
-          <span class="p">},</span>
-          <span class="s">"object"</span><span class="o">:</span> <span class="p">{},</span>
-          <span class="s">"version"</span><span class="o">:</span> <span class="s">"3.0.2"</span>
-        <span class="p">},</span>
-        <span class="s">"kuzzle-plugin-logger"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"activated"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-          <span class="s">"config"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"services"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"file"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"addDate"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                <span class="s">"outputs"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"error"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"filename"</span><span class="o">:</span> <span class="s">"kuzzle.log"</span><span class="p">,</span>
-                    <span class="s">"level"</span><span class="o">:</span> <span class="s">"warn"</span>
-                  <span class="p">}</span>
-                <span class="p">}</span>
-              <span class="p">},</span>
-              <span class="s">"stdout"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"level"</span><span class="o">:</span> <span class="s">"info"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"threads"</span><span class="o">:</span> <span class="mi">2</span>
-          <span class="p">},</span>
-          <span class="s">"object"</span><span class="o">:</span> <span class="p">{},</span>
-          <span class="s">"version"</span><span class="o">:</span> <span class="s">"2.0.5"</span>
-        <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s">"queues"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"cliQueue"</span><span class="o">:</span> <span class="s">"cli-queue"</span>
-      <span class="p">},</span>
-      <span class="s">"repositories"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"common"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"cacheTTL"</span><span class="o">:</span> <span class="mi">1440</span>
-        <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s">"security"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"default"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"role"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"*"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"actions"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"*"</span><span class="o">:</span> <span class="no">true</span>
-                <span class="p">}</span>
-              <span class="p">}</span>
-            <span class="p">}</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s">"jwt"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"algorithm"</span><span class="o">:</span> <span class="s">"HS256"</span><span class="p">,</span>
-          <span class="s">"expiresIn"</span><span class="o">:</span> <span class="s">"1h"</span><span class="p">,</span>
-          <span class="s">"secret"</span><span class="o">:</span> <span class="s">"Kuzzle rocks"</span>
-        <span class="p">},</span>
-        <span class="s">"restrictedProfileIds"</span><span class="o">:</span> <span class="p">[</span>
-          <span class="s">"default"</span>
-        <span class="p">],</span>
-        <span class="s">"standard"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"profiles"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"admin"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                  <span class="s">"allowInternalIndex"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                  <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"admin"</span>
-                <span class="p">}</span>
-              <span class="p">]</span>
-            <span class="p">},</span>
-            <span class="s">"anonymous"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                  <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"anonymous"</span>
-                <span class="p">}</span>
-              <span class="p">]</span>
-            <span class="p">},</span>
-            <span class="s">"default"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                  <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"default"</span>
-                <span class="p">}</span>
-              <span class="p">]</span>
-            <span class="p">}</span>
-          <span class="p">},</span>
-          <span class="s">"roles"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"admin"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"*"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"actions"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"*"</span><span class="o">:</span> <span class="no">true</span>
-                  <span class="p">}</span>
-                <span class="p">}</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"anonymous"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"auth"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"actions"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"checkToken"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                    <span class="s">"getCurrentUser"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                    <span class="s">"getMyRights"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                    <span class="s">"login"</span><span class="o">:</span> <span class="no">true</span>
-                  <span class="p">}</span>
-                <span class="p">},</span>
-                <span class="s">"server"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"actions"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"info"</span><span class="o">:</span> <span class="no">true</span>
-                  <span class="p">}</span>
-                <span class="p">}</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"default"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"controllers"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"auth"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"actions"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"checkToken"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                    <span class="s">"getCurrentUser"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                    <span class="s">"getMyRights"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                    <span class="s">"logout"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                    <span class="s">"updateSelf"</span><span class="o">:</span> <span class="no">true</span>
-                  <span class="p">}</span>
-                <span class="p">},</span>
-                <span class="s">"server"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"actions"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"info"</span><span class="o">:</span> <span class="no">true</span>
-                  <span class="p">}</span>
-                <span class="p">}</span>
-              <span class="p">}</span>
-            <span class="p">}</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s">"server"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"maxConcurrentRequests"</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="s">"maxRequestHistorySize"</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="s">"maxRetainedRequests"</span><span class="o">:</span> <span class="mi">50000</span><span class="p">,</span>
-        <span class="s">"warningRetainedRequestsLimit"</span><span class="o">:</span> <span class="mi">5000</span>
-      <span class="p">},</span>
-      <span class="s">"services"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"common"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"defaultInitTimeout"</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span>
-          <span class="s">"retryInterval"</span><span class="o">:</span> <span class="mi">1000</span>
-        <span class="p">},</span>
-        <span class="s">"db"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"aliases"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="s">"storageEngine"</span>
-          <span class="p">],</span>
-          <span class="s">"apiVersion"</span><span class="o">:</span> <span class="s">"5.0"</span><span class="p">,</span>
-          <span class="s">"backend"</span><span class="o">:</span> <span class="s">"elasticsearch"</span><span class="p">,</span>
-          <span class="s">"host"</span><span class="o">:</span> <span class="s">"elasticsearch"</span><span class="p">,</span>
-          <span class="s">"port"</span><span class="o">:</span> <span class="mi">9200</span>
-        <span class="p">},</span>
-        <span class="s">"garbageCollector"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"cleanInterval"</span><span class="o">:</span> <span class="mi">86400000</span><span class="p">,</span>
-          <span class="s">"maxDelete"</span><span class="o">:</span> <span class="mi">1000</span>
-        <span class="p">},</span>
-        <span class="s">"internalBroker"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"aliases"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="s">"broker"</span>
-          <span class="p">],</span>
-          <span class="s">"retryInterval"</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
-          <span class="s">"socket"</span><span class="o">:</span> <span class="s">"./run/broker.sock"</span>
-        <span class="p">},</span>
-        <span class="s">"internalCache"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"backend"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
-          <span class="s">"node"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"host"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
-            <span class="s">"port"</span><span class="o">:</span> <span class="mi">6379</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s">"memoryStorage"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"backend"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
-          <span class="s">"database"</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
-          <span class="s">"node"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"host"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
-            <span class="s">"port"</span><span class="o">:</span> <span class="mi">6379</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s">"proxyBroker"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"host"</span><span class="o">:</span> <span class="s">"proxy"</span><span class="p">,</span>
-          <span class="s">"port"</span><span class="o">:</span> <span class="mi">7331</span><span class="p">,</span>
-          <span class="s">"retryInterval"</span><span class="o">:</span> <span class="mi">1000</span>
-        <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s">"stats"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"statsInterval"</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="s">"ttl"</span><span class="o">:</span> <span class="mi">3600</span>
-      <span class="p">},</span>
-      <span class="s">"validation"</span><span class="o">:</span> <span class="p">{},</span>
-      <span class="s">"version"</span><span class="o">:</span> <span class="s">"1.0.0-RC9"</span>
-    <span class="p">},</span>
-    <span class="s">"plugins"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s">"config"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s">"kuzzle-plugin-auth-passport-local"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"activated"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-          <span class="s">"config"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"algorithm"</span><span class="o">:</span> <span class="s">"sha1"</span><span class="p">,</span>
-            <span class="s">"digest"</span><span class="o">:</span> <span class="s">"hex"</span><span class="p">,</span>
-            <span class="s">"secret"</span><span class="o">:</span> <span class="s">"changeme"</span>
-          <span class="p">},</span>
-          <span class="s">"version"</span><span class="o">:</span> <span class="s">"3.0.2"</span>
-        <span class="p">},</span>
-        <span class="s">"kuzzle-plugin-logger"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"activated"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-          <span class="s">"config"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"services"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"file"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"addDate"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
-                <span class="s">"outputs"</span><span class="o">:</span> <span class="p">{</span>
-                  <span class="s">"error"</span><span class="o">:</span> <span class="p">{</span>
-                    <span class="s">"filename"</span><span class="o">:</span> <span class="s">"kuzzle.log"</span><span class="p">,</span>
-                    <span class="s">"level"</span><span class="o">:</span> <span class="s">"warn"</span>
-                  <span class="p">}</span>
-                <span class="p">}</span>
-              <span class="p">},</span>
-              <span class="s">"stdout"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"level"</span><span class="o">:</span> <span class="s">"info"</span>
-              <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s">"threads"</span><span class="o">:</span> <span class="mi">2</span>
-          <span class="p">},</span>
-          <span class="s">"version"</span><span class="o">:</span> <span class="s">"2.0.5"</span>
-        <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s">"routes"</span><span class="o">:</span> <span class="p">[]</span>
-    <span class="p">}</span>
-  }
+     <span class="s">"plugins"</span><span class="o">:</span> <span class="p">{</span>
+       <span class="s">"common"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"workerPrefix"</span><span class="o">:</span> <span class="s">"kpw:"</span><span class="p">,</span>
+         <span class="s">"pipeWarnTime"</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
+         <span class="s">"pipeTimeout"</span><span class="o">:</span> <span class="mi">250</span>
+       <span class="p">},</span>
+       <span class="s">"kuzzle-plugin-xxx"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"some"</span><span class="o">:</span> <span class="s">"configuration"</span><span class="p">,</span>
+         <span class="s">"specific"</span><span class="o">:</span> <span class="s">"to this instance"</span>
+       <span class="p">}</span>
+     <span class="p">},</span>
+     <span class="s">"repositories"</span><span class="o">:</span> <span class="p">{</span>
+       <span class="s">"common"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"cacheTTL"</span><span class="o">:</span> <span class="mi">1440</span>
+       <span class="p">}</span>
+     <span class="p">},</span>
+     <span class="s">"limits"</span><span class="o">:</span> <span class="p">{</span>
+       <span class="s">"requestsHistorySize"</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
+       <span class="s">"concurrentRequests"</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
+       <span class="s">"requestsBufferSize"</span><span class="o">:</span> <span class="mi">50000</span><span class="p">,</span>
+       <span class="s">"requestsBufferWarningThreshold"</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
+       <span class="s">"documentsFetchCount"</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+       <span class="s">"documentsWriteCount"</span><span class="o">:</span> <span class="mi">200</span>
+     <span class="p">},</span>
+     <span class="s">"services"</span><span class="o">:</span> <span class="p">{</span>
+       <span class="s">"common"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"defaultInitTimeout"</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span>
+         <span class="s">"retryInterval"</span><span class="o">:</span> <span class="mi">1000</span>
+       <span class="p">},</span>
+       <span class="s">"internalCache"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"backend"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
+         <span class="s">"node"</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s">"host"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
+           <span class="s">"port"</span><span class="o">:</span> <span class="mi">6379</span>
+         <span class="p">}</span>
+       <span class="p">},</span>
+       <span class="s">"memoryStorage"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"backend"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
+         <span class="s">"database"</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s">"node"</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s">"host"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
+           <span class="s">"port"</span><span class="o">:</span> <span class="mi">6379</span>
+         <span class="p">}</span>
+       <span class="p">},</span>
+       <span class="s">"internalBroker"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"aliases"</span><span class="o">:</span> <span class="p">[</span>
+           <span class="s">"broker"</span>
+         <span class="p">],</span>
+         <span class="s">"socket"</span><span class="o">:</span> <span class="s">"./run/broker.sock"</span><span class="p">,</span>
+         <span class="s">"retryInterval"</span><span class="o">:</span> <span class="mi">1000</span>
+       <span class="p">},</span>
+       <span class="s">"proxyBroker"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"host"</span><span class="o">:</span> <span class="s">"proxy"</span><span class="p">,</span>
+         <span class="s">"port"</span><span class="o">:</span> <span class="mi">7331</span><span class="p">,</span>
+         <span class="s">"retryInterval"</span><span class="o">:</span> <span class="mi">1000</span>
+       <span class="p">},</span>
+       <span class="s">"db"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"aliases"</span><span class="o">:</span> <span class="p">[</span>
+           <span class="s">"storageEngine"</span>
+         <span class="p">],</span>
+         <span class="s">"backend"</span><span class="o">:</span> <span class="s">"elasticsearch"</span><span class="p">,</span>
+         <span class="s">"host"</span><span class="o">:</span> <span class="s">"elasticsearch"</span><span class="p">,</span>
+         <span class="s">"port"</span><span class="o">:</span> <span class="mi">9200</span><span class="p">,</span>
+         <span class="s">"apiVersion"</span><span class="o">:</span> <span class="s">"&lt;elasticsearch api version&gt;"</span><span class="p">,</span>
+         <span class="s">"defaults"</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s">"scrollTTL"</span><span class="o">:</span> <span class="s">"15s"</span>
+         <span class="p">}</span>
+       <span class="p">},</span>
+       <span class="s">"garbageCollector"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"cleanInterval"</span><span class="o">:</span> <span class="mi">86400000</span><span class="p">,</span>
+         <span class="s">"maxDelete"</span><span class="o">:</span> <span class="mi">1000</span>
+       <span class="p">}</span>
+     <span class="p">},</span>
+     <span class="s">"stats"</span><span class="o">:</span> <span class="p">{</span>
+       <span class="s">"ttl"</span><span class="o">:</span> <span class="mi">3600</span><span class="p">,</span>
+       <span class="s">"statsInterval"</span><span class="o">:</span> <span class="mi">10</span>
+     <span class="p">},</span>
+     <span class="s">"validation"</span><span class="o">:</span> <span class="p">{},</span>
+     <span class="s">"dump"</span><span class="o">:</span> <span class="p">{</span>
+       <span class="s">"enabled"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
+       <span class="s">"path"</span><span class="o">:</span> <span class="s">"./dump/"</span><span class="p">,</span>
+       <span class="s">"gcore"</span><span class="o">:</span> <span class="s">"gcore"</span><span class="p">,</span>
+       <span class="s">"dateFormat"</span><span class="o">:</span> <span class="s">"YYYYMMDD-HHmm"</span><span class="p">,</span>
+       <span class="s">"handledErrors"</span><span class="o">:</span> <span class="p">{</span>
+         <span class="s">"enabled"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+         <span class="s">"whitelist"</span><span class="o">:</span> <span class="p">[</span>
+           <span class="s">"RangeError"</span><span class="p">,</span>
+           <span class="s">"TypeError"</span><span class="p">,</span>
+           <span class="s">"KuzzleError"</span><span class="p">,</span>
+           <span class="s">"InternalError"</span>
+         <span class="p">]</span>
+       <span class="p">}</span>
+     <span class="p">},</span>
+     <span class="s">"version"</span><span class="o">:</span> <span class="s">"&lt;current kuzzle version&gt;"</span>
+   }
+ }
 }
 </code></pre>
 
-<p>Returns the current Kuzzle configuration as loaded at Kuzzle start.</p>
+<p>Returns the current Kuzzle configuration.</p>
+
+<aside class="warning" style="float:left;clear:left">
+This route should be opened only to administrators, as it might export sensitive informations about servers configuration or plugins private configuration.
+</aside>
 
 <h2 id="getlaststats">getLastStats</h2>
 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getLastStats</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getLastStats</code><br>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
