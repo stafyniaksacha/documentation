@@ -120,25 +120,35 @@
 
 <p>The first is to be able to search its content according to a query and retrieve the corresponding documents.</p>
 
-<p>The second is to sort these documents according to their relevancy toward the query. To do so, Elasticsearch computes a score according to the request. This score is influenced by each part of the query but the most sophisticated feature resides in its ability to tokenize words in a text field and ponderate it according to the frequency of these words in the corpus. You can find more information about scoring in the <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/scoring-theory.html">Elasticsearch documentation</a>.</p>
+<p>The second is to sort these documents according to their relevancy toward the query.
+To do so, Elasticsearch computes a score according to the request.
+This score is influenced by each part of the query but the most sophisticated feature resides
+in its ability to tokenize words in a text field and ponderate it according to the frequency of
+these words in the corpus. You can find more information about scoring in the
+<a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/scoring-theory.html">Elasticsearch documentation</a>.</p>
 
             <h1 id="installation">Installation</h1>
 
-<p>We want you to manipulate Elasticsearch while you are reading this cookbook, to do so you will need <a href="https://curl.haxx.se/download.html">cURL</a>, a terminal (Linux, Mac, Cygwin&hellip;) and optionally <a href="https://www.docker.com/products/docker">docker</a> to speed up the installation.</p>
+<p>We want you to manipulate Elasticsearch while you are reading this cookbook,
+to do so you will need <a href="https://curl.haxx.se/download.html">cURL</a>, a terminal (Linux, Mac, Cygwin&hellip;)
+and optionally <a href="https://www.docker.com/products/docker">docker</a> to speed up the installation.</p>
 
 <p>You can also trust the output we provide in the cookbook and skip the installation chapter.</p>
 
 <h2 id="launch-elasticsearch">Launch Elasticsearch</h2>
 
-<p>We provide here a way to run Elasticsearch quickly with docker, but you can do it by following the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html">installation documentation</a>.</p>
+<p>We provide here a way to run Elasticsearch quickly with docker, but you can do it by following the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/_installation.html">installation documentation</a>.</p>
 
-<p>To launch Elasticsearch, copy this line in your terminal:</p>
-<pre class="highlight shell"><code>docker run -p 9200:9200 elasticsearch:2.3
+<p>To launch Elasticsearch, copy this lines in your terminal:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>sudo sysctl -w vm.max_map_count<span class="o">=</span>262144
+<span class="gp">$ </span>docker run -p 9200:9200 elasticsearch:5.0
 </code></pre>
 
 <p>(To stop Elasticsearch, you can use Ctrl-C)</p>
 
-<p>The container we just launched will be accessed at the port 9200 on localhost. If you installed Elasticsearch using another method, adapt the examples provided in this cookbook to your install.</p>
+<p>The container we just launched will be accessed at the port 9200 on localhost.
+If you installed Elasticsearch using another method, adapt the examples provided in this cookbook to your install.</p>
 
 <h2 id="check-that-elasticsearch-is-reachable">Check that Elasticsearch is reachable</h2>
 
@@ -146,18 +156,19 @@
 <pre class="highlight plaintext"><code>curl -g -X GET "http://localhost:9200/"
 </code></pre>
 
-<p>You can see below an example of reply. This cookbook assumes that your Elasticsearch <code class="prettyprint">version.number</code> is between <strong>2.3</strong> and <strong>5.x</strong>:</p>
+<p>You can see below an example of reply. This cookbook assumes that your Elasticsearch <code class="prettyprint">version.number</code> is above <strong>5.0</strong>:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Edwin Jarvis"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cluster_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2.3.4"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"build_hash"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"e455fd0c13dceca8dbbdbb1665d068ae55dabe3f"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"build_timestamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-30T11:24:31Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"build_snapshot"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lucene_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"5.5.0"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"tagline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"You Know, for Search"</span><span class="w">
+    </span><span class="nt">"cluster_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"cluster_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AyJUa63UTlqQgHV9I9UzXQ"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kp9tiLV"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"tagline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You Know, for Search"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"build_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-24T10:07:18.101Z"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"build_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6b4951"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"build_snapshot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"lucene_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6.2.1"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0.2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -167,9 +178,14 @@
 
 <h2 id="mapping-creation">Mapping creation</h2>
 
-<p>We will provide to Elasticsearch the mapping (RDBM: schema) of the data we want to index. Here we create a new document <code class="prettyprint">type</code> (RDBM: table) called <code class="prettyprint">blogpost</code> with 6 fields (RDBM: columns).</p>
+<p>We will provide to Elasticsearch the mapping (RDBM: schema) of the data we want to index.
+Here we create a new document <code class="prettyprint">type</code> (RDBM: table) called <code class="prettyprint">blogpost</code> with 6 fields (RDBM: columns).</p>
 
-<aside class="warning">The mapping is not mandatory, but if you don&rsquo;t define it before pushing data to Elasticsearch, Elasticsearch will infer to define the type of each field for you depending of their content. Once defined, the field type can not be changed.</aside>
+<aside class="warning">
+  The mapping is not mandatory, but if you don&rsquo;t define it before pushing data to Elasticsearch,
+  Elasticsearch will infer to define the type of each field for you depending of their content.
+  Once defined, the field type can not be changed.
+</aside>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">PUT</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"settings"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"index"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -180,24 +196,22 @@
     </span><span class="nt">"blogpost"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"analyzer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"analyzer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"analyzer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"not_analyzed"</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"keyword"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"not_analyzed"</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"keyword"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"publish_date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"date"</span><span class="p">,</span><span class="w">
@@ -332,16 +346,25 @@
 
 <h3 id="the-id">The id</h3>
 
-<p>The number (1 to 5) at the end of the request url defines the id of the document (RDBM: primary key). If you do not specify it, Elasticsearch will assign an id to the document automatically. For the sake of this example, we explicitly defined the ID of each document (take a look at the last chunk of the URLs).If you do not specify it, Elasticsearch will automatically generate an ID and assign it to the document. Even if the ID is actually a String, you can use numbers for convenience.</p>
+<p>The number (1 to 5) at the end of the request url defines the id of the document (RDBM: primary key).
+If you do not specify it, Elasticsearch will assign an id to the document automatically.
+For the sake of this example, we explicitly defined the ID of each document (take a look at the last chunk of the URLs).
+If you do not specify it, Elasticsearch will automatically generate an ID and assign it to the document.
+Even if the ID is actually a String, you can use numbers for convenience.</p>
 
 <h3 id="the-body">The body</h3>
 
-<p>The body of the request must contain the content of the document you want to create. As you can see, the structure of the document matches our mapping. As a result, Elasticsearch will analyze and index our document as specified.</p>
+<p>The body of the request must contain the content of the document you want to create.
+As you can see, the structure of the document matches our mapping.
+As a result, Elasticsearch will analyze and index our document as specified.</p>
 
 <h2 id="the-structure">The structure</h2>
 
-<p>As you can see, we insert an array in a field ment to be a string. It is one of the feature of Elasticsearch; Any field can be an array of the defined type. For example, the <code class="prettyprint">tags</code> field is defined as a string, but we chose to use it as an array of strings (and it is totally fine).
-Another feature of Elasticsearch is that you can nest a field to build complex documents. It is not addressed in this cookbook but you can find more information in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/object.html">Elasticsearch documentation</a>.</p>
+<p>As you can see, we insert an array in a field ment to be a string. It is one of the feature of Elasticsearch;
+Any field can be an array of the defined type. For example, the <code class="prettyprint">tags</code> field is defined as a string, but we chose to use it as an array of strings (and it is totally fine).
+Another feature of Elasticsearch is that you can nest a field to build complex documents.
+It is not addressed in this cookbook but you can find more information in the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/object.html">Elasticsearch documentation</a>.</p>
 
             <h1 id="useful-commands">Useful commands</h1>
 
@@ -416,14 +439,17 @@ To retrieve an index mapping, you can use the following command:</p>
 
             <h1 id="basic-queries">Basic queries</h1>
 
-<p>Search queries are all done with the <code class="prettyprint">GET</code> method on the search endpoint, and the body of the request is a JSON object representing the query.
-We will present here the most common ways to use the different queries, together with the options that modify their behaviour. For more details about these options you can find more informations in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html">Elasticsearch documentation</a>.</p>
+<p>We will present here the most common ways to use the different search queries,
+together with the options that modify their behaviour.
+For more details about these options you can find more informations in the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">Elasticsearch documentation</a>.</p>
 
 <h2 id="the-search-endpoint-and-the-match_all-query">The search endpoint (and the <code class="prettyprint">match_all</code> query)</h2>
 
 <p>The search endpoint allows different query parameters to control the output of the search.
 By defaut, the search endpoint will return the <strong>10</strong> first results, sorted by score.
-The <code class="prettyprint">match_all</code> query returns all the documents in the collection, it can be useful with other queries in a <code class="prettyprint">bool</code> query for instance.</p>
+The <code class="prettyprint">match_all</code> query returns all the documents in the collection,
+it can be useful with other queries in a <code class="prettyprint">bool</code> query for instance.</p>
 
 <h3 id="without-query-parameters">Without query parameters</h3>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
@@ -575,8 +601,10 @@ This is very useful when you want to paginate the results.</p>
 
 <h3 id="the-scroll-query-parameter">The <code class="prettyprint">scroll</code> query parameter</h3>
 
-<p>The <code class="prettyprint">scroll</code> query parameter is useful when dealing with huge data sets, or when you want to be sure the data set will not change during your processing.
-We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">Elasticsearch documentation</a> for more details.</p>
+<p>The <code class="prettyprint">scroll</code> query parameter is useful when dealing with huge data sets,
+or when you want to be sure the data set will not change during your processing. We recommend you to read the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/search-request-scroll.html">Elasticsearch documentation</a>
+for more details.</p>
 
 <h2 id="the-ids-query">The <code class="prettyprint">ids</code> query</h2>
 
@@ -635,7 +663,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-query_string-query">The <code class="prettyprint">query_string</code> query</h2>
 
-<p>The <code class="prettyprint">query_string</code> query is a way to &ldquo;talk&rdquo; directly to the core engine of Elasticsearch. If you are used to use Solr, it will look familiar.</p>
+<p>The <code class="prettyprint">query_string</code> query is a way to &ldquo;talk&rdquo; directly to the core engine of Elasticsearch.
+If you are used to use Solr, it will look familiar.</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"query_string"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -690,7 +719,12 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-match-query">The <code class="prettyprint">match</code> query</h2>
 
-<p>The <code class="prettyprint">match</code> query is the one you want to use to perform a full text search. The query you use (here: &ldquo;hate cake&rdquo;) is analyzed (lowercased, tokenized &hellip;) and then is applied against the analyzed version of the field (which is also lowercased, tokenized&hellip;). As a result, the choice of the analyzer applied to a field is very important. To know more about analyzers, We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-analyzers.html">Elasticsearch documentation</a>.</p>
+<p>The <code class="prettyprint">match</code> query is the one you want to use to perform a full text search.
+The query you use (here: &ldquo;hate cake&rdquo;) is analyzed (lowercased, tokenized &hellip;)
+and then is applied against the analyzed version of the field (which is also lowercased, tokenized&hellip;).
+As a result, the choice of the analyzer applied to a field is very important. To know more about analyzers,
+we recommend you to read the
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/analysis-analyzers.html">Elasticsearch documentation</a>.</p>
 
 <p>It results in a set of documents where a score is applied.</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
@@ -745,7 +779,9 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>You can see that the second document does not contain cake at all but is still matching. This is because, by default, the <code class="prettyprint">match</code> query operator applies a <code class="prettyprint">or</code> operand to the provided searched terms. To return documents matching all tokens, you have to use the <code class="prettyprint">and</code> operator:</p>
+<p>You can see that the second document does not contain cake at all but is still matching.
+This is because, by default, the <code class="prettyprint">match</code> query operator applies a <code class="prettyprint">or</code> operand to the provided searched terms.
+To return documents matching all tokens, you have to use the <code class="prettyprint">and</code> operator:</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -790,7 +826,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-prefix-query">The <code class="prettyprint">prefix</code> query</h2>
 
-<p>The <code class="prettyprint">prefix</code> query matches all the documents where the given field has a value that begins with the given string. In the following example, we want to match all the documents where the value of field status begins with <code class="prettyprint">pub</code>:</p>
+<p>The <code class="prettyprint">prefix</code> query matches all the documents where the given field has a value that begins with the given string.
+In the following example, we want to match all the documents where the value of field status begins with <code class="prettyprint">pub</code>:</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -845,7 +882,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-range-query">The <code class="prettyprint">range</code> query</h2>
 
-<p>The <code class="prettyprint">range</code> query matches all the documents where the value of the given field is included within the specified range. In the following example, we want to match all the document where <code class="prettyprint">published_date</code> is included within the two specified dates:</p>
+<p>The <code class="prettyprint">range</code> query matches all the documents where the value of the given field is included within the specified range.
+In the following example, we want to match all the document where <code class="prettyprint">published_date</code> is included within the two specified dates:</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -918,7 +956,9 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-term-query">The <code class="prettyprint">term</code> query</h2>
 
-<p>The <code class="prettyprint">term</code> query is used to find exact matches on the <em>indexed</em> value of a field. It should not be used on analyzed fields: the analyzed value that is indexed is a modified version of the input value. Analyzers are explain during the cookbook you can come back when it is clearer.</p>
+<p>The <code class="prettyprint">term</code> query is used to find exact matches on the <em>indexed</em> value of a field.
+It should not be used on analyzed fields: the analyzed value that is indexed is a modified version of the input value.
+Analyzers are explain during the cookbook you can come back when it is clearer.</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"term"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1136,7 +1176,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-missing-query">The <code class="prettyprint">missing</code> query</h2>
 
-<p>The <code class="prettyprint">missing</code> query is deprecated. Elasticsearch recommends to use the <code class="prettyprint">exists</code> query in a <code class="prettyprint">must_not</code> occurence of a <code class="prettyprint">bool</code> compound query (and this will introduce you to the <code class="prettyprint">bool</code> query :-) ).</p>
+<p>The <code class="prettyprint">missing</code> query has been removed in Elasticsearch 5.x. Elasticsearch recommends to use the <code class="prettyprint">exists</code> query in a <code class="prettyprint">must_not</code>
+occurence of a <code class="prettyprint">bool</code> compound query (and this will introduce you to the <code class="prettyprint">bool</code> query :-) ).</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1169,7 +1210,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="sorting-the-result-set">Sorting the result set</h2>
 
-<p>If you want to sort your result set in a different order than the <code class="prettyprint">_score</code> default sort or compound the <code class="prettyprint">_score</code> sort with other fields, you can specify the sort order alongside to the query:</p>
+<p>If you want to sort your result set in a different order than the <code class="prettyprint">_score</code> default sort
+or compound the <code class="prettyprint">_score</code> sort with other fields, you can specify the sort order alongside to the query:</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
@@ -1272,7 +1314,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
             <h1 id="the-bool-boolean-query">The <code class="prettyprint">bool</code> (Boolean) query</h1>
 
-<p>(optional) You may need to explore the theory first, to understand the paradigm behind this kind of query. Thanksfully you can find a good resource on <a href="https://en.wikipedia.org/wiki/Standard_Boolean_model">Wikipedia</a>.</p>
+<p>(optional) You may need to explore the theory first, to understand the paradigm behind this kind of query.
+Thanksfully you can find a good resource on <a href="https://en.wikipedia.org/wiki/Standard_Boolean_model">Wikipedia</a>.</p>
 
 <p>In the boolean compound query, there are 4 occurrence types:</p>
 
@@ -1354,13 +1397,16 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 </span></code></pre>
 
-<p>You can find a full description in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html">Bool Query documentation</a>.</p>
+<p>You can find a full description in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-bool-query.html">Bool Query documentation</a>.</p>
 
 <h2 id="the-filter-occurrence-type">The <code class="prettyprint">filter</code> occurrence type</h2>
 
-<p>The <code class="prettyprint">filter</code> occurrence type allows to filter documents with additional queries without affecting the score. You can even use a <code class="prettyprint">bool</code> query in a <code class="prettyprint">filter</code> occurrence type. We will introduce you with some ways to make basic <code class="prettyprint">filter</code> requests. Up to you to choose your favorite.</p>
+<p>The <code class="prettyprint">filter</code> occurrence type allows to filter documents with additional queries without affecting the score.
+You can even use a <code class="prettyprint">bool</code> query in a <code class="prettyprint">filter</code> occurrence type. We will introduce you with some ways
+to make basic <code class="prettyprint">filter</code> requests. Up to you to choose your favorite.</p>
 
-<p>Each example is equivalent from one to the others. As you will see there are different ways to achieve the same result using the <code class="prettyprint">filter</code> occurence type.</p>
+<p>Each example is equivalent from one to the others. As you will see there are different ways to achieve
+the same result using the <code class="prettyprint">filter</code> occurence type.</p>
 
 <h3 id="using-a-logical-and-operator-between-fields">Using a logical <code class="prettyprint">AND</code> operator between fields</h3>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
@@ -1430,7 +1476,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>You can notice that the score of both documents is <em>0</em>: this is because we only use the <code class="prettyprint">filter</code> occurence type of the <code class="prettyprint">bool</code> query.</p>
+<p>You can notice that the score of both documents is <em>0</em>: this is because we only use the <code class="prettyprint">filter</code> occurence type
+of the <code class="prettyprint">bool</code> query.</p>
 
 <h3 id="using-a-logical-and-operator-between-terms">Using a logical <code class="prettyprint">AND</code> operator between terms</h3>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
@@ -1633,7 +1680,10 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </span><span class="p">}</span><span class="err">'</span><span class="w">
 </span></code></pre>
 
-<p>The last query is tricky. We specified 3 terms in the query, but as the field <code class="prettyprint">status</code> is not analyzed, the query isn&rsquo;t analyzed either. To split the query string into terms, we have to force the use of the <code class="prettyprint">standard</code> analyzer. This allows the string <code class="prettyprint">&quot;published pending refused&quot;</code> to be tokenized into the 3 following terms: <code class="prettyprint">[&quot;published&quot;, &quot;pending&quot;, &quot;refused&quot;]</code>.</p>
+<p>The last query is tricky. We specified 3 terms in the query, but as the field <code class="prettyprint">status</code> is not analyzed,
+the query isn&rsquo;t analyzed either. To split the query string into terms, we have to force the use of the <code class="prettyprint">standard</code> analyzer.
+This allows the string <code class="prettyprint">&quot;published pending refused&quot;</code> to be tokenized into the 3 following terms:
+<code class="prettyprint">[&quot;published&quot;, &quot;pending&quot;, &quot;refused&quot;]</code>.</p>
 
 <p>Reply:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -1793,7 +1843,8 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-must_not-occurrence-type">The <code class="prettyprint">must_not</code> occurrence type</h2>
 
-<p>The <code class="prettyprint">must_not</code> occurrence type allows to specify a query that will excludes documents from the result set. It acts like a logical <code class="prettyprint">NOT</code>.</p>
+<p>The <code class="prettyprint">must_not</code> occurrence type allows to specify a query that will excludes documents from the result set.
+It acts like a logical <code class="prettyprint">NOT</code>.</p>
 
 <h3 id="usage-of-must_not-with-one-query">Usage of <code class="prettyprint">must_not</code> with one query</h3>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
@@ -1863,11 +1914,15 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Unlike <code class="prettyprint">filter</code> that sets the score to 0 if used alone, the <code class="prettyprint">must_not</code> occurence type sets the score to 1 when used alone. If you don&rsquo;t want this to happen, you can use the <code class="prettyprint">constant_score</code> query or include the <code class="prettyprint">bool</code> with a <code class="prettyprint">must_not</code> occurence in a filter (like we did in the previous example).</p>
+<p>Unlike <code class="prettyprint">filter</code> that sets the score to 0 if used alone, the <code class="prettyprint">must_not</code> occurence type sets the score to 1 when used alone.
+If you don&rsquo;t want this to happen, you can use the <code class="prettyprint">constant_score</code> query or include the <code class="prettyprint">bool</code> with a <code class="prettyprint">must_not</code> occurence
+in a filter (like we did in the previous example).</p>
 
 <h3 id="usage-of-must_not-with-multiple-queries">Usage of <code class="prettyprint">must_not</code> with multiple queries</h3>
 
-<p>If you need to use more than one query to use in the <code class="prettyprint">must_not</code> occurence type, you can replace the object query by an array of query objects. It will evict all documents where the field <code class="prettyprint">status</code> is equal to &ldquo;pending&rdquo; or the field <code class="prettyprint">tags</code> contains &ldquo;pet&rdquo;:</p>
+<p>If you need to use more than one query to use in the <code class="prettyprint">must_not</code> occurence type, you can replace the object query by
+an array of query objects. It will evict all documents where the field <code class="prettyprint">status</code> is equal to &ldquo;pending&rdquo; or the field
+<code class="prettyprint">tags</code> contains &ldquo;pet&rdquo;:</p>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1926,9 +1981,11 @@ We recommend you to read the <a href="https://www.elastic.co/guide/en/elasticsea
 
 <h2 id="the-must-occurrence-type">The <code class="prettyprint">must</code> occurrence type</h2>
 
-<p>The <code class="prettyprint">must</code> occurrence type can be used used like the <code class="prettyprint">filter</code> occurence type with the difference that it will influence the score.
-Let&rsquo;s take a look at all the scores we get by replacing  the <code class="prettyprint">filter</code> occurence type in the previous examples with <code class="prettyprint">must</code>.
-The <code class="prettyprint">AND</code> examples give the same score for all documents. It is due to the little number of documents we use, their size and the small size of the corpus.</p>
+<p>The <code class="prettyprint">must</code> occurrence type can be used used like the <code class="prettyprint">filter</code> occurence type
+with the difference that it will influence the score.
+Let&rsquo;s take a look at all the scores we get by replacing the <code class="prettyprint">filter</code> occurence type in the previous examples with <code class="prettyprint">must</code>.
+The <code class="prettyprint">AND</code> examples give the same score for all documents. It is due to the little number of documents we use,
+their size and the small size of the corpus.</p>
 
 <h3 id="using-a-logical-and-operator-between-fields">Using a logical <code class="prettyprint">AND</code> operator between fields</h3>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
@@ -2360,7 +2417,7 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
 
 <h2 id="the-should-occurrence-type">The <code class="prettyprint">should</code> occurrence type</h2>
 
-<p>The <code class="prettyprint">should</code> occurrence type is different from the 3 others as it allows to specify queries that &ldquo;SHOULD&rdquo; match the documents. If used without <code class="prettyprint">filter</code> or <code class="prettyprint">must</code> occurence types, at least one query will have to match the document. It could be seen as a logical <code class="prettyprint">OR</code> operator. Its behaviour can be modified by the <code class="prettyprint">minimum_should_match</code>. It allows to specify a number or a percentage of queries that have to match in order to select the document. You can see all available value formats of <code class="prettyprint">minimum_should_match</code> in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html">Elasticsearch documentation</a>.</p>
+<p>The <code class="prettyprint">should</code> occurrence type is different from the 3 others as it allows to specify queries that &ldquo;SHOULD&rdquo; match the documents. If used without <code class="prettyprint">filter</code> or <code class="prettyprint">must</code> occurence types, at least one query will have to match the document. It could be seen as a logical <code class="prettyprint">OR</code> operator. Its behaviour can be modified by the <code class="prettyprint">minimum_should_match</code>. It allows to specify a number or a percentage of queries that have to match in order to select the document. You can see all available value formats of <code class="prettyprint">minimum_should_match</code> in the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-minimum-should-match.html">Elasticsearch documentation</a>.</p>
 
 <h3 id="usage-of-minimum_should_match">Usage of <code class="prettyprint">minimum_should_match</code></h3>
 <pre class="highlight json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-g</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="s2">"http://localhost:9200/example/blogpost/_search?pretty"</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
@@ -2480,13 +2537,13 @@ The <code class="prettyprint">AND</code> examples give the same score for all do
             <h1 id="documentation-links">documentation links</h1>
 
 <ul>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html">The <code class="prettyprint">bool</code> query</a></li>
-<li>Other main ways to compound queries : <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html">Constant score query</a> and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html">Dis Max Query</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html">Query String Query</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html">Match Query</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/term-level-queries.html">Term level queries</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_exact_values.html">The explanation why exact matches are tricky</a> and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">here as well</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-analyzers.html">Analyzers</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-bool-query.html">The <code class="prettyprint">bool</code> query</a></li>
+<li>Other main ways to compound queries : <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-constant-score-query.html">Constant score query</a> and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-dis-max-query.html">Dis Max Query</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-query-string-query.html">Query String Query</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-match-query.html">Match Query</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/term-level-queries.html">Term level queries</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/_finding_exact_values.html">The explanation why exact matches are tricky</a> and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl-term-query.html">here as well</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/analysis-analyzers.html">Analyzers</a></li>
 </ul>
 
         </div>

@@ -1312,7 +1312,7 @@ This is especially useful if you want to create a large number of documents. A b
 a lot faster compared to creating them individually using <code class="prettyprint">create</code> queries.</p>
 
 <p>For other queries, the syntax for bulk imports closely resembles the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-bulk.html">ElasticSearch Bulk API</a>.</p>
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-bulk.html">ElasticSearch Bulk API</a>.</p>
 
 <aside class="warning">
 The bulk operations only apply to the persistent data storage layer.
@@ -1506,7 +1506,7 @@ In such case, the <code class="prettyprint">collection</code> in which the docum
 <p>The <code class="prettyprint">bulk import</code> can also be used in a more versatile (yet a little more verbose) way,
 to execute operations on a whole database, modifying multiple data collections in different indexes at once.<br>
 The <code class="prettyprint">collections</code> to modify then need to be specified inside the query message,using the <code class="prettyprint">_type</code>argument, as specified in the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-bulk.html">ElasticSearch Bluk API</a>.</p>
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-bulk.html">ElasticSearch Bluk API</a>.</p>
 
             <h1 id="collection-controller">~ collection controller</h1>
 
@@ -2070,7 +2070,7 @@ and your searches may suffer from below-average performances, depending on the a
 stored in a collection and the complexity of your database.</p>
 
 <p>To solve this matter, Kuzzle&rsquo;s API offers a way to create data mapping and to expose the entire
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
 
 <h2 id="updatespecifications">updateSpecifications</h2>
 
@@ -2316,7 +2316,7 @@ When the validation specification is not well formatted, a detailed error messag
 
 <p>Given some filters, gets the number of matching documents from Kuzzle&rsquo;s data storage layer.</p>
 
-<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
+<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
 
 <h2 id="create">create</h2>
 
@@ -2561,7 +2561,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 
 <p>Deletes all the documents matching the given filter or query from Kuzzle&rsquo;s database.</p>
 
-<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.2/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
+<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
 
 <h2 id="get">get</h2>
 
@@ -2857,10 +2857,10 @@ The query defined in the initial <code class="prettyprint">search</code> request
 
 <p>Only documents in the persistent data storage layer can be searched.</p>
 
-<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
+<p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
 
 <p><code class="prettyprint">aggregations</code> is not mandatory, see the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html">Elasticsearch Documentation</a>
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/search-aggregations.html">Elasticsearch Documentation</a>
 for more details.</p>
 
 <p>If a <code class="prettyprint">scroll</code> argument is provided in the request, a scroll session is started and the response will contain a <code class="prettyprint">_scroll_id</code> that
@@ -3867,7 +3867,7 @@ But in some cases, you may want to create an empty index directly, prior to stor
 </code></pre>
 
 <p>The <code class="prettyprint">autoRefresh</code> flag, when set to true, will make Kuzzle perform a
-<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
+<a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
 immediately after each write request, forcing the documents to be immediately visible to search.</p>
 
 <p>The <code class="prettyprint">getAutoRefresh</code> actions returns the current <code class="prettyprint">autoRefresh</code> status for the given index.</p>
@@ -4041,7 +4041,7 @@ in the search index.
 By default, this operation can take up to 1 second.</p>
 
 <p>Given an index, the <code class="prettyprint">refresh</code> action forces a
-<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a>,
+<a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a>,
 on it, making the documents visible to search immediately.</p>
 
 <aside class="left warning">
@@ -4049,7 +4049,7 @@ on it, making the documents visible to search immediately.</p>
     A refresh operation comes with some performance costs.<br>
   </p>
   <p>
-    From <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api">
+    From <a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api">
     Elasticsearch documentation</a>:
     <div class="quote">
       &ldquo;While a refresh is much lighter than a commit, it still has a performance cost.
@@ -4102,7 +4102,7 @@ in Kuzzle&rsquo;s database layer, the update needs to be indexed before being re
 By default, this operation can take up to 1 second.</p>
 
 <p>Given an index, the <code class="prettyprint">refreshInternal</code> action forces a
-<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a>,
+<a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a>,
 on the internal index, making the documents visible to search immediately.</p>
 
 <aside class="left warning">
@@ -4110,7 +4110,7 @@ on the internal index, making the documents visible to search immediately.</p>
     A refresh operation comes with some performance costs.<br>
   </p>
   <p>
-    From <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api">
+    From <a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api">
     Elasticsearch documentation</a>:
     <div class="quote">
       &ldquo;While a refresh is much lighter than a commit, it still has a performance cost.
@@ -4164,7 +4164,7 @@ on the internal index, making the documents visible to search immediately.</p>
 </code></pre>
 
 <p>The <code class="prettyprint">autoRefresh</code> flag, when set to true, will make Kuzzle perform a
-<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
+<a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
 immediately after each write request, forcing the documents to be immediately visible to search.</p>
 
 <p>Given an index, the <code class="prettyprint">setAutoRefresh</code> action updates its <code class="prettyprint">autoRefresh</code> status.</p>
@@ -12854,7 +12854,7 @@ that the related roles will NOT be deleted.</p>
 <p>This mapping is intended to store the basic information of a profile; typically, its policies (roles and restrictions).</p>
 
 <p>But if you want to store more information about your profiles, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">profiles</code> data mapping using the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
 
 <h2 id="updaterole">updateRole</h2>
 
@@ -13019,7 +13019,7 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s security documentat
 <p>This mapping is intended to store the basic information of a role; typically, its allowed controllers and actions.</p>
 
 <p>But if you want to store more information about your roles, Kuzzle&rsquo;s API offers a way to update the <code class="prettyprint">roles</code> data mapping using the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html">mapping capabilities of ElasticSearch</a>.</p>
 
 <h2 id="updateuser">updateUser</h2>
 

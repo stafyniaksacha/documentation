@@ -1056,7 +1056,7 @@ This method returns all available statistics from Kuzzle.</p>
 </span></code></pre>
 
 <p>The <code class="prettyprint">autoRefresh</code> flag, when set to true, will make Kuzzle perform a
-<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
+<a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
 immediately after each write request, forcing the documents to be immediately visible to search.</p>
 
 <p>The <code class="prettyprint">getAutoRefresh</code> function returns the current <code class="prettyprint">autoRefresh</code> status for the given index.</p>
@@ -2410,13 +2410,13 @@ Check the Kuzzle API Reference available <a href="/api-reference">here</a>
 in the search index.<br>
 By default, this operation can take up to 1 second.</p>
 
-<p>Given an index, the <code class="prettyprint">refresh</code> action forces a <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a>,
+<p>Given an index, the <code class="prettyprint">refresh</code> action forces a <a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a>,
  on it, making the documents visible to search immediately.</p>
 
 <aside class="left warning">
     A refresh operation comes with some performance costs.<br>
     <br>
-    From <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api">elasticsearch documentation</a>:
+    From <a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api">elasticsearch documentation</a>:
     <div class="quote">
     &ldquo;While a refresh is much lighter than a commit, it still has a performance cost. A manual refresh can be useful when writing tests, but don’t do a manual refresh every time you index a document in production; it will hurt your performance. Instead, your application needs to be aware of the near real-time nature of Elasticsearch and make allowances for it.&rdquo;
     </div>
@@ -2595,7 +2595,7 @@ By default, this operation can take up to 1 second.</p>
 </code></pre>
 
 <p>The <code class="prettyprint">autoRefresh</code> flag, when set to true, will make Kuzzle perform a
-<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
+<a href="https://www.elastic.co/guide/en/elasticsearch/guide/5.x/near-real-time.html#refresh-api"><code class="prettyprint">refresh</code></a> request
 immediately after each write request, forcing the documents to be immediately visible to search.</p>
 
 <p>Given an index, the <code class="prettyprint">setAutoRefresh</code> function updates its <code class="prettyprint">autoRefresh</code> status.</p>
@@ -3244,7 +3244,7 @@ immediately after each write request, forcing the documents to be immediately vi
 <tr>
 <td><code class="prettyprint">filters</code></td>
 <td>JSON Object</td>
-<td>Filters in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl.html">ElasticSearch Query DSL</a> format</td>
+<td>Filters in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">ElasticSearch Query DSL</a> format</td>
 </tr>
 <tr>
 <td><code class="prettyprint">options</code></td>
@@ -3679,7 +3679,7 @@ There is a small delay between documents creation and their existence in our sea
 <tr>
 <td><code class="prettyprint">filters</code></td>
 <td>JSON object</td>
-<td>Filters in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl.html">ElasticSearch Query DSL</a> format</td>
+<td>Filters in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">ElasticSearch Query DSL</a> format</td>
 </tr>
 <tr>
 <td><code class="prettyprint">options</code></td>
@@ -4739,7 +4739,7 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 <tr>
 <td><code class="prettyprint">filters</code></td>
 <td>JSON object</td>
-<td>Filters in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl.html">ElasticSearch Query DSL</a> format</td>
+<td>Filters in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">ElasticSearch Query DSL</a> format</td>
 </tr>
 <tr>
 <td><code class="prettyprint">options</code></td>
@@ -5577,7 +5577,7 @@ Once a field mapping has been set, it cannot be removed without reconstructing t
 <tr>
 <td><code class="prettyprint">mapping</code></td>
 <td>JSON Object</td>
-<td>Mapping for this field, following the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/1.7/mapping.html">Elasticsearch Mapping format</a></td>
+<td>Mapping for this field, following the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html">Elasticsearch Mapping format</a></td>
 </tr>
 </tbody></table>
 
