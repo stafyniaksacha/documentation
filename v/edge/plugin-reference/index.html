@@ -2569,6 +2569,11 @@ Different log level are provided, and lower priority levels may be ignored depen
 <td>Triggered when a request execution succeeds. Triggered after any <code class="prettyprint">&lt;controller&gt;:after&lt;Action&gt;</code> event</td>
 <td>Type: Request</td>
 </tr>
+<tr>
+<td><code class="prettyprint">request:onUnauthorized</code></td>
+<td>Triggered when a request failed authorization checks and is about to be rejected with a <code class="prettyprint">401</code> error code.</td>
+<td>Type: Request</td>
+</tr>
 </tbody></table>
 
 <h2 id="room">room</h2>
