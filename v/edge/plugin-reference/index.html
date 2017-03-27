@@ -898,7 +898,7 @@ Each plugin receives its own plugin context instance.</p>
 This argument is the provided request, with its <code class="prettyprint">result</code> and/or <code class="prettyprint">error</code> parts filled.
 To obtain the standardized Kuzzle response from it, simply use the getter <code class="prettyprint">request.response</code>.</p>
 
-<p>Example:</p>
+<h4 id="usage">Usage</h4>
 <pre class="highlight javascript"><code><span class="kd">let</span>
   <span class="nx">derivedRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">context</span><span class="p">.</span><span class="nx">constructors</span><span class="p">.</span><span class="nx">Request</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">index</span><span class="p">:</span> <span class="s1">'index'</span><span class="p">,</span>
@@ -937,218 +937,328 @@ To obtain the standardized Kuzzle response from it, simply use the getter <code 
 </tr>
 </tbody></table>
 
-<aside class="notice">Passport strategy constructors take a &ldquo;verify&rdquo; callback.
-As the following example demonstrates, if the provided callback uses &ldquo;this.[attribute]&rdquo; attributes,
-then it&rsquo;s necessary to bind the provided callback to the plugin&rsquo;s context</aside>
-
-Example:
-
-&ldquo;`js
-var LocalStrategy = require(&lsquo;passport-local&rsquo;).Strategy;
-
-function verify (username, password, done) {
-  // verification code
-  if (userVerified) {
-    done(null, userInformation);
-  }
-  else {
-    done(error);
-  }
-}
-
-pluginContext.accessors.passport.use(new LocalStrategy(verify.bind(this)));
-&rdquo;`
-
-### `router.newConnection`
-
-Declares a new connection for a given protocol.  
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`protocolName`|`string`|Protocol name, used for Kuzzle internal statistics |
-|`connectionUniqueId`|`string`|Unique ID identifying the user connection|
-
-#### Returns
-
-A `promise` resolving to a `RequestContext` object. This object is needed for other router methods.
-
-### `router.execute`
-
-Forward a request to Kuzzle.
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`request`|`Request`| An user request wrapped as a `Request` instance|
-|`callback`|`function`| Callback called with the request corresponding results |
-
-#### Callback
-
-The callback is invoked once the request has been processed by Kuzzle.  
-The provided callback is resolved with a `response` argument, which is a plain-object, representing a standardized [Kuzzle response](/api-reference/#kuzzle-response).
-
-### `router.removeConnection`
-
-Removes a connection from the connection pool maintained by Kuzzle.  
-Not calling this method after a connection is dropped will result in a memory-leak.
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`context`|`RequestContext`| Object identifying the connection context. Obtained by calling `newConnection()`|
-
-
-### `storage.bootstrap`
-
-Allows to initialize the plugin storage index in Elasticsearch. When called, it will create the Elastisearch index
-and the `collections` provided in argument. Can be called at each plugin initialized as long as the mapping is
-not modified.
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`collections`|`Object`| An object that contains the collection mappings. See the [guide](/guide#document-mapping) for more explanation about Elasticsearch mapping. |
-
-#### Returns
-
-Returns a `promise` that resolves to a `boolean` that indicates if the index and the collections already existed or not.
-
-#### Usage
-
-&ldquo;`javascript
-context.accessors.storage.bootstrap({
-  someCollection: {
-    properties: {
-      someField: {
-        type: 'keyword&rsquo;
-      }
-      ,
-      &hellip;
-    }
-  },
-  anotherCollection: {
-    properties: {
-      &hellip;
-    }
-  }
-});
-&rdquo;`
-
-### `storage.createCollection`
-
-Allows to create a collection with its mapping. Can be called at each plugin initialization if the mapping is not
- modified. Consider using [`storage.bootstrap`](#storage-bootstrap) if your collections are not dynamic.
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`collection`|`string`| The collection name |
-|`collectionMapping`|`object`| The collection mapping |
-
-#### Returns
-
-Returns a `promise` that resolves to the object `{ acknowledged: true }`.
-
-#### Usage
-
-&ldquo;`javascript
-context.accessors.storage.createCollection('someCollection&rsquo;, {
-    properties: {
-      someField: {
-        type: 'keyword&rsquo;
-      }
-      ,
-      &hellip;
-    }
-});
-&rdquo;`
-
-### `users.create`
-
-Creates a new user in Kuzzle. Will return an error if the user already exists.
-
-#### Arguments
-
-| Name | Type | Default Value | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`loginName`|`string`| | Name of the user&rsquo;s login to create |
-|`userProfile`|`string`|`default`| [User profile](#permissions) |
-|`userInfo`|`object`| `{}` | Misc. information about the user |
-
-#### Returns
-
-A `promise` resolving a `user` object containing the created information.
-
-### `users.load`
-
-Loads a user from Kuzzle
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`loginName`|`string`| Name of the user&rsquo;s login to load |
-
-#### Returns
-
-A `promise` resolving to a `user` object containing the user information.
-
-
-### `validation.validate`
-
-Validates a document wrapped in a `Request` object.
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`request`|`Request`| A document wrapped as a `Request` object |
-|`verbose`|`boolean`| Defines the behavior of the validation |
-
-#### Returns
-
-If `verbose` is set to `false`:
-
-Returns a `promise` that resolves to a modified `Request` instance where `defaultValues` are applied. Rejects if validation fails.
-
-If `verbose` is set to `true`:
-
-Returns a `promise` that resolves to an `object`:
-
-&ldquo;`javascript
-{
-  errorMessages: &hellip;,
-  validation: &hellip;
-}
-&rdquo;`
-
-Where:
-
-* `errorMessages` is a structured javascript object reflecting the structure of the document with all errors collected during the validation process
-* `validation` is a `boolean` reflecting the validation state.
-
-### `validation.addType`
-
-#### Arguments
-
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`validationType`|`object`| An object instance of a validation type |
-
-#### Returns
-
-Nothing. Can throw a `PluginImplementationError` if the validation type has not the expected form.
-
-#### validationType form
-
-&ldquo;`javascript
-/**
+<aside class="notice">
+  Passport strategy constructors take a &ldquo;verify&rdquo; callback.
+  As the following example demonstrates, if the provided callback uses &ldquo;this.[attribute]&rdquo; attributes,
+  then it&rsquo;s necessary to bind the provided callback to the plugin&rsquo;s context
+</aside>
+
+<h4 id="usage">Usage</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">LocalStrategy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'passport-local'</span><span class="p">).</span><span class="nx">Strategy</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">verify</span> <span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// verification code</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">userVerified</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">userInformation</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">done</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">pluginContext</span><span class="p">.</span><span class="nx">accessors</span><span class="p">.</span><span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="k">new</span> <span class="nx">LocalStrategy</span><span class="p">(</span><span class="nx">verify</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+</code></pre>
+
+<h3 id="router-newconnection"><code class="prettyprint">router.newConnection</code></h3>
+
+<p>Declares a new connection for a given protocol.  </p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">protocolName</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Protocol name, used for Kuzzle internal statistics</td>
+</tr>
+<tr>
+<td><code class="prettyprint">connectionUniqueId</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Unique ID identifying the user connection</td>
+</tr>
+</tbody></table>
+
+<h4 id="returns">Returns</h4>
+
+<p>A <code class="prettyprint">promise</code> resolving to a <code class="prettyprint">RequestContext</code> object. This object is needed for other router methods.</p>
+
+<h3 id="router-execute"><code class="prettyprint">router.execute</code></h3>
+
+<p>Forward a request to Kuzzle.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">request</code></td>
+<td><code class="prettyprint">Request</code></td>
+<td>An user request wrapped as a <code class="prettyprint">Request</code> instance</td>
+</tr>
+<tr>
+<td><code class="prettyprint">callback</code></td>
+<td><code class="prettyprint">function</code></td>
+<td>Callback called with the request corresponding results</td>
+</tr>
+</tbody></table>
+
+<h4 id="callback">Callback</h4>
+
+<p>The callback is invoked once the request has been processed by Kuzzle.<br>
+The provided callback is resolved with a <code class="prettyprint">response</code> argument, which is a plain-object, representing a standardized <a href="/api-reference/#kuzzle-response">Kuzzle response</a>.</p>
+
+<h3 id="router-removeconnection"><code class="prettyprint">router.removeConnection</code></h3>
+
+<p>Removes a connection from the connection pool maintained by Kuzzle.<br>
+Not calling this method after a connection is dropped will result in a memory-leak.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">context</code></td>
+<td><code class="prettyprint">RequestContext</code></td>
+<td>Object identifying the connection context. Obtained by calling <code class="prettyprint">newConnection()</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="storage-bootstrap"><code class="prettyprint">storage.bootstrap</code></h3>
+
+<p>Allows to initialize the plugin storage index in Elasticsearch. When called, it will create the Elastisearch index
+and the <code class="prettyprint">collections</code> provided in argument. Can be called at each plugin initialized as long as the mapping is
+not modified.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">collections</code></td>
+<td><code class="prettyprint">Object</code></td>
+<td>An object that contains the collection mappings. See the <a href="/guide#document-mapping">guide</a> for more explanation about Elasticsearch mapping.</td>
+</tr>
+</tbody></table>
+
+<h4 id="returns">Returns</h4>
+
+<p>Returns a <code class="prettyprint">promise</code> that resolves to a <code class="prettyprint">boolean</code> that indicates if the index and the collections already existed or not.</p>
+
+<h4 id="usage">Usage</h4>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">accessors</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">bootstrap</span><span class="p">({</span>
+  <span class="na">someCollection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">someField</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'keyword'</span>
+      <span class="p">}</span>
+      <span class="p">,</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">anotherCollection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="storage-createcollection"><code class="prettyprint">storage.createCollection</code></h3>
+
+<p>Allows to create a collection with its mapping. Can be called at each plugin initialization if the mapping is not
+ modified. Consider using <a href="#storage-bootstrap"><code class="prettyprint">storage.bootstrap</code></a> if your collections are not dynamic.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>The collection name</td>
+</tr>
+<tr>
+<td><code class="prettyprint">collectionMapping</code></td>
+<td><code class="prettyprint">object</code></td>
+<td>The collection mapping</td>
+</tr>
+</tbody></table>
+
+<h4 id="returns">Returns</h4>
+
+<p>Returns a <code class="prettyprint">promise</code> that resolves to the object <code class="prettyprint">{ acknowledged: true }</code>.</p>
+
+<h4 id="usage">Usage</h4>
+<pre class="highlight javascript"><code><span class="nx">context</span><span class="p">.</span><span class="nx">accessors</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">createCollection</span><span class="p">(</span><span class="s1">'someCollection'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">someField</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'keyword'</span>
+      <span class="p">}</span>
+      <span class="p">,</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="users-create"><code class="prettyprint">users.create</code></h3>
+
+<p>Creates a new user in Kuzzle. Will return an error if the user already exists.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">loginName</code></td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+<td>Name of the user&rsquo;s login to create</td>
+</tr>
+<tr>
+<td><code class="prettyprint">userProfile</code></td>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">default</code></td>
+<td><a href="#permissions">User profile</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">userInfo</code></td>
+<td><code class="prettyprint">object</code></td>
+<td><code class="prettyprint">{}</code></td>
+<td>Misc. information about the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="returns">Returns</h4>
+
+<p>A <code class="prettyprint">promise</code> resolving a <code class="prettyprint">user</code> object containing the created information.</p>
+
+<h3 id="users-load"><code class="prettyprint">users.load</code></h3>
+
+<p>Loads a user from Kuzzle</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">loginName</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Name of the user&rsquo;s login to load</td>
+</tr>
+</tbody></table>
+
+<h4 id="returns">Returns</h4>
+
+<p>A <code class="prettyprint">promise</code> resolving to a <code class="prettyprint">user</code> object containing the user information.</p>
+
+<h3 id="validation-validate"><code class="prettyprint">validation.validate</code></h3>
+
+<p>Validates a document wrapped in a <code class="prettyprint">Request</code> object.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">request</code></td>
+<td><code class="prettyprint">Request</code></td>
+<td>A document wrapped as a <code class="prettyprint">Request</code> object</td>
+</tr>
+<tr>
+<td><code class="prettyprint">verbose</code></td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Defines the behavior of the validation</td>
+</tr>
+</tbody></table>
+
+<h4 id="returns">Returns</h4>
+
+<p>If <code class="prettyprint">verbose</code> is set to <code class="prettyprint">false</code>:</p>
+
+<p>Returns a <code class="prettyprint">promise</code> that resolves to a modified <code class="prettyprint">Request</code> instance where <code class="prettyprint">defaultValues</code> are applied. Rejects if validation fails.</p>
+
+<p>If <code class="prettyprint">verbose</code> is set to <code class="prettyprint">true</code>:</p>
+
+<p>Returns a <code class="prettyprint">promise</code> that resolves to an <code class="prettyprint">object</code>:</p>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="nl">errorMessages</span><span class="p">:</span> <span class="p">...,</span>
+  <span class="nx">validation</span><span class="err">:</span> <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+<li><code class="prettyprint">errorMessages</code> is a structured javascript object reflecting the structure of the document with all errors collected during the validation process</li>
+<li><code class="prettyprint">validation</code> is a <code class="prettyprint">boolean</code> reflecting the validation state.</li>
+</ul>
+
+<h3 id="validation-addtype"><code class="prettyprint">validation.addType</code></h3>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">validationType</code></td>
+<td><code class="prettyprint">object</code></td>
+<td>An object instance of a validation type</td>
+</tr>
+</tbody></table>
+
+<h4 id="returns">Returns</h4>
+
+<p>Nothing. Can throw a <code class="prettyprint">PluginImplementationError</code> if the validation type has not the expected form.</p>
+
+<h4 id="validationtype-form">validationType form</h4>
+<pre class="highlight javascript"><code><span class="cm">/**
  * @typedef {{
  *   validate: Function,
  *   validateFieldSpecification: Function,
@@ -1157,203 +1267,306 @@ Nothing. Can throw a `PluginImplementationError` if the validation type has not 
  *   checkAllowedProperties: Function,
  *   allowedTypeOptions: string[]
  * }} ValidationType
- */
-&rdquo;`
+ */</span>
+</code></pre>
 
-See constructor `BaseValidationType` for more details.
+<p>See constructor <code class="prettyprint">BaseValidationType</code> for more details.</p>
 
-## Constructor
+<h2 id="constructor">Constructor</h2>
 
-### `BaseValidationType`
+<h3 id="basevalidationtype"><code class="prettyprint">BaseValidationType</code></h3>
 
-The `BaseValidationType` constructor provides a base to create your own validation types.
-It provides a common structure for all validation types developped in Kuzzle.
+<p>The <code class="prettyprint">BaseValidationType</code> constructor provides a base to create your own validation types.
+It provides a common structure for all validation types developped in Kuzzle.</p>
 
-You can find an example of a type creation in the
-[Kuzzle source code](https://github.com/kuzzleio/kuzzle/blob/master/lib/api/core/validation/types/type.js.template).
+<p>You can find an example of a type creation in the
+<a href="https://github.com/kuzzleio/kuzzle/blob/master/lib/api/core/validation/types/type.js.template">Kuzzle source code</a>.</p>
 
-### `Dsl`
+<h3 id="dsl"><code class="prettyprint">Dsl</code></h3>
 
-The DSL constructor provided in the plugin context gives access to
-[Kuzzle real-time filtering capabilities](#filtering-syntax).
-It allows managing filters, and testing data to get a list of matching filters.
+<p>The DSL constructor provided in the plugin context gives access to
+<a href="#filtering-syntax">Kuzzle real-time filtering capabilities</a>.
+It allows managing filters, and testing data to get a list of matching filters.</p>
 
-Each plugin can instantiate its own sandboxed DSL instance:
+<p>Each plugin can instantiate its own sandboxed DSL instance:</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">dsl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">context</span><span class="p">.</span><span class="nx">constructors</span><span class="p">.</span><span class="nx">Dsl</span><span class="p">();</span>
+</code></pre>
 
-&ldquo;`js
-var dsl = new context.constructors.Dsl();
-&rdquo;`
+<p>The DSL exposes the following methods:</p>
 
-The DSL exposes the following methods:
+<h4 id="exists"><code class="prettyprint">exists</code></h4>
 
-#### `exists`
+<p>Returns a boolean indicating if filters exist for an index-collection pair</p>
 
-Returns a boolean indicating if filters exist for an index-collection pair
+<p><strong>Arguments</strong></p>
 
-**Arguments**
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">index</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data index name</td>
+</tr>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data collection name</td>
+</tr>
+</tbody></table>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`index`|`string`| Data index name |
-|`collection`|`string`| Data collection name |
+<p><strong>Returns</strong></p>
 
+<p>Returns <code class="prettyprint">true</code> if at least one filter exists on the provided index-collection pair, returns <code class="prettyprint">false</code> otherwise</p>
 
-**Returns**
+<h4 id="getfilterids"><code class="prettyprint">getFilterIds</code></h4>
 
-Returns `true` if at least one filter exists on the provided index-collection pair, returns `false` otherwise
+<p>Retrieves filter IDs registered on an index-collection pair</p>
 
-#### `getFilterIds`
+<p><strong>Arguments</strong></p>
 
-Retrieves filter IDs registered on an index-collection pair
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">index</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data index name</td>
+</tr>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data collection name</td>
+</tr>
+</tbody></table>
 
+<p><strong>Returns</strong></p>
 
-**Arguments**
+<p>An <code class="prettyprint">array</code> of <code class="prettyprint">filterId</code> corresponding to filters registered on an index-collection pair.</p>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`index`|`string`| Data index name |
-|`collection`|`string`| Data collection name |
+<h4 id="register"><code class="prettyprint">register</code></h4>
 
-**Returns**
+<p>Registers a filter to the DSL.</p>
 
-An `array` of `filterId` corresponding to filters registered on an index-collection pair.
+<p><strong>Arguments</strong></p>
 
-#### `register`
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">index</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data index name</td>
+</tr>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data collection name</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filters</code></td>
+<td><code class="prettyprint">object</code></td>
+<td>Filters in <a href="#filtering-syntax">Kuzzle DSL</a> format</td>
+</tr>
+</tbody></table>
 
-Registers a filter to the DSL.
+<p><strong>Returns</strong></p>
 
-**Arguments**
+<p>A <code class="prettyprint">promise</code> resolving to an object containing the following attributes:</p>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`index`|`string`| Data index name |
-|`collection`|`string`| Data collection name |
-|`filters`|`object`| Filters in [Kuzzle DSL](#filtering-syntax) format |
+<ul>
+<li><code class="prettyprint">id</code>: the filter unique identifier</li>
+<li><code class="prettyprint">diff</code>: <code class="prettyprint">false</code> if the filter already existed in the engine. Otherwise, contains an object with the canonical version of the provided filters</li>
+</ul>
 
-**Returns**
+<h4 id="remove"><code class="prettyprint">remove</code></h4>
 
-A `promise` resolving to an object containing the following attributes:
+<p>Removes all references to a given filter from the DSL</p>
 
-* `id`: the filter unique identifier
-* `diff`: `false` if the filter already existed in the engine. Otherwise, contains an object with the canonical version of the provided filters
+<p><strong>Arguments</strong></p>
 
-#### `remove`
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">filterId</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Filter unique ID. Obtained by using <code class="prettyprint">register</code></td>
+</tr>
+</tbody></table>
 
-Removes all references to a given filter from the DSL
+<p><strong>Returns</strong></p>
 
-**Arguments**
+<p>A <code class="prettyprint">promise</code> resolved once the filter has been completely removed from the DSL</p>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`filterId`|`string`| Filter unique ID. Obtained by using `register`|
+<h4 id="test"><code class="prettyprint">test</code></h4>
 
-**Returns**
+<p>Test data against filters registered in the DSL, returning matching filter IDs, if any.</p>
 
-A `promise` resolved once the filter has been completely removed from the DSL
+<p><strong>Arguments</strong></p>
 
-#### `test`
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">index</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data index name</td>
+</tr>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Data collection name</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data</code></td>
+<td><code class="prettyprint">object</code></td>
+<td>Data to test against filters</td>
+</tr>
+<tr>
+<td><code class="prettyprint">documentId</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>If applicable, document unique ID</td>
+</tr>
+</tbody></table>
 
-Test data against filters registered in the DSL, returning matching filter IDs, if any.
+<p><strong>Returns</strong></p>
 
-**Arguments**
+<p>An array of <code class="prettyprint">filterId</code> matching the provided data (and/or documentId, if any).</p>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`index`|`string`| Data index name |
-|`collection`|`string`| Data collection name |
-|`data`|`object`| Data to test against filters |
-|`documentId`|`string`| If applicable, document unique ID |
+<h4 id="validate"><code class="prettyprint">validate</code></h4>
 
+<p>Tests the provided filters without storing them in the system, to check whether they are well-formed or not.</p>
 
-**Returns**
+<p><strong>Arguments</strong></p>
 
-An array of `filterId` matching the provided data (and/or documentId, if any).
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">filters</code></td>
+<td><code class="prettyprint">object</code></td>
+<td>Filters in <a href="#filtering-syntax">Kuzzle DSL</a> format</td>
+</tr>
+</tbody></table>
 
-#### `validate`
+<p><strong>Returns</strong></p>
 
-Tests the provided filters without storing them in the system, to check whether they are well-formed or not.
+<p>A resolved promise if the provided filters are valid, or a rejected one with the appropriate error object otherwise.</p>
 
-**Arguments**
+<h3 id="repository"><code class="prettyprint">Repository</code></h3>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`filters`|`object`| Filters in [Kuzzle DSL](#filtering-syntax) format |
-
-**Returns**
-
-A resolved promise if the provided filters are valid, or a rejected one with the appropriate error object otherwise.
-
-### `Repository`
-
-The Repository constructor provided in the plugin context gives access to methods
+<p>The Repository constructor provided in the plugin context gives access to methods
 that allow the plugin to interact with its plugin storage. The plugin storage is a dedicated
-index in Elasticsearch where the plugin can [create collections](#storage-createcollection).
-To do so the plugin should first [bootstrap](#storage-bootstrap) the index.
+index in Elasticsearch where the plugin can <a href="#storage-createcollection">create collections</a>.
+To do so the plugin should first <a href="#storage-bootstrap">bootstrap</a> the index.</p>
 
-Once done, the plugin can instantiate repositories to interact with the different collections it created.
+<p>Once done, the plugin can instantiate repositories to interact with the different collections it created.</p>
 
+<p><strong>Arguments</strong></p>
 
-**Arguments**
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">collection</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>The collection linked to the repository</td>
+</tr>
+<tr>
+<td><code class="prettyprint">ObjectConstructor</code></td>
+<td><code class="prettyprint">constructor function</code></td>
+<td>(optional) Will be used as constructor for the fetched documents instead of <code class="prettyprint">Object</code></td>
+</tr>
+</tbody></table>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-| `collection` | `string` | The collection linked to the repository |
-| `ObjectConstructor` |`constructor function` | (optional) Will be used as constructor for the fetched documents instead of `Object` |
+<p><strong>Usage</strong></p>
 
+<p>Each plugin can instantiate its own repositories linked to its own sandboxed plugin storage:</p>
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nx">ObjectConstructor</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">someProperty</span> <span class="o">=</span> <span class="s1">'someValue'</span><span class="p">;</span>
+<span class="p">}</span>
 
-**Usage**
+<span class="kd">var</span> <span class="nx">someCollectionRepository</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">context</span><span class="p">.</span><span class="nx">constructors</span><span class="p">.</span><span class="nx">Repository</span><span class="p">(</span><span class="s1">'someCollection'</span><span class="p">,</span> <span class="nx">ObjectConstructor</span><span class="p">);</span>
+</code></pre>
 
-Each plugin can instantiate its own repositories linked to its own sandboxed plugin storage:
+<p>The Repository exposes the following methods:</p>
 
-&ldquo;`js
-function ObjectConstructor() {
-  this.someProperty = 'someValue&rsquo;;
-}
+<h4 id="create"><code class="prettyprint">create</code></h4>
 
-var someCollectionRepository = new context.constructors.Repository('someCollection&rsquo;, ObjectConstructor);
-&rdquo;`
+<p>Creates a document in the plugin storage.</p>
 
-The Repository exposes the following methods:
+<p><strong>Arguments</strong></p>
 
-#### `create`
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">document</code></td>
+<td><code class="prettyprint">Object</code></td>
+<td>The document you want to create. It must contain a unique <code class="prettyprint">_id</code> string property. You don&rsquo;t need to worry about collisions with other plugins as your plugin storage is only accessible by your plugin</td>
+</tr>
+</tbody></table>
 
-Creates a document in the plugin storage.
+<p><strong>Returns</strong></p>
 
-**Arguments**
+<p>Returns a <code class="prettyprint">promise</code> that resolves to an object respresentation of Elasticsearch request result.</p>
 
-| Name | Type | Description                      |
-|&mdash;&mdash;|&mdash;&mdash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|
-|`document`|`Object`| The document you want to create. It must contain a unique `_id` string property. You don&rsquo;t need to worry about collisions with other plugins as your plugin storage is only accessible by your plugin |
+<p><strong>Usage</strong></p>
+<pre class="highlight javascript"><code><span class="nx">someCollectionRepository</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">_id</span><span class="p">:</span> <span class="s1">'&lt;a unique id&gt;'</span><span class="p">,</span>
+  <span class="na">someField</span><span class="p">:</span> <span class="s1">'some content'</span><span class="p">,</span>
+  <span class="na">anotherField</span><span class="p">:</span> <span class="s1">'another content'</span><span class="p">,</span>
+  <span class="p">...</span>
+<span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+  <span class="p">});</span>
 
-**Returns**
-
-Returns a `promise` that resolves to an object respresentation of Elasticsearch request result.
-
-**Usage**
-
-&ldquo;`javascript
-someCollectionRepository.create({
-  _id: &rsquo;<a unique id>&rsquo;,
-  someField: 'some content&rsquo;,
-  anotherField: 'another content&rsquo;,
-  &hellip;
-})
-  .then(result => {
-    console.log(result);
-  });
-
-/**
+<span class="cm">/**
  * Outputs:
- * { _index: &rsquo;%some-plugin&rsquo;,
- *   _type: 'someCollection&rsquo;,
- *   _id: &rsquo;<a unique id>&rsquo;,
+ * { _index: '%some-plugin',
+ *   _type: 'someCollection',
+ *   _id: '&lt;a unique id&gt;',
  *   _version: 1,
- *   result: 'created&rsquo;,
+ *   result: 'created',
  *   _shards: { total: 2, successful: 1, failed: 0 },
  *   created: true,
- *   _source: { someField: 'some content&rsquo;, anotherField: 'another content&rsquo; } }
- */
-&rdquo;`
+ *   _source: { someField: 'some content', anotherField: 'another content' } }
+ */</span>
+</code></pre>
 
 <aside class="warning">
   The document provided as argument should be a plain object representing the document you want to store.
