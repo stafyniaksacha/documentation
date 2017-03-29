@@ -256,8 +256,8 @@ Kuzzle <span class="o">{</span>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;action route&gt;[route options]</code>
-<strong>Method:</strong> <code class="prettyprint">get|post|put|delete</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;action route&gt;[route options]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">get|post|put|delete</code><br/>
 <strong>Body:</strong> Can be empty (usually with get and delete methods) or a JSON object
 of the resource body (usually with post and put methods).</p>
 </blockquote>
@@ -266,16 +266,16 @@ of the resource body (usually with post and put methods).</p>
 
 <blockquote>
 <p><strong>Websocket:</strong> The Websocket layer listens to a specific socket room in order
-to forward your queries to the right Kuzzle controller.
-<strong>Room name:</strong> <code class="prettyprint">kuzzle</code>
+to forward your queries to the right Kuzzle controller.<br/>
+<strong>Room name:</strong> <code class="prettyprint">kuzzle</code><br/>
 <strong>Query body syntax (JSON data):</strong></p>
 </blockquote>
 
 <section class="others"></section>
 
 <blockquote>
-<p><strong>MQTT:</strong> The MQTT layer listens to a specific topic in order to forward your queries to the right Kuzzle controller.
-<strong>Topic name:</strong> <code class="prettyprint">kuzzle</code>
+<p><strong>MQTT:</strong> The MQTT layer listens to a specific topic in order to forward your queries to the right Kuzzle controller.<br/>
+<strong>Topic name:</strong> <code class="prettyprint">kuzzle</code><br/>
 <strong>Query body syntax (JSON data):</strong></p>
 </blockquote>
 
@@ -947,8 +947,8 @@ it cannot be filtered.
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_checkToken</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_checkToken</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1006,8 +1006,8 @@ This API route does not require to be logged in.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_me</code>
-<strong>Method:</strong> <code class="prettyprint">GET</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_me</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code><br/>
 <strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code></p>
 </blockquote>
 
@@ -1062,8 +1062,8 @@ This API route does not require to be logged in.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_me/_rights</code>
-<strong>Method:</strong> <code class="prettyprint">GET</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_me/_rights</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code><br/>
 <strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code></p>
 </blockquote>
 
@@ -1111,8 +1111,8 @@ This API route does not require to be logged in.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_login</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_login</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1199,8 +1199,8 @@ and let you authenticate with a login and password.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_logout</code>
-<strong>Method:</strong> <code class="prettyprint">GET</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_logout</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code><br/>
 <strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code></p>
 </blockquote>
 
@@ -1243,9 +1243,9 @@ and let you authenticate with a login and password.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_updateSelf</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
-<strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_updateSelf</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
+<strong>Headers:</strong> <code class="prettyprint">Authorization: &quot;Bearer &lt;encrypted_jwt_token&gt;&quot;</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -1327,8 +1327,8 @@ even if some of the documents in the import match your subscription filters.
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_bulk</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_bulk</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1420,8 +1420,8 @@ In such case, the <code class="prettyprint">collection</code> in which the docum
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_bulk</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_bulk</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -1515,7 +1515,7 @@ The <code class="prettyprint">collections</code> to modify then need to be speci
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;data&gt;/&lt;collection&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;data&gt;/&lt;collection&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">PUT</code></p>
 </blockquote>
 
@@ -1560,7 +1560,7 @@ This method does nothing if the collection already exists.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_specifications</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_specifications</code><br/>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -1603,7 +1603,7 @@ It responds 200 even there where no validation specification manually set before
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_exists</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_exists</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -1644,7 +1644,7 @@ It responds 200 even there where no validation specification manually set before
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mapping</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mapping</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -1700,7 +1700,7 @@ It responds 200 even there where no validation specification manually set before
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_specifications</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_specifications</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -1770,7 +1770,7 @@ index and collection if some specifications has been defined first.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_list(/&lt;all|stored|realtime&gt;)[?from=0][&amp;size=42]</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_list(/&lt;all|stored|realtime&gt;)[?from=0][&amp;size=42]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -1843,8 +1843,8 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_searchSpecifications</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_searchSpecifications</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -1943,7 +1943,7 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_truncate</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_truncate</code><br/>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -1987,8 +1987,8 @@ It is also faster than deleting all documents from a collection using a query.</
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mapping</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mapping</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2077,8 +2077,8 @@ stored in a collection and the complexity of your database.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_specifications</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_specifications</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2181,8 +2181,8 @@ When the validation specification is not well formatted, a detailed error messag
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_validateSpecifications</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_validateSpecifications</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2259,8 +2259,8 @@ When the validation specification is not well formatted, a detailed error messag
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_count</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_count</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2323,8 +2323,8 @@ When the validation specification is not well formatted, a detailed error messag
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_create[?refresh=wait_for]</code> or <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_create[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_create[?refresh=wait_for]</code> or <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_create[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2387,8 +2387,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2451,7 +2451,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;[?refresh=wait_for]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -2504,8 +2504,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_query</code>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_query</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2568,7 +2568,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -2628,8 +2628,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_replace[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_replace[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2692,8 +2692,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_scroll/&lt;scrollId&gt;[?scroll=&lt;scroll ttl]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_scroll/&lt;scrollId&gt;[?scroll=&lt;scroll ttl]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -2768,8 +2768,8 @@ The query defined in the initial <code class="prettyprint">search</code> request
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_search[?from=0][&amp;size=42][&amp;scroll=1m]</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_search[?from=0][&amp;size=42][&amp;scroll=1m]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -2875,8 +2875,8 @@ must be used to iterate the pagination.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mCreate[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mCreate[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3019,8 +3019,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mCreateOrReplace[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mCreateOrReplace[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3160,8 +3160,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mDelete[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mDelete[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3221,8 +3221,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mGet</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mGet</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3317,8 +3317,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mReplace[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mReplace[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3461,8 +3461,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mUpdate[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mUpdate[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3581,8 +3581,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_update[?refresh=wait_for]</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_update[?refresh=wait_for]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3649,8 +3649,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_validate</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_validate</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3710,7 +3710,7 @@ In any ways, the document is <strong>not</strong> stored nor published.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_create</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_create</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -3754,7 +3754,7 @@ But in some cases, you may want to create an empty index directly, prior to stor
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -3795,7 +3795,7 @@ But in some cases, you may want to create an empty index directly, prior to stor
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_exists</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_exists</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -3834,7 +3834,7 @@ But in some cases, you may want to create an empty index directly, prior to stor
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_autoRefresh</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_autoRefresh</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -3887,7 +3887,7 @@ immediately after each write request, forcing the documents to be immediately vi
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_list</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_list</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -3932,8 +3932,8 @@ immediately after each write request, forcing the documents to be immediately vi
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_mDelete</code>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_mDelete</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -3998,7 +3998,7 @@ and &ldquo;index3&rdquo; is kept in the persistent storage layer.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_refresh</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_refresh</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -4065,7 +4065,7 @@ on it, making the documents visible to search immediately.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_refreshInternal</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_refreshInternal</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -4126,7 +4126,7 @@ on the internal index, making the documents visible to search immediately.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_autoRefresh</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/_autoRefresh</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 
 <p>Query</p>
@@ -4255,7 +4255,7 @@ It is internally based on Redis. You can access most of Redis functions (all low
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_bitcount/&lt;key&gt;[?start=&lt;integer&gt;&amp;end=&lt;integer&gt;]</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_bitcount/&lt;key&gt;[?start=&lt;integer&gt;&amp;end=&lt;integer&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
 </blockquote>
 
@@ -4301,8 +4301,8 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512//ms/_bitop/&lt;destination key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512//ms/_bitop/&lt;destination key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong>  </p>
 </blockquote>
 
@@ -4356,8 +4356,8 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_bitpos/&lt;key&gt;?bit=[0|1][&amp;start=&lt;integer&gt;&amp;end=&lt;integer&gt;]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_bitpos/&lt;key&gt;?bit=[0|1][&amp;start=&lt;integer&gt;&amp;end=&lt;integer&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -4402,7 +4402,7 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_dbsize</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_dbsize</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
 </blockquote>
 
@@ -4444,7 +4444,7 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_decr/&lt;key&gt;</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_decr/&lt;key&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code>  </p>
 </blockquote>
 
@@ -4487,8 +4487,8 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_decrby/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_decrby/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong>  </p>
 </blockquote>
 
@@ -4540,8 +4540,8 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
 <strong>Body:</strong>  </p>
 </blockquote>
 
@@ -4592,7 +4592,7 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_exists?keys=key1,key2,...</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_exists?keys=key1,key2,...</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
 </blockquote>
 
@@ -4635,8 +4635,8 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_expire/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_expire/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -4688,8 +4688,8 @@ The <code class="prettyprint">start</code> and <code class="prettyprint">end</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_expireat/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_expireat/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -4742,8 +4742,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_flushdb</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_flushdb</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -4784,8 +4784,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geoadd/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geoadd/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -4861,8 +4861,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geodist/&lt;key&gt;/&lt;member1&gt;/&lt;member2&gt;[?unit=[m|km|mi|ft]]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geodist/&lt;key&gt;/&lt;member1&gt;/&lt;member2&gt;[?unit=[m|km|mi|ft]]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -4908,8 +4908,8 @@ The returned distance is expressed in meters by default.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geohash/&lt;key&gt;?members=member1,member2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geohash/&lt;key&gt;?members=member1,member2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -4952,8 +4952,8 @@ The returned distance is expressed in meters by default.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geopos/&lt;key&gt;?members=member1,member2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_geopos/&lt;key&gt;?members=member1,member2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5000,8 +5000,8 @@ The returned distance is expressed in meters by default.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_georadius/&lt;key&gt;?lon=&lt;longitude&gt;&amp;lat=&lt;latitude&gt;&amp;distance=&lt;distance&gt;&amp;unit=[m|km|mi|ft][&amp;options=option1,option2,...]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_georadius/&lt;key&gt;?lon=&lt;longitude&gt;&amp;lat=&lt;latitude&gt;&amp;distance=&lt;distance&gt;&amp;unit=[m|km|mi|ft][&amp;options=option1,option2,...]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5058,8 +5058,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_georadiusbymember/&lt;key&gt;?member=&lt;member&gt;&amp;distance=&lt;distance&gt;&amp;unit=[m|km|mi|ft][&amp;options=option1,option2,...]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_georadiusbymember/&lt;key&gt;?member=&lt;member&gt;&amp;distance=&lt;distance&gt;&amp;unit=[m|km|mi|ft][&amp;options=option1,option2,...]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5115,8 +5115,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>    </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5158,8 +5158,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_getbit/&lt;key&gt;?offset=&lt;offset&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>    </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_getbit/&lt;key&gt;?offset=&lt;offset&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5202,8 +5202,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_getrange/&lt;key&gt;?start=&lt;start&gt;&amp;end=&lt;end&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_getrange/&lt;key&gt;?start=&lt;start&gt;&amp;end=&lt;end&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5247,9 +5247,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_getset/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_getset/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -5300,9 +5300,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hdel/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hdel/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -5353,8 +5353,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hexists/&lt;key&gt;/&lt;field&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hexists/&lt;key&gt;/&lt;field&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5397,8 +5397,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hget/&lt;key&gt;/&lt;field&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hget/&lt;key&gt;/&lt;field&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5441,8 +5441,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hgetall/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hgetall/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5488,9 +5488,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hincrby/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hincrby/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -5543,9 +5543,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hincrbyfloat/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hincrbyfloat/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -5598,8 +5598,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hkeys/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hkeys/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5645,8 +5645,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hlen/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hlen/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5688,8 +5688,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hmget/&lt;key&gt;?fields=field1,field2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hmget/&lt;key&gt;?fields=field1,field2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5736,9 +5736,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hmset/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hmset/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -5797,8 +5797,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hscan/&lt;key&gt;?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hscan/&lt;key&gt;?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -5854,9 +5854,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hset/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hset/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -5909,9 +5909,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hsetnx/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hsetnx/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -5964,8 +5964,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hstrlen/&lt;key&gt;/&lt;field&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hstrlen/&lt;key&gt;/&lt;field&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6008,8 +6008,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hvals/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_hvals/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6055,8 +6055,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_incr/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_incr/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6098,9 +6098,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_incrby/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_incrby/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6151,9 +6151,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_incrbyfloat/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_incrbyfloat/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6204,8 +6204,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_keys/&lt;pattern&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_keys/&lt;pattern&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6251,8 +6251,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lindex/&lt;key&gt;/&lt;index&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lindex/&lt;key&gt;/&lt;index&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6295,9 +6295,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_linsert/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_linsert/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6352,8 +6352,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_llen/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_llen/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6395,8 +6395,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lpop/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lpop/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6438,9 +6438,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lpush/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lpush/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6491,9 +6491,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lpushx/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lpushx/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6544,8 +6544,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lrange/&lt;key&gt;?start=&lt;start&gt;&amp;stop=&lt;stop&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lrange/&lt;key&gt;?start=&lt;start&gt;&amp;stop=&lt;stop&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6593,9 +6593,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lrem/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lrem/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6648,9 +6648,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lset/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_lset/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6703,9 +6703,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_ltrim/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_ltrim/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6758,8 +6758,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_mget?keys=key1,key2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_mget?keys=key1,key2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6805,9 +6805,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_mset</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_mset</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6865,9 +6865,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_msetnx</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_msetnx</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -6925,8 +6925,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_object/&lt;key&gt;?subcommand=[refcount|encoding|idletime]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_object/&lt;key&gt;?subcommand=[refcount|encoding|idletime]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -6969,8 +6969,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_persist/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_persist/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7012,9 +7012,9 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pexpire/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pexpire/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7065,8 +7065,8 @@ For instance, <code class="prettyprint">&amp;options=count,&lt;count&gt;</code> 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pexpireat/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pexpireat/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -7119,9 +7119,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pfadd/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pfadd/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7172,8 +7172,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pfcount?keys=key1,key2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pfcount?keys=key1,key2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7215,9 +7215,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pfmerge/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pfmerge/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7268,8 +7268,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_ping</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_ping</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7310,9 +7310,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_psetex/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_psetex/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7365,8 +7365,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pttl/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_pttl/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7408,9 +7408,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_randomkey</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_randomkey</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7451,9 +7451,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rename/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rename/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7504,9 +7504,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_renamenx/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_renamenx/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7557,8 +7557,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpop/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpop/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7600,9 +7600,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpoplpush</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpoplpush</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7654,9 +7654,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpush/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpush/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7707,9 +7707,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpushx/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_rpushx/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7760,9 +7760,9 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sadd/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sadd/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -7813,8 +7813,8 @@ The <code class="prettyprint">timestamp</code> parameter accepts an <a href="htt
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_scan?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_scan?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7878,8 +7878,8 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_scard/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_scard/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7921,8 +7921,8 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sdiff/&lt;key&gt;?keys=key1,key2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sdiff/&lt;key&gt;?keys=key1,key2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -7969,9 +7969,9 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sdiffstore/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sdiffstore/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8026,9 +8026,9 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_set/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_set/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8102,9 +8102,9 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_setex/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_setex/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8157,9 +8157,9 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_setnx/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_setnx/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8210,8 +8210,8 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sinter?keys=key1,key2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sinter?keys=key1,key2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8257,9 +8257,9 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sinterstore</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sinterstore</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8313,8 +8313,8 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sismember/&lt;key&gt;/&lt;member&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sismember/&lt;key&gt;/&lt;member&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8357,8 +8357,8 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_smembers/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_smembers/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8404,9 +8404,9 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_smove/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_smove/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8459,9 +8459,9 @@ The scan terminates when the cursor returned by the server is 0.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sort/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sort/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8540,9 +8540,9 @@ By default, sorting is numeric and elements are compared by their value interpre
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_spop/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_spop/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8595,8 +8595,8 @@ By default, sorting is numeric and elements are compared by their value interpre
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_srandmember/&lt;key&gt;[?count=&lt;count&gt;]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_srandmember/&lt;key&gt;[?count=&lt;count&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8643,9 +8643,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_srem/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_srem/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8696,8 +8696,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sscan/&lt;key&gt;?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sscan/&lt;key&gt;?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8751,8 +8751,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_strlen/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_strlen/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8794,8 +8794,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sunion?keys=key1,key2,...</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sunion?keys=key1,key2,...</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8841,9 +8841,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sunionstore</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_sunionstore</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8897,8 +8897,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_time</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_time</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -8942,9 +8942,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_touch</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_touch</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -8994,8 +8994,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_ttl/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_ttl/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9037,8 +9037,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_type/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_type/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9080,9 +9080,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zadd/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zadd/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -9166,8 +9166,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zcard/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zcard/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9209,8 +9209,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zcount/&lt;key&gt;?min=&lt;min score&gt;&amp;max=&lt;max score&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zcount/&lt;key&gt;?min=&lt;min score&gt;&amp;max=&lt;max score&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9256,9 +9256,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zincrby/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zincrby/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -9311,9 +9311,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zinterstore/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zinterstore/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -9379,8 +9379,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zlexcount/&lt;key&gt;?min=&lt;min value&gt;&amp;max=&lt;max value&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zlexcount/&lt;key&gt;?min=&lt;min value&gt;&amp;max=&lt;max value&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9424,8 +9424,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrange/&lt;key&gt;?start=&lt;index start&gt;&amp;stop=&lt;index stop&gt;[&amp;options=withscores]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrange/&lt;key&gt;?start=&lt;index start&gt;&amp;stop=&lt;index stop&gt;[&amp;options=withscores]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9478,8 +9478,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrangebylex/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrangebylex/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9532,8 +9532,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrangebyscore/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count][&amp;options=withscores]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrangebyscore/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count][&amp;options=withscores]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9589,8 +9589,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrank/&lt;key&gt;/&lt;member&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrank/&lt;key&gt;/&lt;member&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9633,9 +9633,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrem/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrem/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -9686,9 +9686,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zremrangebylex/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zremrangebylex/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -9741,9 +9741,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zremrangebyrank/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zremrangebyrank/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -9798,9 +9798,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zremrangebyscore/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">DELETE</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zremrangebyscore/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">DELETE</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -9855,8 +9855,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrange/&lt;key&gt;?start=&lt;index start&gt;&amp;stop=&lt;index stop&gt;[&amp;options=withscores]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrange/&lt;key&gt;?start=&lt;index start&gt;&amp;stop=&lt;index stop&gt;[&amp;options=withscores]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9907,8 +9907,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrangebylex/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrangebylex/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -9959,8 +9959,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrangebyscore/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count][&amp;options=withscores]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrangebyscore/&lt;key&gt;?min=&lt;min interval&gt;&amp;max=&lt;max interval&gt;[&amp;limit=offset,count][&amp;options=withscores]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -10012,8 +10012,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrank/&lt;key&gt;/&lt;member&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zrevrank/&lt;key&gt;/&lt;member&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -10056,8 +10056,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zscan/&lt;key&gt;?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zscan/&lt;key&gt;?cursor=&lt;cursor&gt;[&amp;match=&lt;pattern&gt;][&amp;count=&lt;count&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -10113,8 +10113,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zscore/&lt;key&gt;/&lt;member&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zscore/&lt;key&gt;/&lt;member&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
 <section class="others"></section>
@@ -10157,9 +10157,9 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zunionstore/&lt;key&gt;</code><br>
-<strong>Method:</strong> <code class="prettyprint">POST</code><br>
-<strong>Body:</strong>  </p>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/ms/_zunionstore/&lt;key&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
+<strong>Body:</strong></p>
 </blockquote>
 
 <section class="http"></section>
@@ -10397,8 +10397,8 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_publish</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_publish</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -10743,8 +10743,8 @@ In practice, your subscription won&rsquo;t receive any new message on the room o
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_validate</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_validate</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -10804,8 +10804,8 @@ In any ways, the document is <strong>not</strong> stored nor published.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;userId&gt;/_createFirstAdmin[?reset=1]</code> or <code class="prettyprint">http://kuzzle:7512/_createFirstAdmin[?reset=1]</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;userId&gt;/_createFirstAdmin[?reset=1]</code> or <code class="prettyprint">http://kuzzle:7512/_createFirstAdmin[?reset=1]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -10897,8 +10897,8 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profileId&gt;</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profileId&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -10999,8 +10999,8 @@ the preset roles (<code class="prettyprint">anonymous</code> and <code class="pr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -11082,8 +11082,8 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s permissions documen
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -11150,8 +11150,8 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s permissions documen
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profileId&gt;/_create</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profileId&gt;/_create</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -11252,8 +11252,8 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s permissions documen
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;/_create</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;/_create</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -11336,8 +11336,8 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s permissions documen
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_create</code> or <code class="prettyprint">http://kuzzle:7512/users/_create</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_create</code> or <code class="prettyprint">http://kuzzle:7512/users/_create</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -11434,8 +11434,8 @@ If not provided, the <code class="prettyprint">_id</code> will be auto-generated
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_createRestricted</code> or <code class="prettyprint">http://kuzzle:7512/users/_createRestricted</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_createRestricted</code> or <code class="prettyprint">http://kuzzle:7512/users/_createRestricted</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -11527,7 +11527,7 @@ This route is especially useful to allow anonymous users to create a user.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -11573,7 +11573,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -11618,7 +11618,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">DELETE</code></p>
 </blockquote>
 
@@ -11663,7 +11663,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -11710,7 +11710,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mapping</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mapping</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -11751,7 +11751,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;/_rights</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_profiles/&lt;profileId&gt;/_rights</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -11802,7 +11802,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;role id&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;role id&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -11853,7 +11853,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mapping</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mapping</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -11894,7 +11894,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -11940,7 +11940,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mapping</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mapping</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -11981,7 +11981,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_users/&lt;userId&gt;/_rights</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_users/&lt;userId&gt;/_rights</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -12029,7 +12029,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mDelete</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mDelete</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code>
 <strong>Body:</strong></p>
 </blockquote>
@@ -12081,8 +12081,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mDelete</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mDelete</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -12133,8 +12133,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mDelete</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mDelete</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -12186,8 +12186,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mGet</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mGet</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -12271,8 +12271,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mGet</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mGet</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -12357,8 +12357,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_search[?from=0][&amp;size=42]</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_search[?from=0][&amp;size=42]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -12478,8 +12478,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_search[?from=0][&amp;size=42]</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_search[?from=0][&amp;size=42]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -12578,8 +12578,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_search[?from=0][&amp;size=42]</code>
-<strong>Method:</strong> <code class="prettyprint">POST</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_search[?from=0][&amp;size=42]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -12681,8 +12681,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profile id&gt;/_update</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/&lt;profile id&gt;/_update</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -12776,8 +12776,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mapping</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_mapping</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -12861,8 +12861,8 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;/_update</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/&lt;roleId&gt;/_update</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -12941,8 +12941,8 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s security documentat
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mapping</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/roles/_mapping</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -13026,8 +13026,8 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s security documentat
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_update</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/&lt;userId&gt;/_update</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body</strong></p>
 </blockquote>
 
@@ -13085,8 +13085,8 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s security documentat
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mapping</code>
-<strong>Method:</strong> <code class="prettyprint">PUT</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_mapping</code><br/>
+<strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
 
@@ -13172,7 +13172,7 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s security documentat
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_adminExists</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_adminExists</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -13212,7 +13212,7 @@ please refer to <a href="/guide/#permissions">Kuzzle&rsquo;s security documentat
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getAllStats</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getAllStats</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -13284,7 +13284,7 @@ By default, snapshots are made every 10s, and these snapshots are stored for 1hr
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getConfig</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getConfig</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -13420,7 +13420,7 @@ This route should be opened only to administrators, as it might export sensitive
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getLastStats</code><br>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getLastStats</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -13487,7 +13487,7 @@ By default, snapshots are made every 10s.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getStats[?startTime=123456789][&amp;stopTime=234567890]</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_getStats[?startTime=123456789][&amp;stopTime=234567890]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code></p>
 </blockquote>
 
@@ -13564,7 +13564,7 @@ By default, snapshots are made every 10s.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_serverInfo</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_serverInfo</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -13689,7 +13689,7 @@ By default, snapshots are made every 10s.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_now</code>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_now</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
