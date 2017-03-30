@@ -389,7 +389,7 @@ Each pipes must also be exported.</p>
 <p>Examples:</p>
 
 <ul>
-<li>HTTP: <code class="prettyprint">GET http://&lt;server&gt;:&lt;port&gt;/&lt;plugin name&gt;/&lt;url defined by the plugin&gt;/&lt;resources&gt;</code></li>
+<li>HTTP: <code class="prettyprint">GET http://&lt;server&gt;:&lt;port&gt;/_plugin/&lt;plugin name&gt;/&lt;url defined by the plugin&gt;/&lt;resources&gt;</code></li>
 <li>Other protocols:</li>
 </ul>
 <pre class="highlight javascript"><code><span class="p">{</span>
@@ -1150,7 +1150,7 @@ not modified.</p>
 <td><code class="prettyprint">userProfile</code></td>
 <td><code class="prettyprint">string</code></td>
 <td><code class="prettyprint">default</code></td>
-<td><a href="#permissions">User profile</a></td>
+<td><a href="/guide/#permissions">User profile</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">userInfo</code></td>
@@ -2189,7 +2189,7 @@ to comply with the norm. For instance <code class="prettyprint">set-cookie</code
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">err</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">context</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">BadRequestError</span><span class="p">(</span><span class="s1">'error message'</span><span class="p">);</span>
 </code></pre>
 
-<h3 id="forbiddenerror">ForbiddenError`</h3>
+<h3 id="forbiddenerror"><code class="prettyprint">ForbiddenError</code></h3>
 
 <p><strong>Status Code:</strong> <code class="prettyprint">403</code></p>
 

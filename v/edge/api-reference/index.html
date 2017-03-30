@@ -1506,7 +1506,7 @@ In such case, the <code class="prettyprint">collection</code> in which the docum
 <p>The <code class="prettyprint">bulk import</code> can also be used in a more versatile (yet a little more verbose) way,
 to execute operations on a whole database, modifying multiple data collections in different indexes at once.<br>
 The <code class="prettyprint">collections</code> to modify then need to be specified inside the query message,using the <code class="prettyprint">_type</code>argument, as specified in the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-bulk.html">ElasticSearch Bluk API</a>.</p>
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-bulk.html">ElasticSearch Bulk API</a>.</p>
 
             <h1 id="collection-controller">~ collection controller</h1>
 
@@ -1843,7 +1843,7 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_searchSpecifications</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/validations/_search</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
@@ -10238,8 +10238,6 @@ If <code class="prettyprint">count</code> is provided and is positive, the retur
 
 <section class="others"></section>
 <pre class="highlight literate_coffeescript"><code>{
-  "index": "<span class="nt">&lt;index&gt;</span>",
-  "collection": "<span class="nt">&lt;collection&gt;</span>",
   "controller": "realtime",
   "action": "count",
   "body": {
