@@ -1838,12 +1838,107 @@ index and collection if some specifications has been defined first.</p>
 The <code class="prettyprint">type</code> argument filters the returned collections. Allowed values: <code class="prettyprint">all</code>, <code class="prettyprint">stored</code> and <code class="prettyprint">realtime</code> (default : <code class="prettyprint">all</code>).<br>
 The <code class="prettyprint">from</code> and <code class="prettyprint">size</code> arguments allow pagination. They are returned in the response if provided.</p>
 
+<h2 id="scrollspecifications">scrollSpecifications</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/validations/_scroll/&lt;scrollId&gt;[?scroll=&lt;time to live&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "collections",
+  "action": "scrollSpecifications",
+  "scrollId": "<span class="nt">&lt;scrollId&gt;</span>",
+
+  // Optional: new time to live of the cursor
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "action": "scrollSpecifications",
+  "controller": "collection",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="o">//</span> <span class="nx">scroll</span> <span class="nx">requests</span> <span class="nx">may</span> <span class="k">return</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">scroll</span> <span class="nx">identifier</span>
+    <span class="o">//</span> <span class="nx">only</span> <span class="nx">the</span> <span class="nx">most</span> <span class="nx">recent</span> <span class="nx">scrollId</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">used</span>
+    <span class="s">"scrollId"</span><span class="o">:</span> <span class="s">"&lt;new scroll id&gt;"</span><span class="p">,</span>
+
+    <span class="o">//</span> <span class="nx">An</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">objects</span> <span class="nx">containing</span> <span class="nx">your</span> <span class="nx">retrieved</span> <span class="nx">documents</span>
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myIndex#myCollection"</span><span class="p">,</span>
+        <span class="s">"_index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
+        <span class="s">"_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"collection"</span><span class="o">:</span> <span class="s">"myCollection"</span><span class="p">,</span>
+          <span class="s">"index"</span><span class="o">:</span> <span class="s">"myIndex"</span><span class="p">,</span>
+          <span class="s">"validation"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">"fields"</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s">"fieldName"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"defaultValue"</span><span class="o">:</span> <span class="s">"a default value"</span><span class="p">,</span>
+                <span class="s">"mandatory"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span>
+                <span class="s">"multivalued"</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s">"maxCount"</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+                  <span class="s">"minCount"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                  <span class="s">"value"</span><span class="o">:</span> <span class="no">true</span>
+                <span class="p">},</span>
+                <span class="s">"type"</span><span class="o">:</span> <span class="s">"string"</span><span class="p">,</span>
+                <span class="s">"typeOptions"</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s">"length"</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="s">"max"</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+                    <span class="s">"min"</span><span class="o">:</span> <span class="mi">2</span>
+                  <span class="p">}</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s">"strict"</span><span class="o">:</span> <span class="no">true</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s">"_type"</span><span class="o">:</span> <span class="s">"validations"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">found</span> <span class="nx">specifications</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>This method moves forward a result set cursor created by a <a href="#searchspecifications"><code class="prettyprint">searchSpecifications</code> query</a> with the <code class="prettyprint">scroll</code> argument provided.</p>
+
+<p>The response may contain a <em>different</em> cursor identifier, pointing to the next page of results.</p>
+
+<p>The optional <code class="prettyprint">scroll</code> argument allows to refresh the cursor duration, with a new <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time to live</a> value.</p>
+
+<aside class="warning">
+  The results that are returned from a `scrollSpecifications` request reflect the state of the index at the time
+  that the initial search request was made, like a snapshot in time. Subsequent changes
+  to documents (index, update or delete) will only affect later search requests.
+</aside>
+
 <h2 id="searchspecifications">searchSpecifications</h2>
 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/validations/_search</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/validations/_search[?from=0][&amp;size=10][&amp;scroll=&lt;time to live&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
@@ -1873,9 +1968,10 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
       <span class="s">"Some"</span><span class="o">:</span> <span class="s">"filters"</span>
     <span class="p">}</span>
   },
-  // "from" and "size" argument for pagination
+  // Optional arguments
   "from": 0,
-  "size": 42
+  "size": 42,
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
 }
 </code></pre>
 <pre class="highlight plaintext"><code>
@@ -1928,15 +2024,20 @@ The <code class="prettyprint">from</code> and <code class="prettyprint">size</co
         "_type": "validations"
       }
     ],
-    "max_score": null,
-    "timed_out": false,
-    "took": 1,
-    "total": &lt;number of results&gt;
+    "total": &lt;number of specifications&gt;
   }
 }
 </code></pre>
 
 <p>Allows to search in the persistence layer for collection specifications.</p>
+
+<p>Optional arguments:</p>
+
+<ul>
+<li><code class="prettyprint">size</code> controls the maximum number of documents returned in the response</li>
+<li><code class="prettyprint">from</code> is usually used with the <code class="prettyprint">size</code> argument, and defines the offset from the first result you want to fetch</li>
+<li><code class="prettyprint">scroll</code> allows to fetch large result sets, and it must be set with a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time duration</a>. If set, a forward-only cursor will be created (and automatically destroyed at the end of the set duration), and its identifier will be returned in the <code class="prettyprint">scrollId</code> property, along with the first page of results. This cursor can then be moved forward using the <a href="#scrollspecifications"><code class="prettyprint">scrollSpecifications</code> API action</a></li>
+</ul>
 
 <h2 id="truncate">truncate</h2>
 
@@ -2692,7 +2793,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_scroll/&lt;scrollId&gt;[?scroll=&lt;scroll ttl]</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/_scroll/&lt;scrollId&gt;[?scroll=&lt;time to live&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">GET</code></p>
 </blockquote>
 
@@ -2708,8 +2809,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
   "action": "scroll",
   "scrollId": "<span class="nt">&lt;scrollId&gt;</span>",
 
-  // Optional: time to live of the cursor
-  "scroll": "1m"
+  // Optional: new time to live of the cursor
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
   }
 }
 </code></pre>
@@ -2724,8 +2825,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
   "controller": "document",
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": {
-    <span class="o">//</span> <span class="nx">The</span> <span class="nx">initial</span> <span class="nx">search</span> <span class="nx">request</span> <span class="o">and</span> <span class="nx">each</span> <span class="nx">subsequent</span> <span class="nx">scroll</span> <span class="nx">request</span> <span class="nx">returns</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">_scroll_id</span><span class="err"> </span>
-    <span class="o">//</span> <span class="nx">only</span> <span class="nx">the</span> <span class="nx">most</span> <span class="nx">recent</span> <span class="nx">_scroll_id</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">used</span><span class="p">.</span>
+    <span class="o">//</span> <span class="nx">scroll</span> <span class="nx">requests</span> <span class="nx">may</span> <span class="k">return</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">scroll</span> <span class="nx">identifier</span>
+    <span class="o">//</span> <span class="nx">only</span> <span class="nx">the</span> <span class="nx">most</span> <span class="nx">recent</span> <span class="nx">scrollId</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">used</span>
     <span class="s">"_scroll_id"</span><span class="o">:</span> <span class="s">"&lt;new scroll id&gt;"</span><span class="p">,</span>
 
     <span class="o">//</span> <span class="nx">An</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">objects</span> <span class="nx">containing</span> <span class="nx">your</span> <span class="nx">retrieved</span> <span class="nx">documents</span>
@@ -2739,23 +2840,16 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
         <span class="o">//</span> <span class="nx">Another</span> <span class="nb">document</span><span class="p">...</span> <span class="na">and</span> <span class="nx">so</span> <span class="no">on</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">found</span> <span class="nx">documents</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="s">"max_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s">"timed_out"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
-    <span class="s">"took"</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">found</span> <span class="nx">documents</span><span class="o">&gt;</span>
   }
 }
 </code></pre>
 
-<p>While a <code class="prettyprint">search</code> request returns a single &ldquo;page&rdquo; of results, the scroll API can
-be used to retrieve large numbers of results (or even all results) from a single
-<code class="prettyprint">search</code> request, in much the same way as you would use a cursor on a traditional database.</p>
+<p>This method moves forward a result set cursor created by a <a href="#search"><code class="prettyprint">search</code> query</a> with the <code class="prettyprint">scroll</code> argument provided.</p>
 
-<p>Scrolling is not intended for real time user requests, but rather for processing large amounts of data.</p>
+<p>The response may contain a <em>different</em> cursor identifier, pointing to the next page of results.</p>
 
-<p>In order to use scrolling, the initial <a href="#search"><code class="prettyprint">search</code></a> request must specify the <code class="prettyprint">scroll</code> parameter in the request,
-which tells Elasticsearch how long it should keep the &ldquo;scroll session&rdquo; alive.
-The query defined in the initial <code class="prettyprint">search</code> request will then be used for all <code class="prettyprint">scroll</code> using the provided <code class="prettyprint">_scroll_id</code>.</p>
+<p>The optional <code class="prettyprint">scroll</code> argument allows to refresh the cursor duration, with a new <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time to live</a> value.</p>
 
 <aside class="warning">
   The results that are returned from a `scroll` request reflect the state of the index at the time
@@ -2768,7 +2862,7 @@ The query defined in the initial <code class="prettyprint">search</code> request
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_search[?from=0][&amp;size=42][&amp;scroll=1m]</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_search[?from=0][&amp;size=42][&amp;scroll=&lt;time to live&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
@@ -2807,11 +2901,11 @@ The query defined in the initial <code class="prettyprint">search</code> request
 
     <span class="p">}</span>
   },
-  // "from" and "size" argument for pagination
+
+  // Optional arguments
   "from": 0,
   "size": 42,
-  // "scroll" argument to start a scroll session
-  "scroll": "60s"
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
 }
 </code></pre>
 
@@ -2847,10 +2941,7 @@ The query defined in the initial <code class="prettyprint">search</code> request
 
       <span class="p">}</span>
     <span class="p">}</span>
-    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">found</span> <span class="nx">documents</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="s">"max_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s">"timed_out"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
-    <span class="s">"took"</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">found</span> <span class="nx">documents</span><span class="o">&gt;</span>
   }
 }
 </code></pre>
@@ -2859,16 +2950,14 @@ The query defined in the initial <code class="prettyprint">search</code> request
 
 <p>Kuzzle uses the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/query-dsl.html">ElasticSearch Query DSL</a> syntax.</p>
 
-<p><code class="prettyprint">aggregations</code> is not mandatory, see the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/search-aggregations.html">Elasticsearch Documentation</a>
-for more details.</p>
+<p>Optional arguments:</p>
 
-<p>If a <code class="prettyprint">scroll</code> argument is provided in the request, a scroll session is started and the response will contain a <code class="prettyprint">_scroll_id</code> that
-can be used with the <a href="#scroll"><code class="prettyprint">scroll</code> action</a>.
-The value of the scroll defines the timeout of the session (it will be refreshed with subsequent <code class="prettyprint">scroll</code> calls).
- A scroll session is a way to paginate a search request.
-The <code class="prettyprint">search</code> response will contain the first maching documents. After the first search, the <a href="#scroll"><code class="prettyprint">scroll</code> action</a>
-must be used to iterate the pagination.</p>
+<ul>
+<li><code class="prettyprint">aggregations</code> details how to aggregate the search results. See the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/search-aggregations.html">Elasticsearch Documentation</a> for more details</li>
+<li><code class="prettyprint">size</code> controls the maximum number of documents returned in the response</li>
+<li><code class="prettyprint">from</code> is usually used with the <code class="prettyprint">size</code> argument, and defines the offset from the first result you want to fetch</li>
+<li><code class="prettyprint">scroll</code> allows to fetch large result sets, and it must be set with a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time duration</a>. If set, a forward-only cursor will be created (and automatically destroyed at the end of the set duration), and its identifier will be returned in the <code class="prettyprint">_scroll_id</code> property, along with the first page of results. This cursor can then be moved forward using the <a href="#scroll"><code class="prettyprint">scroll</code> API action</a></li>
+</ul>
 
 <h2 id="mcreate">mCreate</h2>
 
@@ -12350,12 +12439,158 @@ that the related roles will NOT be deleted.</p>
 
 <p>Retrieves a list of <code class="prettyprint">role</code> objects from Kuzzle&rsquo;s database layer given a list of role ids.</p>
 
+<h2 id="scrollprofiles">scrollProfiles</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_scroll/&lt;scrollId&gt;[?scroll=&lt;time to live&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "scrollProfiles",
+  "scrollId": "<span class="nt">&lt;scrollId&gt;</span>",
+
+  // Optional: new time to live of the cursor
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "action": "scrollProfiles",
+  "controller": "security",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="o">//</span> <span class="nx">scroll</span> <span class="nx">requests</span> <span class="nx">may</span> <span class="k">return</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">scroll</span> <span class="nx">identifier</span>
+    <span class="o">//</span> <span class="nx">only</span> <span class="nx">the</span> <span class="nx">most</span> <span class="nx">recent</span> <span class="nx">scrollId</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">used</span>
+    <span class="s">"scrollId"</span><span class="o">:</span> <span class="s">"&lt;new scroll id&gt;"</span><span class="p">,</span>
+
+    <span class="o">//</span> <span class="nx">An</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">objects</span> <span class="nx">containing</span> <span class="nx">your</span> <span class="nx">retrieved</span> <span class="nx">documents</span>
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"myProfile1"</span><span class="p">,</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">"policies"</span><span class="o">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="s">"roleId"</span><span class="o">:</span> <span class="s">"myRoleId"</span><span class="p">,</span>
+              <span class="s">"restrictedTo"</span><span class="o">:</span> <span class="p">[</span>
+                <span class="p">...</span>
+              <span class="p">]</span>
+            <span class="p">},</span>
+            <span class="p">...</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">found</span> <span class="nx">profiles</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>This method moves forward a result set cursor created by a <a href="#searchprofiles"><code class="prettyprint">searchProfiles</code> query</a> with the <code class="prettyprint">scroll</code> argument provided.</p>
+
+<p>The response may contain a <em>different</em> cursor identifier, pointing to the next page of results.</p>
+
+<p>The optional <code class="prettyprint">scroll</code> argument allows to refresh the cursor duration, with a new <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time to live</a> value.</p>
+
+<aside class="warning">
+  The results that are returned from a `scrollProfiles` request reflect the state of the index at the time
+  that the initial search request was made, like a snapshot in time. Subsequent changes
+  to documents (index, update or delete) will only affect later search requests.
+</aside>
+
+<h2 id="scrollusers">scrollUsers</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_scroll/&lt;scrollId&gt;[?scroll=&lt;time to live&gt;]</code><br/>
+<strong>Method:</strong> <code class="prettyprint">GET</code></p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p>Query</p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "scrollUsers",
+  "scrollId": "<span class="nt">&lt;scrollId&gt;</span>",
+
+  // Optional: new time to live of the cursor
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "action": "scrollUsers",
+  "controller": "security",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
+  "result": {
+    <span class="o">//</span> <span class="nx">scroll</span> <span class="nx">requests</span> <span class="nx">may</span> <span class="k">return</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">scroll</span> <span class="nx">identifier</span>
+    <span class="o">//</span> <span class="nx">only</span> <span class="nx">the</span> <span class="nx">most</span> <span class="nx">recent</span> <span class="nx">scrollId</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">used</span>
+    <span class="s">"scrollId"</span><span class="o">:</span> <span class="s">"&lt;new scroll id&gt;"</span><span class="p">,</span>
+
+    <span class="o">//</span> <span class="nx">An</span> <span class="nx">array</span> <span class="k">of</span> <span class="nx">objects</span> <span class="nx">containing</span> <span class="nx">your</span> <span class="nx">retrieved</span> <span class="nx">documents</span>
+    <span class="s">"hits"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s">"_id"</span><span class="o">:</span> <span class="s">"&lt;userId&gt;"</span><span class="p">,</span>
+        <span class="s">"_source"</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>             <span class="o">//</span> <span class="nx">The</span> <span class="nx">user</span> <span class="nx">object</span> <span class="nx">content</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="p">...</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">"total"</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span> <span class="k">of</span> <span class="nx">found</span> <span class="nx">users</span><span class="o">&gt;</span>
+  }
+}
+</code></pre>
+
+<p>This method moves forward a result set cursor created by a <a href="#searchusers"><code class="prettyprint">searchUsers</code> query</a> with the <code class="prettyprint">scroll</code> argument provided.</p>
+
+<p>The response may contain a <em>different</em> cursor identifier, pointing to the next page of results.</p>
+
+<p>The optional <code class="prettyprint">scroll</code> argument allows to refresh the cursor duration, with a new <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time to live</a> value.</p>
+
+<aside class="warning">
+  The results that are returned from a `scrollUsers` request reflect the state of the index at the time
+  that the initial search request was made, like a snapshot in time. Subsequent changes
+  to documents (index, update or delete) will only affect later search requests.
+</aside>
+
 <h2 id="searchprofiles">searchProfiles</h2>
 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_search[?from=0][&amp;size=42]</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/profiles/_search[?from=0][&amp;size=42][&amp;scroll=&lt;time to live&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
@@ -12387,9 +12622,11 @@ that the related roles will NOT be deleted.</p>
       <span class="s">"admin"</span>
     <span class="p">]</span>
   },
-  // filter can handle pagination using the from and size properties
+
+  // Optional arguments
   "from": 0,
-  "size": 42
+  "size": 42,
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
 }
 </code></pre>
 
@@ -12433,43 +12670,26 @@ that the related roles will NOT be deleted.</p>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s">"max_score"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s">"timed_out"</span><span class="o">:</span> <span class="no">false</span><span class="p">,</span>
-    <span class="s">"took"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s">"total"</span><span class="o">:</span> <span class="mi">2</span>
-    <span class="p">},</span>
-    <span class="s">"index"</span><span class="o">:</span> <span class="s">"%kuzzle"</span><span class="p">,</span>
-    <span class="s">"collection"</span><span class="o">:</span> <span class="s">"profiles"</span>
-    <span class="s">"action"</span><span class="o">:</span> <span class="s">"searchProfiles"</span><span class="p">,</span>
-    <span class="s">"controller"</span><span class="o">:</span> <span class="s">"security"</span><span class="p">,</span>
-    <span class="s">"requestId"</span><span class="o">:</span> <span class="s">"&lt;unique request identifier&gt;"</span>
-  }
+  },
+  "index": "%kuzzle",
+  "collection": "profiles"
+  "action": "searchProfiles",
+  "controller": "security",
+  "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>"
 }
 </code></pre>
 
 <p>Retrieves profiles referring to a given set of roles in their policies.</p>
 
-<p>Attribute <code class="prettyprint">policies</code> in body is optional.</p>
+<p>Optional arguments:</p>
 
-<p>The <code class="prettyprint">from</code> and <code class="prettyprint">size</code> arguments allow pagination.</p>
-
-<p>Available filters:</p>
-
-<table><thead>
-<tr>
-<th>Filter</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">policies</code></td>
-<td>array</td>
-<td>Contains an array <code class="prettyprint">policies</code> with a list of role ids</td>
-<td><code class="prettyprint">undefined</code></td>
-</tr>
-</tbody></table>
+<ul>
+<li><code class="prettyprint">body.policies</code> contains an array of role identifiers used to filters the search results</li>
+<li><code class="prettyprint">size</code> controls the maximum number of documents returned in the response</li>
+<li><code class="prettyprint">from</code> is usually used with the <code class="prettyprint">size</code> argument, and defines the offset from the first result you want to fetch</li>
+<li><code class="prettyprint">scroll</code> allows to fetch large result sets, and it must be set with a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time duration</a>. If set, a forward-only cursor will be created (and automatically destroyed at the end of the set duration), and its identifier will be returned in the <code class="prettyprint">scrollId</code> property, along with the first page of results. This cursor can then be moved forward using the <a href="#scrollprofiles"><code class="prettyprint">scrollProfiles</code> API action</a></li>
+</ul>
 
 <h2 id="searchroles">searchRoles</h2>
 
@@ -12576,7 +12796,7 @@ that the related roles will NOT be deleted.</p>
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_search[?from=0][&amp;size=42]</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/users/_search[?from=0][&amp;size=42][&amp;scroll=&lt;time to live&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">POST</code><br/>
 <strong>Body</strong></p>
 </blockquote>
@@ -12637,9 +12857,11 @@ that the related roles will NOT be deleted.</p>
       <span class="p">]</span>
     <span class="p">}</span>
   },
-  // "from" and "size" argument for pagination
+
+  // Optional arguments
   "from": 0,
-  "size": 10
+  "size": 10,
+  "scroll": "<span class="nt">&lt;time</span> <span class="na">to</span> <span class="na">live</span><span class="nt">&gt;</span>"
 }
 </code></pre>
 
@@ -12670,9 +12892,15 @@ that the related roles will NOT be deleted.</p>
 }
 </code></pre>
 
-<p>Retrieves all the users matching the given filter.</p>
+<p>Retrieves users matching the provided filter.</p>
 
-<p>The <code class="prettyprint">from</code> and <code class="prettyprint">size</code> arguments allow pagination.</p>
+<p>Optional arguments:</p>
+
+<ul>
+<li><code class="prettyprint">size</code> controls the maximum number of documents returned in the response</li>
+<li><code class="prettyprint">from</code> is usually used with the <code class="prettyprint">size</code> argument, and defines the offset from the first result you want to fetch</li>
+<li><code class="prettyprint">scroll</code> allows to fetch large result sets, and it must be set with a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units">time duration</a>. If set, a forward-only cursor will be created (and automatically destroyed at the end of the set duration), and its identifier will be returned in the <code class="prettyprint">scrollId</code> property, along with the first page of results. This cursor can then be moved forward using the <a href="#scrollusers"><code class="prettyprint">scrollUsers</code> API action</a></li>
+</ul>
 
 <h2 id="updateprofile">updateProfile</h2>
 
