@@ -2236,6 +2236,14 @@ to comply with the norm. For instance <code class="prettyprint">set-cookie</code
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">err</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">context</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">BadRequestError</span><span class="p">(</span><span class="s1">'error message'</span><span class="p">);</span>
 </code></pre>
 
+<h3 id="externalserviceerror"><code class="prettyprint">ExternalServiceError</code></h3>
+
+<p><strong>Status Code:</strong> <code class="prettyprint">500</code></p>
+
+<p>Used when an external service answers to a request with an error other than a bad request or a service unavailable one.</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">err</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">context</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">ExternalServiceError</span><span class="p">(</span><span class="s1">'error message'</span><span class="p">);</span>
+</code></pre>
+
 <h3 id="forbiddenerror"><code class="prettyprint">ForbiddenError</code></h3>
 
 <p><strong>Status Code:</strong> <code class="prettyprint">403</code></p>
