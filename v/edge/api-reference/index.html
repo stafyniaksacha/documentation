@@ -3550,9 +3550,9 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mUpdate[?refresh=wait_for]</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/_mUpdate[?refresh=wait_for][&amp;retryOnConflict=&lt;retries&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
-<strong>Body:</strong></p>
+<strong>Body:</strong>  </p>
 </blockquote>
 
 <section class="http"></section>
@@ -3621,6 +3621,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
   "collection": "<span class="nt">&lt;collection&gt;</span>",
   "action": "mUpdate",
   <span class="p">[</span><span class="nv">"refresh": "wait_for",</span><span class="p">]</span>
+  <span class="p">[</span><span class="nv">"retryOnConflict": &lt;number of retries&gt;,</span><span class="p">]</span>
   "controller": "document",
   "requestId": "<span class="nt">&lt;unique</span> <span class="na">request</span> <span class="na">identifier</span><span class="nt">&gt;</span>",
   "result": {
@@ -3665,12 +3666,15 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
 with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
 
+<p>Conflicts may occur if the same document gets updated multiple times within a short time on a database cluster. When this happens, Kuzzle answers with an error that clients have to handle.<br>
+You may set the <code class="prettyprint">retryOnConflict</code> optional argument with a positive integer, asking Kuzzle to retry updating the document that number of times before rejecting the request with an error.</p>
+
 <h2 id="update">update</h2>
 
 <section class="http"></section>
 
 <blockquote>
-<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_update[?refresh=wait_for]</code><br/>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/&lt;index&gt;/&lt;collection&gt;/&lt;documentId&gt;/_update[?refresh=wait_for][&amp;retryOnConflict=&lt;retries&gt;]</code><br/>
 <strong>Method:</strong> <code class="prettyprint">PUT</code><br/>
 <strong>Body:</strong></p>
 </blockquote>
@@ -3696,6 +3700,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
   "controller": "document",
   "action": "update",
   <span class="p">[</span><span class="nv">"refresh": "wait_for",</span><span class="p">]</span>
+  <span class="p">[</span><span class="nv">"retryOnConflict": &lt;number of retries&gt;,</span><span class="p">]</span>
   // The document id you provided or that was generated at document creation.
   // it is also the one returned during a search query.
   "_id": "<span class="nt">&lt;documentId&gt;</span>"
@@ -3732,6 +3737,9 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
 with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
+
+<p>Conflicts may occur if the same document gets updated multiple times within a short time on a database cluster. When this happens, Kuzzle answers with an error that clients have to handle.<br>
+You may set the <code class="prettyprint">retryOnConflict</code> optional argument with a positive integer, asking Kuzzle to retry updating the document that number of times before rejecting the request with an error.</p>
 
 <h2 id="validate">validate</h2>
 
