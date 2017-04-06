@@ -1222,22 +1222,6 @@ and let you authenticate with a login and password.</p>
 
 <p>The <strong>_logout</strong> action doesn&rsquo;t take strategy.</p>
 
-<aside class="warning">
-    <strong>The auth/logout action will be removed on the next RC1 release of Kuzzle.</strong>
-    <br>
-    <br>
-    Kuzzle will implement two authentication modes soon:
-  <ol>
-    <li>
-      A default stateless mode, in which the expiration will solely rely on the JWT ttl.
-      The logout action won&rsquo;t be available in this mode.
-    </li>
-    <li>
-      A full Session mode, handled by a plugin, in which the logout route will be updated (@tbd).
-    </li>
-  </ol>
-</aside>
-
 <h2 id="updateself">updateSelf</h2>
 
 <section class="http"></section>

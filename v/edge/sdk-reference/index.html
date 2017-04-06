@@ -3119,12 +3119,24 @@ immediately after each write request, forcing the documents to be immediately vi
 <pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">dataMapping</span> <span class="o">=</span> <span class="nx">kuzzle</span>
   <span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">'collection'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">collectionMapping</span><span class="p">({</span><span class="na">someField</span><span class="p">:</span> <span class="p">{</span><span class="na">type</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span> <span class="na">index</span><span class="p">:</span> <span class="s1">'analyzed'</span><span class="p">}})</span>
-  <span class="p">.</span><span class="nx">apply</span><span class="p">();</span>
+  <span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// called once the mapping action has been completed</span>
+  <span class="p">});</span>
 </code></pre>
 <pre class="highlight java"><code><span class="n">CollectionMapping</span> <span class="n">dataMapping</span> <span class="o">=</span> <span class="n">kuzzle</span>
   <span class="o">.</span><span class="na">collection</span><span class="o">(</span><span class="s">"collection"</span><span class="o">,</span> <span class="s">"index"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">collectionMapping</span><span class="o">(</span><span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"someFiled"</span><span class="o">,</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"type"</span><span class="o">,</span> <span class="s">"string"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"index"</span><span class="o">,</span> <span class="s">"analyzed"</span><span class="o">))</span>
-  <span class="o">.</span><span class="na">apply</span><span class="o">();</span>
+  <span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">CollectionMapping</span><span class="o">&gt;()</span> <span class="o">{</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">CollectionMapping</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+       <span class="c1">// called once the mapping action has been completed</span>
+     <span class="o">}</span>
+
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="n">onError</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+       <span class="c1">// Handle error</span>
+     <span class="o">}</span>
+  <span class="o">});</span>
 </code></pre>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 
@@ -4764,6 +4776,12 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">from</code></td>
+<td>number</td>
+<td>Provide the starting offset of the request (used to paginate results)</td>
+<td><code class="prettyprint">0</code></td>
+</tr>
+<tr>
 <td><code class="prettyprint">queuable</code></td>
 <td>boolean</td>
 <td>Mark this request as (not) queuable</td>
@@ -4774,12 +4792,6 @@ A scroll session is always initiated by a <code class="prettyprint">search</code
 <td>string</td>
 <td>Start a scroll session, with a time to live equals to this parameter&rsquo;s value following the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/common-options.html#time-units">Elastisearch time format</a></td>
 <td><code class="prettyprint">undefined</code></td>
-</tr>
-<tr>
-<td><code class="prettyprint">from</code></td>
-<td>number</td>
-<td>Provide the starting offset of the request (used to paginate results)</td>
-<td><code class="prettyprint">0</code></td>
 </tr>
 <tr>
 <td><code class="prettyprint">size</code></td>
@@ -21711,10 +21723,22 @@ You can get the rights from Kuzzle by using <a href="#getUserRights">`Security.g
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">from</code></td>
+<td>number</td>
+<td>Starting offset</td>
+<td><code class="prettyprint">0</code></td>
+</tr>
+<tr>
 <td><code class="prettyprint">queuable</code></td>
 <td>boolean</td>
 <td>Mark this request as (not) queuable</td>
 <td><code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">size</code></td>
+<td>number</td>
+<td> Number of hits to return</td>
+<td><code class="prettyprint">20</code></td>
 </tr>
 </tbody></table>
 

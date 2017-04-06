@@ -2008,34 +2008,10 @@ their own specific headers manually.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">context</code></td>
-<td><code class="prettyprint">RequestContext</code></td>
-<td><a href="https://github.com/kuzzleio/kuzzle-common-objects/blob/master/README.md#modelsrequestcontext">RequestContext</a> object</td>
-<td>Request connection context</td>
-</tr>
-<tr>
-<td><code class="prettyprint">error</code></td>
-<td><code class="prettyprint">KuzzleError</code></td>
-<td><code class="prettyprint">null</code></td>
-<td>Request error, if any</td>
-</tr>
-<tr>
 <td><code class="prettyprint">id</code></td>
 <td><code class="prettyprint">string</code></td>
 <td>Auto-generated UUID</td>
 <td>Request unique identifier</td>
-</tr>
-<tr>
-<td><code class="prettyprint">input</code></td>
-<td><code class="prettyprint">RequestInput</code></td>
-<td><a href="https://github.com/kuzzleio/kuzzle-common-objects/blob/master/README.md#modelsrequestinput">RequestInput</a> object</td>
-<td>Request&rsquo;s parameters</td>
-</tr>
-<tr>
-<td><code class="prettyprint">result</code></td>
-<td><em>(varies)</em></td>
-<td><code class="prettyprint">null</code></td>
-<td>Request result, if any</td>
 </tr>
 <tr>
 <td><code class="prettyprint">status</code></td>
@@ -2059,9 +2035,29 @@ their own specific headers manually.</p>
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">context</code></td>
+<td><code class="prettyprint">RequestContext</code></td>
+<td><a href="https://github.com/kuzzleio/kuzzle-common-objects/blob/master/README.md#modelsrequestcontext">RequestContext</a> object</td>
+</tr>
+<tr>
+<td><code class="prettyprint">error</code></td>
+<td><code class="prettyprint">KuzzleError</code></td>
+<td><code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">input</code></td>
+<td><code class="prettyprint">RequestInput</code></td>
+<td><a href="https://github.com/kuzzleio/kuzzle-common-objects/blob/master/README.md#modelsrequestinput">RequestInput</a> object</td>
+</tr>
+<tr>
 <td><code class="prettyprint">response</code></td>
 <td><code class="prettyprint">RequestResponse</code></td>
 <td>Response view of the request, standardized as the expected <a href="/api-reference/?others#kuzzle-response">Kuzzle API response</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">result</code></td>
+<td><em>(varies)</em></td>
+<td><code class="prettyprint">null</code></td>
 </tr>
 </tbody></table>
 
@@ -2084,20 +2080,6 @@ their own specific headers manually.</p>
 <td>Header name</td>
 </tr>
 </tbody></table>
-
-<h4 id="response-getheaders"><code class="prettyprint">response.getHeaders()</code></h4>
-
-<p>Returns an object describing all currently registered headers on that response.</p>
-<pre class="highlight plaintext"><code>if (request.context.protocol === 'http') {
-  request.response.setHeader('Content-Type', 'text/plain');
-
-  /*
-    Prints:
-    { "Content-Type": "text/plain" }
-   */
-  console.log(request.response.getHeaders());
-}
-</code></pre>
 
 <h4 id="response-removeheader"><code class="prettyprint">response.removeHeader</code></h4>
 
