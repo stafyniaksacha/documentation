@@ -693,7 +693,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
@@ -709,7 +709,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
     </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481814465050</span><span class="p">,</span><span class="w">
         </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -733,7 +733,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"collections"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -765,7 +765,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
@@ -799,7 +799,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"took"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w">
@@ -818,7 +818,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
         </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey! Ho!"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816934209</span><span class="p">,</span><span class="w">
           </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -835,7 +835,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
         </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816922252</span><span class="p">,</span><span class="w">
           </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -852,7 +852,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
         </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Let's go!"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816942415</span><span class="p">,</span><span class="w">
           </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -887,7 +887,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"took"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
@@ -906,7 +906,7 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
         </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey! Ho!"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816934209</span><span class="p">,</span><span class="w">
           </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -924,8 +924,8 @@ This is done by sending a <code class="prettyprint">POST</code> request to the A
 
 <h3 id="document-metadata">Document metadata</h3>
 
-<p>When you create or update a document, Kuzzle adds metadatas. These metadatas describe the life-cycle of the document.
-They are available in the <code class="prettyprint">_kuzzle_info</code> part of a document:</p>
+<p>When you create or update a document, Kuzzle adds metadata. These metadata describe the life-cycle of the document.
+They are available in the <code class="prettyprint">_meta</code> part of a document:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
@@ -934,7 +934,7 @@ They are available in the <code class="prettyprint">_kuzzle_info</code> part of 
   </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey! Ho!"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816934209</span><span class="p">,</span><span class="w">
     </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -958,7 +958,7 @@ They are available in the <code class="prettyprint">_kuzzle_info</code> part of 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"_kuzzle_info.createdAt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"_meta.createdAt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"lte"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816930000</span><span class="w">
           </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -975,7 +975,7 @@ They are available in the <code class="prettyprint">_kuzzle_info</code> part of 
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycollection"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"took"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
@@ -994,7 +994,7 @@ They are available in the <code class="prettyprint">_kuzzle_info</code> part of 
         </span><span class="nt">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, world!"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"_kuzzle_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481816922252</span><span class="p">,</span><span class="w">
           </span><span class="nt">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -1035,7 +1035,7 @@ This is done by sending a <code class="prettyprint">PUT</code> request to the AP
   </span><span class="nt">"controller"</span><span class="p">:</span><span class="w"> </span><span class="s2">"collection"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myindex"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8acca50e-592d-4f0d-962c-31719b11e171"</span><span class="p">,</span><span class="w"> 
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"acknowledged"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -1279,7 +1279,7 @@ All the following examples are written in Javascript, therefore using the Javasc
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nt">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;unique request identifier&gt;"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fswdfsrt43e6t2q3rfw"</span><span class="p">,</span><span class="w">
@@ -1622,7 +1622,7 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
 <pre class="highlight javascript"><code><span class="nx">RequestInput</span> <span class="p">{</span>
     <span class="c1">// members</span>
     <span class="nx">args</span><span class="p">,</span>           <span class="c1">// {Object}     Parametric arguments. i.e. for REST, taken from the query string</span>
-    <span class="nx">metadata</span><span class="p">,</span>       <span class="c1">// {Object}</span>
+    <span class="kr">volatile</span><span class="p">,</span>       <span class="c1">// {Object}</span>
     <span class="nx">body</span><span class="p">,</span>           <span class="c1">// {Object}     Content of the resource for REST like routes, main parameters for others</span>
     <span class="nx">controller</span><span class="p">,</span>     <span class="c1">// {string}</span>
     <span class="nx">action</span><span class="p">,</span>         <span class="c1">// {string}</span>
@@ -1923,7 +1923,7 @@ If you are running Kuzzle in a Docker container, you will need to enter the cont
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sayHello"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"volatile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2352,7 +2352,7 @@ Kuzzle will get back to him with a corresponding Room ID and a Room Channel usin
   "action": "login",
   "state": "done",
   "requestId": "ed4faaff-253a-464f-a6b3-387af9d8483d",
-  "metadata": {},
+  "volatile": {},
   "result": {
     "_id": "my_username",
     "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJteV91c2VybmFtZSIsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ.BefoyfAKzwXuGhbYe0iPeG0v9F4HmikvahqwqzQr3pE"
@@ -2406,7 +2406,7 @@ Kuzzle will get back to him with a corresponding Room ID and a Room Channel usin
   "action": "login",
   "controller": "auth",
   "error": null,
-  "metadata": {},
+  "volatile": {},
   "requestId": "fd4246f9-717c-4503-b50b-3a5bf0f142b5",
   "result": {
     "headers": {
