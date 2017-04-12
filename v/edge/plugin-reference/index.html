@@ -556,7 +556,7 @@ Each pipes must also be exported.</p>
 <p><code class="prettyprint">verify(request, ..., callback)</code></p>
 
 <ul>
-<li><code class="prettyprint">request</code> is the login <a href="#request"><code class="prettyprint">Request</code> object</a></li>
+<li><code class="prettyprint">request</code> is the login request made to passport. The object format is <code class="prettyprint">{query: {passport: &#39;crendentials&#39;}, original: Request}</code> (see <a href="#request"> the <code class="prettyprint">Request</code> documentation</a>)</li>
 <li><code class="prettyprint">...</code>: varies, depending on the used strategy</li>
 <li><code class="prettyprint">callback</code> is a function that <strong>must</strong> be called at the end of an authentication process, with the following arguments:
 
@@ -968,7 +968,7 @@ To obtain the standardized Kuzzle response from it, simply use the getter <code 
 Here is the generic signature: <code class="prettyprint">verify(request, ..., callback)</code>:</p>
 
 <ul>
-<li><code class="prettyprint">request</code> is the login <a href="#request"><code class="prettyprint">Request</code> object</a></li>
+<li><code class="prettyprint">request</code> is the login request made to passport. The object format is <code class="prettyprint">{query: {passport: &#39;crendentials&#39;}, original: Request}</code> (see <a href="#request"> the <code class="prettyprint">Request</code> documentation</a>)</li>
 <li><code class="prettyprint">...</code>: varies, depending on the used strategy</li>
 <li><code class="prettyprint">callback</code> is a function that <strong>must</strong> be called at the end of an authentication process, with the following arguments:
 
