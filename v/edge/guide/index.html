@@ -661,6 +661,98 @@ Having trouble? <a href="https://gitter.im/kuzzleio/kuzzle-bo">Get in touch with
   For an exhaustive list of configuration parameters, please refer to the <a href="https://github.com/kuzzleio/kuzzle/blob/master/.kuzzlerc.sample">kuzzlerc</a> file.
 </aside>
 
+            <h2 id="configuring-kuzzle-proxy">Configuring Kuzzle proxy</h2>
+
+<p>The <strong>complete default configuration</strong> of Kuzzle proxy is stored in the <a href="https://github.com/kuzzleio/kuzzle-proxy/blob/master/.proxyrc.sample">proxyrc file</a> at the root of the installation directory.</p>
+
+<p>Kuzzle proxy uses <a href="https://github.com/dominictarr/rc">rc</a> to <strong>override</strong> its default configuration. The most common ways to do it is:</p>
+
+<ul>
+<li>via a <code class="prettyprint">.proxyrc</code> file (<a href="https://github.com/kuzzleio/kuzzle-proxy/blob/master/.proxyrc.sample">example here</a>);</li>
+<li>via environment variables prefixed with <code class="prettyprint">proxy_</code>.</li>
+</ul>
+
+<h3 id="logs">Logs</h3>
+
+<p>Kuzzle proxy uses two loggers: one is dedicated to output <code class="prettyprint">access</code> logs, the second one is in charge of outputing <code class="prettyprint">errors</code>.</p>
+
+<h4 id="default-configuration">Default configuration</h4>
+
+<p>By default, on a fresh installation, Kuzzle proxy outputs both access and error logs to the console.<br>
+The default format for access logs mimics <a href="https://httpd.apache.org/docs/current/logs.html#combined">Apache combined log format</a>.</p>
+
+<p>For protocols other than http, the verb is arbitrary set to <em>DO</em> and the url is computed based on the request <code class="prettyprint">controller</code>, <code class="prettyprint">action</code> and <code class="prettyprint">index</code>, <code class="prettyprint">collection</code> and <code class="prettyprint">_id</code> if provided:</p>
+<pre class="highlight plaintext"><code>::ffff:172.23.0.1 - - [24/Apr/2017:14:02:19 +0000] "DO /server/now WEBSOCKET" 200 193 - -
+</code></pre>
+
+<h4 id="custom-logs-configuration">Custom logs configuration</h4>
+
+<p>Kuzzle proxy internally relies on <a href="https://github.com/winstonjs/winston">winston</a> popular log library.</p>
+
+<p>Any option given under <code class="prettyprint">logs/&lt;log type&gt;/transport</code> will be passed as-is to Winston related transport.</p>
+
+<aside class="warning">As Kuzzle proxy configuration is stored in text mode, any option where Winston would accept a function is not supported</aside>
+
+<h4 id="supported-transports">Supported transports</h4>
+
+<p>Kuzzle proxy supports the following transports:</p>
+
+<ul>
+<li><a href="https://github.com/winstonjs/winston/blob/master/docs/transports.md#console-transport">console</a> (default)</li>
+<li><a href="https://github.com/winstonjs/winston/blob/master/docs/transports.md#file-transport">file</a></li>
+<li><a href="https://github.com/winstonjs/winston/blob/master/docs/transports.md#elasticsearch-transport">elasticsearch</a></li>
+<li><a href="https://github.com/winstonjs/winston-syslog">syslog</a></li>
+</ul>
+
+<h4 id="miscelaneous-options">Miscelaneous options</h4>
+
+<p>In addition to standard Winston options, Kuzzle proxy access logs accept two additional parameters:</p>
+
+<table><thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>accessLogFormat</strong></td>
+<td>Accepted values: <strong>combined</strong> (default) or <strong>logstash</strong>. If set to <strong>logstash</strong>, access logs are outputed in <code class="prettyprint">JSON</code></td>
+</tr>
+<tr>
+<td><strong>accessLogIpOffset</strong></td>
+<td>The offset starting from the right to extract the end-user ip address from the <a href="https://en.wikipedia.org/wiki/X-Forwarded-For"><code class="prettyprint">X-Forwarded-For</code></a> header. This header is set by Kuzzle proxy protocols. The default value is <em>0</em>, which takes the last ip address from the header.<br>You may need to modify this value if Kuzzle is running behind a reverse proxy</td>
+</tr>
+</tbody></table>
+
+<h4 id="example-store-logs-to-files">Example - store logs to files</h4>
+
+<p><em>.proxyrc</em></p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"logs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"transport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/logs/kuzzle/access.log"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"json"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"transport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/logs/kuzzle/proxy-errors.log"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"json"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"maxsize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15728640</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"maxFiles"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zippedArchive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"accessLogFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"combined"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"accessLogIPOffset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="notice">
+  Kuzzle proxy does not handle any log rotation by itself.<br>
+  In the example above, error logs are configured to be rotated by winston but you will need to handle access logs rotation by yourself, for instance using logrotate.
+</aside>
+
             <h2 id="working-with-persistent-data">Working with persistent data</h2>
 
 <p>Kuzzle relies on <a href="https://www.elastic.co/">Elasticsearch</a> to store and fetch persistent data.</p>
