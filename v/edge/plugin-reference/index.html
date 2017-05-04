@@ -146,11 +146,7 @@
 
 <h3 id="writing-plugin-code">Writing plugin code</h3>
 
-<p>Plugins must be written in Javascript, for the Node.js interpreter. You must be accustomed to <a href="https://nodejs.org/docs/v4.6.2/doc/api/modules.html">how modules are loaded and exported</a>.</p>
-
-<p>As Kuzzle treats plugins as Node.js modules, plugins must make themselves available to Kuzzle using <code class="prettyprint">module.exports</code>. Otherwise Kuzzle won&rsquo;t be able to instantiate them.</p>
-
-<p>Plugins must be valid NodeJS require-able modules, usually shipped as a directory containing either:</p>
+<p>Plugins must be valid NodeJS require-able <a href="https://nodejs.org/dist/latest-v6.x/docs/api/modules.html">modules</a>, usually shipped as a directory containing either:</p>
 
 <ul>
 <li>an <code class="prettyprint">index.js</code> file in its root directory, exporting a valid Javascript class exposing an <code class="prettyprint">init</code> method, or</li>
