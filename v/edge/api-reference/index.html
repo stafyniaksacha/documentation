@@ -1289,18 +1289,18 @@ and let you authenticate with a login and password.</p>
 
             <h1 id="bulk-controller">~ bulk controller</h1>
 
+<aside class="warning">
+The bulk operations only apply to the persistent data storage layer.
+You <strong>won&rsquo;t receive any real-time notfications</strong> on your document subcriptions
+even if some of the documents in the import match your subscription filters.
+</aside>
+
 <p>A bulk import allows your application to perform multiple writing operations thanks to a single query.
 This is especially useful if you want to create a large number of documents. A bulk import will be
 a lot faster compared to creating them individually using <code class="prettyprint">create</code> queries.</p>
 
 <p>For other queries, the syntax for bulk imports closely resembles the
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-bulk.html">ElasticSearch Bulk API</a>.</p>
-
-<aside class="warning">
-The bulk operations only apply to the persistent data storage layer.
-You <strong>won&rsquo;t receive any real-time notfications</strong> on your document subcriptions
-even if some of the documents in the import match your subscription filters.
-</aside>
 
 <h2 id="import">import</h2>
 
@@ -1396,6 +1396,8 @@ even if some of the documents in the import match your subscription filters.
 
 <p>You can use the <code class="prettyprint">bulk import</code> to save a list of documents in one specific <code class="prettyprint">collection</code> in a specified <code class="prettyprint">index</code>.<br>
 In such case, the <code class="prettyprint">collection</code> in which the documents need to be inserted needs to be specified in the query.</p>
+
+<p>In case a subset of the queries sent within the request fail, the client will receive a <a href="#partialerror">PartialError</a> object.</p>
 
 <h3 id="performing-a-global-bulk-import">Performing a global bulk import</h3>
 
@@ -3080,7 +3082,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 
 <p>Creates new documents in the persistent data storage.</p>
 
-<p>Returns a partial error (with status 206) if one or more documents already exist.</p>
+<p>Returns a <a href="#partialerror">partial error</a> (with status 206) if one or more documents creation fails.</p>
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
 with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
@@ -3224,7 +3226,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 
 <p>Creates or replaces documents in the persistent data storage.</p>
 
-<p>Returns a partial error (with status 206) if one or more documents can not be created or replaced.</p>
+<p>Returns a <a href="#partialerror">partial error</a> (with status 206) if one or more documents can not be created or replaced.</p>
 
 <h2 id="mdelete">mDelete</h2>
 
@@ -3282,7 +3284,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 
 <p>Deletes documents in the persistent data storage.</p>
 
-<p>Returns a partial error (with status 206) if one or more document can not be deleted.</p>
+<p>Returns a <a href="#partialerror">partial error</a> (with status 206) if one or more document can not be deleted.</p>
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
 with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
@@ -3382,6 +3384,8 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 <p>Given <code class="prettyprint">document ids</code>, retrieves the corresponding documents from the database.</p>
 
 <p>Only documents in the persistent data storage layer can be retrieved.</p>
+
+<p>Returns a <a href="#partialerror">partial error</a> (with status 206) if one or more document can not be retrieved.</p>
 
 <h2 id="mreplace">mReplace</h2>
 
@@ -3522,7 +3526,7 @@ with the value <code class="prettyprint">wait_for</code> in order to wait for th
 
 <p>Replaces documents in the persistent data storage.</p>
 
-<p>Returns a partial error (with status 206) if one or more documents can not be replaced.</p>
+<p>Returns a <a href="#partialerror">partial error</a> (with status 206) if one or more documents can not be replaced.</p>
 
 <p>Elastisearch 5.x and above only: The optional parameter <code class="prettyprint">refresh</code> can be used
 with the value <code class="prettyprint">wait_for</code> in order to wait for the document indexation (indexed documents are available for <code class="prettyprint">search</code>).</p>
@@ -13870,6 +13874,150 @@ By default, snapshots are made every 10s.</p>
 </code></pre>
 
 <p>Returns the current Kuzzle UTC timestamp as Epoch time (number of milliseconds elapsed since 1 January 1970 00:00:00).</p>
+
+            <h1 id="errors">Errors</h1>
+
+<p>All errors received by Kuzzle clients are <code class="prettyprint">Kuzzle errors</code>. </p>
+
+<p>A <code class="prettyprint">Kuzzle error</code> has the following properties:</p>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td>integer</td>
+<td>HTTP like status code. In most cases, will be the same as the response one.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">message</code></td>
+<td>text</td>
+<td>Short description of the error</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stack</code></td>
+<td>text</td>
+<td><strong>Available in development mode only</strong> - Kuzzle stack trace that generated the error</td>
+</tr>
+</tbody></table>
+
+<p>Clients can detect the error type based on their <code class="prettyprint">status</code> and decide which action to take accordingly.</p>
+
+<h2 id="badrequesterror">BadRequestError</h2>
+
+<p><strong>status</strong>: 400</p>
+
+<p>A <code class="prettyprint">BadRequestError</code> is thrown if Kuzzle was unable to process the action due to a malformed request.</p>
+
+<p><code class="prettyprint">BadRequestError</code> objects can for instance be received if a mandatory parameter is missing or if its type is incorrect.</p>
+
+<h2 id="externalserviceerror">ExternalServiceError</h2>
+
+<p><strong>status</strong>: 500</p>
+
+<p>An <code class="prettyprint">ExternalServiceError</code> is thrown if Kuzzle was unable to process the action due to some external service failure (i.e. database).</p>
+
+<h2 id="forbiddenerror">ForbiddenError</h2>
+
+<p><strong>status</strong>: 403</p>
+
+<p>A <code class="prettyprint">ForbiddenError</code> is thrown if the requested action is not authorized for the current authenticated user.</p>
+
+<h2 id="gatewaytimeouterror">GatewayTimeoutError</h2>
+
+<p><strong>status</strong>: 504</p>
+
+<p>A <code class="prettyprint">GatewayTimeoutError</code> is thrown if Kuzzle is too long to respond.</p>
+
+<aside class="warning">
+Receiving this error does not guarantee the original request was not processed, just that it was not processed _in time_.<br>
+Clients shall make some extra checks to verify if the original action was actually successful.
+</aside>
+
+<h2 id="internalerror">InternalError</h2>
+
+<p><strong>status</strong>: 500</p>
+
+<p>An <code class="prettyprint">InternalError</code> is thrown if Kuzzle encountered a severe unknown error.</p>
+
+<h2 id="notfounderror">NotFoundError</h2>
+
+<p><strong>status</strong> 404</p>
+
+<p>A <code class="prettyprint">NotFoundError</code> is thrown if the requested resource could not be found, like, for instance, when calling <code class="prettyprint">document/get</code> on a non-existing id.</p>
+
+<!---
+ParseError: not documented @TODO: remove its current usage by BadRequestError
+-->
+
+<h2 id="partialerror">PartialError</h2>
+
+<p><strong>status</strong>: 206</p>
+
+<p>A <code class="prettyprint">PartialError</code> is thrown if Kuzzle was unable to process a subset of a multi-actions requests.</p>
+
+<p>A <code class="prettyprint">PartialError</code> can be generated, for instance, if one or several queries inside a <code class="prettyprint">bulk/import</code> request failed.</p>
+
+<p>The detail of each failure can be retrieved using the <code class="prettyprint">errors</code> property of the error object.</p>
+
+<h3 id="additional-properties">Additional properties</h3>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">count</code></td>
+<td>integer</td>
+<td>number of failures encountered</td>
+</tr>
+<tr>
+<td><code class="prettyprint">errors</code></td>
+<td>array or <code class="prettyprint">KuzzleError</code> objects</td>
+<td>Detailed errors of the failed actions</td>
+</tr>
+</tbody></table>
+
+<h2 id="pluginimplementationerror">PluginImplementationError</h2>
+
+<p><strong>status</strong>: 500</p>
+
+<p>A <code class="prettyprint">PluginImplementationError</code> is thrown if Kuzzle encountered a severe unknown error issued by a <a href="../plugin-reference/">plugin</a>.</p>
+
+<h2 id="preconditionerror">PreconditionError</h2>
+
+<p><strong>status</strong>: 412</p>
+
+<p>A <code class="prettyprint">PreconditionError</code> is thrown if Kuzzle was not able to process the request due to an invalid state.</p>
+
+<p>This error can for instance be generated when trying to create a document on a non-existing collection.</p>
+
+<h2 id="serviceunavailableerror">ServiceUnavailableError</h2>
+
+<p><strong>status</strong>: 503</p>
+
+<p>A <code class="prettyprint">ServiceUnavailableError</code> can be sent by Kuzzle proxy if no Kuzzle instance is found to process the request.</p>
+
+<h2 id="sizelimiterror">SizeLimitError</h2>
+
+<p><strong>status</strong>: 413</p>
+
+<p>A <code class="prettyprint">SizeLimitError</code> is thrown by Kuzzle if the request size exceeds the limits defined in the <a href="../guide/#configuring-kuzzle-proxy">proxy configuration</a>.</p>
+
+<h2 id="unauthorizederror">UnauthorizedError</h2>
+
+<p><strong>status</strong>: 401</p>
+
+<p>An <code class="prettyprint">UnauthorizedError</code> is thrown by Kuzzle if the permissions could not be verified for the request.</p>
+
+<p>Typically, an <code class="prettyprint">UnauthorizedError</code> will be generated for a restricted action if the client is not authentified yet.</p>
 
         </div>
         <div class="dark-box">
