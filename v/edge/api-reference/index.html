@@ -10747,15 +10747,21 @@ You can also subscribe multiple times to the same room, with different configura
 Kuzzle will provide you with a channel for each of these subscriptions,
 allowing different part of your application to concentrate on what it needs to process.</p>
 
-<p>The matching criteria you pass on to Kuzzle are based upon <a href="./filters.md">Kuzzle DSL</a></p>
+<p>The matching criteria you pass on to Kuzzle are based upon <a href="../real-time-filters">Kuzzle DSL</a></p>
 
 <p>How subscription works:</p>
 
 <ul>
 <li>=&gt; You send a subscription query to Kuzzle</li>
 <li>&lt;= Kuzzle responds to you with a <code class="prettyprint">roomId</code> and a <code class="prettyprint">channel</code></li>
+</ul>
+
+<p>When using <code class="prettyprint">websocket</code> or <code class="prettyprint">socket.io</code> protocol, the client will start receiving <a href="#notifications">notifications</a> right away.<br>
+When using other protocols, such as <code class="prettyprint">MQTT</code>, the client may have to perform these two extra steps:</p>
+
+<ul>
 <li>=&gt; You listen to the <code class="prettyprint">channel</code> provided in the response</li>
-<li>&lt;= Kuzzle forwards the corresponding <a href="/#notifications">notifications</a> on that channel</li>
+<li>&lt;= Kuzzle forwards the corresponding <a href="#notifications">notifications</a> on that channel</li>
 </ul>
 
 <h2 id="unsubscribe">unsubscribe</h2>
