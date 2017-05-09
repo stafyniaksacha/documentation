@@ -2633,27 +2633,22 @@ Different log level are provided, and lower priority levels may be ignored depen
 <tr>
 <td><code class="prettyprint">internalBroker:connected</code></td>
 <td>Triggered when the internal broker is connected</td>
-<td>Type: String.<br> <code class="prettyprint">&#39;Connected to Kuzzle server&#39;</code></td>
+<td>Type: String.<br> Server address (<code class="prettyprint">ws://</code> / <code class="prettyprint">ws+unix://</code>)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">internalBroker:error</code></td>
 <td>Triggered when an error occured in internal broker</td>
-<td>Type: Object.<br> {host, port, message, retry}</td>
+<td>Type: Object.<br> <code class="prettyprint">{host, port, message, retry}</code></td>
 </tr>
 <tr>
 <td><code class="prettyprint">internalBroker:reregistering</code></td>
 <td>Triggered when the internal broker is reregistered</td>
-<td>Type: String.<br> <code class="prettyprint">&#39;Re-registering room: &#39; + room</code></td>
+<td>Type: String.<br> room name</td>
 </tr>
 <tr>
 <td><code class="prettyprint">internalBroker:socketClosed</code></td>
 <td>Triggered when the socket is closed</td>
-<td>Type: String</td>
-</tr>
-<tr>
-<td><code class="prettyprint">internalBroker:started</code></td>
-<td>Triggered when the internal broker is started</td>
-<td>Type: String.<br> <code class="prettyprint">&#39;Internal broker server started&#39;</code></td>
+<td>Type: Number <br> code</td>
 </tr>
 </tbody></table>
 
