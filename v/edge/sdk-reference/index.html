@@ -583,16 +583,18 @@ This property must be set with a function returning an array of objects with the
 <p><strong>Note:</strong> listeners are called in the order of their insertion.</p>
 
 <h2 id="addlistener">addListener</h2>
-<pre class="highlight javascript"><code>  <span class="kd">var</span> <span class="nx">listenerId</span> <span class="o">=</span> <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="s1">'connected'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<pre class="highlight javascript"><code>  <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Actions to perform when receiving a 'connected' global event</span>
-  <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="nx">kuzzle</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="s1">'connected'</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">listenerId</span> <span class="o">=</span> <span class="n">kuzzle</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">connected</span><span class="o">,</span> <span class="k">new</span> <span class="n">EventListener</span><span class="o">()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">EventListener</span> <span class="n">eventListener</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EventListener</span><span class="o">()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="n">trigger</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// Actions to perform when receiving a 'connected' global event</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">trigger</span><span class="o">(</span><span class="n">Object</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Actions to perform when receiving a 'subscribed' global event</span>
   <span class="o">}</span>
-<span class="o">});</span>
+<span class="o">};</span>
+<span class="n">kuzzle</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">connected</span><span class="o">,</span> <span class="n">eventListener</span><span class="o">);</span>
 </code></pre>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 
@@ -605,10 +607,6 @@ This property must be set with a function returning an array of objects with the
 <p>Adds a listener to a Kuzzle global event. When an event is fired, listeners are called in the order of their insertion.</p>
 
 <p>See the <a href="docs.kuzzle.io/sdk-reference/#event-handling">event handling</a> section for a full events list.</p>
-
-<aside class="notice">
-The ID returned by this function is required if you want to remove this listener later.
-</aside>
 
 <h3 id="addlistener-event-listener">addListener(event, listener)</h3>
 
@@ -633,7 +631,7 @@ The ID returned by this function is required if you want to remove this listener
 
 <h3 id="return-value">Return value</h3>
 
-<p>Returns a <code class="prettyprint">string</code> containing an unique listener ID.</p>
+<p>Returns the <code class="prettyprint">Kuzzle</code> object to allow chaining.</p>
 
 <h2 id="checktoken">checkToken</h2>
 <pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
@@ -2522,21 +2520,21 @@ By default, this operation can take up to 1 second.</p>
 <p>Returns the <code class="prettyprint">Kuzzle</code> object to allow chaining.</p>
 
 <h2 id="removelistener">removeListener</h2>
-<pre class="highlight javascript"><code><span class="nx">kuzzle</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="s1">'disconnected'</span><span class="p">,</span> <span class="nx">listenerId</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="nx">kuzzle</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="s1">'disconnected'</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">removeListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">disconnected</span><span class="o">,</span> <span class="s">"listenerId"</span><span class="o">);</span>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">removeListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">disconnected</span><span class="o">,</span> <span class="n">eventListener</span><span class="o">);</span>
 </code></pre>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 
-<span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">removeListener</span><span class="p">(</span><span class="s1">'jwtTokenExpired'</span><span class="p">,</span> <span class="nv">$listenerId</span><span class="p">);</span>
+<span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">removeListener</span><span class="p">(</span><span class="s1">'jwtTokenExpired'</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">);</span>
 </code></pre>
 
 <p>Removes a listener from an event.</p>
 
-<h3 id="removelistener-event-listenerid">removeListener(event, listenerID)</h3>
+<h3 id="removelistener-event-callback">removeListener(event, callback)</h3>
 
 <table><thead>
 <tr>
@@ -2551,9 +2549,9 @@ By default, this operation can take up to 1 second.</p>
 <td>One of the event described in the <code class="prettyprint">Event Handling</code> section of this documentation</td>
 </tr>
 <tr>
-<td><code class="prettyprint">listenerID</code></td>
-<td>string</td>
-<td>The ID returned by <code class="prettyprint">addListener</code></td>
+<td><code class="prettyprint">callback</code></td>
+<td>function/object</td>
+<td>the callback</td>
 </tr>
 </tbody></table>
 
