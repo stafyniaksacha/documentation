@@ -20065,7 +20065,7 @@ That means that a profile that was just been created will not be returned by <co
 <tr>
 <td><code class="prettyprint">content</code></td>
 <td>JSON Object</td>
-<td>A plain JSON object representing the profile</td>
+<td>A plain JSON object representing the profile and credentials</td>
 </tr>
 <tr>
 <td><code class="prettyprint">options</code></td>
@@ -20109,15 +20109,20 @@ That means that a profile that was just been created will not be returned by <co
 
 <h2 id="createuser">createUser</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">userContent</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="c1">// A "profile" field is required to bind a user to an existing profile</span>
-  <span class="na">profileIds</span><span class="p">:</span> <span class="p">[</span><span class="s1">'admin'</span><span class="p">],</span>
-
-  <span class="c1">// The "local" authentication strategy requires a password</span>
-  <span class="na">password</span><span class="p">:</span> <span class="s1">'secretPassword'</span><span class="p">,</span>
-
-  <span class="c1">// You can also set custom fields to your user</span>
-  <span class="na">firstname</span><span class="p">:</span> <span class="s1">'John'</span><span class="p">,</span>
-  <span class="na">lastname</span><span class="p">:</span> <span class="s1">'Doe'</span>
+  <span class="na">content</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// A "profile" field is required to bind a user to an existing profile</span>
+    <span class="na">profileIds</span><span class="p">:</span> <span class="p">[</span><span class="s1">'admin'</span><span class="p">],</span>
+    <span class="na">firstname</span><span class="p">:</span> <span class="s1">'John'</span><span class="p">,</span>
+    <span class="na">lastname</span><span class="p">:</span> <span class="s1">'Doe'</span>
+  <span class="p">},</span>
+  <span class="na">credentials</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">local</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// The "local" authentication strategy requires a password</span>
+      <span class="na">password</span><span class="p">:</span> <span class="s1">'secretPassword'</span><span class="p">,</span>
+      <span class="c1">// You can also set custom fields to your user</span>
+      <span class="na">lastLoggedIn</span><span class="p">:</span> <span class="mi">1494411803</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="c1">// You can chose to replace the given user if already exists</span>
@@ -20141,14 +20146,21 @@ That means that a profile that was just been created will not be returned by <co
     <span class="c1">// result is a User object</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">JSONObject</span> <span class="n">newUser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">()</span>
+<pre class="highlight java"><code><span class="n">JSONObject</span> <span class="n">content</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">()</span>
   <span class="c1">// A "profile" field is required to bind a user to an existing profile</span>
-  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"profileIds"</span><span class="o">,</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"admin"</span><span class="o">))</span>
-  <span class="c1">// The "local" authentication strategy requires a password</span>
-  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="s">"secret password"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"profileIds"</span><span class="o">,</span> <span class="k">new</span> <span class="n">JSONArray</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"admin"</span><span class="o">)</span>
   <span class="c1">// You can also set custom fields to your user</span>
   <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"firstname"</span><span class="o">,</span> <span class="s">"John"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastname"</span><span class="o">,</span> <span class="s">"Doe"</span><span class="o">);</span>
+  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastname"</span><span class="o">,</span> <span class="s">"Doe"</span><span class="o">))</span>
+<span class="n">JSONObject</span> <span class="n">newUser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"content"</span><span class="o">,</span> <span class="n">content</span><span class="o">);</span>
+
+<span class="n">JSONObject</span> <span class="n">credentials</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"local"</span><span class="o">,</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">()</span>
+  <span class="c1">// The "local" authentication strategy requires a password</span>
+  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="s">"secret password"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastLoggedIn"</span><span class="o">,</span> <span class="mi">1494411803</span><span class="o">);</span>
+
+<span class="n">newUser</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"credentials"</span><span class="o">,</span> <span class="n">credentials</span><span class="o">);</span>
 
 <span class="n">Options</span> <span class="n">opts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Options</span><span class="o">().</span><span class="na">setReplaceIfExist</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 
@@ -20173,11 +20185,21 @@ That means that a profile that was just been created will not be returned by <co
 
 <span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 <span class="nv">$userDefinition</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="s1">'profileIds'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'myProfile'</span><span class="p">],</span>
-  <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'secret'</span><span class="p">,</span>
-  <span class="s1">'firstname'</span> <span class="o">=&gt;</span> <span class="s1">'John'</span><span class="p">,</span>
-  <span class="s1">'lastname'</span> <span class="o">=&gt;</span> <span class="s1">'Doe'</span>
-<span class="p">];</span>
+    <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+      <span class="c1">// A "profile" field is required to bind a user to an existing profile
+</span>      <span class="s1">'profileIds'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'admin'</span><span class="p">],</span>
+      <span class="c1">// You can also set custom fields to your user
+</span>      <span class="s1">'firstname'</span> <span class="o">=&gt;</span> <span class="s1">'John'</span><span class="p">,</span>
+      <span class="s1">'lastname'</span> <span class="o">=&gt;</span> <span class="s1">'Doe'</span>
+    <span class="p">],</span>
+    <span class="s1">'credentials'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+      <span class="s1">'local'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// The "local" authentication strategy requires a password
+</span>        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'secretPassword'</span><span class="p">,</span>
+        <span class="s1">'lastLoggedIn'</span> <span class="o">=&gt;</span> <span class="mi">1494411803</span>
+      <span class="p">]</span>
+    <span class="p">]</span>
+  <span class="p">];</span>
 
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 <span class="nv">$security</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">();</span>
@@ -20260,12 +20282,15 @@ That means that a user that was just been created will not be returned by <code>
 
 <h2 id="createrestricteduser">createRestrictedUser</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">userContent</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="c1">// The "local" authentication strategy requires a password</span>
-  <span class="na">password</span><span class="p">:</span> <span class="s1">'secretPassword'</span><span class="p">,</span>
-
-  <span class="c1">// You can also set custom fields to your user</span>
-  <span class="na">firstname</span><span class="p">:</span> <span class="s1">'John'</span><span class="p">,</span>
-  <span class="na">lastname</span><span class="p">:</span> <span class="s1">'Doe'</span>
+  <span class="na">content</span><span class="p">:</span> <span class="p">{</span>
+  <span class="p">},</span>
+  <span class="na">credentials</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">local</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// The "local" authentication strategy requires a password</span>
+      <span class="na">password</span><span class="p">:</span> <span class="s1">'secretPassword'</span><span class="p">,</span>
+      <span class="na">lastLoggedIn</span><span class="p">:</span> <span class="mi">1494411803</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 <span class="p">};</span>
 
 
@@ -20284,18 +20309,23 @@ That means that a user that was just been created will not be returned by <code>
     <span class="c1">// result is a User object</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">JSONObject</span> <span class="n">newUser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">()</span>
+<pre class="highlight java"><code><span class="n">JSONObject</span> <span class="n">content</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+
+<span class="n">JSONObject</span> <span class="n">newUser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"content"</span><span class="o">,</span> <span class="n">content</span><span class="o">);</span>
+
+<span class="n">JSONObject</span> <span class="n">credentials</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"local"</span><span class="o">,</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">()</span>
   <span class="c1">// The "local" authentication strategy requires a password</span>
   <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="s">"secret password"</span><span class="o">)</span>
-  <span class="c1">// You can also set custom fields to your user</span>
-  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"firstname"</span><span class="o">,</span> <span class="s">"John"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastname"</span><span class="o">,</span> <span class="s">"Doe"</span><span class="o">);</span>
+  <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastLoggedIn"</span><span class="o">,</span> <span class="mi">1494411803</span><span class="o">));</span>
+
+<span class="n">newUser</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"credentials"</span><span class="o">,</span> <span class="n">credentials</span><span class="o">);</span>
 
 <span class="n">Options</span> <span class="n">opts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Options</span><span class="o">().</span><span class="na">setReplaceIfExist</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 
 <span class="n">kuzzle</span>
   <span class="o">.</span><span class="na">security</span>
-  <span class="o">.</span><span class="na">createRestrictedUser</span><span class="o">(</span><span class="s">"myNewUser"</span><span class="o">,</span> <span class="n">newUser</span><span class="o">,</span> <span class="n">opts</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="o">.</span><span class="na">createUser</span><span class="o">(</span><span class="s">"myNewUser"</span><span class="o">,</span> <span class="n">newUser</span><span class="o">,</span> <span class="n">opts</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
 
@@ -20313,11 +20343,17 @@ That means that a user that was just been created will not be returned by <code>
 <span class="k">use</span> <span class="nx">\Kuzzle\Security\User</span><span class="p">;</span>
 
 <span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
-<span class="nv">$userDefinition</span> <span class="o">=&gt;</span> <span class="p">[</span>
-  <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'secret'</span><span class="p">,</span>
-  <span class="s1">'firstname'</span> <span class="o">=&gt;</span> <span class="s1">'John'</span><span class="p">,</span>
-  <span class="s1">'lastname'</span> <span class="o">=&gt;</span> <span class="s1">'Doe'</span>
-<span class="p">];</span>
+<span class="nv">$userDefinition</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="p">],</span>
+    <span class="s1">'credentials'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+      <span class="s1">'local'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// The "local" authentication strategy requires a password
+</span>        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'secretPassword'</span><span class="p">,</span>
+        <span class="s1">'lastLoggedIn'</span> <span class="o">=&gt;</span> <span class="mi">1494411803</span>
+      <span class="p">]</span>
+    <span class="p">]</span>
+  <span class="p">];</span>
 
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 <span class="nv">$security</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">();</span>
