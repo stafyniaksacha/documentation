@@ -2385,7 +2385,15 @@ Kuzzle will get back to him with a corresponding Room ID and a Room Channel usin
 <li>Finally, the plugins send the message to the clients who subscribed to it.</li>
 </ul>
 
-            <h2 id="authentication">Authentication</h2>
+            <h2 id="the-kuzzle-user-identifier">The Kuzzle User Identifier</h2>
+
+<p>The kuzzle user identifier is a string that identifies a kuzzle user uniquely. It is used internally to link the user stored in Kuzzle with its credentials within the different authentication strategies.</p>
+
+<p>When a user is created, this identifier can either be set by the request, or generated directly by Kuzzle.</p>
+
+<p>When an authentication strategy stores its credentials in its own storage (internal or external) with its own storage nomenclature they have to store a reference to this value. This way it can retrieve the Kuzzle user identifier when the user credentials are provided during a log in request.</p>
+
+<h2 id="authentication">Authentication</h2>
 
 <p>Kuzzle uses <a href="http://PassportJS.org/">PassportJS</a> to enable authentication through a large amount of providers, for example:</p>
 
@@ -2416,13 +2424,13 @@ Kuzzle will get back to him with a corresponding Room ID and a Room Channel usin
 <ul>
 <li>The user calls the <code class="prettyprint">login</code> action of the Auth Controller:</li>
 </ul>
-<pre class="highlight plaintext"><code>{
+<pre class="highlight literate_coffeescript"><code>{
   "controller": "auth",
   "action": "login",
   "body": {
-    "strategy": "local",
-    "username": "&lt;my_username&gt;",
-    "password": "&lt;my_password&gt;"
+    <span class="s">"strategy"</span><span class="o">:</span> <span class="s">"local"</span><span class="p">,</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"&lt;my_username&gt;"</span><span class="p">,</span>
+    <span class="s">"password"</span><span class="o">:</span> <span class="s">"&lt;my_password&gt;"</span>
   }
 }
 </code></pre>
@@ -2603,7 +2611,7 @@ Location: http://&lt;kuzzle&gt;/_login/GitHub?code=OAUTH2_CODE
 <p>The permission function has the following signature:</p>
 <pre class="highlight javascript"><code><span class="cm">/**
  * @param {Request} $request              The current action request.
- * @param {string} $currentUserId         The current user Id. Shortcut to request.context.token.userId
+ * @param {string} $currentUserId         The current user kuid. Shortcut to request.context.token.userId
  * @param {Object} args                   The result of the evaluated args definition.
  *
  * @return {Boolean}
@@ -2621,7 +2629,7 @@ Location: http://&lt;kuzzle&gt;/_login/GitHub?code=OAUTH2_CODE
 
 <h5 id="currentuserid">$currentUserId</h5>
 
-<p>The <code class="prettyprint">$currentUserId</code> variable contains the current user ID. It is an alias for <code class="prettyprint">request.context.token.userId</code>.</p>
+<p>The <code class="prettyprint">$currentUserId</code> variable contains the current user <a href="./#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>. It is an alias for <code class="prettyprint">request.context.token.userId</code>.</p>
 
 <h5 id="args">args</h5>
 
@@ -2772,10 +2780,8 @@ Each <code class="prettyprint">args</code> item will look like:</p>
 
 <p>The search results are available in the Permission Function as an array of documents fetched from <code class="prettyprint">myIndex</code>/<code class="prettyprint">myCollection</code>, for which the <code class="prettyprint">name</code> attribute matches the <code class="prettyprint">name</code> attribute of the request:</p>
 <pre class="highlight javascript"><code><span class="nx">args</span><span class="p">.</span><span class="nx">myDocuments</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"id_1"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="s2">"Cum sociis natoque penatibus et magnis dis parturient montes"</span><span class="p">},</span>
-  <span class="p">}</span>
-  <span class="p">{</span> <span class="nl">id</span><span class="p">:</span> <span class="s2">"id_2"</span><span class="p">,</span> <span class="nx">content</span><span class="err">:</span> <span class="p">{</span><span class="nl">name</span><span class="p">:</span> <span class="s2">"foo bar"</span><span class="p">,</span> <span class="nx">description</span><span class="err">:</span> <span class="s2">"nascetur ridiculus mus. Nulla nunc velit"</span><span class="p">},</span>
-  <span class="p">}</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"id_1"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="s2">"Cum sociis natoque penatibus et magnis dis parturient montes"</span><span class="p">}},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"id_2"</span><span class="p">,</span> <span class="na">content</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"foo bar"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="s2">"nascetur ridiculus mus. Nulla nunc velit"</span><span class="p">}},</span>
   <span class="p">...</span>
 <span class="p">]</span>
 </code></pre>

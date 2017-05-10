@@ -388,11 +388,11 @@ Each pipes must also be exported.</p>
 <li>HTTP: <code class="prettyprint">GET http://&lt;server&gt;:&lt;port&gt;/_plugin/&lt;plugin name&gt;/&lt;url defined by the plugin&gt;/&lt;resources&gt;</code></li>
 <li>Other protocols:</li>
 </ul>
-<pre class="highlight javascript"><code><span class="p">{</span>
-  <span class="nl">controller</span><span class="p">:</span> <span class="s1">'&lt;plugin name&gt;/&lt;added controller name&gt;'</span><span class="p">,</span>
-  <span class="nx">action</span><span class="err">:</span> <span class="s1">'&lt;action of the added controller&gt;'</span><span class="p">,</span>
-  <span class="p">...</span>
-<span class="p">}</span>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "<span class="nt">&lt;plugin</span> <span class="na">name</span><span class="nt">&gt;</span>/<span class="nt">&lt;added</span> <span class="na">controller</span> <span class="na">name</span><span class="nt">&gt;</span>",
+  "action": "<span class="nt">&lt;action</span> <span class="na">of</span> <span class="na">the</span> <span class="na">added</span> <span class="na">controller</span><span class="nt">&gt;</span>",
+  ...
+}
 </code></pre>
 
 <h3 id="implementing-a-controller-route">Implementing a controller route</h3>
@@ -533,7 +533,7 @@ Each pipes must also be exported.</p>
 
 <p>Kuzzle handles users security and authentication. The supported authentication strategies can be extended by Plugins.</p>
 
-<p>Any strategy supported by <a href="http://passportjs.org/">Passport</a> can be used to extend Kuzzle supported strategies, like we did with our official <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth">OAUTH2 Authentication plugin</a>.  </p>
+<p>Any strategy supported by <a href="http://passportjs.org/">Passport</a> can be used to extend Kuzzle supported strategies, like we did with our official <a href="https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth">OAUTH2 Authentication plugin</a>.</p>
 
 <h3 id="choose-or-implement-a-passport-strategy">Choose or implement a Passport strategy</h3>
 
@@ -541,69 +541,347 @@ Each pipes must also be exported.</p>
 
 <p>In any case, the chosen strategy must be available in the Plugin local directory when Kuzzle installs it, either by adding the strategy in the Plugin&rsquo;s NPM dependencies, or by including the strategy code directly in the Plugin repository.</p>
 
-<h3 id="create-a-verification-function">Create a verification function</h3>
+<h3 id="expose-a-strategies-attribute">Expose a <code class="prettyprint">strategies</code> attribute</h3>
 
-<p>First, you have to implement a <a href="http://passportjs.org/docs/configure"><code class="prettyprint">verify</code> function</a>, which will be used by Kuzzle to authorize or to deny access to a user.</p>
-
-<p>The number of arguments taken by this <code class="prettyprint">verify</code> function depends on the authentication strategy. For instance, a <code class="prettyprint">local password</code> strategy needs the <code class="prettyprint">verify</code> callback to be provided with an <code class="prettyprint">user</code> name and his <code class="prettyprint">password</code>.</p>
-
-<p>Here is the generic signature of the <code class="prettyprint">verify</code> function you have to implement:</p>
-
-<p><code class="prettyprint">verify(request, ..., callback)</code></p>
+<p>The <code class="prettyprint">strategies</code> object must contain one attribute per added strategy. This attribute must be named after the strategy name and be an object containing:</p>
 
 <ul>
-<li><code class="prettyprint">request</code> is the login request made to passport. The object format is <code class="prettyprint">{query: {passport: &#39;crendentials&#39;}, original: Request}</code> (see <a href="#request"> the <code class="prettyprint">Request</code> documentation</a>)</li>
-<li><code class="prettyprint">...</code>: varies, depending on the used strategy</li>
-<li><code class="prettyprint">callback</code> is a function that <strong>must</strong> be called at the end of an authentication process, with the following arguments:
+<li>config: The configuration part
 
 <ul>
-<li><code class="prettyprint">error</code>: null if no error occured, an error object otherwise (note: an authentication rejection is
-<em>not</em> an error)</li>
-<li><code class="prettyprint">user</code>: either <code class="prettyprint">false</code> (authentication rejected) or a user object, provided by the plugin context <a href="#users-load"><code class="prettyprint">user.load</code> method</a></li>
-<li><code class="prettyprint">info</code>: (optional) the rejection reason</li>
+<li>constructor: The constructor of the Passport strategy</li>
+<li>strategyOptions: The options provided to the Passport strategy constructor</li>
+<li>authenticateOptions: The options provided to the Passport&rsquo;s (authenticate method)[http://passportjs.org/docs/authenticate].</li>
+<li>fields: The list of fields that can be provided to the plugin.</li>
+</ul></li>
+<li>methods:
+
+<ul>
+<li>create: The name of the <code class="prettyprint">create</code> function in the plugin object.</li>
+<li>delete: The name of the <code class="prettyprint">delete</code> function in the plugin object.</li>
+<li>exists: The name of the <code class="prettyprint">exists</code> function in the plugin object.</li>
+<li>getInfo: The name of the <code class="prettyprint">getInfo</code> function in the plugin object.</li>
+<li>update: The name of the <code class="prettyprint">update</code> function in the plugin object.</li>
+<li>validate: The name of the <code class="prettyprint">validate</code> function in the plugin object.</li>
+<li>verify: The name of the <code class="prettyprint">verify</code> function in the plugin object.</li>
 </ul></li>
 </ul>
 
-<h3 id="register-the-strategy-to-kuzzle">Register the strategy to Kuzzle</h3>
+<h4 id="example">Example</h4>
 
-<p>Once you chose a strategy and implemented its corresponding <code class="prettyprint">verify</code> callback function, all you have to do is to register it to Kuzzle, using <a href="#registerstrategy">the <code class="prettyprint">registerStrategy</code> accessor method</a>, available in the plugin context.</p>
+<p>Here is a skeleton of authentication plugin</p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">StrategyConstructor</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'some-passport-strategy'</span><span class="p">);</span>
 
-<h3 id="optional-scope-of-access">(optional) Scope of access</h3>
-
-<p>Some authentication procedures, like OAUTH 2.0, need a <a href="http://passportjs.org/docs/oauth">scope of access</a> to be configured.</p>
-
-<p>Kuzzle Plugins support scope of access. To add one in your plugin, simply expose a <code class="prettyprint">scope</code> attribute. Its format depends on the implemented strategy.</p>
-
-<h3 id="localstrategy-example">LocalStrategy Example</h3>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">LocalStrategy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'passport-local'</span><span class="p">).</span><span class="nx">Strategy</span><span class="p">;</span>
-
-<span class="kd">function</span> <span class="nx">MyAuthenticationPlugin</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">context</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-
-  <span class="cm">/*
-    Required plugin initialization function
-    (see the "Plugin prerequisites" section)
+<span class="cm">/**
+ * @class AuthenticationPlugin
+ */</span>
+<span class="kr">class</span> <span class="nx">AuthenticationPlugin</span> <span class="p">{</span>
+  <span class="cm">/**
+   * @constructor
    */</span>
-  <span class="k">this</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">customConfig</span><span class="p">,</span> <span class="nx">pluginContext</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">context</span> <span class="o">=</span> <span class="nx">pluginContext</span><span class="p">;</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">accessors</span><span class="p">.</span><span class="nx">registerStrategy</span><span class="p">(</span><span class="nx">LocalStrategy</span><span class="p">,</span> <span class="s1">'myLocalStrategy'</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">verify</span><span class="p">);</span>
+  <span class="cm">/**
+   * @param {object} customConfig
+   * @param {KuzzlePluginContext} context
+   * @returns {*}
+   */</span>
+  <span class="nx">init</span> <span class="p">(</span><span class="nx">customConfig</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">strategies</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="c1">// The name of the strategy</span>
+      <span class="na">strategyName</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">config</span><span class="p">:</span> <span class="p">{</span>
+          <span class="c1">// The constructor of the passport strategy you chose</span>
+          <span class="na">constructor</span><span class="p">:</span> <span class="nx">StrategyConstructor</span><span class="p">,</span>
+          <span class="c1">// The options provided to the strategy constructor at instanciation</span>
+          <span class="na">strategyOptions</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="c1">// The options provided to the authenticate function during the authentication process</span>
+          <span class="na">authenticateOptions</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">scope</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="p">},</span>
+          <span class="c1">// The list of fields that may be provided in the credentials</span>
+          <span class="na">fields</span><span class="p">:</span> <span class="p">[</span><span class="s1">'login'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+          <span class="c1">// The name of the create function</span>
+          <span class="na">create</span><span class="p">:</span> <span class="s1">'create'</span><span class="p">,</span>
+          <span class="c1">// The name of the delete function</span>
+          <span class="na">delete</span><span class="p">:</span> <span class="s1">'delete'</span><span class="p">,</span>
+          <span class="c1">// The name of the exists function</span>
+          <span class="na">exists</span><span class="p">:</span> <span class="s1">'exists'</span><span class="p">,</span>
+          <span class="c1">// The name of the getInfo function</span>
+          <span class="na">getInfo</span><span class="p">:</span> <span class="s1">'getInfo'</span><span class="p">,</span>
+          <span class="c1">// The name of the update function</span>
+          <span class="na">update</span><span class="p">:</span> <span class="s1">'update'</span><span class="p">,</span>
+          <span class="c1">// The name of the validate function</span>
+          <span class="na">validate</span><span class="p">:</span> <span class="s1">'validate'</span><span class="p">,</span>
+          <span class="c1">// The name of the verify function</span>
+          <span class="na">verify</span><span class="p">:</span> <span class="s1">'verify'</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
   <span class="p">}</span>
 
-  <span class="k">this</span><span class="p">.</span><span class="nx">verify</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Code performing the necessary verifications</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">accessors</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">username</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span>
-      <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s1">'Login failed'</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">};</span>
-<span class="p">};</span>
+  <span class="cm">/**
+   * Called after the strategy has been built with the constructor
+   *
+   * @param {*} constructedStrategy
+   * @returns {Promise&lt;object&gt;}
+   */</span>
+  <span class="nx">afterRegister</span> <span class="p">(</span><span class="nx">constructedStrategy</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do some action</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* any value */</span><span class="p">);</span>
+  <span class="p">}</span>
 
-<span class="c1">// Exports the plugin objects, allowing Kuzzle to instantiate it</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">MyAuthenticationPlugin</span><span class="p">;</span>
+  <span class="cm">/**
+   * Persists the provided credentials in some way
+   * Must keep a link between the persisted credentials
+   * and the kuid
+   *
+   * @param {KuzzleRequest} request
+   * @param {object} credentials
+   * @param {string} kuid
+   * @returns {Promise&lt;object&gt;}
+   */</span>
+  <span class="nx">create</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">credentials</span><span class="p">,</span> <span class="nx">kuid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// persist credentials</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* non sensitive credentials info */</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Removes the user's stored credentials from
+   * the plugin persistence layer
+   *
+   * @param {KuzzleRequest} request
+   * @param {string} kuid
+   * @returns {Promise&lt;object&gt;}
+   */</span>
+  <span class="k">delete</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">kuid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// remove credentials</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* any value */</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Checks if user's credentials exist in the persistence layer
+   *
+   * @param {KuzzleRequest} request
+   * @param {string} kuid
+   * @returns {Promise&lt;boolean&gt;}
+   */</span>
+  <span class="nx">exists</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">kuid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// check credentials existence</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* true|false */</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Retrieves the non sensitive user's credentials information
+   * from the persistence layer
+   *
+   * @param {KuzzleRequest} request
+   * @param {string} kuid
+   * @returns {Promise&lt;object&gt;}
+   */</span>
+  <span class="nx">getInfo</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">kuid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// retrieve credentials</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* non sensitive credentials info */</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Updates the user's credentials information in the
+   * persistence layer
+   *
+   * @param {KuzzleRequest} request
+   * @param {object} credentials
+   * @param {string} kuid
+   * @returns {Promise&lt;object&gt;}
+   */</span>
+  <span class="nx">update</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">credentials</span><span class="p">,</span> <span class="nx">kuid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// update credentials</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* non sensitive credentials info */</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Validates credentials validity conforming to the
+   * authentication strategy rules (mandatory fields,
+   * password length, username uniqueness, ...)
+   *
+   * @param {KuzzleRequest} request
+   * @param {object} credentials
+   * @param {string} kuid
+   * @param {boolean} isUpdate
+   * @returns {Promise&lt;boolean&gt;}
+   */</span>
+  <span class="nx">validate</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">credentials</span><span class="p">,</span> <span class="nx">kuid</span><span class="p">,</span> <span class="nx">isUpdate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// validate credentials</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* true|false */</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Provided to the Passport strategy as verify function
+   * Should return the kuid if the user can authentify
+   * or an object with the login failure reason as message attribute
+   * 
+   * @param {KuzzleRequest} request
+   * @param {*[]} args - provided arguments depends on the Passport strategy
+   * @returns {Promise&lt;string|{message: string}&gt;}
+   */</span>
+  <span class="nx">verify</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// verify if the user can authentify</span>
+    <span class="kr">const</span> <span class="nx">kuid</span> <span class="o">=</span> <span class="nx">getUserIdFromCredentials</span><span class="p">(</span><span class="nx">args</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">kuid</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">kuid</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">({</span><span class="na">message</span><span class="p">:</span> <span class="s1">'Login failed - Reason ...'</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
+
+<h3 id="the-verify-function">The verify function</h3>
+
+<p>You have to implement a <a href="http://passportjs.org/docs/configure"><code class="prettyprint">verify</code> function</a> (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), which will be used by Kuzzle to authorize or to deny access to a user.</p>
+
+<p>The number of arguments taken by this <code class="prettyprint">verify</code> function depends on the authentication strategy. For instance, a <code class="prettyprint">local password</code> strategy needs the <code class="prettyprint">verify</code> callback to be provided with an <code class="prettyprint">username</code> and his <code class="prettyprint">password</code>.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">verify</code> function you have to implement:</p>
+
+<p><code class="prettyprint">verify(request, ...)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the login request made to passport. The object format is <code class="prettyprint">{query: {passport: &#39;crendentials&#39;}, original: Request}</code> (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>)</li>
+<li><code class="prettyprint">...</code>: varies, depending on the used strategy</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to either the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a> if the user is authenticated, or an object containing a message string attribute giving the reason why it can not be authenticated. The function should reject the Promise if an error occurs (note: an authentication rejection is <em>not</em> an error).</p>
+
+<h3 id="the-exists-function">The exists function</h3>
+
+<p>You have to implement an <code class="prettyprint">exists</code> function (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), which will be used by Kuzzle to verify if a user can be authenticated using your strategy.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">exists</code> function you have to implement:</p>
+
+<p><code class="prettyprint">exists (request, kuid)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the request made to Kuzzle (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>).</li>
+<li><code class="prettyprint">kuid</code> is the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>.</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to a boolean depending on the user ability to authenticate with a strategy.</p>
+
+<h3 id="the-create-function">The create function</h3>
+
+<p>You have to implement an <code class="prettyprint">create</code> function (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), used by Kuzzle to add credentials to a user using this strategy.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">create</code> function you have to implement:</p>
+
+<p><code class="prettyprint">create (request, credentials, kuid)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the request made to Kuzzle (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>).</li>
+<li><code class="prettyprint">credentials</code> is the content of the credentials to create, that have already been passed to your <code class="prettyprint">validate</code> function.</li>
+<li><code class="prettyprint">kuid</code> is the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>.</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to an object that contains <strong>non sensitive</strong> information of the object (can be an empty object).</p>
+
+<aside class="warning">
+  The credentials have to be persisted, either by using the <a href="#repository">Repository constructor</a>, or any external service.
+</aside>
+
+<h3 id="the-update-function">The update function</h3>
+
+<p>You have to implement an <code class="prettyprint">update</code> function (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), used by Kuzzle to update a user&rsquo;s credentials to this strategy.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">update</code> function you have to implement:</p>
+
+<p><code class="prettyprint">update (request, credentials, kuid)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the request made to Kuzzle (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>).</li>
+<li><code class="prettyprint">credentials</code> is the content of the credentials to create, that have already been passed to your <code class="prettyprint">validate</code> function.</li>
+<li><code class="prettyprint">kuid</code> is the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>.</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to an object that contains <strong>non sensitive</strong> information of the object (can be an empty object).</p>
+
+<aside class="warning">
+  The credentials have to be persisted, either by using the <a href="#repository">Repository constructor</a>, or any external service.
+</aside>
+
+<h3 id="the-delete-function">The delete function</h3>
+
+<p>You have to implement a <code class="prettyprint">delete</code> function (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), used by Kuzzle to delete a user&rsquo;s credentials to this strategy.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">delete</code> function you have to implement:</p>
+
+<p><code class="prettyprint">delete (request, kuid)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the request made to Kuzzle (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>).</li>
+<li><code class="prettyprint">kuid</code> is the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>.</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to any value if deletion succeeds.</p>
+
+<h3 id="the-getinfo-function">The getInfo function</h3>
+
+<p>You may implement a <code class="prettyprint">getInfo</code> function (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), used by Kuzzle to get informations about a user&rsquo;s credentials to this strategy. For security reasons, only <strong>non sensitive</strong> informations should be returned.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">getInfo</code> function you have to implement:</p>
+
+<p><code class="prettyprint">getInfo (request, kuid)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the request made to Kuzzle (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>).</li>
+<li><code class="prettyprint">kuid</code> is the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>.</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to an object that contains <strong>non sensitive</strong> information of the object (can be an empty object).</p>
+
+<aside class="info">
+  If no getInfo function is provided, an empty object will be returned in the controllers that use it.
+</aside>
+
+<h3 id="the-afterregister-function">The afterRegister function</h3>
+
+<p>You may implement a <code class="prettyprint">afterRegister</code> function (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), which will be called once the strategy constructor has been build</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">afterRegister</code> function you have to implement:</p>
+
+<p><code class="prettyprint">afterRegister (constructedStrategy)</code></p>
+
+<ul>
+<li><code class="prettyprint">constructedStrategy</code> is the instance of the Passport strategy constructor.</li>
+</ul>
+
+<p>The function <strong>may</strong> return any value as it will be ignored.</p>
+
+<aside class="info">
+  If no afterRegister function is provided, Kuzzle won&rsquo;t try to call it, and register will process as expected.
+</aside>
+
+<h3 id="the-validate-function">The validate function</h3>
+
+<p>You have to implement a <code class="prettyprint">validate</code> (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), which will be used by Kuzzle to check if the provided user&rsquo;s credentials to this strategy are well-formed.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">validate</code> function you have to implement:</p>
+
+<p><code class="prettyprint">validate (request, credentials, kuid, isUpdate)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the request made to Kuzzle (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>).</li>
+<li><code class="prettyprint">credentials</code> is the content of the credentials to create or update.</li>
+<li><code class="prettyprint">kuid</code> is the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>.</li>
+<li><code class="prettyprint">isUpdate</code> is true if <code class="prettyprint">validate</code> is called during an update.</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to true or rejects with an error explaining the reason.</p>
+
+<aside class="warning">
+  Validate can be called during an update with partial information. The validation should behave accordingly when isUpdate is true, knowing that mandatory information should already have been stored during a previous create call.
+</aside>
 
 <h2 id="adding-a-new-communication-protocol">Adding a new communication protocol</h2>
 
@@ -815,20 +1093,12 @@ Each plugin receives its own plugin context instance.</p>
 <td>Access to Kuzzle API</td>
 </tr>
 <tr>
-<td><code class="prettyprint">context.accessors.registerStrategy</code></td>
-<td>Allow <a href="/#gt-authentication-plugin">authentication plugins</a> to register a new login strategy to Kuzzle.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">context.accessors.router</code></td>
 <td>Access to Kuzzle protocol communication system. Allow <strong>protocol</strong> plugins to interface themselves with Kuzzle.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">context.accessors.storage</code></td>
 <td>Initiate and configure to the plugin storage. This storage can only be accessed by the plugin and can be used to persist plugin datas.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">context.accessors.users</code></td>
-<td>Access to users management, especially useful for authentication plugins. Provides methods for handling users. This accessor is mainly used by authentication plugins.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">context.accessors.validation</code></td>
@@ -918,78 +1188,6 @@ To obtain the standardized Kuzzle response from it, simply use the getter <code 
    See Request constructor documentation for more information
    */</span>
 <span class="p">});</span>
-</code></pre>
-
-<h3 id="registerstrategy"><code class="prettyprint">registerStrategy</code></h3>
-
-<p>Register a new authentication strategy to Kuzzle.</p>
-
-<h4 id="arguments">Arguments</h4>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">Strategy</code></td>
-<td><code class="prettyprint">function</code></td>
-<td>A <a href="https://github.com/jaredhanson/passport/wiki/Strategies">Passport strategy</a> object constructor</td>
-</tr>
-<tr>
-<td><code class="prettyprint">name</code></td>
-<td><code class="prettyprint">string</code></td>
-<td>Strategy name identifier (<a href="/api-reference/#login">see <code class="prettyprint">auth:login</code></a>)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">context</code></td>
-<td><code class="prettyprint">object</code></td>
-<td><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/this">Context</a> in which the <code class="prettyprint">verify</code> callback will be executed</td>
-</tr>
-<tr>
-<td><code class="prettyprint">verify</code></td>
-<td><code class="prettyprint">function</code></td>
-<td>Callback function invoked to verify an authentication request</td>
-</tr>
-<tr>
-<td><code class="prettyprint">options</code></td>
-<td><code class="prettyprint">object</code></td>
-<td>(Optional) Strategy specific options parameters</td>
-</tr>
-</tbody></table>
-
-<p>The provided <code class="prettyprint">verify</code> callback signature varies depending on the used strategy.<br>
-Here is the generic signature: <code class="prettyprint">verify(request, ..., callback)</code>:</p>
-
-<ul>
-<li><code class="prettyprint">request</code> is the login request made to passport. The object format is <code class="prettyprint">{query: {passport: &#39;crendentials&#39;}, original: Request}</code> (see <a href="#request"> the <code class="prettyprint">Request</code> documentation</a>)</li>
-<li><code class="prettyprint">...</code>: varies, depending on the used strategy</li>
-<li><code class="prettyprint">callback</code> is a function that <strong>must</strong> be called at the end of an authentication process, with the following arguments:
-
-<ul>
-<li><code class="prettyprint">error</code>: null if no error occured, an error object otherwise (note: an authentication rejection is
-<em>not</em> an error)</li>
-<li><code class="prettyprint">user</code>: either <code class="prettyprint">false</code> (authentication rejected) or a user object, provided by the plugin context <a href="#users-load"><code class="prettyprint">user.load</code> method</a></li>
-<li><code class="prettyprint">info</code>: (optional) the rejection reason</li>
-</ul></li>
-</ul>
-
-<h4 id="usage">Usage</h4>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">LocalStrategy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'passport-local'</span><span class="p">).</span><span class="nx">Strategy</span><span class="p">;</span>
-
-<span class="kd">function</span> <span class="nx">verify</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// verification code</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">userVerified</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">userInformation</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="k">else</span> <span class="p">{</span>
-    <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s1">'Login failed'</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nx">pluginContext</span><span class="p">.</span><span class="nx">accessors</span><span class="p">.</span><span class="nx">registerStrategy</span><span class="p">(</span><span class="nx">LocalStrategy</span><span class="p">,</span> <span class="s1">'myLocalStrategy'</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">verify</span><span class="p">);</span>
 </code></pre>
 
 <h3 id="router-newconnection"><code class="prettyprint">router.newConnection</code></h3>
@@ -1158,68 +1356,6 @@ not modified.</p>
     <span class="p">}</span>
 <span class="p">});</span>
 </code></pre>
-
-<h3 id="users-create"><code class="prettyprint">users.create</code></h3>
-
-<p>Creates a new user in Kuzzle. Will return an error if the user already exists.</p>
-
-<h4 id="arguments">Arguments</h4>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">loginName</code></td>
-<td><code class="prettyprint">string</code></td>
-<td></td>
-<td>Name of the user&rsquo;s login to create</td>
-</tr>
-<tr>
-<td><code class="prettyprint">userProfile</code></td>
-<td><code class="prettyprint">string</code></td>
-<td><code class="prettyprint">default</code></td>
-<td><a href="/guide/#permissions">User profile</a></td>
-</tr>
-<tr>
-<td><code class="prettyprint">userInfo</code></td>
-<td><code class="prettyprint">object</code></td>
-<td><code class="prettyprint">{}</code></td>
-<td>Misc. information about the user</td>
-</tr>
-</tbody></table>
-
-<h4 id="returns">Returns</h4>
-
-<p>A <code class="prettyprint">promise</code> resolving a <code class="prettyprint">user</code> object containing the created information.</p>
-
-<h3 id="users-load"><code class="prettyprint">users.load</code></h3>
-
-<p>Loads a user from Kuzzle</p>
-
-<h4 id="arguments">Arguments</h4>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">loginName</code></td>
-<td><code class="prettyprint">string</code></td>
-<td>Name of the user&rsquo;s login to load</td>
-</tr>
-</tbody></table>
-
-<h4 id="returns">Returns</h4>
-
-<p>A <code class="prettyprint">promise</code> resolving to a <code class="prettyprint">user</code> object containing the user information.</p>
 
 <h3 id="validation-validate"><code class="prettyprint">validation.validate</code></h3>
 
@@ -1571,6 +1707,27 @@ To do so the plugin should first <a href="#storage-bootstrap">bootstrap</a> the 
 <td><code class="prettyprint">Object</code></td>
 <td>The document you want to create. It must contain a unique <code class="prettyprint">_id</code> string property. You don&rsquo;t need to worry about collisions with other plugins as your plugin storage is only accessible by your plugin</td>
 </tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td><code class="prettyprint">Object</code></td>
+<td>Optional arguments</td>
+</tr>
+</tbody></table>
+
+<p>If a raw <code class="prettyprint">options</code> object is provided, it may contain:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">refresh</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Value can only be <code class="prettyprint">wait_for</code> if provided. See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-refresh.html">Elasticsearch documentation</a> for more information.</td>
+</tr>
 </tbody></table>
 
 <p><strong>Returns</strong></p>
@@ -1623,6 +1780,27 @@ To do so the plugin should first <a href="#storage-bootstrap">bootstrap</a> the 
 <td><code class="prettyprint">object</code></td>
 <td>The document you want to create or replace. It must contain a unique <code class="prettyprint">_id</code> string property. You don&rsquo;t need to worry about collisions with other plugins as your plugin storage is only accessible by your plugin</td>
 </tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td><code class="prettyprint">Object</code></td>
+<td>Optional arguments</td>
+</tr>
+</tbody></table>
+
+<p>If a raw <code class="prettyprint">options</code> object is provided, it may contain:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">refresh</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Value can only be <code class="prettyprint">wait_for</code> if provided. See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-refresh.html">Elasticsearch documentation</a> for more information.</td>
+</tr>
 </tbody></table>
 
 <p><strong>Returns</strong></p>
@@ -1659,6 +1837,27 @@ To do so the plugin should first <a href="#storage-bootstrap">bootstrap</a> the 
 <td><code class="prettyprint">document</code></td>
 <td><code class="prettyprint">object</code></td>
 <td>The document <code class="prettyprint">_id</code> of the document you want to delete.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td><code class="prettyprint">Object</code></td>
+<td>Optional arguments</td>
+</tr>
+</tbody></table>
+
+<p>If a raw <code class="prettyprint">options</code> object is provided, it may contain:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">refresh</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Value can only be <code class="prettyprint">wait_for</code> if provided. See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-refresh.html">Elasticsearch documentation</a> for more information.</td>
 </tr>
 </tbody></table>
 
@@ -1758,6 +1957,27 @@ To do so the plugin should first <a href="#storage-bootstrap">bootstrap</a> the 
 <td><code class="prettyprint">object</code></td>
 <td>The content of the document. It must contain a unique <code class="prettyprint">_id</code> string property.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td><code class="prettyprint">Object</code></td>
+<td>Optional arguments</td>
+</tr>
+</tbody></table>
+
+<p>If a raw <code class="prettyprint">options</code> object is provided, it may contain:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">refresh</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Value can only be <code class="prettyprint">wait_for</code> if provided. See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-refresh.html">Elasticsearch documentation</a> for more information.</td>
+</tr>
 </tbody></table>
 
 <p><strong>Returns</strong></p>
@@ -1837,6 +2057,27 @@ contains an array of <code class="prettyprint">Object</code> or <code class="pre
 <td><code class="prettyprint">document</code></td>
 <td><code class="prettyprint">object</code></td>
 <td>The partial content of the document. It must contain a unique <code class="prettyprint">_id</code> string property.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td><code class="prettyprint">Object</code></td>
+<td>Optional arguments</td>
+</tr>
+</tbody></table>
+
+<p>If a raw <code class="prettyprint">options</code> object is provided, it may contain:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">refresh</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Value can only be <code class="prettyprint">wait_for</code> if provided. See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/docs-refresh.html">Elasticsearch documentation</a> for more information.</td>
 </tr>
 </tbody></table>
 

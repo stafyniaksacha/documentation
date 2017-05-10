@@ -20181,7 +20181,7 @@ That means that a profile that was just been created will not be returned by <co
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">\Kuzzle\Security\User</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 <span class="nv">$userDefinition</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="p">[</span>
       <span class="c1">// A "profile" field is required to bind a user to an existing profile
@@ -20203,7 +20203,7 @@ That means that a profile that was just been created will not be returned by <co
 <span class="nv">$security</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">();</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">createUser</span><span class="p">(</span><span class="nv">$userId</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
+  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">createUser</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
 
   <span class="c1">// $user instanceof User
 </span><span class="p">}</span>
@@ -20340,7 +20340,7 @@ That means that a user that was just been created will not be returned by <code>
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">\Kuzzle\Security\User</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 <span class="nv">$userDefinition</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="p">],</span>
@@ -20357,7 +20357,7 @@ That means that a user that was just been created will not be returned by <code>
 <span class="nv">$security</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">();</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">createRestrictedUser</span><span class="p">(</span><span class="nv">$userId</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
+  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">createRestrictedUser</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
 
   <span class="c1">// $user instanceof User
 </span><span class="p">}</span>
@@ -20673,12 +20673,12 @@ That means that a role that was just been delete will be returned by <code>searc
 
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">deleteUser</span><span class="p">(</span><span class="nv">$userId</span><span class="p">);</span>
+  <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">deleteUser</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
 
@@ -20979,12 +20979,12 @@ That means that a user that has just been delete will be returned by <code>searc
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">\Kuzzle\Security\User</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">fetchUser</span><span class="p">(</span><span class="nv">$userId</span><span class="p">);</span>
+  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">fetchUser</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">);</span>
 
   <span class="c1">// $user instanceof User
 </span><span class="p">}</span>
@@ -21078,12 +21078,12 @@ That means that a user that has just been delete will be returned by <code>searc
 
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$rights</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getUserRights</span><span class="p">(</span><span class="nv">$userId</span><span class="p">);</span>
+  <span class="nv">$rights</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getUserRights</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">);</span>
 
 <span class="p">}</span>
 <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
@@ -22281,7 +22281,7 @@ You can get the rights from Kuzzle by using <a href="#getUserRights">`Security.g
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">\Kuzzle\Security\User</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 <span class="nv">$userDefinition</span> <span class="o">=</span> <span class="p">[</span>
   <span class="s1">'firstname'</span> <span class="o">=&gt;</span> <span class="s1">'My Name Is'</span><span class="p">,</span>
   <span class="s1">'lastname'</span> <span class="o">=&gt;</span> <span class="s1">'Jonas'</span>
@@ -22291,7 +22291,7 @@ You can get the rights from Kuzzle by using <a href="#getUserRights">`Security.g
 <span class="nv">$security</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">();</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">updateUser</span><span class="p">(</span><span class="nv">$userId</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
+  <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">updateUser</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
 
   <span class="c1">// $user instanceof User
 </span><span class="p">}</span>
@@ -22383,14 +22383,14 @@ You can get the rights from Kuzzle by using <a href="#getUserRights">`Security.g
     <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"firstname"</span><span class="o">,</span> <span class="s">"John"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastname"</span><span class="o">,</span> <span class="s">"Doe"</span><span class="o">);</span>
 
-<span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">kuzzle</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">user</span><span class="o">(</span><span class="s">"userId"</span><span class="o">,</span> <span class="n">userContent</span><span class="o">);</span>  
+<span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">kuzzle</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">user</span><span class="o">(</span><span class="s">"&lt;kuid&gt;"</span><span class="o">,</span> <span class="n">userContent</span><span class="o">);</span>  
 </code></pre>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">\Kuzzle\Security\User</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 <span class="nv">$userDefinition</span> <span class="o">=</span> <span class="p">[</span>
   <span class="c1">// A "profileIds" field is required to bind a user to an existing profile
 </span>  <span class="s1">'profileIds'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'myProfile'</span><span class="p">],</span>
@@ -22403,7 +22403,7 @@ You can get the rights from Kuzzle by using <a href="#getUserRights">`Security.g
 <span class="nv">$kuzzle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kuzzle</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">);</span>
 <span class="nv">$security</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">();</span>
 
-<span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="nv">$userId</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
 <span class="c1">// $user instanceof User
 </span></code></pre>
 
@@ -23640,7 +23640,7 @@ Updating a profile will have no impact until the <code>save</code> method is cal
 <span class="k">use</span> <span class="nx">\Kuzzle\Kuzzle</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">\Kuzzle\Security\User</span><span class="p">;</span>
 
-<span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
+<span class="nv">$kuid</span> <span class="o">=</span> <span class="s1">'myUser'</span><span class="p">;</span>
 <span class="nv">$userDefinition</span> <span class="o">=</span> <span class="p">[</span>
   <span class="c1">// A "profileIds" field is required to bind a user to an existing profile
 </span>  <span class="s1">'profileIds'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'myProfile'</span><span class="p">],</span>
@@ -23654,10 +23654,10 @@ Updating a profile will have no impact until the <code>save</code> method is cal
 <span class="nv">$security</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">security</span><span class="p">();</span>
 
 <span class="c1">// Using the Security factory
-</span><span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="nv">$userId</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
+</span><span class="nv">$user</span> <span class="o">=</span> <span class="nv">$security</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="nv">$kuid</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
 
 <span class="c1">// Or directly with the constructor:
-</span><span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nv">$security</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
+</span><span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nv">$security</span><span class="p">,</span> <span class="nv">$kuid</span><span class="p">,</span> <span class="nv">$userDefinition</span><span class="p">);</span>
 </code></pre>
 
 <p>Instantiates a new User object.</p>
