@@ -2796,29 +2796,6 @@ Different log level are provided, and lower priority levels may be ignored depen
 </tr>
 </tbody></table>
 
-<h2 id="index">index</h2>
-
-<p>Events triggered when a request is treated in the <a href="/api-reference/#index-controller"><code class="prettyprint">index</code> controller</a>.</p>
-
-<table><thead>
-<tr>
-<th>Event</th>
-<th>Description</th>
-<th>Payload</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">index:after&lt;Action&gt;</code></td>
-<td>All actions in <code class="prettyprint">index</code> controller trigger an event after executing</td>
-<td>Type: Request</td>
-</tr>
-<tr>
-<td><code class="prettyprint">index:before&lt;Action&gt;</code></td>
-<td>All actions in <code class="prettyprint">index</code> controller trigger an event before executing</td>
-<td>Type: Request</td>
-</tr>
-</tbody></table>
-
 <h2 id="document">document</h2>
 
 <p>Events triggered when a request is treated in the <a href="/api-reference/#document-controller"><code class="prettyprint">document</code> controller</a>.</p>
@@ -2858,6 +2835,29 @@ Different log level are provided, and lower priority levels may be ignored depen
 </tr>
 </tbody></table>
 
+<h2 id="index">index</h2>
+
+<p>Events triggered when a request is treated in the <a href="/api-reference/#index-controller"><code class="prettyprint">index</code> controller</a>.</p>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">index:after&lt;Action&gt;</code></td>
+<td>All actions in <code class="prettyprint">index</code> controller trigger an event after executing</td>
+<td>Type: Request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">index:before&lt;Action&gt;</code></td>
+<td>All actions in <code class="prettyprint">index</code> controller trigger an event before executing</td>
+<td>Type: Request</td>
+</tr>
+</tbody></table>
+
 <h2 id="internalbroker">internalBroker</h2>
 
 <aside class="warning">Internal use only</aside>
@@ -2890,6 +2890,51 @@ Different log level are provided, and lower priority levels may be ignored depen
 <td><code class="prettyprint">internalBroker:socketClosed</code></td>
 <td>Triggered when the socket is closed</td>
 <td>Type: Number <br> code</td>
+</tr>
+</tbody></table>
+
+<h2 id="log">log</h2>
+
+<p>Events triggered by Kuzzle to log messages or events. These events are <strong>read-only</strong> and only hooks can be plugged on these.</p>
+
+<p>Each log event has an associated log level and, depending on the minimum log level in the Kuzzle configuration file, some of these events may never be triggered.</p>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">log:error</code></td>
+<td>Log level 0</td>
+<td>Type: String</td>
+</tr>
+<tr>
+<td><code class="prettyprint">log:warn</code></td>
+<td>Log level 1</td>
+<td>Type: String</td>
+</tr>
+<tr>
+<td><code class="prettyprint">log:info</code></td>
+<td>Log level 2</td>
+<td>Type: String</td>
+</tr>
+<tr>
+<td><code class="prettyprint">log:verbose</code></td>
+<td>Log level 3</td>
+<td>Type: String</td>
+</tr>
+<tr>
+<td><code class="prettyprint">log:debug</code></td>
+<td>Log level 4</td>
+<td>Type: String</td>
+</tr>
+<tr>
+<td><code class="prettyprint">log:silly</code></td>
+<td>Log level 5</td>
+<td>Type: String</td>
 </tr>
 </tbody></table>
 
