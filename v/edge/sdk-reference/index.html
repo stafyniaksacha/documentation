@@ -134,6 +134,221 @@
 <li><a href="https://github.com/kuzzleio/sdk-php">PHP</a></li>
 </ul>
 
+            <h1 id="essentials">Essentials</h1>
+
+<h2 id="offline-first">Offline first</h2>
+
+<p>Working with an unstable network connection implies to handle what an application should be doing while being offline.<br>
+Our goal is to provide our users with the right tools to handle such situations.</p>
+
+<h3 id="handling-a-network-disconnection">Handling a network disconnection</h3>
+
+<p>There are two ways to handle a network disconnection:</p>
+
+<ul>
+<li>Stop all further communication with Kuzzle and invalidate the current instance and all its children. The application will have to manually instantiate a new Kuzzle object once the network has recovered. To do so, simply pass the <code class="prettyprint">autoReconnect</code> option to <code class="prettyprint">false</code> when starting a new Kuzzle instance.</li>
+<li>Reconnect automatically to Kuzzle when possible, and enter <em>offline mode</em> in the meantime. This is the default behavior.</li>
+</ul>
+
+<p>Offline mode simply refers to the time between a <code class="prettyprint">disconnected</code> and a <code class="prettyprint">reconnected</code> event (see <a href="#events">Events</a>).</p>
+
+<h3 id="subscriptions">Subscriptions</h3>
+
+<p>A subscription is a permanent pipe opened between a SDK instance and a Kuzzle server, with a set of filters. Whenever a real-time message or a modified document match these subscription filters, a push notification is sent by Kuzzle to this SDK (for instance, see the <a href="#subscribe">Collection.subscribe</a> method).</p>
+
+<p>During offline mode, all subscriptions configurations are kept indefinitely, with no maximum subscriptions retained.</p>
+
+<p>By default, upon reconnection, all subscription are renewed. This behavior can be changed by setting the <code class="prettyprint">autoResubscribe</code> to <code class="prettyprint">false</code>. In that case, each subscription must be renewed manually using the <code class="prettyprint">Room.renew</code> method.</p>
+
+<h3 id="api-requests">API requests</h3>
+
+<p>Requests can be queued while being offline, to be replayed once the network connection has been reestablished.<br>
+By default, there is no request queuing.</p>
+
+<p>You can:</p>
+
+<ul>
+<li>Queue all requests automatically when going offline by setting the <code class="prettyprint">autoQueue</code> option to <code class="prettyprint">true</code> (see <a href="#constructors">Kuzzle constructor</a>)</li>
+<li>Start and stop queuing manually, by using the <a href="#startqueuing">startQueuing</a> and <a href="#stopqueuing">stopQueuing</a> methods</li>
+</ul>
+
+<p>The queue itself can be configured using the <code class="prettyprint">queueTTL</code> and <code class="prettyprint">queueMaxSize</code> options.</p>
+
+<h4 id="filtering-requests-to-be-queued">Filtering requests to be queued</h4>
+
+<p>After request queuing is activated, by default, all requests are queued.</p>
+
+<p>You can decide to filter some of these requests with the <a href="#properties"><code class="prettyprint">queueFilter</code> property</a>. This property must be set with a function taking the request to be queued as an argument, and it must return a boolean telling the Kuzzle SDK if the request can be queued or not.</p>
+
+<p>Additionally, almost all request methods accept a <code class="prettyprint">queuable</code> option. If set to <code class="prettyprint">false</code>, the request will be discarded if the SDK is disconnected, and it will be played immediately with no queuing otherwise. This option bypasses the <code class="prettyprint">queueFilter</code> property.</p>
+
+<h3 id="handling-network-reconnection">Handling network reconnection</h3>
+
+<aside class="warning">
+Setting <code>autoReplay</code> to <code>true</code> when using user authentication should generally be avoided.<br/>
+When leaving offline-mode, the JWT Token validity is verified. If it has expired, the token will be removed and a <code>jwtTokenExpired</code> event will be triggered.<br/>
+If <code>autoReplay</code> is set, then all pending requests will be automatically played as an anonymous user.
+</aside>
+
+<p>Once a <code class="prettyprint">reconnected</code> event is fired, you may replay the content of the queue with the <code class="prettyprint">replayQueue</code> method. Or you can let the SDK replay it automatically upon reconnection, by setting the <code class="prettyprint">autoReplay</code> option to <code class="prettyprint">true</code>.  </p>
+
+<p>Requests are sent to Kuzzle with the <code class="prettyprint">replayInterval</code> delay between each one of them.</p>
+
+<p>Requests submitted while replaying the queue are delayed until the queue is empty, to ensure all requests are played in the right order.</p>
+
+<h3 id="taking-control-of-the-offline-queue">Taking control of the offline queue</h3>
+
+<p>You can be notified about what&rsquo;s going on about the offline queue, with the <a href="#events"><code class="prettyprint">offlineQueuePush</code> and the <code class="prettyprint">offlineQueuePop</code> events</a>).  </p>
+
+<p>The <code class="prettyprint">offlineQueuePush</code> event is fired whenever a request is queued. It provides to its listeners an object containing a <code class="prettyprint">query</code> property, describing the queued request, and an optional <code class="prettyprint">cb</code> property containing the corresponding callback, if any.</p>
+
+<p>The <code class="prettyprint">offlineQueuePop</code> event is fired whenever a request has been removed from the queue, either because the queue limits have been reached, or because the request has been replayed. It provides the removed request to its listeners.</p>
+
+<p>The <code class="prettyprint">offlineQueueLoader</code> property of the Kuzzle main object allows loading requests to the queue, <strong>before any previously queued request</strong>. It is invoked every time the SDK starts dequeuing requests.<br>
+This property must be set with a function returning an array of objects with the following accessible properties:</p>
+
+<ul>
+<li>a <code class="prettyprint">query</code> property, containing the request to be replayed</li>
+<li>an optional <code class="prettyprint">cb</code> property pointing to the callback to invoke after the completion of the request</li>
+</ul>
+
+<p>Finally, if the provided methods don&rsquo;t give you enough control over the offline queue, you can access and edit the queue directly using the <code class="prettyprint">offlineQueue</code> property.</p>
+
+<h3 id="automatic-offline-mode">Automatic offline-mode</h3>
+
+<p>You can set the <code class="prettyprint">offlineMode</code> option to <code class="prettyprint">auto</code> when instantiating the <a href="#kuzzle">Kuzzle object</a>. This configures the offline mode behavior with the following options:</p>
+
+<ul>
+<li><code class="prettyprint">autoReconnect</code> = <code class="prettyprint">true</code></li>
+<li><code class="prettyprint">autoQueue</code> = <code class="prettyprint">true</code></li>
+<li><code class="prettyprint">autoReplay</code> = <code class="prettyprint">true</code></li>
+<li><code class="prettyprint">autoResubscribe</code> = <code class="prettyprint">true</code></li>
+</ul>
+
+<h2 id="events">Events</h2>
+
+<p>The <a href="#kuzzle">Kuzzle object</a> exposes a set of events triggered on some cases. To subscribe or unsubscribe on these events, simply plug a callback function to the event you want to listen, using the functions <a href="#addlistener">addListener</a> and <a href="#removelistener">removeListener</a>.</p>
+
+<p>Here is the list of exposed events:</p>
+
+<table><thead>
+<tr>
+<th>Event Name</th>
+<th>Callback arguments</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">connected</code></td>
+<td><em>(none)</em></td>
+<td>Triggered when the SDK has successfully connected to Kuzzle</td>
+</tr>
+<tr>
+<td><code class="prettyprint">discarded</code></td>
+<td><code class="prettyprint">error</code> (object)</td>
+<td>Triggered when Kuzzle rejects a request (e.g. request can&rsquo;t be parsed, request too large, &hellip;)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">disconnected</code></td>
+<td><em>(none)</em></td>
+<td>Triggered when the current session has been unexpectedly disconnected</td>
+</tr>
+<tr>
+<td><code class="prettyprint">error</code></td>
+<td><code class="prettyprint">error</code> (object)</td>
+<td>Triggered when the SDK has failed to connect to Kuzzle. Does not trigger offline mode.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">jwtTokenExpired</code></td>
+<td><em>(none)</em></td>
+<td>Triggered when Kuzzle rejected a request because the authentication token expired</td>
+</tr>
+<tr>
+<td><code class="prettyprint">loginAttempt</code></td>
+<td><code class="prettyprint">{ &quot;success&quot;: &lt;boolean&gt;, &quot;error&quot;: &quot;&lt;error message&gt;&quot; }</code></td>
+<td>Triggered when a login attempt completes, either with a success or a failure result</td>
+</tr>
+<tr>
+<td><code class="prettyprint">offlineQueuePop</code></td>
+<td><code class="prettyprint">query</code> (object)</td>
+<td>Triggered whenever a request is removed from the offline queue.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">offlineQueuePush</code></td>
+<td><code class="prettyprint">{ &quot;query&quot;: &lt;object&gt;, &quot;cb&quot;: &lt;function&gt; }</code></td>
+<td>Triggered whenever a request is added to the offline queue</td>
+</tr>
+<tr>
+<td><code class="prettyprint">queryError</code></td>
+<td><code class="prettyprint">error</code> (object), <code class="prettyprint">query</code> (object)</td>
+<td>Triggered whenever Kuzzle responds with an error</td>
+</tr>
+<tr>
+<td><code class="prettyprint">reconnected</code></td>
+<td><em>(none)</em></td>
+<td>Triggered when the current session has reconnected to Kuzzle after a disconnection, and only if <code class="prettyprint">autoReconnect</code> is set to <code class="prettyprint">true</code></td>
+</tr>
+</tbody></table>
+
+<p><strong>Note:</strong> listeners are called in the order of their insertion.</p>
+
+<h2 id="handling-errors">Handling errors</h2>
+<pre class="highlight javascript"><code><span class="c1">// Any API request method behave the same way</span>
+
+<span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
+<span class="nx">kuzzle</span><span class="p">.</span><span class="nx">checkToken</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span> <span class="s1">': '</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Using promises (NodeJS only)</span>
+<span class="nx">kuzzle</span><span class="p">.</span><span class="nx">checkTokenPromise</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span> <span class="s1">': '</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">kuzzle</span><span class="o">.</span><span class="na">checkToken</span><span class="o">(</span><span class="s">"some jwt token"</span><span class="o">,</span> <span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">TokenValidity</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">TokenValidity</span> <span class="n">tokenInfo</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">tokenInfo</span><span class="o">.</span><span class="na">isValid</span><span class="o">())</span> <span class="o">{</span>
+      <span class="c1">// tokenInfo.getExpiresAt() returns the expiration timestamp</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+      <span class="c1">// tokenInfo.getState() returns the invalidity reason</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onError</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="err">'</span><span class="n">status</span><span class="err">'</span><span class="o">)</span> <span class="o">+</span> <span class="err">'</span><span class="o">:</span> <span class="err">'</span> <span class="o">+</span> <span class="n">error</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="err">'</span><span class="n">message</span><span class="err">'</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$kuzzle</span><span class="o">-&gt;</span><span class="na">checkToken</span><span class="p">(</span><span class="s1">'some jwt token'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">status</span> <span class="o">.</span> <span class="s1">': '</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>All methods taking a callback as an argument may return an error, either directly from the SDK, or as a response from Kuzzle.</p>
+
+<p>All errors returned that way are JSON objects containing the following properties:</p>
+
+<ul>
+<li><code class="prettyprint">message</code>: the error message</li>
+<li><code class="prettyprint">status</code>: an error code following the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP standard</a></li>
+</ul>
+
             <h1 id="kuzzle">Kuzzle</h1>
 
 <p>This is the main entry point to communicate with Kuzzle. Every other objects inherits properties from this one.</p>
@@ -434,153 +649,6 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <li>the <code class="prettyprint">offlineQueueLoader</code> must be set with a function, taking no argument, and returning an array of objects containing a <code class="prettyprint">query</code> member with a Kuzzle query to be replayed, and an optional <code class="prettyprint">cb</code> member with the corresponding callback to invoke with the query result</li>
 <li>updates to <code class="prettyprint">host</code>, <code class="prettyprint">port</code>, <code class="prettyprint">autoReconnect</code>, <code class="prettyprint">reconnectionDelay</code> and <code class="prettyprint">sslConnection</code> properties will only take effect on next <code class="prettyprint">connect</code> call</li>
 </ul>
-
-<h2 id="offline-mode">Offline mode</h2>
-
-<p>Working with an unstable network connection implies to handle what an application should be doing while being offline.<br>
-Our goal is to provide our users with the right tools to handle such situations.</p>
-
-<p><strong>There are two ways to handle a network disconnection</strong></p>
-
-<ul>
-<li>Stop all further communication with Kuzzle and invalidate the current instance and all its children. The application will have to manually instantiate a new Kuzzle object once the network has recovered. To do so, simply pass the <code class="prettyprint">autoReconnect</code> option to <code class="prettyprint">false</code> when starting a new Kuzzle instance.</li>
-<li>Reconnect automatically to Kuzzle when possible, and enter <em>offline mode</em>. This is the default behavior.</li>
-</ul>
-
-<p>Offline mode simply refers to the time between a <code class="prettyprint">disconnected</code> and a <code class="prettyprint">reconnected</code> event.</p>
-
-<p><strong>Handling subscriptions</strong></p>
-
-<p>During offline mode, all subscriptions are kept indefinitely, with no maximum subscriptions retained.</p>
-
-<p>By default, upon reconnection, all subscription are renewed. This behavior can be changed by setting the <code class="prettyprint">autoResubscribe</code> to <code class="prettyprint">false</code>. In that case, each subscription must be renewed manually using the <code class="prettyprint">Room.renew</code> method.</p>
-
-<p><strong>Queuing requests while offline</strong></p>
-
-<p>Requests can be queued while being offline, to be replayed once the network connection has been reestablished.<br>
-By default, there is no request queuing.</p>
-
-<p>You can:</p>
-
-<ul>
-<li>Queue all requests automatically when going offline by setting the <code class="prettyprint">autoQueue</code> option to <code class="prettyprint">true</code></li>
-<li>Start and stop queuing manually, by using the <code class="prettyprint">startQueuing</code> and <code class="prettyprint">stopQueuing</code> methods</li>
-</ul>
-
-<p>The queue itself can be configured using the <code class="prettyprint">queueTTL</code> and <code class="prettyprint">queueMaxSize</code> options.</p>
-
-<p><strong>Filter requests to be queued</strong></p>
-
-<p>After request queuing is activated, by default, all requests are queued.</p>
-
-<p>You can decide to filter some of these requests with the <code class="prettyprint">queueFilter</code> property. This property must be set with a function taking the request to be queued as an argument, and it must return a boolean telling the Kuzzle SDK if the request can be queued or not.</p>
-
-<p>Additionally, almost all methods accept a <code class="prettyprint">queuable</code> option. If set to <code class="prettyprint">false</code>, the request will be discarded if the SDK is disconnected, and it will be played immediately with no queuing otherwise. This option bypasses the <code class="prettyprint">queueFilter</code> property.</p>
-
-<p><strong>Handling network reconnection</strong></p>
-
-<p>Once a <code class="prettyprint">reconnected</code> event is fired, you may replay the content of the queue with the <code class="prettyprint">replayQueue</code> method. Or you can let the SDK replay it automatically upon reconnection, by setting the <code class="prettyprint">autoReplay</code> option to <code class="prettyprint">true</code>.  </p>
-
-<p>Requests are sent to Kuzzle with the <code class="prettyprint">replayInterval</code> delay between each one of them.</p>
-
-<p>Requests submitted while replaying the queue are delayed until the queue is empty, to ensure all requests are played in the right order.</p>
-
-<aside class="warning">
-Setting <code>autoReplay</code> to <code>true</code> when using user authentication should generally be avoided.<br/>
-When leaving offline-mode, the JWT Token validity is verified. If it has expired, the token will be removed and a <code>jwtTokenExpired</code> event will be fired.<br/>
-If <code>autoReplay</code> is set, then all pending requests will be automatically played as an anonymous user.
-</aside>
-
-<p><strong>Taking control of the offline queue</strong></p>
-
-<p>You can be notified about what&rsquo;s going on about the offline queue, with the <code class="prettyprint">offlineQueuePush</code> and the <code class="prettyprint">offlineQueuePop</code> events.  </p>
-
-<p>The <code class="prettyprint">offlineQueuePush</code> event is fired whenever a request is queued. It provides to its listeners an object containing a <code class="prettyprint">query</code> property, describing the queued request, and an optional <code class="prettyprint">cb</code> property containing the corresponding callback, if any.</p>
-
-<p>The <code class="prettyprint">offlineQueuePop</code> event is fired whenever a request has been removed from the queue, either because the queue limits have been reached, or because the request has been replayed. It provides the removed request to its listeners.</p>
-
-<p>The <code class="prettyprint">offlineQueueLoader</code> property allows loading requests to the queue, <strong>before any previously queued request</strong>. It is invoked every time the SDK starts dequeuing requests.<br>
-This property must be set with a function returning an array of objects with the following accessible properties: a <code class="prettyprint">query</code> property, containing the request to be replayed, and an optional <code class="prettyprint">cb</code> property pointing to the callback to invoke after the completion of the request.</p>
-
-<p>Finally, if the provided methods don&rsquo;t give you enough control over the offline queue, you can access and edit the queue directly with the <code class="prettyprint">offlineQueue</code> property.</p>
-
-<p><strong>Automatic offline-mode</strong></p>
-
-<p>You can set the <code class="prettyprint">offlineMode</code> option to <code class="prettyprint">auto</code>. This configures the offline mode behavior with the following options:</p>
-
-<ul>
-<li><code class="prettyprint">autoReconnect</code> = <code class="prettyprint">true</code></li>
-<li><code class="prettyprint">autoQueue</code> = <code class="prettyprint">true</code></li>
-<li><code class="prettyprint">autoReplay</code> = <code class="prettyprint">true</code></li>
-<li><code class="prettyprint">autoResubscribe</code> = <code class="prettyprint">true</code></li>
-</ul>
-
-<h2 id="event-handling">Event Handling</h2>
-
-<p>The Kuzzle object listens to global events fired by Kuzzle. To subscribe or unsubscribe on these events, simply plug a callback function to the event you want to act upon, using the functions <code class="prettyprint">addListener</code> and <code class="prettyprint">removeListener</code>.</p>
-
-<p>Here is the list of these special events:</p>
-
-<table><thead>
-<tr>
-<th>Event Name</th>
-<th>Callback arguments</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">connected</code></td>
-<td><em>(none)</em></td>
-<td>Fired when the SDK has successfully connected to Kuzzle</td>
-</tr>
-<tr>
-<td><code class="prettyprint">discarded</code></td>
-<td><code class="prettyprint">error</code> (object)</td>
-<td>Fired when Kuzzle reject a request (e.g. request can&rsquo;t be parsed, request too large, &hellip;)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">disconnected</code></td>
-<td><em>(none)</em></td>
-<td>Fired when the current session has been unexpectedly disconnected</td>
-</tr>
-<tr>
-<td><code class="prettyprint">error</code></td>
-<td><code class="prettyprint">error</code> (object)</td>
-<td>Fired when the SDK has failed to connect to Kuzzle. Does not trigger offline mode.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">jwtTokenExpired</code></td>
-<td><em>(none)</em></td>
-<td>Fired when Kuzzle rejected a request because the authentication token expired</td>
-</tr>
-<tr>
-<td><code class="prettyprint">loginAttempt</code></td>
-<td><code class="prettyprint">{ &quot;success&quot;: &lt;boolean&gt;, &quot;error&quot;: &quot;&lt;error message&gt;&quot; }</code></td>
-<td>Fired when a login attempt completes, either with a success or a failure result</td>
-</tr>
-<tr>
-<td><code class="prettyprint">offlineQueuePop</code></td>
-<td><code class="prettyprint">query</code> (object)</td>
-<td>Fired whenever a request is removed from the offline queue.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">offlineQueuePush</code></td>
-<td><code class="prettyprint">{ &quot;query&quot;: &lt;object&gt;, &quot;cb&quot;: &lt;function&gt; }</code></td>
-<td>Fired whenever a request is added to the offline queue</td>
-</tr>
-<tr>
-<td><code class="prettyprint">queryError</code></td>
-<td><code class="prettyprint">error</code> (object), <code class="prettyprint">query</code> (object)</td>
-<td>Fired whenever Kuzzle responds with an error</td>
-</tr>
-<tr>
-<td><code class="prettyprint">reconnected</code></td>
-<td><em>(none)</em></td>
-<td>Fired when the current session has reconnected to Kuzzle after a disconnection, and only if <code class="prettyprint">autoReconnect</code> is set to <code class="prettyprint">true</code></td>
-</tr>
-</tbody></table>
-
-<p><strong>Note:</strong> listeners are called in the order of their insertion.</p>
 
 <h2 id="addlistener">addListener</h2>
 <pre class="highlight javascript"><code>  <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
