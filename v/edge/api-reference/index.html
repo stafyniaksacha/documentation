@@ -14605,85 +14605,75 @@ By default, snapshots are made every 10s.</p>
           <span class="s">"routes"</span><span class="o">:</span> <span class="p">{</span>
             <span class="s">"controller1"</span><span class="o">:</span> <span class="p">{</span>
               <span class="s">"action1"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"method"</span><span class="o">:</span> <span class="s">"get"</span><span class="p">,</span>
-                <span class="s">"name"</span><span class="o">:</span> <span class="s">"action1"</span><span class="p">,</span>
-                <span class="s">"route"</span><span class="o">:</span> <span class="s">"..."</span>
+                <span class="s">"controller"</span><span class="o">:</span> <span class="s">"controller1"</span><span class="p">,</span>
+                <span class="s">"action"</span><span class="o">:</span> <span class="s">"action1"</span><span class="p">,</span>
+                <span class="s">"http"</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s">"verb"</span><span class="o">:</span> <span class="s">"GET"</span><span class="p">,</span>
+                  <span class="s">"url"</span><span class="o">:</span> <span class="s">"/action1/url"</span>
+                <span class="p">}</span>
               <span class="p">},</span>
               <span class="s">"action2"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"method"</span><span class="o">:</span> <span class="s">"post"</span><span class="p">,</span>
-                <span class="s">"name"</span><span class="o">:</span> <span class="s">"action2"</span><span class="p">,</span>
-                <span class="s">"route"</span><span class="o">:</span> <span class="s">"..."</span>
+                <span class="s">"controller"</span><span class="o">:</span> <span class="s">"controller1"</span><span class="p">,</span>
+                <span class="s">"action"</span><span class="o">:</span> <span class="s">"action2"</span><span class="p">,</span>
+                <span class="s">"http"</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s">"verb"</span><span class="o">:</span> <span class="s">"POST"</span><span class="p">,</span>
+                  <span class="s">"url"</span><span class="o">:</span> <span class="s">"/action2/url"</span>
+                <span class="p">}</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s">"etc..."</span><span class="o">:</span> <span class="s">"etc ..."</span>
+                <span class="s">"..."</span><span class="o">:</span> <span class="s">"..."</span>
               <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s">"controller2"</span><span class="o">:</span> <span class="p">{</span>
-              <span class="s">"action1"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"method"</span><span class="o">:</span> <span class="s">"get"</span><span class="p">,</span>
-                <span class="s">"name"</span><span class="o">:</span> <span class="s">"action1"</span><span class="p">,</span>
-                <span class="s">"route"</span><span class="o">:</span> <span class="s">"..."</span>
-              <span class="p">},</span>
-              <span class="s">"action2"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"method"</span><span class="o">:</span> <span class="s">"post"</span><span class="p">,</span>
-                <span class="s">"name"</span><span class="o">:</span> <span class="s">"action2"</span><span class="p">,</span>
-                <span class="s">"route"</span><span class="o">:</span> <span class="s">"..."</span>
+            <span class="s">"pluginName/controller"</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s">"action"</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s">"controller"</span><span class="o">:</span> <span class="s">"pluginName/controller"</span><span class="p">,</span>
+                <span class="s">"action"</span><span class="o">:</span> <span class="s">"action"</span><span class="p">,</span>
+                <span class="s">"http"</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s">"verb"</span><span class="o">:</span> <span class="s">"GET"</span><span class="p">,</span>
+                  <span class="s">"url"</span><span class="o">:</span> <span class="s">"/action/url"</span>
+                <span class="p">}</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s">"etc..."</span><span class="o">:</span> <span class="s">"etc ..."</span>
+                <span class="s">"..."</span><span class="o">:</span> <span class="s">" ..."</span>
               <span class="p">}</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s">"etc..."</span><span class="o">:</span> <span class="s">"etc ..."</span>
+              <span class="s">"..."</span><span class="o">:</span> <span class="s">"..."</span>
             <span class="p">}</span>
           <span class="p">},</span>
-          <span class="s">"version"</span><span class="o">:</span> <span class="s">"1.0"</span>
+          <span class="s">"version"</span><span class="o">:</span> <span class="s">"&lt;API version&gt;"</span>
         <span class="p">},</span>
-        <span class="s">"memoryUsed"</span><span class="o">:</span> <span class="mi">82747392</span><span class="p">,</span>
-        <span class="s">"nodeVersion"</span><span class="o">:</span> <span class="s">"v4.4.3"</span><span class="p">,</span>
+        <span class="s">"memoryUsed"</span><span class="o">:</span> <span class="mi">12345</span><span class="p">,</span>
+        <span class="s">"nodeVersion"</span><span class="o">:</span> <span class="s">"v6.9.5"</span><span class="p">,</span>
         <span class="s">"plugins"</span><span class="o">:</span> <span class="p">{},</span>
         <span class="s">"system"</span><span class="o">:</span> <span class="p">{</span>
           <span class="s">"cpus"</span><span class="o">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s">"model"</span><span class="o">:</span> <span class="s">"Intel(R) Core(TM) i5-4670 CPU @ 3.40GHz"</span><span class="p">,</span>
-              <span class="s">"speed"</span><span class="o">:</span> <span class="mi">2700</span><span class="p">,</span>
-              <span class="s">"times"</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s">"idle"</span><span class="o">:</span> <span class="mi">19767912700</span><span class="p">,</span>
-                <span class="s">"irq"</span><span class="o">:</span> <span class="mi">73805400</span><span class="p">,</span>
-                <span class="s">"nice"</span><span class="o">:</span> <span class="mi">66474700</span><span class="p">,</span>
-                <span class="s">"sys"</span><span class="o">:</span> <span class="mi">588744200</span><span class="p">,</span>
-                <span class="s">"user"</span><span class="o">:</span> <span class="mi">1733754000</span>
-              <span class="p">}</span>
+              <span class="s">"cpu1"</span><span class="o">:</span> <span class="s">"informations"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s">"etc..."</span><span class="o">:</span> <span class="s">"etc ..."</span>
+              <span class="s">"..."</span><span class="o">:</span> <span class="s">"..."</span>
             <span class="p">}</span>
           <span class="p">],</span>
           <span class="s">"memory"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s">"free"</span><span class="o">:</span> <span class="mi">1157988352</span><span class="p">,</span>
-            <span class="s">"total"</span><span class="o">:</span> <span class="mi">16768524288</span>
+            <span class="s">"free"</span><span class="o">:</span> <span class="mi">123456</span><span class="p">,</span>
+            <span class="s">"total"</span><span class="o">:</span> <span class="mi">1234567</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s">"uptime"</span><span class="o">:</span> <span class="s">"349.923s"</span><span class="p">,</span>
-        <span class="s">"version"</span><span class="o">:</span> <span class="s">"1.0.0-RC4"</span>
+        <span class="s">"uptime"</span><span class="o">:</span> <span class="s">"&lt;uptime, in seconds&gt;"</span><span class="p">,</span>
+        <span class="s">"version"</span><span class="o">:</span> <span class="s">"&lt;kuzzle version&gt;"</span>
       <span class="p">},</span>
       <span class="s">"services"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s">"internalCache"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"memoryPeak"</span><span class="o">:</span> <span class="s">"1.06M"</span><span class="p">,</span>
-          <span class="s">"memoryUsed"</span><span class="o">:</span> <span class="s">"978.63K"</span><span class="p">,</span>
-          <span class="s">"mode"</span><span class="o">:</span> <span class="s">"standalone"</span><span class="p">,</span>
-          <span class="s">"type"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
-          <span class="s">"version"</span><span class="o">:</span> <span class="s">"3.0.7"</span>
+          <span class="s">"kuzzle memory cache"</span><span class="o">:</span> <span class="s">"informations"</span><span class="p">,</span>
+          <span class="s">"..."</span><span class="o">:</span> <span class="s">"..."</span>
         <span class="p">},</span>
         <span class="s">"memoryStorage"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s">"memoryPeak"</span><span class="o">:</span> <span class="s">"1.06M"</span><span class="p">,</span>
-          <span class="s">"memoryUsed"</span><span class="o">:</span> <span class="s">"1014.62K"</span><span class="p">,</span>
-          <span class="s">"mode"</span><span class="o">:</span> <span class="s">"standalone"</span><span class="p">,</span>
-          <span class="s">"type"</span><span class="o">:</span> <span class="s">"redis"</span><span class="p">,</span>
-          <span class="s">"version"</span><span class="o">:</span> <span class="s">"3.0.7"</span>
+          <span class="s">"API memory storage"</span><span class="o">:</span> <span class="s">"informations"</span><span class="p">,</span>
+          <span class="s">"..."</span><span class="o">:</span> <span class="s">"..."</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s">"etc..."</span><span class="o">:</span> <span class="s">"etc ..."</span>
+          <span class="s">"..."</span><span class="o">:</span> <span class="s">"..."</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">}</span>
