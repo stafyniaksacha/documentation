@@ -112,17 +112,17 @@
 
 <p>The most common example is the &ldquo;e-mail field validation&rdquo;. Imagine you provide a registration form to your users to collect their name and e-mail. It&rsquo;s quite vital to you that the user provides a valid e-mail address.</p>
 
-<p>Instead of leaving you with the burden of coding this logic, Kuzzle natively provides a way to validate your data input against a validation schema. It enables you to define the set document fields to validate and provides you with <a href="/validation-reference/">an extended set of validation rules</a>.</p>
+<p>Instead of leaving you with the burden of coding this logic, Kuzzle natively provides a way to validate your data input against a validation schema. It enables you to define the set document fields to validate and provides you with <a href="../validation-reference/">an extended set of validation rules</a>.</p>
 
 <p>This way, every time Kuzzle receives a data input, it checks it against the validation schema and returns a <strong>standard error</strong> when the validation fails.</p>
 
-<p>You can specify the validation rules in the kuzzle <a href="/guide/#configuring-kuzzle">configuration file</a> in the <code class="prettyprint">validation</code> field.</p>
+<p>You can specify the validation rules in the kuzzle <a href="#configuring-kuzzle">configuration file</a> in the <code class="prettyprint">validation</code> field.</p>
 
-<p>You can take a look at the <a href="/validation-reference/">Kuzzle Data Validation Reference</a> for a straight dive, or keep reading for a smoother introduction.</p>
+<p>You can take a look at the <a href="../validation-reference/">Kuzzle Data Validation Reference</a> for a straight dive, or keep reading for a smoother introduction.</p>
 
 <h3 id="basic-validation">Basic validation</h3>
 
-<p>The place to specify your validation schema is the <code class="prettyprint">validation</code> field in your kuzzlerc file. A validation schema has a <a href="/validation-reference/#schema-structure">hierarchical structure</a>, where you specify a set of rules per collection.</p>
+<p>The place to specify your validation schema is the <code class="prettyprint">validation</code> field in your kuzzlerc file. A validation schema has a <a href="../validation-reference/#schema-structure">hierarchical structure</a>, where you specify a set of rules per collection.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"validation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"onlineshop"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -151,7 +151,7 @@
 <li>We specified the field <code class="prettyprint">productDescription</code> as of type <code class="prettyprint">String</code>, with a sorry-ish default value.</li>
 </ul>
 
-<p>Take a look at the <a href="/validation-reference/#fields">Validation Fields Reference</a> for a complete insight of all the available specifications.</p>
+<p>Take a look at the <a href="../validation-reference/#fields">Validation Fields Reference</a> for a complete insight of all the available specifications.</p>
 
 <h3 id="basic-validation-with-type-options">Basic validation with type options</h3>
 
@@ -181,12 +181,12 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>In the example above, we specified that the value of the field <code class="prettyprint">price</code> (of documents contained in the <code class="prettyprint">products</code> collection) must be greater than 0 (because we do not want to make an online shop that gives products away). We leveraged the <code class="prettyprint">typeOption range</code>, that you can look-up in the <a href="/validation-reference/#typeoptions">Data Validation Reference</a>.</p>
+<p>In the example above, we specified that the value of the field <code class="prettyprint">price</code> (of documents contained in the <code class="prettyprint">products</code> collection) must be greater than 0 (because we do not want to make an online shop that gives products away). We leveraged the <code class="prettyprint">typeOption range</code>, that you can look-up in the <a href="../validation-reference/#typeoptions">Data Validation Reference</a>.</p>
 
 <h3 id="complex-validation-via-the-dsl">Complex validation via the DSL</h3>
 
 <p>When the validation fields are not enough for your need, or you want conditional validation,
-you can switch gears and create a complex validation specification via the <a href="/real-time-filters/">filtering DSL</a>
+you can switch gears and create a complex validation specification via the <a href="../real-time-filters/">filtering DSL</a>
 (the same DSL used to create real-time subscriptions).
 The idea is pretty simple: you specify a filter that documents must match in order to be valid.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -239,9 +239,9 @@ The idea is pretty simple: you specify a filter that documents must match in ord
 </span></code></pre>
 
 <p>In the example above, we specified that at least one of the fields <code class="prettyprint">price</code> or <code class="prettyprint">vatPrice</code> must exist (because if the product has no price, we can&rsquo;t sell it).
-We leveraged the <code class="prettyprint">exists</code> term with the <code class="prettyprint">or</code> operand, that you can look-up in the <a href="/real-time-filters/#exists">Real-time filters Reference</a>.</p>
+We leveraged the <code class="prettyprint">exists</code> term with the <code class="prettyprint">or</code> operand, that you can look-up in the <a href="../real-time-filters/#exists">Real-time filters Reference</a>.</p>
 
-<p>You can take a look at the <a href="/validation-reference/">Kuzzle Data Validation Reference</a> for deeper insight.</p>
+<p>You can take a look at the <a href="../validation-reference/">Kuzzle Data Validation Reference</a> for deeper insight.</p>
 
         </div>
         <div class="dark-box">

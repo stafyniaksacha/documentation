@@ -642,7 +642,7 @@ If the <code class="prettyprint">connect</code> option is set to <code class="pr
 <li>if <code class="prettyprint">connect</code> is set to <code class="prettyprint">manual</code>, the <code class="prettyprint">connect</code> method will have to be called manually</li>
 <li>the kuzzle instance will automatically queue all requests, and play them automatically once a first connection is established, regardless of the <code class="prettyprint">connect</code> or offline mode option values.</li>
 <li>multiple methods allow passing specific <code class="prettyprint">volatile</code> data. These <code class="prettyprint">volatile</code> data will be merged with the global Kuzzle object <code class="prettyprint">volatile</code> when sending the request, with the request specific <code class="prettyprint">volatile</code> taking priority over the global ones.</li>
-<li>the <code class="prettyprint">queueFilter</code> property is a function taking a JSON object as an argument. This object is the request sent to Kuzzle, following the <a href="/api-reference/#query-syntax">Kuzzle API</a> format</li>
+<li>the <code class="prettyprint">queueFilter</code> property is a function taking a JSON object as an argument. This object is the request sent to Kuzzle, following the <a href="../api-reference/#query-syntax">Kuzzle API</a> format</li>
 <li>if <code class="prettyprint">queueTTL</code> is set to <code class="prettyprint">0</code>, requests are kept indefinitely</li>
 <li>The offline buffer acts like a FIFO queue, meaning that if the <code class="prettyprint">queueMaxSize</code> limit is reached, older requests are discarded to make room for new requests</li>
 <li>if <code class="prettyprint">queueMaxSize</code> is set to <code class="prettyprint">0</code>, an unlimited number of requests is kept until the buffer is flushed</li>
@@ -2353,7 +2353,7 @@ This is a low-level method, exposed to allow advanced SDK users to bypass high-l
 Check the Kuzzle API Reference available <a href="/api-reference">here</a>
 </aside>
 
-<p>Base method used to send queries to Kuzzle, following the <a href="/api-reference">API Reference</a></p>
+<p>Base method used to send queries to Kuzzle, following the <a href="../api-reference">API Reference</a></p>
 
 <h3 id="query-queryargs-query-options-callback">query(queryArgs, query, [options], [callback])</h3>
 
@@ -5022,7 +5022,7 @@ To subscribe to the entire data collection, simply provide an empty filter.
 <tr>
 <td><code class="prettyprint">filters</code></td>
 <td>JSON Object</td>
-<td><a href="/real-time-filters">Filters</a></td>
+<td><a href="../real-time-filters">Filters</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">options</code></td>
@@ -19491,7 +19491,7 @@ Unsubscribes first if this Room object was already listening to events.</p>
 <tr>
 <td><code class="prettyprint">filters</code></td>
 <td>JSON Object</td>
-<td><a href="/real-time-filters/">Filters</a></td>
+<td><a href="../real-time-filters/">Filters</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">notificationCallback</code></td>
@@ -19834,7 +19834,7 @@ Unsubscribes first if this Room object was already listening to events.</p>
 
 <p>The Security component lets you handle users permissions in Kuzzle.</p>
 
-<p>Please refer to our <a href="/guide/#permissions">Kuzzle permissions guide</a> for more information.</p>
+<p>Please refer to our <a href="../guide/#permissions">Kuzzle permissions guide</a> for more information.</p>
 
 <h2 id="constructors">Constructors</h2>
 <pre class="highlight javascript"><code><span class="cm">/*
@@ -21863,7 +21863,7 @@ You can get the rights from Kuzzle by using <a href="#getUserRights">`Security.g
 <tr>
 <td><code class="prettyprint">filters</code></td>
 <td>JSON Object</td>
-<td><a href="/real-time-filters/">Filters</a></td>
+<td><a href="../real-time-filters/">Filters</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">options</code></td>
@@ -23031,7 +23031,7 @@ Updating a role content will have no impact until the <code>save</code> method i
   </p>
 </aside>
 
-<p>To get more information on Kuzzle permissions, please refer to our <a href="/guide/#permissions">Kuzzle Permissions guide</a>.</p>
+<p>To get more information on Kuzzle permissions, please refer to our <a href="../guide/#permissions">Kuzzle Permissions guide</a>.</p>
 
 <h3 id="update-content-options-callback">update(content, [options], [callback])</h3>
 
