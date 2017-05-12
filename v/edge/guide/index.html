@@ -1809,10 +1809,12 @@ It is used to inform the client about the real status of his request (if an erro
 <p>Kuzzle ships with a <a href="https://en.wikipedia.org/wiki/Command-line_interface">Command line interface</a> which enables you to:</p>
 
 <ul>
-<li>start and stop Kuzzle Core,</li>
-<li>install and configure plugins,</li>
+<li>start a Kuzzle Core,</li>
+<li>shutdown a Kuzzle Core gracefully</li>
 <li>create the first administrator user,</li>
-<li>reset Kuzzle internal data <em>(use with caution !)</em>.</li>
+<li>reset Kuzzle internal data <em>(use with caution !)</em></li>
+<li>clear Kuzzle&rsquo;s cached data</li>
+<li>produce a diagnostic dump of a Kuzzle Core current state</li>
 </ul>
 
 <aside class="warning">
@@ -1825,12 +1827,12 @@ If you are running Kuzzle in a Docker container, you will have to <a href="https
 
   Commands:
 
-    createFirstAdmin          create the first administrator user
-    clearCache                clear internal caches <span class="k">in </span>Redis
-    plugins <span class="o">[</span>options] <span class="o">[</span>name]  manage plugins
-    reset <span class="o">[</span>options]           delete Kuzzle configuration and users from database
-    start <span class="o">[</span>options]           start a Kuzzle instance
-    dump                      create a dump of current state of Kuzzle
+    createFirstAdmin   create the first administrator user
+    clearCache         clear internal caches <span class="k">in </span>Redis
+    reset <span class="o">[</span>options]    delete Kuzzle configuration and users from database
+    shutdown           gracefully exits after processing remaining requests
+    start <span class="o">[</span>options]    start a Kuzzle instance
+    dump               create a dump of current state of kuzzle
 
   Options:
 
@@ -1838,7 +1840,6 @@ If you are running Kuzzle in a Docker container, you will have to <a href="https
     -V, --version   output the version number
     -d, --debug     make errors more verbose
     -C, --noColors  <span class="k">do </span>not use ANSI coloring
-
 </code></pre>
 
 <h3 id="createfirstadmin">createFirstAdmin</h3>
@@ -1855,7 +1856,30 @@ If you are running Kuzzle in a Docker container, you will have to <a href="https
 <pre class="highlight shell"><code><span class="gp">$ </span>./bin/kuzzle clearCache
 </code></pre>
 
-<p>Kuzzle relies on the Redis service to store some frequently accessed internal data. If you need to restart Kuzzle with a fresh cache, this command can come in hand.</p>
+<p>Kuzzle relies on the Redis service to store frequently accessed internal data. If you need to restart Kuzzle with a fresh cache, this command can come in hand.</p>
+
+<h3 id="dump">dump</h3>
+<pre class="highlight shell"><code><span class="gp">$ </span>./bin/kuzzle dump
+<span class="o">[</span>ℹ] Creating dump file...
+<span class="o">[</span>✔] Done!
+
+<span class="o">[</span>ℹ] Dump has been successfully generated <span class="k">in</span> <span class="s2">"dump/&lt;date&gt;-&lt;time&gt;-cli"</span> folder
+<span class="o">[</span>ℹ] You can send the folder to the kuzzle core team at support@kuzzle.io
+</code></pre>
+
+<p>The <code class="prettyprint">dump</code> command creates a snapshot of the state of Kuzzle, including:</p>
+
+<ul>
+<li>a coredump of Kuzzle Core</li>
+<li>the current Kuzzle Core instance configuration</li>
+<li>server logs</li>
+<li>Node.js binary &amp; properties</li>
+<li>a list of OS properties</li>
+<li>plugins configuration,</li>
+<li>usage statistics of the dumped instance</li>
+</ul>
+
+<p>The generated directory can be used to feed a crash report to the support team if you own a Kuzzle License.</p>
 
 <h3 id="reset">reset</h3>
 <pre class="highlight plaintext"><code>$ ./bin/kuzzle reset --help
@@ -1874,7 +1898,15 @@ If you are running Kuzzle in a Docker container, you will have to <a href="https
 
 <p>The <code class="prettyprint">reset</code> command deletes all currently set configurations and users from the database.</p>
 
-<p>If business data were imported in Kuzzle&rsquo;s database layer, these are kept intact.</p>
+<p>Only Kuzzle internal data are cleaned up: this command has no impact over plugins stored data, or stored documents.</p>
+
+<h3 id="shutdown">shutdown</h3>
+<pre class="highlight plaintext"><code>$ ./bin/kuzzle shutdown
+[ℹ] Shutting down...
+[✔] Done!
+</code></pre>
+
+<p>The <code class="prettyprint">shutdown</code> command allows to stop a Kuzzle Core instance after remaining requests are processed, ensuring that no unnecessary <code class="prettyprint">Service Unavailable</code> errors are forwarded to clients.</p>
 
 <h3 id="start">start</h3>
 <pre class="highlight plaintext"><code>$ ./bin/kuzzle start --help
@@ -1891,27 +1923,7 @@ If you are running Kuzzle in a Docker container, you will have to <a href="https
           --mappings &lt;mappings&gt;  load and apply mappings from file
 </code></pre>
 
-<p>The <code class="prettyprint">start</code> command starts a Kuzzle server in the foreground.</p>
-
-<h3 id="dump">dump</h3>
-<pre class="highlight shell"><code><span class="gp">$ </span>./bin/kuzzle dump --help
-<span class="o">[</span>ℹ] Creating dump file...
-<span class="o">[</span>✔] Done!
-
-<span class="o">[</span>ℹ] Dump has been successfully generated <span class="k">in</span> <span class="s2">"dump/20161214-1555-cli"</span> folder
-<span class="o">[</span>ℹ] You can send the folder to the kuzzle core team at support@kuzzle.io
-</code></pre>
-
-<p>The <code class="prettyprint">dump</code> command creates a snapshot of the state of Kuzzle. It includes
-* a core dump of Kuzzle Core,
-* a dump of the main configuration,
-* a dump of all the server logs,
-* a dump of the Node.js engine properties,
-* a dump of the OS properties,
-* a dump of the plugins configuration,
-* a dump of the usage statistics of the Kuzzle Server.</p>
-
-<p>This can be particularly handy to feed a crash report to the support team if you own a Kuzzle License.</p>
+<p>The <code class="prettyprint">start</code> command starts a Kuzzle Core instance in the foreground.</p>
 
             <h2 id="the-plugin-system">The Plugin System</h2>
 
