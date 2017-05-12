@@ -470,23 +470,41 @@ The &ldquo;sysctl&rdquo; command is needed by Elasticsearch v5.x. More details <
 <ol>
 <li>Create a directory for Kuzzle Proxy and install it:</li>
 </ol>
-<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd</span> ~/kuzzle
-<span class="gp">$ </span>git clone https://github.com/kuzzleio/kuzzle-proxy.git
-<span class="gp">$ </span><span class="nb">cd </span>kuzzle-proxy
-<span class="gp">$ </span>git submodule init
-<span class="gp">$ </span>git submodule update
-<span class="gp">$ </span>npm install
+<pre class="highlight shell"><code><span class="nb">cd</span> ~/kuzzle
+git clone https://github.com/kuzzleio/kuzzle-proxy.git
+<span class="nb">cd </span>kuzzle-proxy
+npm install
+
+<span class="c"># init submodules to install defaults proxy plugins</span>
+git submodule init
+git submodule update
+
+<span class="c"># install dependencies for all enabled plugins</span>
+<span class="k">for </span>PLUGIN <span class="k">in</span> ./plugins/enabled/<span class="k">*</span>; <span class="k">do
+  if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="k">${</span><span class="nv">PLUGIN</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then</span>
+    <span class="o">(</span> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">PLUGIN</span><span class="k">}</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> npm install <span class="o">)</span>
+  <span class="k">fi
+done</span>
 </code></pre>
 
 <ol>
 <li>Create a directory for Kuzzle Core and install it:</li>
 </ol>
-<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd</span> ~/kuzzle
-<span class="gp">$ </span>git clone https://github.com/kuzzleio/kuzzle.git
-<span class="gp">$ </span><span class="nb">cd </span>kuzzle
-<span class="gp">$ </span>git submodule init
-<span class="gp">$ </span>git submodule update
-<span class="gp">$ </span>npm install
+<pre class="highlight shell"><code><span class="nb">cd</span> ~/kuzzle
+git clone https://github.com/kuzzleio/kuzzle.git
+<span class="nb">cd </span>kuzzle
+npm install
+
+<span class="c"># init submodules to install defaults kuzzle plugins</span>
+git submodule init
+git submodule update
+
+<span class="c"># install dependencies for all enabled plugins</span>
+<span class="k">for </span>PLUGIN <span class="k">in</span> ./plugins/enabled/<span class="k">*</span>; <span class="k">do
+  if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="k">${</span><span class="nv">PLUGIN</span><span class="k">}</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then</span>
+    <span class="o">(</span> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">PLUGIN</span><span class="k">}</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> npm install <span class="o">)</span>
+  <span class="k">fi
+done</span>
 </code></pre>
 
 <ol>
