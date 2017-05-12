@@ -687,6 +687,19 @@ Each pipes must also be exported.</p>
   <span class="p">}</span>
 
   <span class="cm">/**
+   * Retrieves the non sensitive user's credentials information
+   * from the persistence layer using the strategy internal id
+   *
+   * @param {KuzzleRequest} request
+   * @param {string} id
+   * @returns {Promise&lt;object&gt;}
+   */</span>
+  <span class="nx">getById</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// retrieve credentials</span>
+    <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* non sensitive credentials info */</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
    * Updates the user's credentials information in the
    * persistence layer
    *
@@ -841,7 +854,26 @@ Each pipes must also be exported.</p>
 <p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to an object that contains <strong>non sensitive</strong> information of the object (can be an empty object).</p>
 
 <aside class="info">
-  If no getInfo function is provided, an empty object will be returned in the controllers that use it.
+  If no getInfo function is provided, an empty object will be returned by controllers that use it.
+</aside>
+
+<h3 id="the-getbyid-function">The getById function</h3>
+
+<p>You may implement a <code class="prettyprint">getById</code> function (its name depends on the configuration provided in the <code class="prettyprint">strategies</code> attribute), used by Kuzzle to get informations about a user&rsquo;s credentials to this strategy searching by the strategy storage identifier (<code class="prettyprint">_id</code>). For security reasons, only <strong>non sensitive</strong> informations should be returned.</p>
+
+<p>Here is the generic signature of the <code class="prettyprint">getInfo</code> function you have to implement:</p>
+
+<p><code class="prettyprint">getInfo (request, id)</code></p>
+
+<ul>
+<li><code class="prettyprint">request</code> is the request made to Kuzzle (see <a href="#request">the <code class="prettyprint">Request</code> documentation</a>).</li>
+<li><code class="prettyprint">id</code> is the user&rsquo;s storage identifier in the strategy.</li>
+</ul>
+
+<p>The function <strong>must</strong> return a <code class="prettyprint">Promise</code> that resolves to an object that contains <strong>non sensitive</strong> information of the object (can be an empty object).</p>
+
+<aside class="info">
+  If no getById function is provided, an empty object will be returned by controllers that use it.
 </aside>
 
 <h3 id="the-afterregister-function">The afterRegister function</h3>

@@ -1658,8 +1658,8 @@ You can think to a <code class="prettyprint">profile</code> as a user group. All
         <span class="na">delete</span><span class="p">:</span> <span class="p">{</span>
           <span class="na">args</span><span class="p">:</span> <span class="p">{</span>
             <span class="na">document</span><span class="p">:</span> <span class="p">{</span>
-              <span class="na">index</span><span class="p">:</span> <span class="s2">"$requestObject.index"</span><span class="p">,</span>
-              <span class="na">collection</span><span class="p">:</span> <span class="s2">"$requestObject.collection"</span><span class="p">,</span>
+              <span class="na">index</span><span class="p">:</span> <span class="s2">"$request.input.resource.index"</span><span class="p">,</span>
+              <span class="na">collection</span><span class="p">:</span> <span class="s2">"$request.input.resource.collection"</span><span class="p">,</span>
               <span class="na">action</span><span class="p">:</span> <span class="p">{</span>
                 <span class="na">get</span><span class="p">:</span> <span class="s2">"$currentId"</span>
               <span class="p">}</span>
@@ -2657,8 +2657,8 @@ Each <code class="prettyprint">args</code> item will look like:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"&lt;some variable&gt;"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;index</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">fetch</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">document(s)&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;collection</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">fetch</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">document(s)&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;index from which to fetch the document(s)&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;collection from which to fetch the document(s)&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"&lt;action type (get|mget|search)&gt;"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;action</span><span class="w"> </span><span class="err">type</span><span class="w"> </span><span class="err">specific</span><span class="w"> </span><span class="err">parameters&gt;</span><span class="w">
       </span><span class="p">}</span><span class="w">

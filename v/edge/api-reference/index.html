@@ -1067,7 +1067,8 @@ This API route does not require to be logged in.</p>
   "action": "createMyCredentials",
   "controller": "auth",
   "result": {
-    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
   }
 }
 </code></pre>
@@ -1207,7 +1208,8 @@ This API route does not require to be logged in.</p>
   "action": "getMyCredentials",
   "controller": "auth",
   "result": {
-    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
   }
 }
 </code></pre>
@@ -1484,7 +1486,8 @@ and let you authenticate with a login and password.</p>
   "action": "updateMyCredentials",
   "controller": "auth",
   "result": {
-    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
   }
 }
 </code></pre>
@@ -11298,7 +11301,8 @@ In any ways, the document is <strong>not</strong> stored nor published.</p>
   "controller": "security",
   "_id": "<span class="nt">&lt;kuid&gt;</span>",
   "result": {
-    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
   }
 }
 </code></pre>
@@ -12334,12 +12338,57 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "_id": "<span class="nt">&lt;kuid&gt;</span>",
   "result": {
-    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
   }
 }
 </code></pre>
 
 <p>Get credential information of the specified <code class="prettyprint">&lt;strategy&gt;</code> for the user <a href="../guide/#the-kuzzle-user-identifier"><code class="prettyprint">&lt;kuid&gt;</code></a>. Provided information completely depend of the strategy. The result can be an empty object.</p>
+
+<h2 id="getcredentialsbyid">getCredentialsById</h2>
+
+<section class="http"></section>
+
+<blockquote>
+<p><strong>URL:</strong> <code class="prettyprint">http://kuzzle:7512/credentials/&lt;strategy&gt;/&lt;kuid&gt;/_byId</code><br>
+<strong>Method:</strong> <code class="prettyprint">GET</code>  </p>
+</blockquote>
+
+<section class="others"></section>
+
+<blockquote>
+<p><strong>Query</strong></p>
+</blockquote>
+
+<section class="others"></section>
+<pre class="highlight literate_coffeescript"><code>{
+  "controller": "security",
+  "action": "getCredentialsById",
+  "strategy": "<span class="nt">&lt;strategy&gt;</span>",
+  "_id": "<span class="nt">&lt;strategyId&gt;</span>"
+}
+</code></pre>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<pre class="highlight literate_coffeescript"><code>// example with a "local" authentication
+
+{
+  "status": 200,                      // Assuming everything went well
+  "error": null,                      // Assuming everything went well
+  "action": "getCredentialsById",
+  "controller": "security",
+  "_id": "<span class="nt">&lt;kuid&gt;</span>",
+  "result": {
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
+  }
+}
+</code></pre>
+
+<p>Get credential information of the specified <code class="prettyprint">&lt;strategyId&gt;</code> (storage key of the strategy) of the user. Storage key and provided information completely depend of the strategy. The result can be an empty object.</p>
 
 <h2 id="getprofile">getProfile</h2>
 
@@ -13603,7 +13652,8 @@ that the related roles will NOT be deleted.</p>
   "controller": "security",
   "_id": "<span class="nt">&lt;kuid&gt;</span>",
   "result": {
-    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
   }
 }
 </code></pre>
@@ -14167,7 +14217,8 @@ please refer to <a href="../guide/#permissions">Kuzzle&rsquo;s security document
   "controller": "security",
   "_id": "<span class="nt">&lt;kuid&gt;</span>",
   "result": {
-    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span>
+    <span class="s">"username"</span><span class="o">:</span> <span class="s">"MyUser"</span><span class="p">,</span>
+    <span class="s">"kuid"</span><span class="o">:</span> <span class="s">"&lt;kuid&gt;"</span>
   }
 }
 </code></pre>

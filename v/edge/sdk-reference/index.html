@@ -20214,10 +20214,7 @@ That means that a profile that was just been created will not be returned by <co
   <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="c1">// You can chose to replace the given user if already exists</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">replaceIfExist</span><span class="p">:</span> <span class="kc">true</span>
-<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{};</span>
 
 
 <span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
@@ -20251,7 +20248,7 @@ That means that a profile that was just been created will not be returned by <co
 
 <span class="n">newUser</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"credentials"</span><span class="o">,</span> <span class="n">credentials</span><span class="o">);</span>
 
-<span class="n">Options</span> <span class="n">opts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Options</span><span class="o">().</span><span class="na">setReplaceIfExist</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">Options</span> <span class="n">opts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Options</span><span class="o">();</span>
 
 <span class="n">kuzzle</span>
   <span class="o">.</span><span class="na">security</span>
@@ -20351,12 +20348,6 @@ That means that a user that was just been created will not be returned by <code>
 <th>Default</th>
 </tr>
 </thead><tbody>
-<tr>
-<td><code class="prettyprint">replaceIfExist</code></td>
-<td>boolean</td>
-<td>If the same user already exists: throw an error if sets to false. Replace the existing user otherwise</td>
-<td><code class="prettyprint">false</code></td>
-</tr>
 <tr>
 <td><code class="prettyprint">queuable</code></td>
 <td>boolean</td>
@@ -23924,7 +23915,7 @@ Updating a profile will have no impact until the <code>save</code> method is cal
 </code></pre>
 
 <aside class="note">
-Updating an user will have no impact until the <code>save</code> method is called
+Updating an user will have no impact until the <code>create</code> or <code>replace</code> method is called
 </aside>
 
 <p>Replace the profile associated to the user</p>
@@ -23956,6 +23947,99 @@ Updating an user will have no impact until the <code>save</code> method is calle
 
 <p>Returns the <code class="prettyprint">User</code> object.</p>
 
+<h2 id="create">create</h2>
+<pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
+<span class="nx">user</span>
+  <span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// result is a User object</span>
+  <span class="p">});</span>
+
+<span class="c1">// Using promises (NodeJS)</span>
+<span class="nx">user</span>
+  <span class="p">.</span><span class="nx">createPromise</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// result is a User object</span>
+  <span class="p">});</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">user</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">onError</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Kuzzle\Security\User</span><span class="p">;</span>
+
+<span class="c1">// ...
+</span>
+<span class="cm">/*
+ * @var $user User
+ */</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+
+<p>Create the user in kuzzle. Credentials can be created during the process by using <code class="prettyprint">setCredentials</code> beforehand.</p>
+
+<h3 id="create-options-callback">create([options], [callback])</h3>
+
+<table><thead>
+<tr>
+<th>Arguments</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">options</code></td>
+<td>JSON Object</td>
+<td>Optional parameters</td>
+</tr>
+<tr>
+<td><code class="prettyprint">callback</code></td>
+<td>function</td>
+<td>(Optional) Callback handling the response</td>
+</tr>
+</tbody></table>
+
+<p>Available options:</p>
+
+<table><thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">queuable</code></td>
+<td>boolean</td>
+<td>Mark this request as (not) queuable</td>
+<td><code class="prettyprint">true</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="return-value">Return value</h3>
+
+<p>Returns the <code class="prettyprint">User</code> object to allow chaining.</p>
+
+<h3 id="callback-response">Callback response</h3>
+
+<p>Resolves to a <code class="prettyprint">User</code> object.</p>
+
 <h2 id="delete">delete</h2>
 <pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
 <span class="nx">user</span>
@@ -23966,7 +24050,7 @@ Updating an user will have no impact until the <code>save</code> method is calle
 <span class="c1">// Using promises (NodeJS)</span>
 <span class="nx">user</span>
   <span class="p">.</span><span class="nx">deletePromise</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="c1">// result is the id of deleted user</span>
   <span class="p">});</span>
 </code></pre>
@@ -24061,21 +24145,21 @@ Updating an user will have no impact until the <code>save</code> method is calle
 
 <p>Returns an array of associated profiles</p>
 
-<h2 id="save">save</h2>
+<h2 id="replace">replace</h2>
 <pre class="highlight javascript"><code><span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
 <span class="nx">user</span>
-  <span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// result is a User object</span>
   <span class="p">});</span>
 
 <span class="c1">// Using promises (NodeJS)</span>
 <span class="nx">user</span>
-  <span class="p">.</span><span class="nx">savePromise</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">replacePromise</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="c1">// result is a User object</span>
   <span class="p">});</span>
 </code></pre>
-<pre class="highlight java"><code><span class="n">user</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;()</span> <span class="o">{</span>
+<pre class="highlight java"><code><span class="n">user</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="k">new</span> <span class="n">ResponseListener</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;()</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="n">onSuccess</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
 
@@ -24098,20 +24182,16 @@ Updating an user will have no impact until the <code>save</code> method is calle
  */</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+  <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">replace</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="k">catch</span> <span class="p">(</span><span class="nx">ErrorException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">}</span>
 </code></pre>
 
-<p>Create or replace the user in kuzzle</p>
+<p>Replaces the user in kuzzle.</p>
 
-<aside class="warning">
-Saving this object can rise an error if the associated profile is not created in Kuzzle
-</aside>
-
-<h3 id="save-options-callback">save([options], [callback])</h3>
+<h3 id="replace-options-callback">replace([options], [callback])</h3>
 
 <table><thead>
 <tr>
@@ -24168,7 +24248,7 @@ Saving this object can rise an error if the associated profile is not created in
 <span class="c1">// Using promises (NodeJS)</span>
 <span class="nx">user</span>
   <span class="p">.</span><span class="nx">saveRestrictedPromise</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="c1">// result is a User object</span>
   <span class="p">});</span>
 </code></pre>
@@ -24283,7 +24363,7 @@ Saving this object can rise an error if the associated profile is not created in
 </code></pre>
 
 <aside class="note">
-Updating an user will have no impact until the <code>save</code> method is called
+Updating an user will have no impact until the <code>create</code> or <code>replace</code> method is called
 </aside>
 
 <p>Replaces the content of User</p>
@@ -24301,6 +24381,63 @@ Updating an user will have no impact until the <code>save</code> method is calle
 <td><code class="prettyprint">data</code></td>
 <td>JSON Object</td>
 <td>User content</td>
+</tr>
+</tbody></table>
+
+<h3 id="return-value">Return value</h3>
+
+<p>Returns the <code class="prettyprint">User</code> object.</p>
+
+<h2 id="setcredentials">setCredentials</h2>
+<pre class="highlight javascript"><code><span class="nx">user</span><span class="p">.</span><span class="nx">setCredentials</span><span class="p">({</span>
+  <span class="s1">'&lt;strategy name&gt;'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">some</span><span class="p">:</span> <span class="s1">'credentials'</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">JSONObject</span>
+  <span class="n">strategyCredentials</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"some"</span><span class="o">,</span> <span class="s">"credentials"</span><span class="o">),</span>
+  <span class="n">credentials</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"&lt;strategy name&gt;"</span><span class="o">,</span> <span class="n">strategyCredentials</span><span class="o">);</span>
+
+<span class="n">user</span><span class="o">.</span><span class="na">setCredentials</span><span class="o">(</span><span class="n">credentials</span><span class="o">);</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Kuzzle\Security\User</span><span class="p">;</span>
+
+
+<span class="cm">/*
+ * @var $user User
+ */</span>
+
+<span class="c1">// Updating the profile with a Profile object
+</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setCredentials</span><span class="p">([</span>
+    <span class="s1">'&lt;strategy name&gt;'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">'some'</span> <span class="o">=&gt;</span> <span class="s1">'credentials'</span>
+    <span class="p">]</span>
+<span class="p">]);</span>
+</code></pre>
+
+<aside class="note">
+  Updating user credentials will have no impact until the <code>create</code> method is called.<br />
+  The credentials to send depends entirely on the authentication plugin and strategy you want to create credentials for.
+</aside>
+
+<p>Sets the credentials associated to a user</p>
+
+<h3 id="setcredentials-credentials">setCredentials(credentials)</h3>
+
+<table><thead>
+<tr>
+<th>Arguments</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">credentials</code></td>
+<td>object</td>
+<td>An object containing an attribute for each strategy you want to create for the user.</td>
 </tr>
 </tbody></table>
 
@@ -24360,7 +24497,7 @@ Updating an user will have no impact until the <code>save</code> method is calle
 </code></pre>
 
 <aside class="note">
-Updating an user will have no impact until the <code>save</code> method is called
+Updating an user will have no impact until the <code>create</code> or <code>replace</code> method is called
 </aside>
 
 <p>Replace the profile associated to the user</p>
@@ -24401,7 +24538,7 @@ Updating an user will have no impact until the <code>save</code> method is calle
 <span class="c1">// Using callbacks (NodeJS or Web Browser)</span>
 <span class="nx">user</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">updateContent</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">updatedUser</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// the updatedUser variable is the updated User object</span>
-<span class="p">})</span>
+<span class="p">});</span>
 
 <span class="c1">// Using promises (NodeJS)</span>
 <span class="nx">role</span>
