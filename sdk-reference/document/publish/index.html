@@ -1,4 +1,201 @@
-<!doctype html><html><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=msapplication-TileColor content=#FFFFFF><meta name=msapplication-TileImage content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-144x144.png><meta name=msapplication-square70x70logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-70x70.png><meta name=msapplication-square150x150logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-150x150.png><meta name=msapplication-wide310x150logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x150.png><meta name=msapplication-square310x310logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x310.png><meta name=google-site-verification content=luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4><meta itemprop=name content=publish><meta itemprop=image content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png><meta name=twitter:card value=summary><meta name=twitter:site content=@kuzzleio><meta name=twitter:title content=publish><meta name=twitter:creator content=@kuzzleio><meta name=twitter:image content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png><meta property=og:title content=publish><meta property=og:type content=article><meta property=og:site_name content=""><meta property=og:image content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-96x96.png><meta property=article:published_time content=2017-05-21T11:50:33.398Z><meta property=article:modified_time content=2017-05-21T11:50:33.398Z><meta property=article:section content="SDK Reference"><meta property=article:tag content=Document><link rel=apple-touch-icon-precomposed sizes=57x57 href=/documentation/assets/images/favicon/apple-touch-icon-57x57.png><link rel=apple-touch-icon-precomposed sizes=114x114 href=/documentation/assets/images/favicon/apple-touch-icon-114x114.png><link rel=apple-touch-icon-precomposed sizes=72x72 href=/documentation/assets/images/favicon/apple-touch-icon-72x72.png><link rel=apple-touch-icon-precomposed sizes=144x144 href=/documentation/assets/images/favicon/apple-touch-icon-144x144.png><link rel=apple-touch-icon-precomposed sizes=60x60 href=/documentation/assets/images/favicon/apple-touch-icon-60x60.png><link rel=apple-touch-icon-precomposed sizes=120x120 href=/documentation/assets/images/favicon/apple-touch-icon-120x120.png><link rel=apple-touch-icon-precomposed sizes=76x76 href=/documentation/assets/images/favicon/apple-touch-icon-76x76.png><link rel=apple-touch-icon-precomposed sizes=152x152 href=/documentation/assets/images/favicon/apple-touch-icon-152x152.png><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-196x196.png sizes=196x196><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-96x96.png sizes=96x96><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-128.png sizes=128x128><link rel=stylesheet href=/documentation/assets/font-awesome/scss/font-awesome.css><link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel=stylesheet><title>publish - Document - SDK Reference - Kuzzle documentation</title><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-dark.min.css><link href=/documentation/assets/stylesheets/side-code/screen.css rel=stylesheet type=text/css media=screen></head><body class=index><header><div class=wrapper><div id=logo><a href=http://kuzzle.io/ >&#xA0;</a></div><a class=mobile-nav-burger href=javascript:;></a><nav><ul><li><a href=http://kuzzle.io/kuzzle-entreprise class=nav-item>product</a></li><li><a href=https://stafyniaksacha.github.io/documentation/ class="nav-item developers active">Documentation</a><ul class=mobile-nav><li><a href=guide><span>Guide</span></a></li><li class=active><a href=/documentation/sdk-reference><span>SDK Reference</span></a><ul class=sub-nav><li><a href=/documentation/sdk-reference/essentials><span>Essentials</span></a></li><li><a href=/documentation/sdk-reference/kuzzle><span>Kuzzle</span></a></li><li><a href=/documentation/sdk-reference/collection><span>Collection</span></a></li><li><a href=/documentation/sdk-reference/collection-mapping><span>CollectionMapping</span></a></li><li class=active><a href=/documentation/sdk-reference/document><span>Document</span></a></li><li><a href=/documentation/sdk-reference/memory-storage><span>MemoryStorage</span></a></li><li><a href=/documentation/sdk-reference/profile><span>Profile</span></a></li><li><a href=/documentation/sdk-reference/role><span>Role</span></a></li><li><a href=/documentation/sdk-reference/room><span>Room</span></a></li><li><a href=/documentation/sdk-reference/search-result><span>SearchResult</span></a></li><li><a href=/documentation/sdk-reference/security><span>Security</span></a></li><li><a href=/documentation/sdk-reference/user><span>User</span></a></li></ul></li><li><a href=kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=validation-reference><span>Data Validation</span></a></li><li><a href=api-documentation><span>API Documentation</span></a></li><li><a href=plugins-reference><span>Plugins Reference</span></a></li><li><a href=elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul></li><li><a href=http://kuzzle.io/demos-tutorials/ class=nav-item>Demos</a></li><li><a href=http://kuzzle.io/blog/ class=nav-item>Blog</a></li><li><a href=http://kuzzle.io/contact/ class=nav-item>Contact</a></li><li><a href=https://github.com/kuzzleio/kuzzle target=_blank class="nav-item github"><i class="icon icon-github icon-small"></i></a></li></ul></nav></div><div class="developer-nav open"><ul class=search><li><input name=search type=search placeholder=search tabindex=1></li></ul><ul class=nav><li><a href=/documentation/guide><span>Guide</span></a></li><li class=active><a href=/documentation/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/validation-reference><span>Data Validation</span></a></li><li><a href=/documentation/api-documentation><span>API Documentation</span></a></li><li><a href=/documentation/plugins-reference><span>Plugins Reference</span></a></li><li><a href=/documentation/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul><div class=search-results><ul></ul></div><script type=text/plain id=search-results-template><li>
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-144x144.png">
+  <meta name="msapplication-square70x70logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-70x70.png">
+  <meta name="msapplication-square150x150logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-150x150.png">
+  <meta name="msapplication-wide310x150logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x150.png">
+  <meta name="msapplication-square310x310logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x310.png">
+  <meta name="google-site-verification" content="luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4">
+  
+  <!-- Schema.org markup for Google+ -->
+  <meta itemprop="name" content="publish">
+  <meta itemprop="image" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png">
+  
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" value="summary">
+  <meta name="twitter:site" content="@kuzzleio">
+  <meta name="twitter:title" content="publish">
+  <meta name="twitter:creator" content="@kuzzleio">
+  <meta name="twitter:image" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png">
+  
+  <!-- Open Graph data -->
+  <meta property="og:title" content="publish">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="">
+  <meta property="og:image" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-96x96.png">
+  <meta property="article:published_time" content="2017-05-21T13:38:01.605Z">
+  <meta property="article:modified_time" content="2017-05-21T13:38:01.605Z">
+  <meta property="article:section" content="SDK Reference">
+  <meta property="article:tag" content="Document">
+  
+  
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/documentation/assets/images/favicon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/documentation/assets/images/favicon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/documentation/assets/images/favicon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/documentation/assets/images/favicon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/documentation/assets/images/favicon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/documentation/assets/images/favicon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/documentation/assets/images/favicon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/documentation/assets/images/favicon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-128.png" sizes="128x128">
+  
+  <link rel="stylesheet" href="/documentation/assets/font-awesome/scss/font-awesome.css">
+  <link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+  
+  <title>
+      publish
+      - Document
+      - SDK Reference
+       -
+  
+     Kuzzle documentation
+  </title>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-dark.min.css">
+
+  <link href="/documentation/assets/stylesheets/side-code/screen.css" rel="stylesheet" type="text/css" media="screen">
+</head>
+
+<body class="index">
+<header>
+  <div class="wrapper">
+    <div id="logo">
+      <a href="http://kuzzle.io/">&#xA0;</a>
+    </div>
+
+    <a class="mobile-nav-burger" href="javascript:;"></a>
+
+    <nav>
+      <ul>
+        <li>
+          <a href="http://kuzzle.io/kuzzle-entreprise" class="nav-item">product</a>
+        </li>
+        <li>
+          <a href="https://stafyniaksacha.github.io/documentation/" class="nav-item developers active">Documentation</a>
+          <ul class="mobile-nav">
+              <li>
+                <a href="/documentation/guide"><span>Guide</span></a>
+              </li>
+              <li class="active">
+                <a href="/documentation/sdk-reference"><span>SDK Reference</span></a>
+
+                <ul class="sub-nav">
+                  <li>
+                    <a href="/documentation/sdk-reference/essentials"><span>Essentials</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/kuzzle"><span>Kuzzle</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/collection"><span>Collection</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/collection-mapping"><span>CollectionMapping</span></a>
+                  </li>
+                  <li class="active">
+                    <a href="/documentation/sdk-reference/document"><span>Document</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/memory-storage"><span>MemoryStorage</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/profile"><span>Profile</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/role"><span>Role</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/room"><span>Room</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/search-result"><span>SearchResult</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/security"><span>Security</span></a>
+                  </li>
+                  <li>
+                    <a href="/documentation/sdk-reference/user"><span>User</span></a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/documentation/kuzzle-dsl"><span>Kuzzle DSL</span></a>
+              </li>
+              <li>
+                <a href="/documentation/validation-reference"><span>Data Validation</span></a>
+              </li>
+              <li>
+                <a href="/documentation/api-documentation"><span>API Documentation</span></a>
+              </li>
+              <li>
+                <a href="/documentation/plugins-reference"><span>Plugins Reference</span></a>
+              </li>
+              <li>
+                <a href="/documentation/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
+              </li>
+          </ul>
+        </li>
+        <li>
+          <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
+        </li>
+        <li>
+          <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
+        </li>
+        <li>
+          <a href="http://kuzzle.io/contact/" class="nav-item ">Contact</a>
+        </li>
+        <li>
+          <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
+            <i class="icon icon-github icon-small"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="developer-nav open">
+    <ul class="search">
+      <li>
+        <input name="search" type="search" placeholder="search" tabindex="1">
+        <!-- <input name="search" type="search" placeholder="search"></input> -->
+      </li>
+    </ul>
+    <ul class="nav">
+        <li>
+          <a href="/documentation/guide"><span>Guide</span></a>
+        </li>
+        <li class="active">
+          <a href="/documentation/sdk-reference"><span>SDK Reference</span></a>
+        </li>
+        <li>
+          <a href="/documentation/kuzzle-dsl"><span>Kuzzle DSL</span></a>
+        </li>
+        <li>
+          <a href="/documentation/validation-reference"><span>Data Validation</span></a>
+        </li>
+        <li>
+          <a href="/documentation/api-documentation"><span>API Documentation</span></a>
+        </li>
+        <li>
+          <a href="/documentation/plugins-reference"><span>Plugins Reference</span></a>
+        </li>
+        <li>
+          <a href="/documentation/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
+        </li>
+    </ul>
+
+    <div class="search-results"><ul></ul></div>
+
+    <script type="text/plain" id="search-results-template">
+      <li>
         <a href="__link__" tabindex="__tabindex__">
           <p class="page">
             <span class="title">__title__</span>
@@ -7,21 +204,188 @@
           </p>
           <p class="preview">__preview__</p>
         </a>
-      </li></script></div></header><div class=container><div class=tocify-wrapper><ul class=search-results></ul><div class=tocify><ul class=tocify-header><li class="tocify-item tocify-focus tocify-hover"></li></ul><ul class=tocify-header><li class=tocify-item><a style="color: #111; text-decoration: none" href=https://stafyniaksacha.github.io/documentation/sdk-reference title="back to SDK Reference home">SDK Reference</a></li><ul class=tocify-subheader><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/essentials/events title=Essentials>Essentials</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/kuzzle title=Kuzzle>Kuzzle</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/collection title=Collection>Collection</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/collection-mapping title=CollectionMapping>CollectionMapping</a></li><li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none" href=# title=Document>Document</a></li><ul class=tocify-header><ul class=tocify-subheader><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=sdk-reference/document title=Document>&#x203A; Constructor</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/document/delete title=delete>&#x203A; delete</a></li><li class="tocify-item tocify-level-2 tocify-focus"><a style="color: #FFF; text-decoration: none" href=/documentation/sdk-reference/document/publish title=publish>&#x203A; publish</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/document/refresh title=refresh>&#x203A; refresh</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/document/save title=save>&#x203A; save</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/document/set-content title=setContent>&#x203A; setContent</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/document/set-headers title=setHeaders>&#x203A; setHeaders</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/document/subscribe title=subscribe>&#x203A; subscribe</a></li></ul></ul><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/memory-storage title=MemoryStorage>MemoryStorage</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/profile title=Profile>Profile</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/role title=Role>Role</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/room title=Room>Room</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/search-result title=SearchResult>SearchResult</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/security title=Security>Security</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/sdk-reference/user title=User>User</a></li></ul></ul><ul class=toc-footer></ul></div></div><div class=page-wrapper><div class=content><div class=mobile-breadcrumb><p><a href=https://stafyniaksacha.github.io/documentation/ >Kuzzle documentation</a> &#xBB; <a href=https://stafyniaksacha.github.io/documentation/sdk-reference>SDK Reference</a> &#xBB; <a href=https://stafyniaksacha.github.io/documentation/sdk-reference/document>Document</a> &#xBB; publish</p></div><div class=nav-sibling><div class=nav-left><p><a href=https://github.com/kuzzleio/documentation/edit/rcx-refactor-doc/src/sdk-reference/document/publish.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/kuzzleio/documentation/issues/new?labels=sdk-reference&amp;title=Feedback%20about%20page%20&apos;sdk-reference/document/publish.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p><a href=https://stafyniaksacha.github.io/documentation/sdk-reference/document/delete>&#xAB; delete</a> <span class=separator>|</span> <a href=https://stafyniaksacha.github.io/documentation/sdk-reference/document/refresh>refresh &#xBB;</a></p></div><div style=clear:both></div></div><div class=main-content><h1><a class=anchor id=publish></a>publish</h1><div class=language-tab-selector><a href=# class=language-tab-active data-language-name=js>Javascript</a><a href=# data-language-name=java>Android</a><a href=# data-language-name=php>PHP</a></div><pre class="language-tab language-first-tab language-tab-active" data-language=js><code class="hljs js"><span class=hljs-built_in>document</span>.publish();</code></pre><pre class=language-tab data-language=java><code class="hljs java">document.publish();</code></pre><pre class=language-tab data-language=php><code class="hljs php"><span class=hljs-meta>&lt;?php</span>
+      </li>
+    </script>
+  </div>
+</header>
 
-<span class=hljs-keyword>use</span> \<span class=hljs-title>Kuzzle</span>\<span class=hljs-title>Document</span>;
+<div class="container">
+    <div class="tocify-wrapper">
+      <ul class="search-results"></ul>
+    
+      <div class="tocify">
+        <ul class="tocify-header">
+          <li class="tocify-item tocify-focus tocify-hover"></li>
+        </ul>
+        <ul class="tocify-header">
+          <li class="tocify-item"><a style="color: #111; text-decoration: none;" href="https://stafyniaksacha.github.io/documentation/sdk-reference" title="back to SDK Reference home">SDK Reference</a></li>
+          <ul class="tocify-subheader">
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/essentials/events" title="Kuzzle SDKs basic concepts">Essentials</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/kuzzle" title="Entry point and main class for the entire SDK">Kuzzle</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/collection" title="Data collection methods">Collection</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/collection-mapping" title="Methods manipulating data collection structures">CollectionMapping</a></li>
+    
+            <li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none;" href="#" title="Class for documents handling">Document</a></li>
+              <ul class="tocify-header">
+                <ul class="tocify-subheader">
+                        <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/document" title="Class for documents handling">&#x203A; Constructor</a></li>
+                        <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/document/delete" title="delete">&#x203A; delete</a></li>
+                        <li class="tocify-item tocify-level-2 tocify-focus"><a style="color: #FFF; text-decoration: none;" href="/documentation/sdk-reference/document/publish" title="publish">&#x203A; publish</a></li>
+                        <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/document/refresh" title="refresh">&#x203A; refresh</a></li>
+                        <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/document/save" title="save">&#x203A; save</a></li>
+                        <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/document/set-content" title="setContent">&#x203A; setContent</a></li>
+                        <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/document/set-headers" title="setHeaders">&#x203A; setHeaders</a></li>
+                        <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/document/subscribe" title="subscribe">&#x203A; subscribe</a></li>
+                </ul>
+              </ul>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/memory-storage" title="Memory cache storage methods">MemoryStorage</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/profile" title="Permission profiles manipulation">Profile</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/role" title="Permission roles manipulation">Role</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/room" title="Real-time subscription management class">Room</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/search-result" title="Search result navigation class">SearchResult</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/security" title="Rights administration methods">Security</a></li>
+    
+                <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/sdk-reference/user" title="Permission users manipulation">User</a></li>
+          </ul>
+        </ul>
+        <ul class="toc-footer">
+          <!-- community links here ! -->
+    
+              <li><span style="color:#717171">1.0.0-RC9 (latest)</span></li>
+              <li><a href="/documentation/v/edge/">1.0.0-RC10 (next)</a></li>
+        </ul>
+      </div>
+    </div>
 
-<span class=hljs-comment>// ...</span>
+    <div class="page-wrapper">
+      <div class="content">
+        <div class="mobile-breadcrumb">
+          <p>
+          <a href="https://stafyniaksacha.github.io/documentation/">Kuzzle documentation</a>
+        
+            &#xBB; <a href="https://stafyniaksacha.github.io/documentation/sdk-reference">SDK Reference</a>
+            &#xBB; <a href="https://stafyniaksacha.github.io/documentation/sdk-reference/document">Document</a>
+        
+            &#xBB; publish
+           </p>
+        </div>
+        
+        <div class="nav-sibling">
+          <div class="nav-left">
+            <p>
+              <a href="https://github.com/kuzzleio/documentation/edit/rcx-refactor-doc/src/sdk-reference/document/publish.md">edit on github<i class="icon icon-github icon-small"></i></a>
+              <span class="separator">|</span>
+              <a href="https://github.com/kuzzleio/documentation/issues/new?labels=sdk-reference&amp;title=Feedback%20about%20page%20&apos;sdk-reference/document/publish.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
+              <span class="separator">|</span>
+              <select class="rate-documentation">
+                <option value=""></option>
+                <option value="1">Unusable documentation</option>
+                <option value="2">Poor documentation</option>
+                <option value="3">OK documentation</option>
+                <option value="4">Good documentation</option>
+                <option value="5">Excellent documentation</option>
+              </select>
+            </p>
+          </div>
+          <div class="nav-right">
+            <p>
+              <a href="https://stafyniaksacha.github.io/documentation/sdk-reference/document/delete">&#xAB; delete</a>
+              <span class="separator">|</span>
+              <a href="https://stafyniaksacha.github.io/documentation/sdk-reference/document/refresh">refresh &#xBB;</a>
+            </p>
+          </div>
+          <div style="clear:both"></div>
+        </div>
 
-<span class=hljs-comment>/**
- * <span class=hljs-doctag>@var</span> $document Document
+        <div class="main-content">
+          <h1><a class="anchor" id="publish"></a>publish</h1>
+<div class="language-tab-selector"><a href="#" class="language-tab-active" data-language-name="js">Javascript</a><a href="#" data-language-name="java">Android</a><a href="#" data-language-name="php">PHP</a></div><pre class="language-tab language-first-tab language-tab-active" data-language="js"><code class="hljs js"><span class="hljs-built_in">document</span>.publish();</code></pre>
+
+<pre class="language-tab" data-language="java"><code class="hljs java">document.publish();</code></pre>
+
+<pre class="language-tab" data-language="php"><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">use</span> \<span class="hljs-title">Kuzzle</span>\<span class="hljs-title">Document</span>;
+
+<span class="hljs-comment">// ...</span>
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@var</span> $document Document
  */</span>
 
-<span class=hljs-keyword>try</span> {
+<span class="hljs-keyword">try</span> {
   $document-&gt;publish();
-} <span class=hljs-keyword>catch</span> (ErrorException $e) {
+} <span class="hljs-keyword">catch</span> (ErrorException $e) {
 
-}</code></pre><p>Publishes the content of this document as a real-time message.</p><hr><h2><a class=anchor id=publish-options></a>publish([options])</h2><table><thead><tr><th>Arguments</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>options</code></td><td>JSON Object</td><td>Optional parameters</td></tr></tbody></table><hr><h2><a class=anchor id=options></a>Options</h2><table><thead><tr><th>Option</th><th>Type</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td><code>volatile</code></td><td>JSON Object</td><td>Additional information passed to notifications to other users</td><td><code>null</code></td></tr><tr><td><code>queuable</code></td><td>boolean</td><td>Mark this request as (not) queuable</td><td><code>true</code></td></tr></tbody></table><hr><h2><a class=anchor id=return-value></a>Return value</h2><p>Returns this <code>Document</code> object to allow chaining.</p><div style="clear: both"></div></div><hr><div id=disqus_thread></div><script async>var disqus_developer = 1;
+}</code></pre>
+
+<p>Publishes the content of this document as a real-time message.</p>
+<hr>
+<h2><a class="anchor" id="publish-options"></a>publish([options])</h2>
+<table>
+<thead>
+<tr>
+<th>Arguments</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td>JSON Object</td>
+<td>Optional parameters</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a class="anchor" id="options"></a>Options</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>volatile</code></td>
+<td>JSON Object</td>
+<td>Additional information passed to notifications to other users</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>queuable</code></td>
+<td>boolean</td>
+<td>Mark this request as (not) queuable</td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a class="anchor" id="return-value"></a>Return value</h2>
+<p>Returns this <code>Document</code> object to allow chaining.</p>
+
+          <div style="clear: both"></div>
+        </div>
+
+        <hr>
+        <div id="disqus_thread"></div>
+        
+        <script async>
+          var disqus_developer = 1;
         
           var disqus_config = function () {
             this.page.url = 'https://stafyniaksacha.github.io/documentation/sdk-reference/document/publish';
@@ -34,7 +398,47 @@
             s.src = 'https://kuzzle-documentation.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
-          })();</script><div class="nav-sibling bottom"><div class=nav-left><p><a href=https://github.com/kuzzleio/documentation/edit/rcx-refactor-doc/src/sdk-reference/document/publish.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/kuzzleio/documentation/issues/new?labels=sdk-reference&amp;title=Feedback%20about%20page%20&apos;sdk-reference/document/publish.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p><a href=https://stafyniaksacha.github.io/documentation/sdk-reference/document/delete>&#xAB; delete</a> <span class=separator>|</span> <a href=https://stafyniaksacha.github.io/documentation/sdk-reference/document/refresh>refresh &#xBB;</a></p></div><div style=clear:both></div></div></div></div></div><script src=//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js></script><script src=//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js></script><script src=/documentation/assets/javascript/lib/jquery.barrating.js></script><script type=text/javascript>// store helper
+          })();
+        </script>
+
+        <div class="nav-sibling bottom">
+          <div class="nav-left">
+            <p>
+              <a href="https://github.com/kuzzleio/documentation/edit/rcx-refactor-doc/src/sdk-reference/document/publish.md">edit on github<i class="icon icon-github icon-small"></i></a>
+              <span class="separator">|</span>
+              <a href="https://github.com/kuzzleio/documentation/issues/new?labels=sdk-reference&amp;title=Feedback%20about%20page%20&apos;sdk-reference/document/publish.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
+              <span class="separator">|</span>
+              <select class="rate-documentation">
+                <option value=""></option>
+                <option value="1">Unusable documentation</option>
+                <option value="2">Poor documentation</option>
+                <option value="3">OK documentation</option>
+                <option value="4">Good documentation</option>
+                <option value="5">Excellent documentation</option>
+              </select>
+            </p>
+          </div>
+          <div class="nav-right">
+            <p>
+              <a href="https://stafyniaksacha.github.io/documentation/sdk-reference/document/delete">&#xAB; delete</a>
+              <span class="separator">|</span>
+              <a href="https://stafyniaksacha.github.io/documentation/sdk-reference/document/refresh">refresh &#xBB;</a>
+            </p>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
+<script src="/documentation/assets/javascript/lib/jquery.barrating.js"></script>
+
+<script type="text/javascript">
+  // store helper
   var store = function store(key, value) {
     var lsSupport = false;
 
@@ -649,4 +1053,7 @@
       });
     });
 
-  })();</script></body></html>
+  })();
+</script>
+</body>
+</html>
