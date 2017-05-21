@@ -1,213 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="msapplication-TileColor" content="#FFFFFF">
-  <meta name="msapplication-TileImage" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-144x144.png">
-  <meta name="msapplication-square70x70logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-70x70.png">
-  <meta name="msapplication-square150x150logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-150x150.png">
-  <meta name="msapplication-wide310x150logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x150.png">
-  <meta name="msapplication-square310x310logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x310.png">
-  <meta name="google-site-verification" content="luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4">
-  
-  <!-- Schema.org markup for Google+ -->
-  <meta itemprop="name" content="Notifications">
-  <meta itemprop="image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Twitter Card data -->
-  <meta name="twitter:card" value="summary">
-  <meta name="twitter:site" content="@kuzzleio">
-  <meta name="twitter:title" content="Notifications">
-  <meta name="twitter:creator" content="@kuzzleio">
-  <meta name="twitter:image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Open Graph data -->
-  <meta property="og:title" content="Notifications">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="">
-  <meta property="og:image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-96x96.png">
-  <meta property="article:published_time" content="2017-05-21T13:38:01.573Z">
-  <meta property="article:modified_time" content="2017-05-21T13:38:01.573Z">
-  <meta property="article:section" content="API Documentation">
-  <meta property="article:tag" content="Notifications">
-  
-  <meta property="og:description" content="understand Kuzzle real-time notifications mechanisms">
-  <meta itemprop="description" content="understand Kuzzle real-time notifications mechanisms">
-  <meta name="twitter:description" content="understand Kuzzle real-time notifications mechanisms">
-  <meta name="description" content="understand Kuzzle real-time notifications mechanisms">
-  
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-128.png" sizes="128x128">
-  
-  <link rel="stylesheet" href="/documentation/v/edge/assets/font-awesome/scss/font-awesome.css">
-  <link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
-  
-  <title>
-      Notifications
-      - API Documentation
-       -
-  
-     Kuzzle documentation
-  </title>
-
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css">
-
-  <link href="/documentation/v/edge/assets/stylesheets/full/screen.css" rel="stylesheet" type="text/css" media="screen">
-</head>
-
-<body class="index">
-<header>
-  <div class="wrapper">
-    <div id="logo">
-      <a href="http://kuzzle.io/">&#xA0;</a>
-    </div>
-
-    <a class="mobile-nav-burger" href="javascript:;"></a>
-
-    <nav>
-      <ul>
-        <li>
-          <a href="http://kuzzle.io/kuzzle-entreprise" class="nav-item">product</a>
-        </li>
-        <li>
-          <a href="https://stafyniaksacha.github.io/documentation/v/edge/" class="nav-item developers active">Documentation</a>
-          <ul class="mobile-nav">
-              <li>
-                <a href="/documentation/v/edge/guide"><span>Guide</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/sdk-reference"><span>SDK Reference</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/validation-reference"><span>Data Validation</span></a>
-              </li>
-              <li class="active">
-                <a href="/documentation/v/edge/api-documentation"><span>API Documentation</span></a>
-
-                <ul class="sub-nav">
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/connecting-to-kuzzle"><span>Connecting to Kuzzle</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/query-syntax"><span>Query syntax</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/kuzzle-response"><span>Kuzzle response</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/volatile-data"><span>Sending volatile data</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/errors"><span>Errors</span></a>
-                  </li>
-                  <li class="active">
-                    <a href="/documentation/v/edge/api-documentation/notifications"><span>Notifications</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-auth"><span>auth</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-bulk"><span>bulk</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-collection"><span>collection</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-document"><span>document</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-index"><span>index</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-memory-storage"><span>memoryStorage</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-realtime"><span>realtime</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-security"><span>security</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-server"><span>server</span></a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/plugins-reference"><span>Plugins Reference</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-              </li>
-          </ul>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/contact/" class="nav-item ">Contact</a>
-        </li>
-        <li>
-          <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
-            <i class="icon icon-github icon-small"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="developer-nav open">
-    <ul class="search">
-      <li>
-        <input name="search" type="search" placeholder="search" tabindex="1">
-        <!-- <input name="search" type="search" placeholder="search"></input> -->
-      </li>
-    </ul>
-    <ul class="nav">
-        <li>
-          <a href="/documentation/v/edge/guide"><span>Guide</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/sdk-reference"><span>SDK Reference</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/validation-reference"><span>Data Validation</span></a>
-        </li>
-        <li class="active">
-          <a href="/documentation/v/edge/api-documentation"><span>API Documentation</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/plugins-reference"><span>Plugins Reference</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-        </li>
-    </ul>
-
-    <div class="search-results"><ul></ul></div>
-
-    <script type="text/plain" id="search-results-template">
-      <li>
+<!doctype html><html><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=msapplication-TileColor content=#FFFFFF><meta name=msapplication-TileImage content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-144x144.png><meta name=msapplication-square70x70logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-70x70.png><meta name=msapplication-square150x150logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-150x150.png><meta name=msapplication-wide310x150logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x150.png><meta name=msapplication-square310x310logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x310.png><meta name=google-site-verification content=luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4><meta itemprop=name content=Notifications><meta itemprop=image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png><meta name=twitter:card value=summary><meta name=twitter:site content=@kuzzleio><meta name=twitter:title content=Notifications><meta name=twitter:creator content=@kuzzleio><meta name=twitter:image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png><meta property=og:title content=Notifications><meta property=og:type content=article><meta property=og:site_name content=""><meta property=og:image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-96x96.png><meta property=article:published_time content=2017-05-21T15:16:19.383Z><meta property=article:modified_time content=2017-05-21T15:16:19.383Z><meta property=article:section content="API Documentation"><meta property=article:tag content=Notifications><meta property=og:description content="understand Kuzzle real-time notifications mechanisms"><meta itemprop=description content="understand Kuzzle real-time notifications mechanisms"><meta name=twitter:description content="understand Kuzzle real-time notifications mechanisms"><meta name=description content="understand Kuzzle real-time notifications mechanisms"><link rel=apple-touch-icon-precomposed sizes=57x57 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-57x57.png><link rel=apple-touch-icon-precomposed sizes=114x114 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-114x114.png><link rel=apple-touch-icon-precomposed sizes=72x72 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-72x72.png><link rel=apple-touch-icon-precomposed sizes=144x144 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-144x144.png><link rel=apple-touch-icon-precomposed sizes=60x60 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-60x60.png><link rel=apple-touch-icon-precomposed sizes=120x120 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-120x120.png><link rel=apple-touch-icon-precomposed sizes=76x76 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-76x76.png><link rel=apple-touch-icon-precomposed sizes=152x152 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-152x152.png><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-196x196.png sizes=196x196><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-96x96.png sizes=96x96><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-128.png sizes=128x128><link rel=stylesheet href=/documentation/v/edge/assets/font-awesome/scss/font-awesome.css><link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel=stylesheet><title>Notifications - API Documentation - Kuzzle documentation</title><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css><link href=/documentation/v/edge/assets/stylesheets/full/screen.css rel=stylesheet type=text/css media=screen></head><body class=index><header><div class=wrapper><div id=logo><a href=http://kuzzle.io/ >&#xA0;</a></div><a class=mobile-nav-burger href=javascript:;></a><nav><ul><li><a href=http://kuzzle.io/kuzzle-entreprise class=nav-item>product</a></li><li><a href=https://stafyniaksacha.github.io/documentation/v/edge/ class="nav-item developers active">Documentation</a><ul class=mobile-nav><li><a href=/documentation/v/edge/guide><span>Guide</span></a></li><li><a href=/documentation/v/edge/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/v/edge/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/v/edge/validation-reference><span>Data Validation</span></a></li><li class=active><a href=/documentation/v/edge/api-documentation><span>API Documentation</span></a><ul class=sub-nav><li><a href=/documentation/v/edge/api-documentation/connecting-to-kuzzle><span>Connecting to Kuzzle</span></a></li><li><a href=/documentation/v/edge/api-documentation/query-syntax><span>Query syntax</span></a></li><li><a href=/documentation/v/edge/api-documentation/kuzzle-response><span>Kuzzle response</span></a></li><li><a href=/documentation/v/edge/api-documentation/volatile-data><span>Sending volatile data</span></a></li><li><a href=/documentation/v/edge/api-documentation/errors><span>Errors</span></a></li><li class=active><a href=/documentation/v/edge/api-documentation/notifications><span>Notifications</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-auth><span>auth</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-bulk><span>bulk</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-collection><span>collection</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-document><span>document</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-index><span>index</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-memory-storage><span>memoryStorage</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-realtime><span>realtime</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-security><span>security</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-server><span>server</span></a></li></ul></li><li><a href=/documentation/v/edge/plugins-reference><span>Plugins Reference</span></a></li><li><a href=/documentation/v/edge/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul></li><li><a href=http://kuzzle.io/demos-tutorials/ class=nav-item>Demos</a></li><li><a href=http://kuzzle.io/blog/ class=nav-item>Blog</a></li><li><a href=http://kuzzle.io/contact/ class=nav-item>Contact</a></li><li><a href=https://github.com/kuzzleio/kuzzle target=_blank class="nav-item github"><i class="icon icon-github icon-small"></i></a></li></ul></nav></div><div class="developer-nav open"><ul class=search><li><input name=search type=search placeholder=search tabindex=1></li></ul><ul class=nav><li><a href=/documentation/v/edge/guide><span>Guide</span></a></li><li><a href=/documentation/v/edge/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/v/edge/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/v/edge/validation-reference><span>Data Validation</span></a></li><li class=active><a href=/documentation/v/edge/api-documentation><span>API Documentation</span></a></li><li><a href=/documentation/v/edge/plugins-reference><span>Plugins Reference</span></a></li><li><a href=/documentation/v/edge/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul><div class=search-results><ul></ul></div><script type=text/plain id=search-results-template><li>
         <a href="__link__" tabindex="__tabindex__">
           <p class="page">
             <span class="title">__title__</span>
@@ -216,226 +7,28 @@
           </p>
           <p class="preview">__preview__</p>
         </a>
-      </li>
-    </script>
-  </div>
-</header>
-
-<div class="container">
-  <div class="tocify-wrapper">
-    <ul class="search-results"></ul>
-  
-    <div class="tocify">
-      <ul class="tocify-header">
-        <li class="tocify-item tocify-focus tocify-hover"></li>
-      </ul>
-      <ul class="tocify-header">
-        <li class="tocify-item"><a style="color: #111; text-decoration: none;" href="https://stafyniaksacha.github.io/documentation/v/edge/api-documentation" title="back to API Documentation home">API Documentation</a></li>
-        <ul class="tocify-subheader">
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/connecting-to-kuzzle" title="through HTTP, WebSocket or Protocol plugins">Connecting to Kuzzle</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/query-syntax" title="learn how to send raw queries to kuzzle">Query syntax</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/kuzzle-response" title="understand Kuzzle response mechanisms">Kuzzle response</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/volatile-data" title="broadcast extra volatile data to subscribers">Sending volatile data</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/errors" title="understand Kuzzle errors mechanisms">Errors</a></li>
-  
-          <li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none;" href="#" title="understand Kuzzle real-time notifications mechanisms">Notifications</a></li>
-            <ul class="tocify-header">
-              <ul class="tocify-subheader">
-                      <li class="tocify-item tocify-level-2 tocify-focus"><a style="color: #FFF; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications" title="understand Kuzzle real-time notifications mechanisms">&#x203A; Notifications</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/document-creating" title="A document is about to be created">&#x203A; A document is about to be created</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/document-created" title="A document has been created">&#x203A; A document has been created</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/document-scope-in" title="An updated document entered your listening scope">&#x203A; An updated document entered your listening scope</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/document-deleting" title="A document is about to be deleted">&#x203A; A document is about to be deleted</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/document-deleted" title="A document has been deleted">&#x203A; A document has been deleted</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/document-scope-out" title="An updated document left your listening scope">&#x203A; An updated document left your listening scope</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/user-scope-in" title="A user subscribed to this room">&#x203A; A user subscribed to this room</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications/user-scope-out" title="A user subscribed to this room">&#x203A; A user subscribed to this room</a></li>
-              </ul>
-            </ul>
-          </ul>
-          <li class="tocify-item"><a style="color: #111; text-decoration: none;" href="/documentation/v/edge/api-documentation/#API Reference" title="back to API Documentation home">API Reference</a></li>
-          <ul class="tocify-subheader">
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-auth/check-token" title="auth">auth</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-bulk" title="bulk">bulk</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-collection/create" title="collection">collection</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-document/count" title="document">document</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-index/create" title="index">index</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-memory-storage/append" title="memoryStorage">memoryStorage</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-realtime/count" title="realtime">realtime</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-security/create-credentials" title="security">security</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-server/admin-exists" title="server">server</a></li>
-        </ul>
-      </ul>
-      <ul class="toc-footer">
-        <!-- community links here ! -->
-  
-            <li><a href="/documentation/">1.0.0-RC9 (latest)</a></li>
-            <li><span style="color:#717171">1.0.0-RC10 (next)</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="page-wrapper">
-    <div class="toc">
-      <ul>
-        <li class="toc-item toc-level-1">
-            <a href="#notifications" title="Notifications">
-              Notifications
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#exemples" title="exemples">
-              exemples
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#websocket" title="Websocket">
-              Websocket
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#socket-io" title="Socket.io">
-              Socket.io
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#mqtt" title="MQTT">
-              MQTT
-            </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="content">
-
-      <div class="mobile-breadcrumb">
-        <p>
-        <a href="https://stafyniaksacha.github.io/documentation/v/edge/">Kuzzle documentation</a>
-      
-          &#xBB; <a href="https://stafyniaksacha.github.io/documentation/v/edge/api-documentation">API Documentation</a>
-      
-          &#xBB; Notifications
-         </p>
-      </div>
-      
-      <div class="nav-sibling">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/stafyniaksacha/documentation/edit/forked-rcx-refactor-doc-deploy/src/api-documentation/notifications/index.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/notifications/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-            <a href="https://stafyniaksacha.github.io/documentation/v/edge/api-documentation/notifications/document-creating">A document is about to be created &#xBB;</a>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-
-      <div class="toc-inline">
-        <ul>
-          <li class="toc-item toc-level-1">
-              <a href="#notifications" title="Notifications">
-                Notifications
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#exemples" title="exemples">
-                exemples
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#websocket" title="Websocket">
-                Websocket
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#socket-io" title="Socket.io">
-                Socket.io
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#mqtt" title="MQTT">
-                MQTT
-              </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="main-content">
-        <h1><a class="anchor" id="notifications"></a>Notifications</h1>
-<p><a href="/documentation/v/edge/api-documentation/controller-realtime/subscribe">Subscribing to some documents in Kuzzle</a> allows to be notified back each time a document matches your criteria.
-The subscription action (realtime/subscribe) returns a channel identifier which you can then listen to receive the
-notifications.</p>
-<p>You can receive the following types of notifications:</p>
-<p><strong>Document Notifications:</strong></p>
-<ul>
-<li>A document has been created</li>
-<li>A document has been updated and entered your subscription scope</li>
-<li>A document has been updated and left your subscription scope</li>
-<li>A document has been deleted</li>
-<li>A document is about to be created (realtime)</li>
-<li>A document is about to be deleted (realtime)</li>
-</ul>
-<p><strong>Subscription Notifications:</strong></p>
-<ul>
-<li>A user subscribed to this room</li>
-<li>A user left this room</li>
-</ul>
-<p><strong>Server Notifications:</strong></p>
-<ul>
-<li>Your JWT Token has expired</li>
-</ul>
-<hr>
-<h2><a class="anchor" id="exemples"></a>exemples</h2>
-<h3><a class="anchor" id="websocket"></a>Websocket</h3>
-<pre><code class="hljs html">// For browsers not supporting websocket, use socket.io instead
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-  <span class="hljs-keyword">var</span>
-    socket = <span class="hljs-keyword">new</span> WebSocket(<span class="hljs-string">&quot;ws://localhost:7512&quot;</span>),
+      </li></script></div></header><div class=container><div class=tocify-wrapper><ul class=search-results></ul><div class=tocify><ul class=tocify-header><li class="tocify-item tocify-focus tocify-hover"></li></ul><ul class=tocify-header><li class=tocify-item><a style="color: #111; text-decoration: none" href=https://stafyniaksacha.github.io/documentation/v/edge/api-documentation title="back to API Documentation home">API Documentation</a></li><ul class=tocify-subheader><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/connecting-to-kuzzle title="through HTTP, WebSocket or Protocol plugins">Connecting to Kuzzle</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/query-syntax title="learn how to send raw queries to kuzzle">Query syntax</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/kuzzle-response title="understand Kuzzle response mechanisms">Kuzzle response</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/volatile-data title="broadcast extra volatile data to subscribers">Sending volatile data</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/errors title="understand Kuzzle errors mechanisms">Errors</a></li><li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none" href=# title="understand Kuzzle real-time notifications mechanisms">Notifications</a></li><ul class=tocify-header><ul class=tocify-subheader><li class="tocify-item tocify-level-2 tocify-focus"><a style="color: #FFF; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications title="understand Kuzzle real-time notifications mechanisms">&#x203A; Notifications</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/document-creating title="A document is about to be created">&#x203A; A document is about to be created</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/document-created title="A document has been created">&#x203A; A document has been created</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/document-scope-in title="An updated document entered your listening scope">&#x203A; An updated document entered your listening scope</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/document-deleting title="A document is about to be deleted">&#x203A; A document is about to be deleted</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/document-deleted title="A document has been deleted">&#x203A; A document has been deleted</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/document-scope-out title="An updated document left your listening scope">&#x203A; An updated document left your listening scope</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/user-scope-in title="A user subscribed to this room">&#x203A; A user subscribed to this room</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications/user-scope-out title="A user subscribed to this room">&#x203A; A user subscribed to this room</a></li></ul></ul></ul><li class=tocify-item><a style="color: #111; text-decoration: none" href="/documentation/v/edge/api-documentation/#API Reference" title="back to API Documentation home">API Reference</a></li><ul class=tocify-subheader><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-auth/check-token title=auth>auth</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-bulk title=bulk>bulk</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-collection/create title=collection>collection</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-document/count title=document>document</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-index/create title=index>index</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-memory-storage/append title=memoryStorage>memoryStorage</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-realtime/count title=realtime>realtime</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-security/create-credentials title=security>security</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-server/admin-exists title=server>server</a></li></ul></ul><ul class=toc-footer><li><a href=/documentation/ >1.0.0-RC9 (latest)</a></li><li><span style=color:#717171>1.0.0-RC10 (next)</span></li></ul></div></div><div class=page-wrapper><div class=toc><ul><li class="toc-item toc-level-1"><a href=#notifications title=Notifications>Notifications</a></li><li class="toc-item toc-level-2"><a href=#exemples title=exemples>exemples</a></li><li class="toc-item toc-level-3"><a href=#websocket title=Websocket>Websocket</a></li><li class="toc-item toc-level-3"><a href=#socket-io title=Socket.io>Socket.io</a></li><li class="toc-item toc-level-3"><a href=#mqtt title=MQTT>MQTT</a></li></ul></div><div class=content><div class=mobile-breadcrumb><p><a href=https://stafyniaksacha.github.io/documentation/v/edge/ >Kuzzle documentation</a> &#xBB; <a href=https://stafyniaksacha.github.io/documentation/v/edge/api-documentation>API Documentation</a> &#xBB; Notifications</p></div><div class=nav-sibling><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/rc.x/src/api-documentation/notifications/index.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/notifications/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p><a href=https://stafyniaksacha.github.io/documentation/v/edge/api-documentation/notifications/document-creating>A document is about to be created &#xBB;</a></p></div><div style=clear:both></div></div><div class=toc-inline><ul><li class="toc-item toc-level-1"><a href=#notifications title=Notifications>Notifications</a></li><li class="toc-item toc-level-2"><a href=#exemples title=exemples>exemples</a></li><li class="toc-item toc-level-3"><a href=#websocket title=Websocket>Websocket</a></li><li class="toc-item toc-level-3"><a href=#socket-io title=Socket.io>Socket.io</a></li><li class="toc-item toc-level-3"><a href=#mqtt title=MQTT>MQTT</a></li></ul></div><div class=main-content><h1><a class=anchor id=notifications></a>Notifications</h1><p><a href=/documentation/v/edge/api-documentation/controller-realtime/subscribe>Subscribing to some documents in Kuzzle</a> allows to be notified back each time a document matches your criteria. The subscription action (realtime/subscribe) returns a channel identifier which you can then listen to receive the notifications.</p><p>You can receive the following types of notifications:</p><p><strong>Document Notifications:</strong></p><ul><li>A document has been created</li><li>A document has been updated and entered your subscription scope</li><li>A document has been updated and left your subscription scope</li><li>A document has been deleted</li><li>A document is about to be created (realtime)</li><li>A document is about to be deleted (realtime)</li></ul><p><strong>Subscription Notifications:</strong></p><ul><li>A user subscribed to this room</li><li>A user left this room</li></ul><p><strong>Server Notifications:</strong></p><ul><li>Your JWT Token has expired</li></ul><hr><h2><a class=anchor id=exemples></a>exemples</h2><h3><a class=anchor id=websocket></a>Websocket</h3><pre><code class="hljs html">// For browsers not supporting websocket, use socket.io instead
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>&gt;</span><span class=javascript>
+  <span class=hljs-keyword>var</span>
+    socket = <span class=hljs-keyword>new</span> WebSocket(<span class=hljs-string>&quot;ws://localhost:7512&quot;</span>),
     channel;
 
-  socket.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">payload</span>) </span>{
-    <span class="hljs-keyword">var</span> response = <span class="hljs-built_in">JSON</span>.parse(payload.data);
+  socket.onmessage = <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>payload</span>) </span>{
+    <span class=hljs-keyword>var</span> response = <span class=hljs-built_in>JSON</span>.parse(payload.data);
 
-    <span class="hljs-comment">/*
+    <span class=hljs-comment>/*
      step 1 - we get the created channel name, as notifications will be sent
         with &quot;room = channelName&quot;
      */</span>
-    <span class="hljs-keyword">if</span> (response.room === <span class="hljs-string">&quot;mySubscription&quot;</span>) {
- <span class="hljs-comment">// we now have a channel to listen to</span>
+    <span class=hljs-keyword>if</span> (response.room === <span class=hljs-string>&quot;mySubscription&quot;</span>) {
+ <span class=hljs-comment>// we now have a channel to listen to</span>
       channel = response.result.channel;
     }
 
-    <span class="hljs-keyword">if</span> (response.room === channel) {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Received a notification: &quot;</span>, response);
+    <span class=hljs-keyword>if</span> (response.room === channel) {
+      <span class=hljs-built_in>console</span>.log(<span class=hljs-string>&quot;Received a notification: &quot;</span>, response);
 
-      <span class="hljs-comment">/*
+      <span class=hljs-comment>/*
       {
         &quot;status&quot;: 200,
         &quot;error&quot;: null,
@@ -454,42 +47,39 @@ notifications.</p>
     }
   };
 
-  <span class="hljs-comment">// step 2 - we subscribe to our documents</span>
-  socket.onopen = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-    socket.send(<span class="hljs-built_in">JSON</span>.stringify({
-      <span class="hljs-string">&quot;requestId&quot;</span>: <span class="hljs-string">&quot;mySubscription&quot;</span>,
-      <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-      <span class="hljs-string">&quot;collection&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-      <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;realtime&quot;</span>,
-      <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;subscribe&quot;</span>,
-      <span class="hljs-string">&quot;body&quot;</span>: {}
+  <span class=hljs-comment>// step 2 - we subscribe to our documents</span>
+  socket.onopen = <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params></span>) </span>{
+    socket.send(<span class=hljs-built_in>JSON</span>.stringify({
+      <span class=hljs-string>&quot;requestId&quot;</span>: <span class=hljs-string>&quot;mySubscription&quot;</span>,
+      <span class=hljs-string>&quot;index&quot;</span>: <span class=hljs-string>&quot;index&quot;</span>,
+      <span class=hljs-string>&quot;collection&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+      <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;realtime&quot;</span>,
+      <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;subscribe&quot;</span>,
+      <span class=hljs-string>&quot;body&quot;</span>: {}
     }));
 
-    <span class="hljs-comment">// step 3 - when publishing a message, we get some notifications back</span>
-    socket.send(<span class="hljs-built_in">JSON</span>.stringify({
-      <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-      <span class="hljs-string">&quot;collection&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-      <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;realtime&quot;</span>,
-      <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;publish&quot;</span>,
-      <span class="hljs-string">&quot;body&quot;</span>: {
-        <span class="hljs-string">&quot;foo&quot;</span>: <span class="hljs-string">&quot;bar&quot;</span>
+    <span class=hljs-comment>// step 3 - when publishing a message, we get some notifications back</span>
+    socket.send(<span class=hljs-built_in>JSON</span>.stringify({
+      <span class=hljs-string>&quot;index&quot;</span>: <span class=hljs-string>&quot;index&quot;</span>,
+      <span class=hljs-string>&quot;collection&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+      <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;realtime&quot;</span>,
+      <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;publish&quot;</span>,
+      <span class=hljs-string>&quot;body&quot;</span>: {
+        <span class=hljs-string>&quot;foo&quot;</span>: <span class=hljs-string>&quot;bar&quot;</span>
       }
     }));
   };
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>&gt;</span></code></pre><h3><a class=anchor id=socket-io></a>Socket.io</h3><pre><code class="hljs html"><span class=hljs-tag>&lt;<span class=hljs-name>script</span> <span class=hljs-attr>src</span>=<span class=hljs-string>&quot;https://cdn.socket.io/socket.io-1.4.5.js&quot;</span>&gt;</span><span class="undefined"></span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>&gt;</span>
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>&gt;</span><span class=javascript>
+  <span class=hljs-keyword>var</span> socket = io(<span class=hljs-string>&quot;http://localhost:7512&quot;</span>);
 
-<h3><a class="anchor" id="socket-io"></a>Socket.io</h3>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.socket.io/socket.io-1.4.5.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-  <span class="hljs-keyword">var</span> socket = io(<span class="hljs-string">&quot;http://localhost:7512&quot;</span>);
+  <span class=hljs-comment>// step 1 - we prepare ourself to receive Kuzzle&apos;s subscription response and then listen to the created channel.</span>
+  socket.once(<span class=hljs-string>&quot;mySubscription&quot;</span>, <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>response</span>) </span>{
+    <span class=hljs-comment>// we now have a channel to listen to</span>
+    socket.on(response.result.channel, <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>notification</span>) </span>{
+      <span class=hljs-built_in>console</span>.log(notification);
 
-  <span class="hljs-comment">// step 1 - we prepare ourself to receive Kuzzle&apos;s subscription response and then listen to the created channel.</span>
-  socket.once(<span class="hljs-string">&quot;mySubscription&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">response</span>) </span>{
-    <span class="hljs-comment">// we now have a channel to listen to</span>
-    socket.on(response.result.channel, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">notification</span>) </span>{
-      <span class="hljs-built_in">console</span>.log(notification);
-
-      <span class="hljs-comment">/*
+      <span class=hljs-comment>/*
       {
         &quot;status&quot;: 200,
         &quot;error&quot;: null,
@@ -508,36 +98,33 @@ notifications.</p>
     });
   });
 
-  <span class="hljs-comment">// step 2 - we subscribe to our documents</span>
-  socket.emit(<span class="hljs-string">&quot;kuzzle&quot;</span>, {
-    <span class="hljs-string">&quot;requestId&quot;</span>: <span class="hljs-string">&quot;mySubscription&quot;</span>,
-    <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-    <span class="hljs-string">&quot;collection&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-    <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;realtime&quot;</span>,
-    <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;subscribe&quot;</span>,
-    <span class="hljs-string">&quot;body&quot;</span>: {}
+  <span class=hljs-comment>// step 2 - we subscribe to our documents</span>
+  socket.emit(<span class=hljs-string>&quot;kuzzle&quot;</span>, {
+    <span class=hljs-string>&quot;requestId&quot;</span>: <span class=hljs-string>&quot;mySubscription&quot;</span>,
+    <span class=hljs-string>&quot;index&quot;</span>: <span class=hljs-string>&quot;index&quot;</span>,
+    <span class=hljs-string>&quot;collection&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+    <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;realtime&quot;</span>,
+    <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;subscribe&quot;</span>,
+    <span class=hljs-string>&quot;body&quot;</span>: {}
   });
 
-  <span class="hljs-comment">// step 3 - when publishing a message, we get some notifications back</span>
-  socket.emit(<span class="hljs-string">&quot;kuzzle&quot;</span>, {
-    <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-    <span class="hljs-string">&quot;collection&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-    <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;realtime&quot;</span>,
-    <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;publish&quot;</span>,
-    <span class="hljs-string">&quot;body&quot;</span>: {
-      <span class="hljs-string">&quot;foo&quot;</span>: <span class="hljs-string">&quot;bar&quot;</span>
+  <span class=hljs-comment>// step 3 - when publishing a message, we get some notifications back</span>
+  socket.emit(<span class=hljs-string>&quot;kuzzle&quot;</span>, {
+    <span class=hljs-string>&quot;index&quot;</span>: <span class=hljs-string>&quot;index&quot;</span>,
+    <span class=hljs-string>&quot;collection&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+    <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;realtime&quot;</span>,
+    <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;publish&quot;</span>,
+    <span class=hljs-string>&quot;body&quot;</span>: {
+      <span class=hljs-string>&quot;foo&quot;</span>: <span class=hljs-string>&quot;bar&quot;</span>
     }
   });
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-
-<h3><a class="anchor" id="mqtt"></a>MQTT</h3>
-<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>&gt;</span></code></pre><h3><a class=anchor id=mqtt></a>MQTT</h3><pre><code class="hljs bash"><span class=hljs-meta>#!/bin/bash
 </span>
-<span class="hljs-comment"># shell 1 - getting direct responses from kuzzle</span>
+<span class=hljs-comment># shell 1 - getting direct responses from kuzzle</span>
 node_modules/.bin/mqtt subscribe -v -h rabbit -t mqtt.myId
 
-<span class="hljs-comment"># shell 2 - we subscribe to our documents</span>
-node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class="hljs-string">&apos;{
+<span class=hljs-comment># shell 2 - we subscribe to our documents</span>
+node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class=hljs-string>&apos;{
   &quot;controller&quot;: &quot;realtime&quot;,
   &quot;action&quot;:&quot;subscribe&quot;,
   &quot;index&quot;: &quot;index&quot;,
@@ -545,28 +132,28 @@ node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class="hljs-string">
   &quot;body&quot;: {}
 }&apos;</span>
 
-<span class="hljs-comment"># shell 1 (prettified)</span>
+<span class=hljs-comment># shell 1 (prettified)</span>
 mqtt/myId {
-  <span class="hljs-string">&quot;status&quot;</span>: 200,
-  <span class="hljs-string">&quot;error&quot;</span>: null,
-  <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-  <span class="hljs-string">&quot;collection&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-  <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;controller&quot;</span>,
-  <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;action&quot;</span>,
-  <span class="hljs-string">&quot;volatile&quot;</span>: {},
-  <span class="hljs-string">&quot;requestId&quot;</span>: <span class="hljs-string">&quot;60621753-2da2-441a-b30b-546127f26cd1&quot;</span>,
-  <span class="hljs-string">&quot;result&quot;</span>: {
-    <span class="hljs-string">&quot;roomId&quot;</span>: <span class="hljs-string">&quot;632682a9eac95cfb95e3a697b29b7739&quot;</span>,
-    <span class="hljs-string">&quot;channel&quot;</span>: <span class="hljs-string">&quot;632682a9eac95cfb95e3a697b29b7739-1c7beed7521fd0b0a8177f219b786d2e&quot;</span>,
-    <span class="hljs-string">&quot;timestamp&quot;</span>: 1450267140597
+  <span class=hljs-string>&quot;status&quot;</span>: 200,
+  <span class=hljs-string>&quot;error&quot;</span>: null,
+  <span class=hljs-string>&quot;index&quot;</span>: <span class=hljs-string>&quot;index&quot;</span>,
+  <span class=hljs-string>&quot;collection&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+  <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;controller&quot;</span>,
+  <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;action&quot;</span>,
+  <span class=hljs-string>&quot;volatile&quot;</span>: {},
+  <span class=hljs-string>&quot;requestId&quot;</span>: <span class=hljs-string>&quot;60621753-2da2-441a-b30b-546127f26cd1&quot;</span>,
+  <span class=hljs-string>&quot;result&quot;</span>: {
+    <span class=hljs-string>&quot;roomId&quot;</span>: <span class=hljs-string>&quot;632682a9eac95cfb95e3a697b29b7739&quot;</span>,
+    <span class=hljs-string>&quot;channel&quot;</span>: <span class=hljs-string>&quot;632682a9eac95cfb95e3a697b29b7739-1c7beed7521fd0b0a8177f219b786d2e&quot;</span>,
+    <span class=hljs-string>&quot;timestamp&quot;</span>: 1450267140597
   }
 }
 
-<span class="hljs-comment"># shell 3 - we subscribe to the nofitications</span>
+<span class=hljs-comment># shell 3 - we subscribe to the nofitications</span>
 node_modules/.bin/mqtt subscribe -h rabbit -t 632682a9eac95cfb95e3a697b29b7739-1c7beed7521fd0b0a8177f219b786d2e
 
-<span class="hljs-comment"># shell 2 - we publish a message</span>
-node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class="hljs-string">&apos;{
+<span class=hljs-comment># shell 2 - we publish a message</span>
+node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class=hljs-string>&apos;{
   &quot;controller&quot;: &quot;realtime&quot;,
   &quot;action&quot;: &quot;publish&quot;,
   &quot;index&quot;: &quot;index&quot;,
@@ -574,30 +161,22 @@ node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class="hljs-string">
   &quot;body&quot;: {&quot;foo&quot;: &quot;bar&quot;}
 }&apos;</span>
 
-<span class="hljs-comment"># shell 3</span>
+<span class=hljs-comment># shell 3</span>
 {
-  <span class="hljs-string">&quot;status&quot;</span>: 200,
-  <span class="hljs-string">&quot;error&quot;</span>: null,
-  <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-  <span class="hljs-string">&quot;collection&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-  <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;controller&quot;</span>,
-  <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;action&quot;</span>,
-  <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;done&quot;</span>,
-  <span class="hljs-string">&quot;scope&quot;</span>: <span class="hljs-string">&quot;in&quot;</span>,
-  <span class="hljs-string">&quot;volatile&quot;</span>: {},
-  <span class="hljs-string">&quot;requestId&quot;</span>: <span class="hljs-string">&quot;10bca195-f375-4b72-817a-04fcb22b3681&quot;</span>,
-  <span class="hljs-string">&quot;result&quot;</span>: {
-    <span class="hljs-string">&quot;_source&quot;</span>: {<span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>}
+  <span class=hljs-string>&quot;status&quot;</span>: 200,
+  <span class=hljs-string>&quot;error&quot;</span>: null,
+  <span class=hljs-string>&quot;index&quot;</span>: <span class=hljs-string>&quot;index&quot;</span>,
+  <span class=hljs-string>&quot;collection&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+  <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;controller&quot;</span>,
+  <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;action&quot;</span>,
+  <span class=hljs-string>&quot;state&quot;</span>: <span class=hljs-string>&quot;done&quot;</span>,
+  <span class=hljs-string>&quot;scope&quot;</span>: <span class=hljs-string>&quot;in&quot;</span>,
+  <span class=hljs-string>&quot;volatile&quot;</span>: {},
+  <span class=hljs-string>&quot;requestId&quot;</span>: <span class=hljs-string>&quot;10bca195-f375-4b72-817a-04fcb22b3681&quot;</span>,
+  <span class=hljs-string>&quot;result&quot;</span>: {
+    <span class=hljs-string>&quot;_source&quot;</span>: {<span class=hljs-string>&quot;foo&quot;</span>:<span class=hljs-string>&quot;bar&quot;</span>}
   }
-}</code></pre>
-        <div style="clear: both"></div>
-      </div>
-
-      <hr>
-      <div id="disqus_thread"></div>
-      
-      <script async>
-        var disqus_developer = 1;
+}</code></pre><div style="clear: both"></div></div><hr><div id=disqus_thread></div><script async>var disqus_developer = 1;
       
         var disqus_config = function () {
           this.page.url = 'https://stafyniaksacha.github.io/documentation/v/edge/api-documentation/notifications';
@@ -610,45 +189,7 @@ node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class="hljs-string">
           s.src = 'https://kuzzle-documentation.disqus.com/embed.js';
           s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
-        })();
-      </script>
-
-      <div class="nav-sibling bottom">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/stafyniaksacha/documentation/edit/forked-rcx-refactor-doc-deploy/src/api-documentation/notifications/index.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/notifications/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-            <a href="https://stafyniaksacha.github.io/documentation/v/edge/api-documentation/notifications/document-creating">A document is about to be created &#xBB;</a>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
-<script src="/documentation/v/edge/assets/javascript/lib/jquery.barrating.js"></script>
-
-<script type="text/javascript">
-  // store helper
+        })();</script><div class="nav-sibling bottom"><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/rc.x/src/api-documentation/notifications/index.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/notifications/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p><a href=https://stafyniaksacha.github.io/documentation/v/edge/api-documentation/notifications/document-creating>A document is about to be created &#xBB;</a></p></div><div style=clear:both></div></div></div></div></div><script src=//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js></script><script src=//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js></script><script src=/documentation/v/edge/assets/javascript/lib/jquery.barrating.js></script><script type=text/javascript>// store helper
   var store = function store(key, value) {
     var lsSupport = false;
 
@@ -1263,7 +804,4 @@ node_modules/.bin/mqtt publish -h rabbit -t kuzzle -m <span class="hljs-string">
       });
     });
 
-  })();
-</script>
-</body>
-</html>
+  })();</script></body></html>

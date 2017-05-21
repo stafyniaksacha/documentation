@@ -1,183 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="msapplication-TileColor" content="#FFFFFF">
-  <meta name="msapplication-TileImage" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-144x144.png">
-  <meta name="msapplication-square70x70logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-70x70.png">
-  <meta name="msapplication-square150x150logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-150x150.png">
-  <meta name="msapplication-wide310x150logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x150.png">
-  <meta name="msapplication-square310x310logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x310.png">
-  <meta name="google-site-verification" content="luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4">
-  
-  <!-- Schema.org markup for Google+ -->
-  <meta itemprop="name" content="Data insertion">
-  <meta itemprop="image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Twitter Card data -->
-  <meta name="twitter:card" value="summary">
-  <meta name="twitter:site" content="@kuzzleio">
-  <meta name="twitter:title" content="Data insertion">
-  <meta name="twitter:creator" content="@kuzzleio">
-  <meta name="twitter:image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Open Graph data -->
-  <meta property="og:title" content="Data insertion">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="">
-  <meta property="og:image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-96x96.png">
-  <meta property="article:published_time" content="2017-05-21T13:38:01.597Z">
-  <meta property="article:modified_time" content="2017-05-21T13:38:01.597Z">
-  <meta property="article:section" content="Elasticsearch Cookbook">
-  <meta property="article:tag" content="Data insertion">
-  
-  <meta property="og:description" content="learn how to index data with elasticsearch">
-  <meta itemprop="description" content="learn how to index data with elasticsearch">
-  <meta name="twitter:description" content="learn how to index data with elasticsearch">
-  <meta name="description" content="learn how to index data with elasticsearch">
-  
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-128.png" sizes="128x128">
-  
-  <link rel="stylesheet" href="/documentation/v/edge/assets/font-awesome/scss/font-awesome.css">
-  <link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
-  
-  <title>
-      Data insertion
-      - Elasticsearch Cookbook
-       -
-  
-     Kuzzle documentation
-  </title>
-
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css">
-
-  <link href="/documentation/v/edge/assets/stylesheets/full/screen.css" rel="stylesheet" type="text/css" media="screen">
-</head>
-
-<body class="index">
-<header>
-  <div class="wrapper">
-    <div id="logo">
-      <a href="http://kuzzle.io/">&#xA0;</a>
-    </div>
-
-    <a class="mobile-nav-burger" href="javascript:;"></a>
-
-    <nav>
-      <ul>
-        <li>
-          <a href="http://kuzzle.io/kuzzle-entreprise" class="nav-item">product</a>
-        </li>
-        <li>
-          <a href="https://stafyniaksacha.github.io/documentation/v/edge/" class="nav-item developers active">Documentation</a>
-          <ul class="mobile-nav">
-              <li>
-                <a href="/documentation/v/edge/guide"><span>Guide</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/sdk-reference"><span>SDK Reference</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/validation-reference"><span>Data Validation</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/api-documentation"><span>API Documentation</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/plugins-reference"><span>Plugins Reference</span></a>
-              </li>
-              <li class="active">
-                <a href="/documentation/v/edge/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-
-                <ul class="sub-nav">
-                  <li>
-                    <a href="/documentation/v/edge/elasticsearch-cookbook/installation"><span>Installation</span></a>
-                  </li>
-                  <li class="active">
-                    <a href="/documentation/v/edge/elasticsearch-cookbook/data-insertion"><span>Data insertion</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/elasticsearch-cookbook/useful-commands"><span>Useful commands</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/elasticsearch-cookbook/basic-queries"><span>Basic queries</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/elasticsearch-cookbook/bool-query"><span>The bool (Boolean) query</span></a>
-                  </li>
-                </ul>
-              </li>
-          </ul>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/contact/" class="nav-item ">Contact</a>
-        </li>
-        <li>
-          <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
-            <i class="icon icon-github icon-small"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="developer-nav open">
-    <ul class="search">
-      <li>
-        <input name="search" type="search" placeholder="search" tabindex="1">
-        <!-- <input name="search" type="search" placeholder="search"></input> -->
-      </li>
-    </ul>
-    <ul class="nav">
-        <li>
-          <a href="/documentation/v/edge/guide"><span>Guide</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/sdk-reference"><span>SDK Reference</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/validation-reference"><span>Data Validation</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/api-documentation"><span>API Documentation</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/plugins-reference"><span>Plugins Reference</span></a>
-        </li>
-        <li class="active">
-          <a href="/documentation/v/edge/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-        </li>
-    </ul>
-
-    <div class="search-results"><ul></ul></div>
-
-    <script type="text/plain" id="search-results-template">
-      <li>
+<!doctype html><html><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=msapplication-TileColor content=#FFFFFF><meta name=msapplication-TileImage content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-144x144.png><meta name=msapplication-square70x70logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-70x70.png><meta name=msapplication-square150x150logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-150x150.png><meta name=msapplication-wide310x150logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x150.png><meta name=msapplication-square310x310logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x310.png><meta name=google-site-verification content=luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4><meta itemprop=name content="Data insertion"><meta itemprop=image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png><meta name=twitter:card value=summary><meta name=twitter:site content=@kuzzleio><meta name=twitter:title content="Data insertion"><meta name=twitter:creator content=@kuzzleio><meta name=twitter:image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png><meta property=og:title content="Data insertion"><meta property=og:type content=article><meta property=og:site_name content=""><meta property=og:image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-96x96.png><meta property=article:published_time content=2017-05-21T15:16:19.407Z><meta property=article:modified_time content=2017-05-21T15:16:19.407Z><meta property=article:section content="Elasticsearch Cookbook"><meta property=article:tag content="Data insertion"><meta property=og:description content="learn how to index data with elasticsearch"><meta itemprop=description content="learn how to index data with elasticsearch"><meta name=twitter:description content="learn how to index data with elasticsearch"><meta name=description content="learn how to index data with elasticsearch"><link rel=apple-touch-icon-precomposed sizes=57x57 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-57x57.png><link rel=apple-touch-icon-precomposed sizes=114x114 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-114x114.png><link rel=apple-touch-icon-precomposed sizes=72x72 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-72x72.png><link rel=apple-touch-icon-precomposed sizes=144x144 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-144x144.png><link rel=apple-touch-icon-precomposed sizes=60x60 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-60x60.png><link rel=apple-touch-icon-precomposed sizes=120x120 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-120x120.png><link rel=apple-touch-icon-precomposed sizes=76x76 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-76x76.png><link rel=apple-touch-icon-precomposed sizes=152x152 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-152x152.png><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-196x196.png sizes=196x196><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-96x96.png sizes=96x96><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-128.png sizes=128x128><link rel=stylesheet href=/documentation/v/edge/assets/font-awesome/scss/font-awesome.css><link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel=stylesheet><title>Data insertion - Elasticsearch Cookbook - Kuzzle documentation</title><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css><link href=/documentation/v/edge/assets/stylesheets/full/screen.css rel=stylesheet type=text/css media=screen></head><body class=index><header><div class=wrapper><div id=logo><a href=http://kuzzle.io/ >&#xA0;</a></div><a class=mobile-nav-burger href=javascript:;></a><nav><ul><li><a href=http://kuzzle.io/kuzzle-entreprise class=nav-item>product</a></li><li><a href=https://stafyniaksacha.github.io/documentation/v/edge/ class="nav-item developers active">Documentation</a><ul class=mobile-nav><li><a href=/documentation/v/edge/guide><span>Guide</span></a></li><li><a href=/documentation/v/edge/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/v/edge/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/v/edge/validation-reference><span>Data Validation</span></a></li><li><a href=/documentation/v/edge/api-documentation><span>API Documentation</span></a></li><li><a href=/documentation/v/edge/plugins-reference><span>Plugins Reference</span></a></li><li class=active><a href=/documentation/v/edge/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a><ul class=sub-nav><li><a href=/documentation/v/edge/elasticsearch-cookbook/installation><span>Installation</span></a></li><li class=active><a href=/documentation/v/edge/elasticsearch-cookbook/data-insertion><span>Data insertion</span></a></li><li><a href=/documentation/v/edge/elasticsearch-cookbook/useful-commands><span>Useful commands</span></a></li><li><a href=/documentation/v/edge/elasticsearch-cookbook/basic-queries><span>Basic queries</span></a></li><li><a href=/documentation/v/edge/elasticsearch-cookbook/bool-query><span>The bool (Boolean) query</span></a></li></ul></li></ul></li><li><a href=http://kuzzle.io/demos-tutorials/ class=nav-item>Demos</a></li><li><a href=http://kuzzle.io/blog/ class=nav-item>Blog</a></li><li><a href=http://kuzzle.io/contact/ class=nav-item>Contact</a></li><li><a href=https://github.com/kuzzleio/kuzzle target=_blank class="nav-item github"><i class="icon icon-github icon-small"></i></a></li></ul></nav></div><div class="developer-nav open"><ul class=search><li><input name=search type=search placeholder=search tabindex=1></li></ul><ul class=nav><li><a href=/documentation/v/edge/guide><span>Guide</span></a></li><li><a href=/documentation/v/edge/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/v/edge/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/v/edge/validation-reference><span>Data Validation</span></a></li><li><a href=/documentation/v/edge/api-documentation><span>API Documentation</span></a></li><li><a href=/documentation/v/edge/plugins-reference><span>Plugins Reference</span></a></li><li class=active><a href=/documentation/v/edge/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul><div class=search-results><ul></ul></div><script type=text/plain id=search-results-template><li>
         <a href="__link__" tabindex="__tabindex__">
           <p class="page">
             <span class="title">__title__</span>
@@ -186,170 +7,9 @@
           </p>
           <p class="preview">__preview__</p>
         </a>
-      </li>
-    </script>
-  </div>
-</header>
-
-<div class="container">
-  <div class="tocify-wrapper">
-    <ul class="search-results"></ul>
-  
-    <div class="tocify">
-      <ul class="tocify-header">
-        <li class="tocify-item tocify-focus tocify-hover"></li>
-      </ul>
-      <ul class="tocify-header">
-        <li class="tocify-item"><a style="color: #111; text-decoration: none;" href="https://stafyniaksacha.github.io/documentation/v/edge/elasticsearch-cookbook" title="back to Elasticsearch Cookbook home">Elasticsearch Cookbook</a></li>
-        <ul class="tocify-subheader">
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/elasticsearch-cookbook/installation" title="learn how to install elasticsearch from scratch">Installation</a></li>
-  
-          <li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none;" href="#" title="learn how to index data with elasticsearch">Data insertion</a></li>
-            <ul class="tocify-header">
-              <ul class="tocify-subheader">
-              </ul>
-            </ul>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/elasticsearch-cookbook/useful-commands" title="learn time-saving elasticsearch commands">Useful commands</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/elasticsearch-cookbook/basic-queries" title="learn how to search data with elasticsearch">Basic queries</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/elasticsearch-cookbook/bool-query" title="learn how to combine filters with elasticsearch">The bool (Boolean) query</a></li>
-        </ul>
-      </ul>
-      <ul class="toc-footer">
-        <!-- community links here ! -->
-  
-            <li><a href="/documentation/">1.0.0-RC9 (latest)</a></li>
-            <li><span style="color:#717171">1.0.0-RC10 (next)</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="page-wrapper">
-    <div class="toc">
-      <ul>
-        <li class="toc-item toc-level-1">
-            <a href="#data-insertion" title="Data insertion">
-              Data insertion
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#mapping-creation" title="Mapping creation">
-              Mapping creation
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#document-creation" title="Document creation">
-              Document creation
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#the-id" title="The id">
-              The id
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#the-body" title="The body">
-              The body
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#the-structure" title="The structure">
-              The structure
-            </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="content">
-
-      <div class="mobile-breadcrumb">
-        <p>
-        <a href="https://stafyniaksacha.github.io/documentation/v/edge/">Kuzzle documentation</a>
-      
-          &#xBB; <a href="https://stafyniaksacha.github.io/documentation/v/edge/elasticsearch-cookbook">Elasticsearch Cookbook</a>
-      
-          &#xBB; Data insertion
-         </p>
-      </div>
-      
-      <div class="nav-sibling">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/stafyniaksacha/documentation/edit/forked-rcx-refactor-doc-deploy/src/elasticsearch-cookbook/data-insertion/index.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=elasticsearch-cookbook&amp;title=Feedback%20about%20page%20&apos;elasticsearch-cookbook/data-insertion/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-
-      <div class="toc-inline">
-        <ul>
-          <li class="toc-item toc-level-1">
-              <a href="#data-insertion" title="Data insertion">
-                Data insertion
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#mapping-creation" title="Mapping creation">
-                Mapping creation
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#document-creation" title="Document creation">
-                Document creation
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#the-id" title="The id">
-                The id
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#the-body" title="The body">
-                The body
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#the-structure" title="The structure">
-                The structure
-              </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="main-content">
-        <h1><a class="anchor" id="data-insertion"></a>Data insertion</h1>
-<p>From now on we will add the <code>?pretty</code> keyword to requests in order to get human-readable outputs.</p>
-<hr>
-<h2><a class="anchor" id="mapping-creation"></a>Mapping creation</h2>
-<p>We will provide to Elasticsearch the mapping (RDBM: schema) of the data we want to index.
-Here we create a new document <code>type</code> (RDBM: table) called <code>blogpost</code> with 6 fields (RDBM: columns).</p>
-<aside class="warning">
-  The mapping is not mandatory, but if you don&apos;t define it before pushing data to Elasticsearch,
-  Elasticsearch will infer to define the type of each field for you depending of their content.
-  Once defined, the field type can not be changed.
-</aside>
-
-<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash
+      </li></script></div></header><div class=container><div class=tocify-wrapper><ul class=search-results></ul><div class=tocify><ul class=tocify-header><li class="tocify-item tocify-focus tocify-hover"></li></ul><ul class=tocify-header><li class=tocify-item><a style="color: #111; text-decoration: none" href=https://stafyniaksacha.github.io/documentation/v/edge/elasticsearch-cookbook title="back to Elasticsearch Cookbook home">Elasticsearch Cookbook</a></li><ul class=tocify-subheader><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/elasticsearch-cookbook/installation title="learn how to install elasticsearch from scratch">Installation</a></li><li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none" href=# title="learn how to index data with elasticsearch">Data insertion</a></li><ul class=tocify-header><ul class=tocify-subheader></ul></ul><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/elasticsearch-cookbook/useful-commands title="learn time-saving elasticsearch commands">Useful commands</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/elasticsearch-cookbook/basic-queries title="learn how to search data with elasticsearch">Basic queries</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/elasticsearch-cookbook/bool-query title="learn how to combine filters with elasticsearch">The bool (Boolean) query</a></li></ul></ul><ul class=toc-footer><li><a href=/documentation/ >1.0.0-RC9 (latest)</a></li><li><span style=color:#717171>1.0.0-RC10 (next)</span></li></ul></div></div><div class=page-wrapper><div class=toc><ul><li class="toc-item toc-level-1"><a href=#data-insertion title="Data insertion">Data insertion</a></li><li class="toc-item toc-level-2"><a href=#mapping-creation title="Mapping creation">Mapping creation</a></li><li class="toc-item toc-level-2"><a href=#document-creation title="Document creation">Document creation</a></li><li class="toc-item toc-level-2"><a href=#the-id title="The id">The id</a></li><li class="toc-item toc-level-2"><a href=#the-body title="The body">The body</a></li><li class="toc-item toc-level-2"><a href=#the-structure title="The structure">The structure</a></li></ul></div><div class=content><div class=mobile-breadcrumb><p><a href=https://stafyniaksacha.github.io/documentation/v/edge/ >Kuzzle documentation</a> &#xBB; <a href=https://stafyniaksacha.github.io/documentation/v/edge/elasticsearch-cookbook>Elasticsearch Cookbook</a> &#xBB; Data insertion</p></div><div class=nav-sibling><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/rc.x/src/elasticsearch-cookbook/data-insertion/index.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=elasticsearch-cookbook&amp;title=Feedback%20about%20page%20&apos;elasticsearch-cookbook/data-insertion/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p></p></div><div style=clear:both></div></div><div class=toc-inline><ul><li class="toc-item toc-level-1"><a href=#data-insertion title="Data insertion">Data insertion</a></li><li class="toc-item toc-level-2"><a href=#mapping-creation title="Mapping creation">Mapping creation</a></li><li class="toc-item toc-level-2"><a href=#document-creation title="Document creation">Document creation</a></li><li class="toc-item toc-level-2"><a href=#the-id title="The id">The id</a></li><li class="toc-item toc-level-2"><a href=#the-body title="The body">The body</a></li><li class="toc-item toc-level-2"><a href=#the-structure title="The structure">The structure</a></li></ul></div><div class=main-content><h1><a class=anchor id=data-insertion></a>Data insertion</h1><p>From now on we will add the <code>?pretty</code> keyword to requests in order to get human-readable outputs.</p><hr><h2><a class=anchor id=mapping-creation></a>Mapping creation</h2><p>We will provide to Elasticsearch the mapping (RDBM: schema) of the data we want to index. Here we create a new document <code>type</code> (RDBM: table) called <code>blogpost</code> with 6 fields (RDBM: columns).</p><aside class=warning>The mapping is not mandatory, but if you don&apos;t define it before pushing data to Elasticsearch, Elasticsearch will infer to define the type of each field for you depending of their content. Once defined, the field type can not be changed.</aside><pre><code class="hljs bash"><span class=hljs-meta>#!/bin/bash
 </span>
-curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/?pretty&quot;</span> <span class="hljs-_">-d</span> <span class="hljs-string">&apos;{
+curl -g -X PUT <span class=hljs-string>&quot;http://localhost:9200/example/?pretty&quot;</span> <span class=hljs-_>-d</span> <span class=hljs-string>&apos;{
   &quot;settings&quot; : {
     &quot;index&quot; : {
       &quot;number_of_shards&quot; : 1
@@ -383,19 +43,11 @@ curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/?pr
       }
     }
   }
-}&apos;</span></code></pre>
-
-
-<p>Reply:</p>
-<pre><code class="hljs json">{
-  <span class="hljs-attr">&quot;acknowledged&quot;</span> : <span class="hljs-literal">true</span>
-}</code></pre>
-
-<hr>
-<h2><a class="anchor" id="document-creation"></a>Document creation</h2>
-<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash
+}&apos;</span></code></pre><p>Reply:</p><pre><code class="hljs json">{
+  <span class=hljs-attr>&quot;acknowledged&quot;</span> : <span class=hljs-literal>true</span>
+}</code></pre><hr><h2><a class=anchor id=document-creation></a>Document creation</h2><pre><code class="hljs bash"><span class=hljs-meta>#!/bin/bash
 </span>
-curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blogpost/1?pretty&quot;</span> <span class="hljs-_">-d</span> <span class="hljs-string">&apos;{
+curl -g -X PUT <span class=hljs-string>&quot;http://localhost:9200/example/blogpost/1?pretty&quot;</span> <span class=hljs-_>-d</span> <span class=hljs-string>&apos;{
   &quot;author&quot;: &quot;John Doe&quot;,
   &quot;title&quot;: &quot;I love cats&quot;,
   &quot;body&quot;: &quot;They are so cute&quot;,
@@ -404,7 +56,7 @@ curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blo
   &quot;publish_date&quot;: &quot;2016-08-03&quot;
 }&apos;</span>
 
-curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blogpost/2?pretty&quot;</span> <span class="hljs-_">-d</span> <span class="hljs-string">&apos;{
+curl -g -X PUT <span class=hljs-string>&quot;http://localhost:9200/example/blogpost/2?pretty&quot;</span> <span class=hljs-_>-d</span> <span class=hljs-string>&apos;{
   &quot;author&quot;: &quot;John Doe&quot;,
   &quot;title&quot;: &quot;I like dogs&quot;,
   &quot;body&quot;: &quot;They are loyal&quot;,
@@ -413,7 +65,7 @@ curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blo
   &quot;publish_date&quot;: &quot;2016-08-01&quot;
 }&apos;</span>
 
-curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blogpost/3?pretty&quot;</span> <span class="hljs-_">-d</span> <span class="hljs-string">&apos;{
+curl -g -X PUT <span class=hljs-string>&quot;http://localhost:9200/example/blogpost/3?pretty&quot;</span> <span class=hljs-_>-d</span> <span class=hljs-string>&apos;{
   &quot;author&quot;: &quot;John Smith&quot;,
   &quot;title&quot;: &quot;I hate fish&quot;,
   &quot;body&quot;: &quot;They do not bring the ball back&quot;,
@@ -422,7 +74,7 @@ curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blo
   &quot;publish_date&quot;: &quot;2017-08-03&quot;
 }&apos;</span>
 
-curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blogpost/4?pretty&quot;</span> <span class="hljs-_">-d</span> <span class="hljs-string">&apos;{
+curl -g -X PUT <span class=hljs-string>&quot;http://localhost:9200/example/blogpost/4?pretty&quot;</span> <span class=hljs-_>-d</span> <span class=hljs-string>&apos;{
   &quot;author&quot;: &quot;Jane Doe&quot;,
   &quot;title&quot;: &quot;I hate cheese cake&quot;,
   &quot;body&quot;: &quot;I prefer chocolat cake&quot;,
@@ -431,107 +83,69 @@ curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blo
   &quot;publish_date&quot;: &quot;1985-08-03&quot;
 }&apos;</span>
 
-curl -g -X PUT <span class="hljs-string">&quot;http://localhost:9200/example/blogpost/5?pretty&quot;</span> <span class="hljs-_">-d</span> <span class="hljs-string">&apos;{
+curl -g -X PUT <span class=hljs-string>&quot;http://localhost:9200/example/blogpost/5?pretty&quot;</span> <span class=hljs-_>-d</span> <span class=hljs-string>&apos;{
   &quot;author&quot;: &quot;Will Smith&quot;,
   &quot;title&quot;: &quot;I admire lions&quot;,
   &quot;body&quot;: &quot;They are so regal&quot;,
   &quot;tags&quot;: [ &quot;wild animal&quot;, &quot;animal&quot;, &quot;lion&quot; ],
   &quot;status&quot;: &quot;published&quot;,
   &quot;publish_date&quot;: &quot;2016-08-02&quot;
-}&apos;</span></code></pre>
-
-
-<p>Replies:</p>
-<pre><code class="hljs json">{
-  <span class="hljs-attr">&quot;_index&quot;</span> : <span class="hljs-string">&quot;example&quot;</span>,
-  <span class="hljs-attr">&quot;_type&quot;</span> : <span class="hljs-string">&quot;blogpost&quot;</span>,
-  <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;1&quot;</span>,
-  <span class="hljs-attr">&quot;_version&quot;</span> : <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;_shards&quot;</span> : {
-    <span class="hljs-attr">&quot;total&quot;</span> : <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;successful&quot;</span> : <span class="hljs-number">1</span>,
-    <span class="hljs-attr">&quot;failed&quot;</span> : <span class="hljs-number">0</span>
+}&apos;</span></code></pre><p>Replies:</p><pre><code class="hljs json">{
+  <span class=hljs-attr>&quot;_index&quot;</span> : <span class=hljs-string>&quot;example&quot;</span>,
+  <span class=hljs-attr>&quot;_type&quot;</span> : <span class=hljs-string>&quot;blogpost&quot;</span>,
+  <span class=hljs-attr>&quot;_id&quot;</span> : <span class=hljs-string>&quot;1&quot;</span>,
+  <span class=hljs-attr>&quot;_version&quot;</span> : <span class=hljs-number>1</span>,
+  <span class=hljs-attr>&quot;_shards&quot;</span> : {
+    <span class=hljs-attr>&quot;total&quot;</span> : <span class=hljs-number>2</span>,
+    <span class=hljs-attr>&quot;successful&quot;</span> : <span class=hljs-number>1</span>,
+    <span class=hljs-attr>&quot;failed&quot;</span> : <span class=hljs-number>0</span>
   },
-  <span class="hljs-attr">&quot;created&quot;</span> : <span class="hljs-literal">true</span>
-}</code></pre>
-
-<pre><code class="hljs json">{
-  <span class="hljs-attr">&quot;_index&quot;</span> : <span class="hljs-string">&quot;example&quot;</span>,
-  <span class="hljs-attr">&quot;_type&quot;</span> : <span class="hljs-string">&quot;blogpost&quot;</span>,
-  <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;2&quot;</span>,
-  <span class="hljs-attr">&quot;_version&quot;</span> : <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;_shards&quot;</span> : {
-    <span class="hljs-attr">&quot;total&quot;</span> : <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;successful&quot;</span> : <span class="hljs-number">1</span>,
-    <span class="hljs-attr">&quot;failed&quot;</span> : <span class="hljs-number">0</span>
+  <span class=hljs-attr>&quot;created&quot;</span> : <span class=hljs-literal>true</span>
+}</code></pre><pre><code class="hljs json">{
+  <span class=hljs-attr>&quot;_index&quot;</span> : <span class=hljs-string>&quot;example&quot;</span>,
+  <span class=hljs-attr>&quot;_type&quot;</span> : <span class=hljs-string>&quot;blogpost&quot;</span>,
+  <span class=hljs-attr>&quot;_id&quot;</span> : <span class=hljs-string>&quot;2&quot;</span>,
+  <span class=hljs-attr>&quot;_version&quot;</span> : <span class=hljs-number>1</span>,
+  <span class=hljs-attr>&quot;_shards&quot;</span> : {
+    <span class=hljs-attr>&quot;total&quot;</span> : <span class=hljs-number>2</span>,
+    <span class=hljs-attr>&quot;successful&quot;</span> : <span class=hljs-number>1</span>,
+    <span class=hljs-attr>&quot;failed&quot;</span> : <span class=hljs-number>0</span>
   },
-  <span class="hljs-attr">&quot;created&quot;</span> : <span class="hljs-literal">true</span>
-}</code></pre>
-
-<pre><code class="hljs json">{
-  <span class="hljs-attr">&quot;_index&quot;</span> : <span class="hljs-string">&quot;example&quot;</span>,
-  <span class="hljs-attr">&quot;_type&quot;</span> : <span class="hljs-string">&quot;blogpost&quot;</span>,
-  <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;3&quot;</span>,
-  <span class="hljs-attr">&quot;_version&quot;</span> : <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;_shards&quot;</span> : {
-    <span class="hljs-attr">&quot;total&quot;</span> : <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;successful&quot;</span> : <span class="hljs-number">1</span>,
-    <span class="hljs-attr">&quot;failed&quot;</span> : <span class="hljs-number">0</span>
+  <span class=hljs-attr>&quot;created&quot;</span> : <span class=hljs-literal>true</span>
+}</code></pre><pre><code class="hljs json">{
+  <span class=hljs-attr>&quot;_index&quot;</span> : <span class=hljs-string>&quot;example&quot;</span>,
+  <span class=hljs-attr>&quot;_type&quot;</span> : <span class=hljs-string>&quot;blogpost&quot;</span>,
+  <span class=hljs-attr>&quot;_id&quot;</span> : <span class=hljs-string>&quot;3&quot;</span>,
+  <span class=hljs-attr>&quot;_version&quot;</span> : <span class=hljs-number>1</span>,
+  <span class=hljs-attr>&quot;_shards&quot;</span> : {
+    <span class=hljs-attr>&quot;total&quot;</span> : <span class=hljs-number>2</span>,
+    <span class=hljs-attr>&quot;successful&quot;</span> : <span class=hljs-number>1</span>,
+    <span class=hljs-attr>&quot;failed&quot;</span> : <span class=hljs-number>0</span>
   },
-  <span class="hljs-attr">&quot;created&quot;</span> : <span class="hljs-literal">true</span>
-}</code></pre>
-
-<pre><code class="hljs json">{
-  <span class="hljs-attr">&quot;_index&quot;</span> : <span class="hljs-string">&quot;example&quot;</span>,
-  <span class="hljs-attr">&quot;_type&quot;</span> : <span class="hljs-string">&quot;blogpost&quot;</span>,
-  <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;4&quot;</span>,
-  <span class="hljs-attr">&quot;_version&quot;</span> : <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;_shards&quot;</span> : {
-    <span class="hljs-attr">&quot;total&quot;</span> : <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;successful&quot;</span> : <span class="hljs-number">1</span>,
-    <span class="hljs-attr">&quot;failed&quot;</span> : <span class="hljs-number">0</span>
+  <span class=hljs-attr>&quot;created&quot;</span> : <span class=hljs-literal>true</span>
+}</code></pre><pre><code class="hljs json">{
+  <span class=hljs-attr>&quot;_index&quot;</span> : <span class=hljs-string>&quot;example&quot;</span>,
+  <span class=hljs-attr>&quot;_type&quot;</span> : <span class=hljs-string>&quot;blogpost&quot;</span>,
+  <span class=hljs-attr>&quot;_id&quot;</span> : <span class=hljs-string>&quot;4&quot;</span>,
+  <span class=hljs-attr>&quot;_version&quot;</span> : <span class=hljs-number>1</span>,
+  <span class=hljs-attr>&quot;_shards&quot;</span> : {
+    <span class=hljs-attr>&quot;total&quot;</span> : <span class=hljs-number>2</span>,
+    <span class=hljs-attr>&quot;successful&quot;</span> : <span class=hljs-number>1</span>,
+    <span class=hljs-attr>&quot;failed&quot;</span> : <span class=hljs-number>0</span>
   },
-  <span class="hljs-attr">&quot;created&quot;</span> : <span class="hljs-literal">true</span>
-}</code></pre>
-
-<pre><code class="hljs json">{
-  <span class="hljs-attr">&quot;_index&quot;</span> : <span class="hljs-string">&quot;example&quot;</span>,
-  <span class="hljs-attr">&quot;_type&quot;</span> : <span class="hljs-string">&quot;blogpost&quot;</span>,
-  <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;5&quot;</span>,
-  <span class="hljs-attr">&quot;_version&quot;</span> : <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;_shards&quot;</span> : {
-    <span class="hljs-attr">&quot;total&quot;</span> : <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;successful&quot;</span> : <span class="hljs-number">1</span>,
-    <span class="hljs-attr">&quot;failed&quot;</span> : <span class="hljs-number">0</span>
+  <span class=hljs-attr>&quot;created&quot;</span> : <span class=hljs-literal>true</span>
+}</code></pre><pre><code class="hljs json">{
+  <span class=hljs-attr>&quot;_index&quot;</span> : <span class=hljs-string>&quot;example&quot;</span>,
+  <span class=hljs-attr>&quot;_type&quot;</span> : <span class=hljs-string>&quot;blogpost&quot;</span>,
+  <span class=hljs-attr>&quot;_id&quot;</span> : <span class=hljs-string>&quot;5&quot;</span>,
+  <span class=hljs-attr>&quot;_version&quot;</span> : <span class=hljs-number>1</span>,
+  <span class=hljs-attr>&quot;_shards&quot;</span> : {
+    <span class=hljs-attr>&quot;total&quot;</span> : <span class=hljs-number>2</span>,
+    <span class=hljs-attr>&quot;successful&quot;</span> : <span class=hljs-number>1</span>,
+    <span class=hljs-attr>&quot;failed&quot;</span> : <span class=hljs-number>0</span>
   },
-  <span class="hljs-attr">&quot;created&quot;</span> : <span class="hljs-literal">true</span>
-}</code></pre>
-
-<hr>
-<h2><a class="anchor" id="the-id"></a>The id</h2>
-<p>The number (1 to 5) at the end of the request url defines the id of the document (RDBM: primary key).</p>
-<p>If you do not specify it, Elasticsearch will assign an id to the document automatically.<br>For the sake of this example, we explicitly defined the ID of each document (take a look at the last chunk of the URLs).</p>
-<p>If you do not specify it, Elasticsearch will automatically generate an ID and assign it to the document.<br>Even if the ID is actually a String, you can use numbers for convenience.</p>
-<hr>
-<h2><a class="anchor" id="the-body"></a>The body</h2>
-<p>The body of the request must contain the content of the document you want to create.</p>
-<p>As you can see, the structure of the document matches our mapping.
-As a result, Elasticsearch will analyze and index our document as specified.</p>
-<hr>
-<h2><a class="anchor" id="the-structure"></a>The structure</h2>
-<p>As you can see, we insert an array in a field ment to be a string. It is one of the feature of Elasticsearch;</p>
-<p>Any field can be an array of the defined type. For example, the <code>tags</code> field is defined as a string, but we chose to use it as an array of strings (and it is totally fine).<br>Another feature of Elasticsearch is that you can nest a field to build complex documents.</p>
-<p>It is not addressed in this cookbook but you can find more information in the
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.x/object.html">Elasticsearch documentation</a>.</p>
-
-        <div style="clear: both"></div>
-      </div>
-
-      <hr>
-      <div id="disqus_thread"></div>
-      
-      <script async>
-        var disqus_developer = 1;
+  <span class=hljs-attr>&quot;created&quot;</span> : <span class=hljs-literal>true</span>
+}</code></pre><hr><h2><a class=anchor id=the-id></a>The id</h2><p>The number (1 to 5) at the end of the request url defines the id of the document (RDBM: primary key).</p><p>If you do not specify it, Elasticsearch will assign an id to the document automatically.<br>For the sake of this example, we explicitly defined the ID of each document (take a look at the last chunk of the URLs).</p><p>If you do not specify it, Elasticsearch will automatically generate an ID and assign it to the document.<br>Even if the ID is actually a String, you can use numbers for convenience.</p><hr><h2><a class=anchor id=the-body></a>The body</h2><p>The body of the request must contain the content of the document you want to create.</p><p>As you can see, the structure of the document matches our mapping. As a result, Elasticsearch will analyze and index our document as specified.</p><hr><h2><a class=anchor id=the-structure></a>The structure</h2><p>As you can see, we insert an array in a field ment to be a string. It is one of the feature of Elasticsearch;</p><p>Any field can be an array of the defined type. For example, the <code>tags</code> field is defined as a string, but we chose to use it as an array of strings (and it is totally fine).<br>Another feature of Elasticsearch is that you can nest a field to build complex documents.</p><p>It is not addressed in this cookbook but you can find more information in the <a href=https://www.elastic.co/guide/en/elasticsearch/reference/5.x/object.html>Elasticsearch documentation</a>.</p><div style="clear: both"></div></div><hr><div id=disqus_thread></div><script async>var disqus_developer = 1;
       
         var disqus_config = function () {
           this.page.url = 'https://stafyniaksacha.github.io/documentation/v/edge/elasticsearch-cookbook/data-insertion';
@@ -544,44 +158,7 @@ As a result, Elasticsearch will analyze and index our document as specified.</p>
           s.src = 'https://kuzzle-documentation.disqus.com/embed.js';
           s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
-        })();
-      </script>
-
-      <div class="nav-sibling bottom">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/stafyniaksacha/documentation/edit/forked-rcx-refactor-doc-deploy/src/elasticsearch-cookbook/data-insertion/index.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=elasticsearch-cookbook&amp;title=Feedback%20about%20page%20&apos;elasticsearch-cookbook/data-insertion/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
-<script src="/documentation/v/edge/assets/javascript/lib/jquery.barrating.js"></script>
-
-<script type="text/javascript">
-  // store helper
+        })();</script><div class="nav-sibling bottom"><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/rc.x/src/elasticsearch-cookbook/data-insertion/index.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=elasticsearch-cookbook&amp;title=Feedback%20about%20page%20&apos;elasticsearch-cookbook/data-insertion/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p></p></div><div style=clear:both></div></div></div></div></div><script src=//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js></script><script src=//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js></script><script src=/documentation/v/edge/assets/javascript/lib/jquery.barrating.js></script><script type=text/javascript>// store helper
   var store = function store(key, value) {
     var lsSupport = false;
 
@@ -1196,7 +773,4 @@ As a result, Elasticsearch will analyze and index our document as specified.</p>
       });
     });
 
-  })();
-</script>
-</body>
-</html>
+  })();</script></body></html>

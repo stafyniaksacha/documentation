@@ -1,213 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="msapplication-TileColor" content="#FFFFFF">
-  <meta name="msapplication-TileImage" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-144x144.png">
-  <meta name="msapplication-square70x70logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-70x70.png">
-  <meta name="msapplication-square150x150logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-150x150.png">
-  <meta name="msapplication-wide310x150logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x150.png">
-  <meta name="msapplication-square310x310logo" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x310.png">
-  <meta name="google-site-verification" content="luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4">
-  
-  <!-- Schema.org markup for Google+ -->
-  <meta itemprop="name" content="Connecting to Kuzzle">
-  <meta itemprop="image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Twitter Card data -->
-  <meta name="twitter:card" value="summary">
-  <meta name="twitter:site" content="@kuzzleio">
-  <meta name="twitter:title" content="Connecting to Kuzzle">
-  <meta name="twitter:creator" content="@kuzzleio">
-  <meta name="twitter:image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Open Graph data -->
-  <meta property="og:title" content="Connecting to Kuzzle">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="">
-  <meta property="og:image" content="https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-96x96.png">
-  <meta property="article:published_time" content="2017-05-21T13:38:01.565Z">
-  <meta property="article:modified_time" content="2017-05-21T13:38:01.565Z">
-  <meta property="article:section" content="API Documentation">
-  <meta property="article:tag" content="Connecting to Kuzzle">
-  
-  <meta property="og:description" content="through HTTP, WebSocket or Protocol plugins">
-  <meta itemprop="description" content="through HTTP, WebSocket or Protocol plugins">
-  <meta name="twitter:description" content="through HTTP, WebSocket or Protocol plugins">
-  <meta name="description" content="through HTTP, WebSocket or Protocol plugins">
-  
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/documentation/v/edge/assets/images/favicon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/documentation/v/edge/assets/images/favicon/favicon-128.png" sizes="128x128">
-  
-  <link rel="stylesheet" href="/documentation/v/edge/assets/font-awesome/scss/font-awesome.css">
-  <link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
-  
-  <title>
-      Connecting to Kuzzle
-      - API Documentation
-       -
-  
-     Kuzzle documentation
-  </title>
-
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css">
-
-  <link href="/documentation/v/edge/assets/stylesheets/full/screen.css" rel="stylesheet" type="text/css" media="screen">
-</head>
-
-<body class="index">
-<header>
-  <div class="wrapper">
-    <div id="logo">
-      <a href="http://kuzzle.io/">&#xA0;</a>
-    </div>
-
-    <a class="mobile-nav-burger" href="javascript:;"></a>
-
-    <nav>
-      <ul>
-        <li>
-          <a href="http://kuzzle.io/kuzzle-entreprise" class="nav-item">product</a>
-        </li>
-        <li>
-          <a href="https://stafyniaksacha.github.io/documentation/v/edge/" class="nav-item developers active">Documentation</a>
-          <ul class="mobile-nav">
-              <li>
-                <a href="/documentation/v/edge/guide"><span>Guide</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/sdk-reference"><span>SDK Reference</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/validation-reference"><span>Data Validation</span></a>
-              </li>
-              <li class="active">
-                <a href="/documentation/v/edge/api-documentation"><span>API Documentation</span></a>
-
-                <ul class="sub-nav">
-                  <li class="active">
-                    <a href="/documentation/v/edge/api-documentation/connecting-to-kuzzle"><span>Connecting to Kuzzle</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/query-syntax"><span>Query syntax</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/kuzzle-response"><span>Kuzzle response</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/volatile-data"><span>Sending volatile data</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/errors"><span>Errors</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/notifications"><span>Notifications</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-auth"><span>auth</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-bulk"><span>bulk</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-collection"><span>collection</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-document"><span>document</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-index"><span>index</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-memory-storage"><span>memoryStorage</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-realtime"><span>realtime</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-security"><span>security</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/v/edge/api-documentation/controller-server"><span>server</span></a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/plugins-reference"><span>Plugins Reference</span></a>
-              </li>
-              <li>
-                <a href="/documentation/v/edge/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-              </li>
-          </ul>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/contact/" class="nav-item ">Contact</a>
-        </li>
-        <li>
-          <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
-            <i class="icon icon-github icon-small"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="developer-nav open">
-    <ul class="search">
-      <li>
-        <input name="search" type="search" placeholder="search" tabindex="1">
-        <!-- <input name="search" type="search" placeholder="search"></input> -->
-      </li>
-    </ul>
-    <ul class="nav">
-        <li>
-          <a href="/documentation/v/edge/guide"><span>Guide</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/sdk-reference"><span>SDK Reference</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/validation-reference"><span>Data Validation</span></a>
-        </li>
-        <li class="active">
-          <a href="/documentation/v/edge/api-documentation"><span>API Documentation</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/plugins-reference"><span>Plugins Reference</span></a>
-        </li>
-        <li>
-          <a href="/documentation/v/edge/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-        </li>
-    </ul>
-
-    <div class="search-results"><ul></ul></div>
-
-    <script type="text/plain" id="search-results-template">
-      <li>
+<!doctype html><html><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=msapplication-TileColor content=#FFFFFF><meta name=msapplication-TileImage content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-144x144.png><meta name=msapplication-square70x70logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-70x70.png><meta name=msapplication-square150x150logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-150x150.png><meta name=msapplication-wide310x150logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x150.png><meta name=msapplication-square310x310logo content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/mstile-310x310.png><meta name=google-site-verification content=luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4><meta itemprop=name content="Connecting to Kuzzle"><meta itemprop=image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png><meta name=twitter:card value=summary><meta name=twitter:site content=@kuzzleio><meta name=twitter:title content="Connecting to Kuzzle"><meta name=twitter:creator content=@kuzzleio><meta name=twitter:image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-196x196.png><meta property=og:title content="Connecting to Kuzzle"><meta property=og:type content=article><meta property=og:site_name content=""><meta property=og:image content=https://stafyniaksacha.github.io/documentation/v/edge/assets/images/favicon/favicon-96x96.png><meta property=article:published_time content=2017-05-21T15:16:19.363Z><meta property=article:modified_time content=2017-05-21T15:16:19.363Z><meta property=article:section content="API Documentation"><meta property=article:tag content="Connecting to Kuzzle"><meta property=og:description content="through HTTP, WebSocket or Protocol plugins"><meta itemprop=description content="through HTTP, WebSocket or Protocol plugins"><meta name=twitter:description content="through HTTP, WebSocket or Protocol plugins"><meta name=description content="through HTTP, WebSocket or Protocol plugins"><link rel=apple-touch-icon-precomposed sizes=57x57 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-57x57.png><link rel=apple-touch-icon-precomposed sizes=114x114 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-114x114.png><link rel=apple-touch-icon-precomposed sizes=72x72 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-72x72.png><link rel=apple-touch-icon-precomposed sizes=144x144 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-144x144.png><link rel=apple-touch-icon-precomposed sizes=60x60 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-60x60.png><link rel=apple-touch-icon-precomposed sizes=120x120 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-120x120.png><link rel=apple-touch-icon-precomposed sizes=76x76 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-76x76.png><link rel=apple-touch-icon-precomposed sizes=152x152 href=/documentation/v/edge/assets/images/favicon/apple-touch-icon-152x152.png><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-196x196.png sizes=196x196><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-96x96.png sizes=96x96><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/documentation/v/edge/assets/images/favicon/favicon-128.png sizes=128x128><link rel=stylesheet href=/documentation/v/edge/assets/font-awesome/scss/font-awesome.css><link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel=stylesheet><title>Connecting to Kuzzle - API Documentation - Kuzzle documentation</title><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css><link href=/documentation/v/edge/assets/stylesheets/full/screen.css rel=stylesheet type=text/css media=screen></head><body class=index><header><div class=wrapper><div id=logo><a href=http://kuzzle.io/ >&#xA0;</a></div><a class=mobile-nav-burger href=javascript:;></a><nav><ul><li><a href=http://kuzzle.io/kuzzle-entreprise class=nav-item>product</a></li><li><a href=https://stafyniaksacha.github.io/documentation/v/edge/ class="nav-item developers active">Documentation</a><ul class=mobile-nav><li><a href=/documentation/v/edge/guide><span>Guide</span></a></li><li><a href=/documentation/v/edge/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/v/edge/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/v/edge/validation-reference><span>Data Validation</span></a></li><li class=active><a href=/documentation/v/edge/api-documentation><span>API Documentation</span></a><ul class=sub-nav><li class=active><a href=/documentation/v/edge/api-documentation/connecting-to-kuzzle><span>Connecting to Kuzzle</span></a></li><li><a href=/documentation/v/edge/api-documentation/query-syntax><span>Query syntax</span></a></li><li><a href=/documentation/v/edge/api-documentation/kuzzle-response><span>Kuzzle response</span></a></li><li><a href=/documentation/v/edge/api-documentation/volatile-data><span>Sending volatile data</span></a></li><li><a href=/documentation/v/edge/api-documentation/errors><span>Errors</span></a></li><li><a href=/documentation/v/edge/api-documentation/notifications><span>Notifications</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-auth><span>auth</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-bulk><span>bulk</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-collection><span>collection</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-document><span>document</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-index><span>index</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-memory-storage><span>memoryStorage</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-realtime><span>realtime</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-security><span>security</span></a></li><li><a href=/documentation/v/edge/api-documentation/controller-server><span>server</span></a></li></ul></li><li><a href=/documentation/v/edge/plugins-reference><span>Plugins Reference</span></a></li><li><a href=/documentation/v/edge/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul></li><li><a href=http://kuzzle.io/demos-tutorials/ class=nav-item>Demos</a></li><li><a href=http://kuzzle.io/blog/ class=nav-item>Blog</a></li><li><a href=http://kuzzle.io/contact/ class=nav-item>Contact</a></li><li><a href=https://github.com/kuzzleio/kuzzle target=_blank class="nav-item github"><i class="icon icon-github icon-small"></i></a></li></ul></nav></div><div class="developer-nav open"><ul class=search><li><input name=search type=search placeholder=search tabindex=1></li></ul><ul class=nav><li><a href=/documentation/v/edge/guide><span>Guide</span></a></li><li><a href=/documentation/v/edge/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/v/edge/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/v/edge/validation-reference><span>Data Validation</span></a></li><li class=active><a href=/documentation/v/edge/api-documentation><span>API Documentation</span></a></li><li><a href=/documentation/v/edge/plugins-reference><span>Plugins Reference</span></a></li><li><a href=/documentation/v/edge/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul><div class=search-results><ul></ul></div><script type=text/plain id=search-results-template><li>
         <a href="__link__" tabindex="__tabindex__">
           <p class="page">
             <span class="title">__title__</span>
@@ -216,256 +7,20 @@
           </p>
           <p class="preview">__preview__</p>
         </a>
-      </li>
-    </script>
-  </div>
-</header>
-
-<div class="container">
-  <div class="tocify-wrapper">
-    <ul class="search-results"></ul>
-  
-    <div class="tocify">
-      <ul class="tocify-header">
-        <li class="tocify-item tocify-focus tocify-hover"></li>
-      </ul>
-      <ul class="tocify-header">
-        <li class="tocify-item"><a style="color: #111; text-decoration: none;" href="https://stafyniaksacha.github.io/documentation/v/edge/api-documentation" title="back to API Documentation home">API Documentation</a></li>
-        <ul class="tocify-subheader">
-  
-          <li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none;" href="#" title="through HTTP, WebSocket or Protocol plugins">Connecting to Kuzzle</a></li>
-            <ul class="tocify-header">
-              <ul class="tocify-subheader">
-              </ul>
-            </ul>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/query-syntax" title="learn how to send raw queries to kuzzle">Query syntax</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/kuzzle-response" title="understand Kuzzle response mechanisms">Kuzzle response</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/volatile-data" title="broadcast extra volatile data to subscribers">Sending volatile data</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/errors" title="understand Kuzzle errors mechanisms">Errors</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/notifications" title="understand Kuzzle real-time notifications mechanisms">Notifications</a></li>
-          </ul>
-          <li class="tocify-item"><a style="color: #111; text-decoration: none;" href="/documentation/v/edge/api-documentation/#API Reference" title="back to API Documentation home">API Reference</a></li>
-          <ul class="tocify-subheader">
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-auth/check-token" title="auth">auth</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-bulk" title="bulk">bulk</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-collection/create" title="collection">collection</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-document/count" title="document">document</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-index/create" title="index">index</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-memory-storage/append" title="memoryStorage">memoryStorage</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-realtime/count" title="realtime">realtime</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-security/create-credentials" title="security">security</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/v/edge/api-documentation/controller-server/admin-exists" title="server">server</a></li>
-        </ul>
-      </ul>
-      <ul class="toc-footer">
-        <!-- community links here ! -->
-  
-            <li><a href="/documentation/">1.0.0-RC9 (latest)</a></li>
-            <li><span style="color:#717171">1.0.0-RC10 (next)</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="page-wrapper">
-    <div class="toc">
-      <ul>
-        <li class="toc-item toc-level-1">
-            <a href="#connecting-to-kuzzle" title="Connecting to Kuzzle">
-              Connecting to Kuzzle
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#http" title="HTTP">
-              HTTP
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#examples" title="Examples">
-              Examples
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#websocket" title="WebSocket">
-              WebSocket
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#websocket-examples" title="Examples">
-              Examples
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#socket-io-websocket-like" title="Socket.io (WebSocket-like)">
-              Socket.io (WebSocket-like)
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#socket-io-websocket-like-examples" title="Examples">
-              Examples
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#mqtt-protocols" title="MQTT protocols">
-              MQTT protocols
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#mqtt-protocols-examples" title="Examples">
-              Examples
-            </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="content">
-
-      <div class="mobile-breadcrumb">
-        <p>
-        <a href="https://stafyniaksacha.github.io/documentation/v/edge/">Kuzzle documentation</a>
-      
-          &#xBB; <a href="https://stafyniaksacha.github.io/documentation/v/edge/api-documentation">API Documentation</a>
-      
-          &#xBB; Connecting to Kuzzle
-         </p>
-      </div>
-      
-      <div class="nav-sibling">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/stafyniaksacha/documentation/edit/forked-rcx-refactor-doc-deploy/src/api-documentation/connecting-to-kuzzle/index.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/connecting-to-kuzzle/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-
-      <div class="toc-inline">
-        <ul>
-          <li class="toc-item toc-level-1">
-              <a href="#connecting-to-kuzzle" title="Connecting to Kuzzle">
-                Connecting to Kuzzle
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#http" title="HTTP">
-                HTTP
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#examples" title="Examples">
-                Examples
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#websocket" title="WebSocket">
-                WebSocket
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#websocket-examples" title="Examples">
-                Examples
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#socket-io-websocket-like" title="Socket.io (WebSocket-like)">
-                Socket.io (WebSocket-like)
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#socket-io-websocket-like-examples" title="Examples">
-                Examples
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#mqtt-protocols" title="MQTT protocols">
-                MQTT protocols
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#mqtt-protocols-examples" title="Examples">
-                Examples
-              </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="main-content">
-        <h1><a class="anchor" id="connecting-to-kuzzle"></a>Connecting to Kuzzle</h1>
-<p>The connection to Kuzzle depends on the protocol to be used.</p>
-<p>HTTP, WebSocket and SocketIO protocols are shipped in Kuzzle&apos;s core.
-Other protocols can be added with <a href="/documentation/v/edge/plugins-reference">Protocol Plugins</a>.</p>
-<hr>
-<h2><a class="anchor" id="http"></a>HTTP</h2>
-<p>By default, Kuzzle exposes itself on the 7512 port. Assuming the Kuzzle server runs locally,
-it can be reached on <code>http://localhost:7512/</code>.</p>
-<p>The default response is the <a href="/documentation/v/edge/api-documentation/controller-server/info">ServerInfo</a> controller.
-With this you will get detailed information about available HTTP API routes.</p>
-<h3><a class="anchor" id="examples"></a>Examples</h3>
-<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash
+      </li></script></div></header><div class=container><div class=tocify-wrapper><ul class=search-results></ul><div class=tocify><ul class=tocify-header><li class="tocify-item tocify-focus tocify-hover"></li></ul><ul class=tocify-header><li class=tocify-item><a style="color: #111; text-decoration: none" href=https://stafyniaksacha.github.io/documentation/v/edge/api-documentation title="back to API Documentation home">API Documentation</a></li><ul class=tocify-subheader><li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none" href=# title="through HTTP, WebSocket or Protocol plugins">Connecting to Kuzzle</a></li><ul class=tocify-header><ul class=tocify-subheader></ul></ul><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/query-syntax title="learn how to send raw queries to kuzzle">Query syntax</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/kuzzle-response title="understand Kuzzle response mechanisms">Kuzzle response</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/volatile-data title="broadcast extra volatile data to subscribers">Sending volatile data</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/errors title="understand Kuzzle errors mechanisms">Errors</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/notifications title="understand Kuzzle real-time notifications mechanisms">Notifications</a></li></ul><li class=tocify-item><a style="color: #111; text-decoration: none" href="/documentation/v/edge/api-documentation/#API Reference" title="back to API Documentation home">API Reference</a></li><ul class=tocify-subheader><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-auth/check-token title=auth>auth</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-bulk title=bulk>bulk</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-collection/create title=collection>collection</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-document/count title=document>document</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-index/create title=index>index</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-memory-storage/append title=memoryStorage>memoryStorage</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-realtime/count title=realtime>realtime</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-security/create-credentials title=security>security</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/v/edge/api-documentation/controller-server/admin-exists title=server>server</a></li></ul></ul><ul class=toc-footer><li><a href=/documentation/ >1.0.0-RC9 (latest)</a></li><li><span style=color:#717171>1.0.0-RC10 (next)</span></li></ul></div></div><div class=page-wrapper><div class=toc><ul><li class="toc-item toc-level-1"><a href=#connecting-to-kuzzle title="Connecting to Kuzzle">Connecting to Kuzzle</a></li><li class="toc-item toc-level-2"><a href=#http title=HTTP>HTTP</a></li><li class="toc-item toc-level-3"><a href=#examples title=Examples>Examples</a></li><li class="toc-item toc-level-2"><a href=#websocket title=WebSocket>WebSocket</a></li><li class="toc-item toc-level-3"><a href=#websocket-examples title=Examples>Examples</a></li><li class="toc-item toc-level-2"><a href=#socket-io-websocket-like title="Socket.io (WebSocket-like)">Socket.io (WebSocket-like)</a></li><li class="toc-item toc-level-3"><a href=#socket-io-websocket-like-examples title=Examples>Examples</a></li><li class="toc-item toc-level-2"><a href=#mqtt-protocols title="MQTT protocols">MQTT protocols</a></li><li class="toc-item toc-level-3"><a href=#mqtt-protocols-examples title=Examples>Examples</a></li></ul></div><div class=content><div class=mobile-breadcrumb><p><a href=https://stafyniaksacha.github.io/documentation/v/edge/ >Kuzzle documentation</a> &#xBB; <a href=https://stafyniaksacha.github.io/documentation/v/edge/api-documentation>API Documentation</a> &#xBB; Connecting to Kuzzle</p></div><div class=nav-sibling><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/rc.x/src/api-documentation/connecting-to-kuzzle/index.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/connecting-to-kuzzle/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p></p></div><div style=clear:both></div></div><div class=toc-inline><ul><li class="toc-item toc-level-1"><a href=#connecting-to-kuzzle title="Connecting to Kuzzle">Connecting to Kuzzle</a></li><li class="toc-item toc-level-2"><a href=#http title=HTTP>HTTP</a></li><li class="toc-item toc-level-3"><a href=#examples title=Examples>Examples</a></li><li class="toc-item toc-level-2"><a href=#websocket title=WebSocket>WebSocket</a></li><li class="toc-item toc-level-3"><a href=#websocket-examples title=Examples>Examples</a></li><li class="toc-item toc-level-2"><a href=#socket-io-websocket-like title="Socket.io (WebSocket-like)">Socket.io (WebSocket-like)</a></li><li class="toc-item toc-level-3"><a href=#socket-io-websocket-like-examples title=Examples>Examples</a></li><li class="toc-item toc-level-2"><a href=#mqtt-protocols title="MQTT protocols">MQTT protocols</a></li><li class="toc-item toc-level-3"><a href=#mqtt-protocols-examples title=Examples>Examples</a></li></ul></div><div class=main-content><h1><a class=anchor id=connecting-to-kuzzle></a>Connecting to Kuzzle</h1><p>The connection to Kuzzle depends on the protocol to be used.</p><p>HTTP, WebSocket and SocketIO protocols are shipped in Kuzzle&apos;s core. Other protocols can be added with <a href=/documentation/v/edge/plugins-reference>Protocol Plugins</a>.</p><hr><h2><a class=anchor id=http></a>HTTP</h2><p>By default, Kuzzle exposes itself on the 7512 port. Assuming the Kuzzle server runs locally, it can be reached on <code>http://localhost:7512/</code>.</p><p>The default response is the <a href=/documentation/v/edge/api-documentation/controller-server/info>ServerInfo</a> controller. With this you will get detailed information about available HTTP API routes.</p><h3><a class=anchor id=examples></a>Examples</h3><pre><code class="hljs bash"><span class=hljs-meta>#!/bin/bash
 </span>
-curl <span class="hljs-string">&quot;http://localhost:7512/&quot;</span></code></pre>
-
-<hr>
-<h2><a class="anchor" id="websocket"></a>WebSocket</h2>
-<p>By default, Kuzzle enables the core websockets protocol,
-accepting websocket requests via the http server (on port 7512 by default).</p>
-<h3><a class="anchor" id="websocket-examples"></a>Examples</h3>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
-    <span class="hljs-keyword">var</span> socket = <span class="hljs-keyword">new</span> WebSocket(<span class="hljs-string">&quot;ws://localhost:7512&quot;</span>);
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-
-<hr>
-<h2><a class="anchor" id="socket-io-websocket-like"></a>Socket.io (WebSocket-like)</h2>
-<p>To ensure compatibility with older web browsers, our official docker images embeds the
-Kuzzle embeds a socketio protocol, accepting socket requests via the http server (on port 7512 by default).</p>
-<h3><a class="anchor" id="socket-io-websocket-like-examples"></a>Examples</h3>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
-    <span class="hljs-keyword">var</span> socket = io(<span class="hljs-string">&quot;http://localhost:7512&quot;</span>);
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-
-
-<hr>
-<h2><a class="anchor" id="mqtt-protocols"></a>MQTT protocols</h2>
-<p>Kuzzle provides a <a href="https://github.com/kuzzleio/kuzzle-plugin-mqtt">plugin protocol</a> that supports the MQTT protocol.
-This plugin protocol is a 2-way means of communication between your application and Kuzzle, forwarding your queries
-forth to Kuzzle, and notifications/responses from Kuzzle back to your application.</p>
-<h3><a class="anchor" id="mqtt-protocols-examples"></a>Examples</h3>
-<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash
+curl <span class=hljs-string>&quot;http://localhost:7512/&quot;</span></code></pre><hr><h2><a class=anchor id=websocket></a>WebSocket</h2><p>By default, Kuzzle enables the core websockets protocol, accepting websocket requests via the http server (on port 7512 by default).</p><h3><a class=anchor id=websocket-examples></a>Examples</h3><pre><code class="hljs html"><span class=hljs-tag>&lt;<span class=hljs-name>script</span>&gt;</span><span class=actionscript>
+    <span class=hljs-keyword>var</span> socket = <span class=hljs-keyword>new</span> WebSocket(<span class=hljs-string>&quot;ws://localhost:7512&quot;</span>);
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>&gt;</span></code></pre><hr><h2><a class=anchor id=socket-io-websocket-like></a>Socket.io (WebSocket-like)</h2><p>To ensure compatibility with older web browsers, our official docker images embeds the Kuzzle embeds a socketio protocol, accepting socket requests via the http server (on port 7512 by default).</p><h3><a class=anchor id=socket-io-websocket-like-examples></a>Examples</h3><pre><code class="hljs html"><span class=hljs-tag>&lt;<span class=hljs-name>script</span> <span class=hljs-attr>src</span>=<span class=hljs-string>&quot;https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js&quot;</span>&gt;</span><span class="undefined"></span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>&gt;</span>
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>&gt;</span><span class=actionscript>
+    <span class=hljs-keyword>var</span> socket = io(<span class=hljs-string>&quot;http://localhost:7512&quot;</span>);
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>&gt;</span></code></pre><hr><h2><a class=anchor id=mqtt-protocols></a>MQTT protocols</h2><p>Kuzzle provides a <a href=https://github.com/kuzzleio/kuzzle-plugin-mqtt>plugin protocol</a> that supports the MQTT protocol. This plugin protocol is a 2-way means of communication between your application and Kuzzle, forwarding your queries forth to Kuzzle, and notifications/responses from Kuzzle back to your application.</p><h3><a class=anchor id=mqtt-protocols-examples></a>Examples</h3><pre><code class="hljs bash"><span class=hljs-meta>#!/bin/bash
 </span>
-<span class="hljs-comment"># shell 1</span>
+<span class=hljs-comment># shell 1</span>
 node_modules/.bin/mqtt subscribe -v -h rabbit -t Kuzzle
 
-<span class="hljs-comment"># shell 2</span>
-node_modules/.bin/mqtt publish -h rabbit -t Kuzzle -m <span class="hljs-string">&apos;{
+<span class=hljs-comment># shell 2</span>
+node_modules/.bin/mqtt publish -h rabbit -t Kuzzle -m <span class=hljs-string>&apos;{
   &quot;collection&quot;:&quot;index&quot;,
   &quot;collection&quot;:&quot;collection&quot;,
   &quot;controller&quot;: &quot;document&quot;,
@@ -476,41 +31,24 @@ node_modules/.bin/mqtt publish -h rabbit -t Kuzzle -m <span class="hljs-string">
   }
 }&apos;</span>
 
-<span class="hljs-comment"># shell 1 (prettified)</span>
+<span class=hljs-comment># shell 1 (prettified)</span>
 Kuzzle {
-  <span class="hljs-string">&quot;error&quot;</span>: null,
-  <span class="hljs-string">&quot;result&quot;</span>: {
-    <span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-string">&quot;AVF8NG3k5ZVpUuiPrN1K&quot;</span>,
-    <span class="hljs-string">&quot;_index&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-    <span class="hljs-string">&quot;_source&quot;</span>: {<span class="hljs-string">&quot;firstName&quot;</span>:<span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-string">&quot;lastName&quot;</span>:<span class="hljs-string">&quot;Doe&quot;</span>},
-    <span class="hljs-string">&quot;_type&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-    <span class="hljs-string">&quot;_version&quot;</span>: 1,
-    <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;createOrReplace&quot;</span>,
-    <span class="hljs-string">&quot;collection&quot;</span>: <span class="hljs-string">&quot;collection&quot;</span>,
-    <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;document&quot;</span>,
-    <span class="hljs-string">&quot;created&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-string">&quot;volatile&quot;</span>: {},
-    <span class="hljs-string">&quot;requestId&quot;</span>:<span class="hljs-string">&quot;5cb4d930-62f4-4393-afc1-9a71e284a214&quot;</span>
+  <span class=hljs-string>&quot;error&quot;</span>: null,
+  <span class=hljs-string>&quot;result&quot;</span>: {
+    <span class=hljs-string>&quot;_id&quot;</span>: <span class=hljs-string>&quot;AVF8NG3k5ZVpUuiPrN1K&quot;</span>,
+    <span class=hljs-string>&quot;_index&quot;</span>: <span class=hljs-string>&quot;index&quot;</span>,
+    <span class=hljs-string>&quot;_source&quot;</span>: {<span class=hljs-string>&quot;firstName&quot;</span>:<span class=hljs-string>&quot;John&quot;</span>, <span class=hljs-string>&quot;lastName&quot;</span>:<span class=hljs-string>&quot;Doe&quot;</span>},
+    <span class=hljs-string>&quot;_type&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+    <span class=hljs-string>&quot;_version&quot;</span>: 1,
+    <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;createOrReplace&quot;</span>,
+    <span class=hljs-string>&quot;collection&quot;</span>: <span class=hljs-string>&quot;collection&quot;</span>,
+    <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;document&quot;</span>,
+    <span class=hljs-string>&quot;created&quot;</span>: <span class=hljs-literal>true</span>,
+    <span class=hljs-string>&quot;volatile&quot;</span>: {},
+    <span class=hljs-string>&quot;requestId&quot;</span>:<span class=hljs-string>&quot;5cb4d930-62f4-4393-afc1-9a71e284a214&quot;</span>
   },
-  <span class="hljs-string">&quot;status&quot;</span>: 200
-}</code></pre>
-
-<p>By default, the MQTT plugin protocol listens on the port 1883.</p>
-<aside class="notice">
-    The examples given in this documentation use the cli client from the mqtt node.js
-    library that is shipped within the Kuzzle Docker container.<br>
-    You can play them by entering the kuzzle container. Once your docker compose stack is running:<br>
-    <code>docker exec -ti kuzzle_kuzzle_1 bash</code>
-</aside>
-
-        <div style="clear: both"></div>
-      </div>
-
-      <hr>
-      <div id="disqus_thread"></div>
-      
-      <script async>
-        var disqus_developer = 1;
+  <span class=hljs-string>&quot;status&quot;</span>: 200
+}</code></pre><p>By default, the MQTT plugin protocol listens on the port 1883.</p><aside class=notice>The examples given in this documentation use the cli client from the mqtt node.js library that is shipped within the Kuzzle Docker container.<br>You can play them by entering the kuzzle container. Once your docker compose stack is running:<br><code>docker exec -ti kuzzle_kuzzle_1 bash</code></aside><div style="clear: both"></div></div><hr><div id=disqus_thread></div><script async>var disqus_developer = 1;
       
         var disqus_config = function () {
           this.page.url = 'https://stafyniaksacha.github.io/documentation/v/edge/api-documentation/connecting-to-kuzzle';
@@ -523,44 +61,7 @@ Kuzzle {
           s.src = 'https://kuzzle-documentation.disqus.com/embed.js';
           s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
-        })();
-      </script>
-
-      <div class="nav-sibling bottom">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/stafyniaksacha/documentation/edit/forked-rcx-refactor-doc-deploy/src/api-documentation/connecting-to-kuzzle/index.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/connecting-to-kuzzle/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
-<script src="/documentation/v/edge/assets/javascript/lib/jquery.barrating.js"></script>
-
-<script type="text/javascript">
-  // store helper
+        })();</script><div class="nav-sibling bottom"><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/rc.x/src/api-documentation/connecting-to-kuzzle/index.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=api-documentation&amp;title=Feedback%20about%20page%20&apos;api-documentation/connecting-to-kuzzle/index.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p></p></div><div style=clear:both></div></div></div></div></div><script src=//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js></script><script src=//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js></script><script src=/documentation/v/edge/assets/javascript/lib/jquery.barrating.js></script><script type=text/javascript>// store helper
   var store = function store(key, value) {
     var lsSupport = false;
 
@@ -1175,7 +676,4 @@ Kuzzle {
       });
     });
 
-  })();
-</script>
-</body>
-</html>
+  })();</script></body></html>
