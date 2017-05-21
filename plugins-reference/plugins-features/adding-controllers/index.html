@@ -1,180 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="msapplication-TileColor" content="#FFFFFF">
-  <meta name="msapplication-TileImage" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-144x144.png">
-  <meta name="msapplication-square70x70logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-70x70.png">
-  <meta name="msapplication-square150x150logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-150x150.png">
-  <meta name="msapplication-wide310x150logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x150.png">
-  <meta name="msapplication-square310x310logo" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x310.png">
-  <meta name="google-site-verification" content="luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4">
-  
-  <!-- Schema.org markup for Google+ -->
-  <meta itemprop="name" content="Adding a controller route">
-  <meta itemprop="image" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Twitter Card data -->
-  <meta name="twitter:card" value="summary">
-  <meta name="twitter:site" content="@kuzzleio">
-  <meta name="twitter:title" content="Adding a controller route">
-  <meta name="twitter:creator" content="@kuzzleio">
-  <meta name="twitter:image" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png">
-  
-  <!-- Open Graph data -->
-  <meta property="og:title" content="Adding a controller route">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="">
-  <meta property="og:image" content="https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-96x96.png">
-  <meta property="article:published_time" content="2017-05-21T13:38:01.601Z">
-  <meta property="article:modified_time" content="2017-05-21T13:38:01.601Z">
-  <meta property="article:section" content="Plugins Reference">
-  <meta property="article:tag" content="Plugins features">
-  
-  
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/documentation/assets/images/favicon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/documentation/assets/images/favicon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/documentation/assets/images/favicon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/documentation/assets/images/favicon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/documentation/assets/images/favicon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/documentation/assets/images/favicon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/documentation/assets/images/favicon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/documentation/assets/images/favicon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/documentation/assets/images/favicon/favicon-128.png" sizes="128x128">
-  
-  <link rel="stylesheet" href="/documentation/assets/font-awesome/scss/font-awesome.css">
-  <link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
-  
-  <title>
-      Adding a controller route
-      - Plugins features
-      - Plugins Reference
-       -
-  
-     Kuzzle documentation
-  </title>
-
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css">
-
-  <link href="/documentation/assets/stylesheets/full/screen.css" rel="stylesheet" type="text/css" media="screen">
-</head>
-
-<body class="index">
-<header>
-  <div class="wrapper">
-    <div id="logo">
-      <a href="http://kuzzle.io/">&#xA0;</a>
-    </div>
-
-    <a class="mobile-nav-burger" href="javascript:;"></a>
-
-    <nav>
-      <ul>
-        <li>
-          <a href="http://kuzzle.io/kuzzle-entreprise" class="nav-item">product</a>
-        </li>
-        <li>
-          <a href="https://stafyniaksacha.github.io/documentation/" class="nav-item developers active">Documentation</a>
-          <ul class="mobile-nav">
-              <li>
-                <a href="/documentation/guide"><span>Guide</span></a>
-              </li>
-              <li>
-                <a href="/documentation/sdk-reference"><span>SDK Reference</span></a>
-              </li>
-              <li>
-                <a href="/documentation/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-              </li>
-              <li>
-                <a href="/documentation/validation-reference"><span>Data Validation</span></a>
-              </li>
-              <li>
-                <a href="/documentation/api-documentation"><span>API Documentation</span></a>
-              </li>
-              <li class="active">
-                <a href="/documentation/plugins-reference"><span>Plugins Reference</span></a>
-
-                <ul class="sub-nav">
-                  <li>
-                    <a href="/documentation/plugins-reference/plugins-creation-prerequisites"><span>Plugins creation prerequisites</span></a>
-                  </li>
-                  <li class="active">
-                    <a href="/documentation/plugins-reference/plugins-features"><span>Plugins features</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/plugins-reference/managing-plugins"><span>Managing Plugins</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/plugins-reference/plugins-context"><span>The plugin context</span></a>
-                  </li>
-                  <li>
-                    <a href="/documentation/plugins-reference/kuzzle-events-list"><span>Kuzzle events list</span></a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="/documentation/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-              </li>
-          </ul>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/contact/" class="nav-item ">Contact</a>
-        </li>
-        <li>
-          <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
-            <i class="icon icon-github icon-small"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="developer-nav open">
-    <ul class="search">
-      <li>
-        <input name="search" type="search" placeholder="search" tabindex="1">
-        <!-- <input name="search" type="search" placeholder="search"></input> -->
-      </li>
-    </ul>
-    <ul class="nav">
-        <li>
-          <a href="/documentation/guide"><span>Guide</span></a>
-        </li>
-        <li>
-          <a href="/documentation/sdk-reference"><span>SDK Reference</span></a>
-        </li>
-        <li>
-          <a href="/documentation/kuzzle-dsl"><span>Kuzzle DSL</span></a>
-        </li>
-        <li>
-          <a href="/documentation/validation-reference"><span>Data Validation</span></a>
-        </li>
-        <li>
-          <a href="/documentation/api-documentation"><span>API Documentation</span></a>
-        </li>
-        <li class="active">
-          <a href="/documentation/plugins-reference"><span>Plugins Reference</span></a>
-        </li>
-        <li>
-          <a href="/documentation/elasticsearch-cookbook"><span>Elasticsearch Cookbook</span></a>
-        </li>
-    </ul>
-
-    <div class="search-results"><ul></ul></div>
-
-    <script type="text/plain" id="search-results-template">
-      <li>
+<!doctype html><html><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=msapplication-TileColor content=#FFFFFF><meta name=msapplication-TileImage content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-144x144.png><meta name=msapplication-square70x70logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-70x70.png><meta name=msapplication-square150x150logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-150x150.png><meta name=msapplication-wide310x150logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x150.png><meta name=msapplication-square310x310logo content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/mstile-310x310.png><meta name=google-site-verification content=luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4><meta itemprop=name content="Adding a controller route"><meta itemprop=image content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png><meta name=twitter:card value=summary><meta name=twitter:site content=@kuzzleio><meta name=twitter:title content="Adding a controller route"><meta name=twitter:creator content=@kuzzleio><meta name=twitter:image content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-196x196.png><meta property=og:title content="Adding a controller route"><meta property=og:type content=article><meta property=og:site_name content=""><meta property=og:image content=https://stafyniaksacha.github.io/documentation/assets/images/favicon/favicon-96x96.png><meta property=article:published_time content=2017-05-21T16:40:27.037Z><meta property=article:modified_time content=2017-05-21T16:40:27.037Z><meta property=article:section content="Plugins Reference"><meta property=article:tag content="Plugins features"><link rel=apple-touch-icon-precomposed sizes=57x57 href=/documentation/assets/images/favicon/apple-touch-icon-57x57.png><link rel=apple-touch-icon-precomposed sizes=114x114 href=/documentation/assets/images/favicon/apple-touch-icon-114x114.png><link rel=apple-touch-icon-precomposed sizes=72x72 href=/documentation/assets/images/favicon/apple-touch-icon-72x72.png><link rel=apple-touch-icon-precomposed sizes=144x144 href=/documentation/assets/images/favicon/apple-touch-icon-144x144.png><link rel=apple-touch-icon-precomposed sizes=60x60 href=/documentation/assets/images/favicon/apple-touch-icon-60x60.png><link rel=apple-touch-icon-precomposed sizes=120x120 href=/documentation/assets/images/favicon/apple-touch-icon-120x120.png><link rel=apple-touch-icon-precomposed sizes=76x76 href=/documentation/assets/images/favicon/apple-touch-icon-76x76.png><link rel=apple-touch-icon-precomposed sizes=152x152 href=/documentation/assets/images/favicon/apple-touch-icon-152x152.png><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-196x196.png sizes=196x196><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-96x96.png sizes=96x96><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/documentation/assets/images/favicon/favicon-128.png sizes=128x128><link rel=stylesheet href=/documentation/assets/font-awesome/scss/font-awesome.css><link href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel=stylesheet><title>Adding a controller route - Plugins features - Plugins Reference - Kuzzle documentation</title><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css><link href=/documentation/assets/stylesheets/full/screen.css rel=stylesheet type=text/css media=screen></head><body class=index><header><div class=wrapper><div id=logo><a href=http://kuzzle.io/ >&#xA0;</a></div><a class=mobile-nav-burger href=javascript:;></a><nav><ul><li><a href=http://kuzzle.io/kuzzle-entreprise class=nav-item>product</a></li><li><a href=https://stafyniaksacha.github.io/documentation/ class="nav-item developers active">Documentation</a><ul class=mobile-nav><li><a href=/documentation/guide><span>Guide</span></a></li><li><a href=/documentation/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/validation-reference><span>Data Validation</span></a></li><li><a href=/documentation/api-documentation><span>API Documentation</span></a></li><li class=active><a href=/documentation/plugins-reference><span>Plugins Reference</span></a><ul class=sub-nav><li><a href=/documentation/plugins-reference/plugins-creation-prerequisites><span>Plugins creation prerequisites</span></a></li><li class=active><a href=/documentation/plugins-reference/plugins-features><span>Plugins features</span></a></li><li><a href=/documentation/plugins-reference/managing-plugins><span>Managing Plugins</span></a></li><li><a href=/documentation/plugins-reference/plugins-context><span>The plugin context</span></a></li><li><a href=/documentation/plugins-reference/kuzzle-events-list><span>Kuzzle events list</span></a></li></ul></li><li><a href=/documentation/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul></li><li><a href=http://kuzzle.io/demos-tutorials/ class=nav-item>Demos</a></li><li><a href=http://kuzzle.io/blog/ class=nav-item>Blog</a></li><li><a href=http://kuzzle.io/contact/ class=nav-item>Contact</a></li><li><a href=https://github.com/kuzzleio/kuzzle target=_blank class="nav-item github"><i class="icon icon-github icon-small"></i></a></li></ul></nav></div><div class="developer-nav open"><ul class=search><li><input name=search type=search placeholder=search tabindex=1></li></ul><ul class=nav><li><a href=/documentation/guide><span>Guide</span></a></li><li><a href=/documentation/sdk-reference><span>SDK Reference</span></a></li><li><a href=/documentation/kuzzle-dsl><span>Kuzzle DSL</span></a></li><li><a href=/documentation/validation-reference><span>Data Validation</span></a></li><li><a href=/documentation/api-documentation><span>API Documentation</span></a></li><li class=active><a href=/documentation/plugins-reference><span>Plugins Reference</span></a></li><li><a href=/documentation/elasticsearch-cookbook><span>Elasticsearch Cookbook</span></a></li></ul><div class=search-results><ul></ul></div><script type=text/plain id=search-results-template><li>
         <a href="__link__" tabindex="__tabindex__">
           <p class="page">
             <span class="title">__title__</span>
@@ -183,221 +7,12 @@
           </p>
           <p class="preview">__preview__</p>
         </a>
-      </li>
-    </script>
-  </div>
-</header>
-
-<div class="container">
-  <div class="tocify-wrapper">
-    <ul class="search-results"></ul>
-  
-    <div class="tocify">
-      <ul class="tocify-header">
-        <li class="tocify-item tocify-focus tocify-hover"></li>
-      </ul>
-      <ul class="tocify-header">
-        <li class="tocify-item"><a style="color: #111; text-decoration: none;" href="https://stafyniaksacha.github.io/documentation/plugins-reference" title="back to Plugins Reference home">Plugins Reference</a></li>
-        <ul class="tocify-subheader">
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/plugins-creation-prerequisites" title="requirements to develop your plugin">Plugins creation prerequisites</a></li>
-  
-          <li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none;" href="#" title="understand Kuzzle plugins mechanisms">Plugins features</a></li>
-            <ul class="tocify-header">
-              <ul class="tocify-subheader">
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/plugins-features" title="understand Kuzzle plugins mechanisms">&#x203A; Introduction</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/plugins-features/adding-hooks" title="Listening asynchronously">&#x203A; Listening asynchronously</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/plugins-features/adding-pipes" title="Listening synchronously">&#x203A; Listening synchronously</a></li>
-                      <li class="tocify-item tocify-level-2 tocify-focus"><a style="color: #FFF; text-decoration: none;" href="/documentation/plugins-reference/plugins-features/adding-controllers" title="Adding a controller route">&#x203A; Adding a controller route</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/plugins-features/adding-authentication-strategy" title="Adding an authentication strategy">&#x203A; Adding an authentication strategy</a></li>
-                      <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/plugins-features/adding-protocol" title="Adding a network protocol">&#x203A; Adding a network protocol</a></li>
-              </ul>
-            </ul>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/managing-plugins" title="learn how to enable and configure plugins">Managing Plugins</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/plugins-context" title="plugin initialization context attribute reference">The plugin context</a></li>
-  
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/documentation/plugins-reference/kuzzle-events-list" title="list of events that plugins can register hooks and pipes">Kuzzle events list</a></li>
-        </ul>
-      </ul>
-      <ul class="toc-footer">
-        <!-- community links here ! -->
-  
-            <li><span style="color:#717171">1.0.0-RC9 (latest)</span></li>
-            <li><a href="/documentation/v/edge/">1.0.0-RC10 (next)</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="page-wrapper">
-    <div class="toc">
-      <ul>
-        <li class="toc-item toc-level-1">
-            <a href="#adding-a-controller-route" title="Adding a controller route">
-              Adding a controller route
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#how-is-the-api-extended" title="How is the API extended">
-              How is the API extended
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#http" title="HTTP">
-              HTTP
-            </a>
-        </li>
-        <li class="toc-item toc-level-3">
-            <a href="#others-protocols" title="Others protocols">
-              Others protocols
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#implementing-a-controller-route" title="Implementing a controller route">
-              Implementing a controller route
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#how-plugins-receive-action-arguments" title="How Plugins receive action arguments">
-              How Plugins receive action arguments
-            </a>
-        </li>
-        <li class="toc-item toc-level-2">
-            <a href="#tl-dr-plugin-skeleton" title="TL;DR plugin skeleton">
-              TL;DR plugin skeleton
-            </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="content">
-
-      <div class="mobile-breadcrumb">
-        <p>
-        <a href="https://stafyniaksacha.github.io/documentation/">Kuzzle documentation</a>
-      
-          &#xBB; <a href="https://stafyniaksacha.github.io/documentation/plugins-reference">Plugins Reference</a>
-          &#xBB; <a href="https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features">Plugins features</a>
-      
-          &#xBB; Adding a controller route
-         </p>
-      </div>
-      
-      <div class="nav-sibling">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/kuzzleio/documentation/edit/rcx-refactor-doc/src/plugins-reference/plugins-features/adding-controllers.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/kuzzleio/documentation/issues/new?labels=plugins-reference&amp;title=Feedback%20about%20page%20&apos;plugins-reference/plugins-features/adding-controllers.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-            <a href="https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-pipes">&#xAB; Listening synchronously</a>
-            <span class="separator">|</span>
-            <a href="https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-authentication-strategy">Adding an authentication strategy &#xBB;</a>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-
-      <div class="toc-inline">
-        <ul>
-          <li class="toc-item toc-level-1">
-              <a href="#adding-a-controller-route" title="Adding a controller route">
-                Adding a controller route
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#how-is-the-api-extended" title="How is the API extended">
-                How is the API extended
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#http" title="HTTP">
-                HTTP
-              </a>
-          </li>
-          <li class="toc-item toc-level-3">
-              <a href="#others-protocols" title="Others protocols">
-                Others protocols
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#implementing-a-controller-route" title="Implementing a controller route">
-                Implementing a controller route
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#how-plugins-receive-action-arguments" title="How Plugins receive action arguments">
-                How Plugins receive action arguments
-              </a>
-          </li>
-          <li class="toc-item toc-level-2">
-              <a href="#tl-dr-plugin-skeleton" title="TL;DR plugin skeleton">
-                TL;DR plugin skeleton
-              </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="main-content">
-        <h1><a class="anchor" id="adding-a-controller-route"></a>Adding a controller route</h1>
-<p>Kuzzle API is divided into &quot;controllers&quot;, each one of them exposing &quot;actions&quot; to execute (see <a href="/documentation/api-documentation/query-syntax/common-attributes">API reference</a>).</p>
-<p>Plugins enable to add a set of new controllers to the Kuzzle public API, each with their own list of available actions.</p>
-<hr>
-<h2><a class="anchor" id="how-is-the-api-extended"></a>How is the API extended</h2>
-<p>To avoid name conflicts, added controllers are prefixed with the plugin name.</p>
-<h3><a class="anchor" id="http"></a>HTTP</h3>
-<p><strong>URL:</strong> <code>http://&lt;server&gt;:&lt;port&gt;/_plugin/&lt;plugin name&gt;/&lt;url defined by the plugin&gt;/&lt;resources&gt;</code><br><strong>Method:</strong> <code>&lt;verb defined by the plugin&gt;</code></p>
-<h3><a class="anchor" id="others-protocols"></a>Others protocols</h3>
-<pre><code class="hljs javascript">{
-  <span class="hljs-string">&quot;controller&quot;</span>: <span class="hljs-string">&quot;&lt;plugin name&gt;/&lt;added controller name&gt;&quot;</span>,
-  <span class="hljs-string">&quot;action&quot;</span>: <span class="hljs-string">&quot;&lt;action of the added controller&gt;&quot;</span>,
+      </li></script></div></header><div class=container><div class=tocify-wrapper><ul class=search-results></ul><div class=tocify><ul class=tocify-header><li class="tocify-item tocify-focus tocify-hover"></li></ul><ul class=tocify-header><li class=tocify-item><a style="color: #111; text-decoration: none" href=https://stafyniaksacha.github.io/documentation/plugins-reference title="back to Plugins Reference home">Plugins Reference</a></li><ul class=tocify-subheader><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/plugins-creation-prerequisites title="requirements to develop your plugin">Plugins creation prerequisites</a></li><li class="tocify-item tocify-focus"><a style="color: #FFF; text-decoration: none" href=# title="understand Kuzzle plugins mechanisms">Plugins features</a></li><ul class=tocify-header><ul class=tocify-subheader><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/plugins-features title="understand Kuzzle plugins mechanisms">&#x203A; Introduction</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/plugins-features/adding-hooks title="Listening asynchronously">&#x203A; Listening asynchronously</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/plugins-features/adding-pipes title="Listening synchronously">&#x203A; Listening synchronously</a></li><li class="tocify-item tocify-level-2 tocify-focus"><a style="color: #FFF; text-decoration: none" href=/documentation/plugins-reference/plugins-features/adding-controllers title="Adding a controller route">&#x203A; Adding a controller route</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/plugins-features/adding-authentication-strategy title="Adding an authentication strategy">&#x203A; Adding an authentication strategy</a></li><li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/plugins-features/adding-protocol title="Adding a network protocol">&#x203A; Adding a network protocol</a></li></ul></ul><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/managing-plugins title="learn how to enable and configure plugins">Managing Plugins</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/plugins-context title="plugin initialization context attribute reference">The plugin context</a></li><li class=tocify-item><a style="color: #002835; text-decoration: none" href=/documentation/plugins-reference/kuzzle-events-list title="list of events that plugins can register hooks and pipes">Kuzzle events list</a></li></ul></ul><ul class=toc-footer><li><span style=color:#717171>1.0.0-RC9 (latest)</span></li><li><a href=/documentation/v/edge/ >1.0.0-RC10 (next)</a></li></ul></div></div><div class=page-wrapper><div class=toc><ul><li class="toc-item toc-level-1"><a href=#adding-a-controller-route title="Adding a controller route">Adding a controller route</a></li><li class="toc-item toc-level-2"><a href=#how-is-the-api-extended title="How is the API extended">How is the API extended</a></li><li class="toc-item toc-level-3"><a href=#http title=HTTP>HTTP</a></li><li class="toc-item toc-level-3"><a href=#others-protocols title="Others protocols">Others protocols</a></li><li class="toc-item toc-level-2"><a href=#implementing-a-controller-route title="Implementing a controller route">Implementing a controller route</a></li><li class="toc-item toc-level-2"><a href=#how-plugins-receive-action-arguments title="How Plugins receive action arguments">How Plugins receive action arguments</a></li><li class="toc-item toc-level-2"><a href=#tl-dr-plugin-skeleton title="TL;DR plugin skeleton">TL;DR plugin skeleton</a></li></ul></div><div class=content><div class=mobile-breadcrumb><p><a href=https://stafyniaksacha.github.io/documentation/ >Kuzzle documentation</a> &#xBB; <a href=https://stafyniaksacha.github.io/documentation/plugins-reference>Plugins Reference</a> &#xBB; <a href=https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features>Plugins features</a> &#xBB; Adding a controller route</p></div><div class=nav-sibling><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/master/src/plugins-reference/plugins-features/adding-controllers.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=plugins-reference&amp;title=Feedback%20about%20page%20&apos;plugins-reference/plugins-features/adding-controllers.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p><a href=https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-pipes>&#xAB; Listening synchronously</a> <span class=separator>|</span> <a href=https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-authentication-strategy>Adding an authentication strategy &#xBB;</a></p></div><div style=clear:both></div></div><div class=toc-inline><ul><li class="toc-item toc-level-1"><a href=#adding-a-controller-route title="Adding a controller route">Adding a controller route</a></li><li class="toc-item toc-level-2"><a href=#how-is-the-api-extended title="How is the API extended">How is the API extended</a></li><li class="toc-item toc-level-3"><a href=#http title=HTTP>HTTP</a></li><li class="toc-item toc-level-3"><a href=#others-protocols title="Others protocols">Others protocols</a></li><li class="toc-item toc-level-2"><a href=#implementing-a-controller-route title="Implementing a controller route">Implementing a controller route</a></li><li class="toc-item toc-level-2"><a href=#how-plugins-receive-action-arguments title="How Plugins receive action arguments">How Plugins receive action arguments</a></li><li class="toc-item toc-level-2"><a href=#tl-dr-plugin-skeleton title="TL;DR plugin skeleton">TL;DR plugin skeleton</a></li></ul></div><div class=main-content><h1><a class=anchor id=adding-a-controller-route></a>Adding a controller route</h1><p>Kuzzle API is divided into &quot;controllers&quot;, each one of them exposing &quot;actions&quot; to execute (see <a href=/documentation/api-documentation/query-syntax/common-attributes>API reference</a>).</p><p>Plugins enable to add a set of new controllers to the Kuzzle public API, each with their own list of available actions.</p><hr><h2><a class=anchor id=how-is-the-api-extended></a>How is the API extended</h2><p>To avoid name conflicts, added controllers are prefixed with the plugin name.</p><h3><a class=anchor id=http></a>HTTP</h3><p><strong>URL:</strong> <code>http://&lt;server&gt;:&lt;port&gt;/_plugin/&lt;plugin name&gt;/&lt;url defined by the plugin&gt;/&lt;resources&gt;</code><br><strong>Method:</strong> <code>&lt;verb defined by the plugin&gt;</code></p><h3><a class=anchor id=others-protocols></a>Others protocols</h3><pre><code class="hljs javascript">{
+  <span class=hljs-string>&quot;controller&quot;</span>: <span class=hljs-string>&quot;&lt;plugin name&gt;/&lt;added controller name&gt;&quot;</span>,
+  <span class=hljs-string>&quot;action&quot;</span>: <span class=hljs-string>&quot;&lt;action of the added controller&gt;&quot;</span>,
   ...
-}</code></pre>
-
-<hr>
-<h2><a class="anchor" id="implementing-a-controller-route"></a>Implementing a controller route</h2>
-<p>To create a new controller, the Plugin must expose to Kuzzle the following objects:</p>
-<ul>
-<li>A <code>controllers</code> object, describing the new controller(s) to add. It will automatically be made available to any network protocol, except for HTTP</li>
-<li>A <code>routes</code> objects, describing how the new controller(s) should be exposed to the HTTP protocol. Only GET and POST verbs are accepted.</li>
-<li>Controller&apos;s actions functions. These methods take a <code>Request</code> object as an argument, and must return a <code>Promise</code> resolving with the action&apos;s result, or rejecting with a KuzzleError object.</li>
-</ul>
-<hr>
-<h2><a class="anchor" id="how-plugins-receive-action-arguments"></a>How Plugins receive action arguments</h2>
-<p>All action functions receive a <a href="/documentation/plugins-reference/plugins-context/constructors/#request">Request</a> object as main argument. Kuzzle will fill it with arguments provided by clients invoking the added controller:</p>
-<ul>
-<li><p>HTTP:</p>
-<ul>
-<li>dynamic arguments provided in the URL, headers and query string arguments are stored in <code>request.input.args</code></li>
-<li>content body is made available in <code>request.input.body</code></li>
-<li>if the URL contains an <code>index</code>, a <code>collection</code> or a <code>_id</code> argument, it will be stored in <code>request.input.resource</code></li>
-</ul>
-</li>
-<li><p>Other protocols:</p>
-<ul>
-<li>if the provided JSON object contains a <code>body</code> object, then its content will be stored in <code>request.input.body</code></li>
-<li>the following fields at the root of the provided JSON objects are available in <code>request.input.resource</code>: <code>index</code>, <code>collection</code>, <code>_id</code></li>
-<li>any unrecognized property at the root of the provided JSON object will be stored in the <code>request.input.args</code> part of the <code>Request</code> object</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2><a class="anchor" id="tl-dr-plugin-skeleton"></a>TL;DR plugin skeleton</h2>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ControllerPlugin</span> (<span class="hljs-params"></span>) </span>{
-  <span class="hljs-comment">/*
+}</code></pre><hr><h2><a class=anchor id=implementing-a-controller-route></a>Implementing a controller route</h2><p>To create a new controller, the Plugin must expose to Kuzzle the following objects:</p><ul><li>A <code>controllers</code> object, describing the new controller(s) to add. It will automatically be made available to any network protocol, except for HTTP</li><li>A <code>routes</code> objects, describing how the new controller(s) should be exposed to the HTTP protocol. Only GET and POST verbs are accepted.</li><li>Controller&apos;s actions functions. These methods take a <code>Request</code> object as an argument, and must return a <code>Promise</code> resolving with the action&apos;s result, or rejecting with a KuzzleError object.</li></ul><hr><h2><a class=anchor id=how-plugins-receive-action-arguments></a>How Plugins receive action arguments</h2><p>All action functions receive a <a href=/documentation/plugins-reference/plugins-context/constructors/#request>Request</a> object as main argument. Kuzzle will fill it with arguments provided by clients invoking the added controller:</p><ul><li><p>HTTP:</p><ul><li>dynamic arguments provided in the URL, headers and query string arguments are stored in <code>request.input.args</code></li><li>content body is made available in <code>request.input.body</code></li><li>if the URL contains an <code>index</code>, a <code>collection</code> or a <code>_id</code> argument, it will be stored in <code>request.input.resource</code></li></ul></li><li><p>Other protocols:</p><ul><li>if the provided JSON object contains a <code>body</code> object, then its content will be stored in <code>request.input.body</code></li><li>the following fields at the root of the provided JSON objects are available in <code>request.input.resource</code>: <code>index</code>, <code>collection</code>, <code>_id</code></li><li>any unrecognized property at the root of the provided JSON object will be stored in the <code>request.input.args</code> part of the <code>Request</code> object</li></ul></li></ul><hr><h2><a class=anchor id=tl-dr-plugin-skeleton></a>TL;DR plugin skeleton</h2><pre><code class="hljs javascript"><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>ControllerPlugin</span> (<span class=hljs-params></span>) </span>{
+  <span class=hljs-comment>/*
     This exposed &quot;controllers&quot; property tells Kuzzle that it needs to extend
     its API with new controllers and actions.
 
@@ -415,14 +30,14 @@
       ...
     }
    */</span>
-  <span class="hljs-keyword">this</span>.controllers = {
-    <span class="hljs-attr">newController</span>: {
-      <span class="hljs-attr">myAction</span>: <span class="hljs-string">&apos;actionFunction&apos;</span>,
-      <span class="hljs-attr">myOtherAction</span>: <span class="hljs-string">&apos;otherActionFunction&apos;</span>
+  <span class=hljs-keyword>this</span>.controllers = {
+    <span class=hljs-attr>newController</span>: {
+      <span class=hljs-attr>myAction</span>: <span class=hljs-string>&apos;actionFunction&apos;</span>,
+      <span class=hljs-attr>myOtherAction</span>: <span class=hljs-string>&apos;otherActionFunction&apos;</span>
     }
   };
 
-  <span class="hljs-comment">/*
+  <span class=hljs-comment>/*
     We also want to expose our new controller to the HTTP protocol.
     To do so, we give Kuzzle instructions on how we want to expose our
     controller to HTTP.
@@ -441,20 +56,20 @@
     passed to the function &apos;otherActionFunction&apos;, in the request.input.body
     property
    */</span>
-  <span class="hljs-keyword">this</span>.routes = [
-    {<span class="hljs-attr">verb</span>: <span class="hljs-string">&apos;get&apos;</span>, <span class="hljs-attr">url</span>: <span class="hljs-string">&apos;/foo/:name&apos;</span>, <span class="hljs-attr">controller</span>: <span class="hljs-string">&apos;newController&apos;</span>, <span class="hljs-attr">action</span>: <span class="hljs-string">&apos;myAction&apos;</span>},
-    {<span class="hljs-attr">verb</span>: <span class="hljs-string">&apos;post&apos;</span>, <span class="hljs-attr">url</span>: <span class="hljs-string">&apos;/bar&apos;</span>, <span class="hljs-attr">controller</span>: <span class="hljs-string">&apos;newController&apos;</span>, <span class="hljs-attr">action</span>: <span class="hljs-string">&apos;myOtherAction&apos;</span>}
+  <span class=hljs-keyword>this</span>.routes = [
+    {<span class=hljs-attr>verb</span>: <span class=hljs-string>&apos;get&apos;</span>, <span class=hljs-attr>url</span>: <span class=hljs-string>&apos;/foo/:name&apos;</span>, <span class=hljs-attr>controller</span>: <span class=hljs-string>&apos;newController&apos;</span>, <span class=hljs-attr>action</span>: <span class=hljs-string>&apos;myAction&apos;</span>},
+    {<span class=hljs-attr>verb</span>: <span class=hljs-string>&apos;post&apos;</span>, <span class=hljs-attr>url</span>: <span class=hljs-string>&apos;/bar&apos;</span>, <span class=hljs-attr>controller</span>: <span class=hljs-string>&apos;newController&apos;</span>, <span class=hljs-attr>action</span>: <span class=hljs-string>&apos;myOtherAction&apos;</span>}
   ];
 
-  <span class="hljs-comment">/*
+  <span class=hljs-comment>/*
     Required plugin initialization function
     (see the &quot;Plugin prerequisites&quot; section)
    */</span>
-  <span class="hljs-keyword">this</span>.init = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">customConfig, context</span>) </span>{
-    <span class="hljs-comment">// plugin initialization</span>
+  <span class=hljs-keyword>this</span>.init = <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>customConfig, context</span>) </span>{
+    <span class=hljs-comment>// plugin initialization</span>
   };
 
-  <span class="hljs-comment">/*
+  <span class=hljs-comment>/*
     Implements the action newController/myAction
     Takes a Request object as an argument, and MUST return
     a promise resolved (or rejected) with the action&apos;s result
@@ -464,20 +79,20 @@
     See the &quot;How plugins receive action arguments&quot; chapter just below
     for more information.
    */</span>
-  <span class="hljs-keyword">this</span>.actionFunction = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">request</span>) </span>{
-    <span class="hljs-comment">// do action</span>
+  <span class=hljs-keyword>this</span>.actionFunction = <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>request</span>) </span>{
+    <span class=hljs-comment>// do action</span>
 
-    <span class="hljs-comment">// optional: set network specific headers</span>
-    <span class="hljs-keyword">if</span> (request.context.protocol === <span class="hljs-string">&apos;http&apos;</span>) {
-      <span class="hljs-comment">// expires in 1h</span>
-      request.response.setHeader(<span class="hljs-string">&apos;expires&apos;</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-built_in">Date</span>.now() + <span class="hljs-number">3600000</span>).toUTCString());
+    <span class=hljs-comment>// optional: set network specific headers</span>
+    <span class=hljs-keyword>if</span> (request.context.protocol === <span class=hljs-string>&apos;http&apos;</span>) {
+      <span class=hljs-comment>// expires in 1h</span>
+      request.response.setHeader(<span class=hljs-string>&apos;expires&apos;</span>, <span class=hljs-keyword>new</span> <span class=hljs-built_in>Date</span>(<span class=hljs-built_in>Date</span>.now() + <span class=hljs-number>3600000</span>).toUTCString());
     }
 
-    <span class="hljs-comment">// Resolve with the result content. For instance:</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve({<span class="hljs-attr">acknowledge</span>: <span class="hljs-literal">true</span>});
+    <span class=hljs-comment>// Resolve with the result content. For instance:</span>
+    <span class=hljs-keyword>return</span> <span class=hljs-built_in>Promise</span>.resolve({<span class=hljs-attr>acknowledge</span>: <span class=hljs-literal>true</span>});
   };
 
-  <span class="hljs-comment">/*
+  <span class=hljs-comment>/*
     Implements the action newController/myOtherAction
     Takes a Request object as an argument, and MUST return
     a promise resolved (or rejected) with the action&apos;s result
@@ -487,23 +102,15 @@
     See the &quot;How plugins receive action arguments&quot; chapter just below
     for more information.
    */</span>
-  <span class="hljs-keyword">this</span>.otherActionFunction = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">request</span>) </span>{
-    <span class="hljs-comment">// do action</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(<span class="hljs-comment">/* result content */</span>);
+  <span class=hljs-keyword>this</span>.otherActionFunction = <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>request</span>) </span>{
+    <span class=hljs-comment>// do action</span>
+    <span class=hljs-keyword>return</span> <span class=hljs-built_in>Promise</span>.resolve(<span class=hljs-comment>/* result content */</span>);
 
   };
 }
 
-<span class="hljs-comment">// Exports the plugin objects, allowing Kuzzle to instantiate it</span>
-<span class="hljs-built_in">module</span>.exports = ControllerPlugin;</code></pre>
-        <div style="clear: both"></div>
-      </div>
-
-      <hr>
-      <div id="disqus_thread"></div>
-      
-      <script async>
-        var disqus_developer = 1;
+<span class=hljs-comment>// Exports the plugin objects, allowing Kuzzle to instantiate it</span>
+<span class=hljs-built_in>module</span>.exports = ControllerPlugin;</code></pre><div style="clear: both"></div></div><hr><div id=disqus_thread></div><script async>var disqus_developer = 1;
       
         var disqus_config = function () {
           this.page.url = 'https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-controllers';
@@ -516,47 +123,7 @@
           s.src = 'https://kuzzle-documentation.disqus.com/embed.js';
           s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
-        })();
-      </script>
-
-      <div class="nav-sibling bottom">
-        <div class="nav-left">
-          <p>
-            <a href="https://github.com/kuzzleio/documentation/edit/rcx-refactor-doc/src/plugins-reference/plugins-features/adding-controllers.md">edit on github<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <a href="https://github.com/kuzzleio/documentation/issues/new?labels=plugins-reference&amp;title=Feedback%20about%20page%20&apos;plugins-reference/plugins-features/adding-controllers.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a>
-            <span class="separator">|</span>
-            <select class="rate-documentation">
-              <option value=""></option>
-              <option value="1">Unusable documentation</option>
-              <option value="2">Poor documentation</option>
-              <option value="3">OK documentation</option>
-              <option value="4">Good documentation</option>
-              <option value="5">Excellent documentation</option>
-            </select>
-          </p>
-        </div>
-        <div class="nav-right">
-          <p>
-            <a href="https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-pipes">&#xAB; Listening synchronously</a>
-            <span class="separator">|</span>
-            <a href="https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-authentication-strategy">Adding an authentication strategy &#xBB;</a>
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
-<script src="/documentation/assets/javascript/lib/jquery.barrating.js"></script>
-
-<script type="text/javascript">
-  // store helper
+        })();</script><div class="nav-sibling bottom"><div class=nav-left><p><a href=https://github.com/stafyniaksacha/documentation/edit/master/src/plugins-reference/plugins-features/adding-controllers.md>edit on github<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span> <a href="https://github.com/stafyniaksacha/documentation/issues/new?labels=plugins-reference&amp;title=Feedback%20about%20page%20&apos;plugins-reference/plugins-features/adding-controllers.md&apos;">send feedback about this content<i class="icon icon-github icon-small"></i></a> <span class=separator>|</span><select class=rate-documentation><option value=""></option><option value=1>Unusable documentation</option><option value=2>Poor documentation</option><option value=3>OK documentation</option><option value=4>Good documentation</option><option value=5>Excellent documentation</option></select></p></div><div class=nav-right><p><a href=https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-pipes>&#xAB; Listening synchronously</a> <span class=separator>|</span> <a href=https://stafyniaksacha.github.io/documentation/plugins-reference/plugins-features/adding-authentication-strategy>Adding an authentication strategy &#xBB;</a></p></div><div style=clear:both></div></div></div></div></div><script src=//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js></script><script src=//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js></script><script src=/documentation/assets/javascript/lib/jquery.barrating.js></script><script type=text/javascript>// store helper
   var store = function store(key, value) {
     var lsSupport = false;
 
@@ -1171,7 +738,4 @@
       });
     });
 
-  })();
-</script>
-</body>
-</html>
+  })();</script></body></html>
